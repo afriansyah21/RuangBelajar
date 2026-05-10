@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .quiz-progress-gradient {
+        background: linear-gradient(90deg, #003f87 0%, #ffba20 100%);
+    }
+}
+
+/* Custom transitions and scrollbar behavior if needed */
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.transition-width {
+    transition: width 0.3s ease-in-out;
+}

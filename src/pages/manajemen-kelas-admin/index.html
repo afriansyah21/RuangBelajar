@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Manajemen Kelas - Admin Portal</title>
+    
+    <!-- Tailwind and Fonts -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Separated Assets -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-md">
+    <!-- Admin SideNavBar -->
+    <aside class="fixed left-0 h-full w-64 bg-slate-50 border-r border-slate-200 flex flex-col p-4 gap-2 z-40">
+        <div class="mb-lg px-2">
+            <h1 class="text-lg font-black text-blue-800 font-display-md">Admin Portal</h1>
+            <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest">Management</p>
+        </div>
+        <nav class="flex flex-col gap-1">
+            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg" href="#">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="font-label-lg">Dashboard</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg" href="#">
+                <span class="material-symbols-outlined">group</span>
+                <span class="font-label-lg">Pengguna</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-700 active-nav-border transition-all rounded-lg" href="#">
+                <span class="material-symbols-outlined">school</span>
+                <span class="font-label-lg">Kelas</span>
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-all rounded-lg" href="#">
+                <span class="material-symbols-outlined">quiz</span>
+                <span class="font-label-lg">Kuis</span>
+            </a>
+        </nav>
+        <div class="mt-auto border-t border-slate-200 pt-4">
+            <button class="flex items-center gap-3 px-4 py-3 w-full text-error hover:bg-error-container/20 rounded-lg transition-colors">
+                <span class="material-symbols-outlined">logout</span>
+                <span class="font-label-lg">Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Canvas -->
+    <main class="ml-64 p-lg max-w-7xl mx-auto min-h-screen">
+        <header class="flex justify-between items-end mb-xl">
+            <div>
+                <h2 class="font-display-md text-display-md text-on-surface">Manajemen Kelas</h2>
+                <p class="font-body-md text-on-surface-variant">Kelola kurikulum video, urutan pelajaran, dan detail konten.</p>
+            </div>
+            <div class="flex gap-md">
+                <button class="flex items-center gap-xs px-md py-sm bg-surface-container text-primary font-label-lg rounded-xl border border-outline-variant hover:shadow-md transition-all active:scale-95">
+                    <span class="material-symbols-outlined">reorder</span> Atur Ulang
+                </button>
+                <button class="flex items-center gap-xs px-md py-sm bg-primary text-on-primary font-label-lg rounded-xl shadow-lg hover:bg-primary-container transition-all active:scale-95">
+                    <span class="material-symbols-outlined">add</span> Tambah Pelajaran
+                </button>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-12 gap-gutter">
+            <section class="col-span-7 flex flex-col gap-md">
+                <div class="flex items-center justify-between px-xs">
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">Daftar Pelajaran (12)</h3>
+                </div>
+                <!-- Lesson Card -->
+                <div class="bg-white border-2 border-primary rounded-xl p-md shadow-lg relative overflow-hidden">
+                    <div class="flex items-start gap-md">
+                        <div class="w-32 h-20 rounded-lg bg-slate-200 overflow-hidden flex-shrink-0 relative">
+                            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATLUS9ZsLTzLYfXbZdYGKavScc8BlMRp9qCnP89IjwiqpDd_aJQNIzAQpHZmjmqlZ1A-RnztBolomZB0FnsL3LzWHG9WTYrcwoPopEsfG8QaAjAFj3rpXPL-mphWLa_SLv_yJ6tVAliVH-xIrYu0ctxJvNQ_DRvWwf8gDmlu0euYoIJxF2C3IWg1wkYRZ1QhKX6fEIzmtlFkp1Iw3mdgP99pgI82DafxEjBpq0ggqEKcJGYUVWg-GTiPbCOzWfkH0_JQANvDQeIyss"/>
+                        </div>
+                        <div class="flex-grow">
+                            <h4 class="font-headline-sm text-primary">01. Pengenalan Dasar UI/UX</h4>
+                            <p class="text-body-sm text-on-surface-variant mt-xs">Pelajari konsep dasar pengalaman pengguna dan antarmuka visual.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="col-span-5">
+                <div class="sticky top-md bg-white border border-outline-variant rounded-xl p-lg shadow-sm">
+                    <h3 class="font-headline-md text-headline-md text-on-surface mb-md">Edit Pelajaran</h3>
+                    <form class="space-y-md">
+                        <div>
+                            <label class="block text-label-lg font-label-lg text-on-surface-variant mb-xs">Link Video</label>
+                            <input class="w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary" type="text" value="https://youtube.com/watch?v=dQw4w9WgXcQ"/>
+                        </div>
+                        <button class="w-full py-3 bg-primary text-on-primary font-label-lg rounded-xl shadow-lg" type="submit">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </main>
+</body>
+</html>

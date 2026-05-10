@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Admin Quiz Management - Ruangbelajar</title>
+    
+    <!-- Tailwind and Fonts -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Separated Assets -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body class="bg-background font-body-md text-on-background">
+    <!-- SideNavBar (Shared Component) -->
+    <aside class="fixed left-0 h-full w-64 border-r border-slate-200 bg-slate-50 flex flex-col p-4 gap-2 z-40">
+        <div class="mb-lg px-2">
+            <h1 class="text-lg font-black text-blue-800">Admin Portal</h1>
+            <p class="text-xs text-slate-500 font-lexend uppercase tracking-wider">Management</p>
+        </div>
+        <nav class="flex-grow space-y-1">
+            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-transform duration-200 font-lexend text-sm font-semibold" href="#">
+                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+                Dashboard
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-transform duration-200 font-lexend text-sm font-semibold" href="#">
+                <span class="material-symbols-outlined" data-icon="group">group</span>
+                Pengguna
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-transform duration-200 font-lexend text-sm font-semibold" href="#">
+                <span class="material-symbols-outlined" data-icon="school">school</span>
+                Kelas
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-700 border-r-4 border-blue-700 transition-transform duration-200 font-lexend text-sm font-semibold" href="#">
+                <span class="material-symbols-outlined" data-icon="quiz">quiz</span>
+                Kuis
+            </a>
+            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 transition-transform duration-200 font-lexend text-sm font-semibold" href="#">
+                <span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
+                Donasi
+            </a>
+        </nav>
+        <div class="mt-auto border-t border-slate-200 pt-4">
+            <button class="flex w-full items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 rounded-lg active:opacity-80 transition-colors">
+                <span class="material-symbols-outlined" data-icon="logout">logout</span>
+                <span class="font-lexend text-sm font-semibold">Logout</span>
+            </button>
+        </div>
+    </aside>
+    
+    <main class="ml-64 min-h-screen">
+        <!-- Top Header Area -->
+        <header class="bg-white/90 backdrop-blur-md border-b border-slate-100 h-16 sticky top-0 z-30 px-gutter flex items-center justify-between">
+            <div class="flex items-center gap-sm">
+                <h2 class="font-headline-sm text-primary">Manajemen Kuis</h2>
+                <span class="text-slate-300">/</span>
+                <span class="text-body-sm text-slate-500">Semua Kuis</span>
+            </div>
+            <button class="bg-primary text-on-primary px-md py-xs rounded-lg flex items-center gap-xs font-label-lg hover:bg-primary-container transition-all active:scale-95">
+                <span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                Tambah Kuis Baru
+            </button>
+        </header>
+        
+        <div class="p-lg max-w-container-max mx-auto">
+            <div class="grid grid-cols-12 gap-gutter items-start">
+                <!-- Left: Quiz List Section -->
+                <section class="col-span-12 lg:col-span-5 space-y-md">
+                    <div class="flex items-center justify-between mb-sm">
+                        <h3 class="font-headline-sm text-on-surface">Daftar Kuis Aktif</h3>
+                        <span class="bg-surface-container text-primary text-label-md px-base py-xs rounded-full">4 Kuis</span>
+                    </div>
+                    <!-- Bento-style Quiz List -->
+                    <div class="space-y-sm">
+                        <!-- Quiz Item 1 -->
+                        <div class="bg-white border border-slate-100 p-md rounded-xl shadow-[0px_4px_12px_rgba(0,86,179,0.05)] flex items-center gap-md group hover:border-primary/30 hover:shadow-[0px_8px_24px_rgba(0,86,179,0.1)] transition-all">
+                            <div class="drag-handle text-slate-300 group-hover:text-slate-400">
+                                <span class="material-symbols-outlined" data-icon="drag_indicator">drag_indicator</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="font-label-lg text-on-surface">Dasar Pemrograman Python</h4>
+                                <p class="text-caption text-slate-500">15 Pertanyaan • Terakhir diubah 2 jam lalu</p>
+                            </div>
+                            <div class="flex items-center gap-xs">
+                                <button class="p-xs text-slate-400 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined" data-icon="edit">edit</span>
+                                </button>
+                                <button class="p-xs text-slate-400 hover:text-error transition-colors">
+                                    <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Quiz Item 2 (Active/Selected) -->
+                        <div class="bg-primary-container/5 border-2 border-primary p-md rounded-xl shadow-[0px_8px_24px_rgba(0,86,179,0.1)] flex items-center gap-md group transition-all">
+                            <div class="drag-handle text-primary/40">
+                                <span class="material-symbols-outlined" data-icon="drag_indicator">drag_indicator</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="font-label-lg text-primary">Matematika Aljabar Linear</h4>
+                                <p class="text-caption text-primary/70">10 Pertanyaan • Sedang diedit</p>
+                            </div>
+                            <div class="flex items-center gap-xs">
+                                <button class="p-xs text-primary transition-colors">
+                                    <span class="material-symbols-outlined" data-icon="edit" data-weight="fill" style="font-variation-settings: 'FILL' 1;">edit</span>
+                                </button>
+                                <button class="p-xs text-slate-400 hover:text-error transition-colors">
+                                    <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Quiz Item 3 -->
+                        <div class="bg-white border border-slate-100 p-md rounded-xl shadow-[0px_4px_12px_rgba(0,86,179,0.05)] flex items-center gap-md group hover:border-primary/30 transition-all">
+                            <div class="drag-handle text-slate-300">
+                                <span class="material-symbols-outlined" data-icon="drag_indicator">drag_indicator</span>
+                            </div>
+                            <div class="flex-grow">
+                                <h4 class="font-label-lg text-on-surface">Struktur Data Lanjut</h4>
+                                <p class="text-caption text-slate-500">20 Pertanyaan • Draft</p>
+                            </div>
+                            <div class="flex items-center gap-xs">
+                                <button class="p-xs text-slate-400 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined" data-icon="edit">edit</span>
+                                </button>
+                                <button class="p-xs text-slate-400 hover:text-error transition-colors">
+                                    <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Visual Accent Card -->
+                    <div class="relative overflow-hidden rounded-xl bg-primary h-48 flex items-end p-md text-on-primary">
+                        <div class="absolute inset-0 z-0">
+                            <img class="w-full h-full object-cover opacity-30 grayscale mix-blend-overlay" data-alt="A sophisticated digital workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBipmY0x3L9KSe6Jw8NXHYIwqelgJ7sLcxLlIjdQ_KIRphv24WlBEGrD2CxpI7JmfwRnKr_Vyi0CZXPCAncO2aKyvHIjRnIg6Bd8621niuP0-SyGnvfEYjBPitQCBupDN0ScOC5icxDsKYQZtZe6il3-TIWKPDAt-pf5EBsV0KTa98lnZ4ti9sZU_Oa0fJv5KbKPaO7Ym1iTfYeg1qmfOHePD8nI6U69gazLiSiJ7P02M8VjprGC_yzDJ4-2wC_k6rl7p8WjosDr9BS"/>
+                        </div>
+                        <div class="relative z-10">
+                            <p class="font-headline-sm">Analitik Performa Kuis</p>
+                            <p class="text-body-sm text-on-primary-container">Lihat bagaimana siswa menjawab kuis Anda secara real-time.</p>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Right: Edit View -->
+                <section class="col-span-12 lg:col-span-7 bg-white rounded-2xl border border-slate-100 shadow-[0px_4px_12px_rgba(0,86,179,0.05)] overflow-hidden">
+                    <div class="p-md border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+                        <div>
+                            <h3 class="font-headline-sm text-primary">Edit Pertanyaan: Aljabar Linear</h3>
+                            <p class="text-body-sm text-slate-500">Modul 4 • Tingkat Lanjut</p>
+                        </div>
+                        <div class="flex gap-sm">
+                            <button class="px-md py-xs rounded-lg border border-slate-200 text-slate-600 font-label-lg hover:bg-slate-100 transition-colors">Batal</button>
+                            <button class="px-md py-xs rounded-lg bg-primary text-on-primary font-label-lg hover:shadow-lg transition-all">Simpan Perubahan</button>
+                        </div>
+                    </div>
+                    <div class="p-lg space-y-lg">
+                        <!-- Question Card 1 -->
+                        <div class="p-md rounded-xl border border-primary/20 bg-primary/5 space-y-md">
+                            <div class="flex items-start justify-between">
+                                <span class="bg-primary text-on-primary px-base py-xs rounded text-label-md">Pertanyaan 1</span>
+                                <button class="text-slate-400 hover:text-error transition-colors">
+                                    <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                </button>
+                            </div>
+                            <div class="space-y-sm">
+                                <label class="text-label-lg text-on-surface">Teks Pertanyaan</label>
+                                <textarea class="w-full rounded-lg border-slate-200 focus:ring-2 focus:ring-primary/20 focus:border-primary text-body-md" rows="2">Manakah yang merupakan definisi dari Matriks Identitas?</textarea>
+                            </div>
+                            <!-- Options -->
+                            <div class="space-y-xs">
+                                <label class="text-label-md text-slate-500 uppercase tracking-wider">Pilihan Jawaban (Tandai yang benar)</label>
+                                <div class="flex items-center gap-base">
+                                    <input checked="" class="text-primary focus:ring-primary h-4 w-4" name="q1" type="radio"/>
+                                    <input class="flex-grow rounded-lg border-slate-200 text-body-sm bg-white" type="text" value="Matriks persegi dengan elemen diagonal utama adalah 1."/>
+                                </div>
+                                <div class="flex items-center gap-base">
+                                    <input class="text-primary focus:ring-primary h-4 w-4" name="q1" type="radio"/>
+                                    <input class="flex-grow rounded-lg border-slate-200 text-body-sm" type="text" value="Matriks yang semua elemennya adalah nol."/>
+                                </div>
+                                <div class="flex items-center gap-base">
+                                    <input class="text-primary focus:ring-primary h-4 w-4" name="q1" type="radio"/>
+                                    <input class="flex-grow rounded-lg border-slate-200 text-body-sm" type="text" value="Matriks yang memiliki nilai determinan nol."/>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Question Card 2 -->
+                        <div class="p-md rounded-xl border border-slate-100 bg-white space-y-md shadow-sm">
+                            <div class="flex items-start justify-between">
+                                <span class="bg-slate-100 text-slate-600 px-base py-xs rounded text-label-md">Pertanyaan 2</span>
+                                <button class="text-slate-400 hover:text-error transition-colors">
+                                    <span class="material-symbols-outlined" data-icon="delete">delete</span>
+                                </button>
+                            </div>
+                            <div class="space-y-sm">
+                                <label class="text-label-lg text-on-surface">Teks Pertanyaan</label>
+                                <textarea class="w-full rounded-lg border-slate-200 focus:ring-2 focus:ring-primary/20 focus:border-primary text-body-md" rows="2">Hitunglah determinan dari matriks 2x2 berikut: [2, 4; 1, 3]</textarea>
+                            </div>
+                            <div class="space-y-xs">
+                                <div class="flex items-center gap-base">
+                                    <input class="text-primary focus:ring-primary h-4 w-4" name="q2" type="radio"/>
+                                    <input class="flex-grow rounded-lg border-slate-200 text-body-sm" type="text" value="10"/>
+                                </div>
+                                <div class="flex items-center gap-base">
+                                    <input checked="" class="text-primary focus:ring-primary h-4 w-4" name="q2" type="radio"/>
+                                    <input class="flex-grow rounded-lg border-slate-200 text-body-sm bg-white" type="text" value="2"/>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full py-md border-2 border-dashed border-slate-200 rounded-xl text-slate-500 flex items-center justify-center gap-base hover:bg-slate-50 hover:border-primary/50 hover:text-primary transition-all">
+                            <span class="material-symbols-outlined" data-icon="add_circle">add_circle</span>
+                            <span class="font-label-lg">Tambah Pertanyaan Baru</span>
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <footer class="mt-xl border-t border-slate-100 bg-white">
+            <div class="max-w-7xl mx-auto py-12 px-6 flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-md md:mb-0">
+                    <h5 class="text-lg font-bold text-slate-900">Ruangbelajar</h5>
+                    <p class="text-xs text-slate-500 font-lexend mt-xs">© 2024 Ruangbelajar Educational Platform</p>
+                </div>
+                <div class="flex flex-wrap gap-md justify-center">
+                    <a class="text-xs text-slate-500 hover:text-blue-600 font-lexend transition-opacity duration-300" href="#">Kontak Kami</a>
+                    <a class="text-xs text-slate-500 hover:text-blue-600 font-lexend transition-opacity duration-300" href="#">Syarat & Ketentuan</a>
+                    <a class="text-xs text-slate-500 hover:text-blue-600 font-lexend transition-opacity duration-300" href="#">Kebijakan Privasi</a>
+                    <a class="text-xs text-slate-500 hover:text-blue-600 font-lexend transition-opacity duration-300" href="#">Bantuan</a>
+                </div>
+            </div>
+        </footer>
+    </main>
+</body>
+</html>

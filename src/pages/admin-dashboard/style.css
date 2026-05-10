@@ -1,0 +1,9 @@
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.level-1-shadow {
+    box-shadow: 0px 4px 12px rgba(0, 86, 179, 0.05);
+}
+.level-2-shadow {
+    box-shadow: 0px 8px 24px rgba(0, 86, 179, 0.1);
+}

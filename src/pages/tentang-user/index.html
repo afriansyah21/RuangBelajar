@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Tentang Kami - Ruangbelajar</title>
+    
+    <!-- Tailwind and Fonts -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lexend:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Separated Assets -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-x-hidden">
+    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
+            <div class="text-xl font-bold tracking-tight text-blue-700 font-display-md">Ruangbelajar</div>
+            <div class="hidden md:flex items-center space-x-8">
+                <a class="font-lexend text-sm font-medium tracking-tight text-slate-600 hover:text-blue-600 transition-colors" href="#">Beranda</a>
+                <a class="font-lexend text-sm font-medium tracking-tight text-slate-600 hover:text-blue-600 transition-colors" href="#">Kelas</a>
+                <a class="font-lexend text-sm font-medium tracking-tight text-slate-600 hover:text-blue-600 transition-colors" href="#">Kuis</a>
+                <a class="font-lexend text-sm font-medium tracking-tight text-blue-700 border-b-2 border-blue-700 pb-1" href="#">Tentang</a>
+                <a class="font-lexend text-sm font-medium tracking-tight text-slate-600 hover:text-blue-600 transition-colors" href="#">Profil</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-20">
+        <section class="max-w-7xl mx-auto px-6 mb-20">
+            <div class="relative rounded-3xl overflow-hidden bg-primary-container min-h-[400px] flex items-center p-12">
+                <div class="relative z-10 space-y-6 max-w-2xl">
+                    <h1 class="text-white font-display-lg text-4xl font-bold leading-tight">Mendefinisikan Ulang Masa Depan Pembelajaran Digital</h1>
+                    <p class="text-blue-100 text-lg">Ruangbelajar hadir sebagai jembatan antara potensi individu dan akses pendidikan berkualitas tanpa batas.</p>
+                </div>
+                <div class="absolute right-0 bottom-0 opacity-20 p-12">
+                    <span class="material-symbols-outlined text-[200px] text-white">school</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-7xl mx-auto px-6 mb-32 grid md:grid-cols-2 gap-12">
+            <div class="p-8 rounded-2xl glass-card">
+                <h2 class="text-2xl font-bold text-primary mb-4">Misi Kami</h2>
+                <p class="text-slate-600 leading-relaxed">Misi utama kami adalah mendemokratisasi akses pendidikan melalui teknologi inovatif. Kami berkomitmen untuk menyediakan platform yang adaptif.</p>
+            </div>
+            <div class="p-8 rounded-2xl bg-blue-50 border border-blue-100">
+                <h2 class="text-2xl font-bold text-primary mb-4">Visi Kami</h2>
+                <p class="text-slate-600 leading-relaxed">Menjadi ekosistem pendidikan digital paling terpercaya di Asia Tenggara yang mampu melahirkan generasi pemimpin masa depan.</p>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

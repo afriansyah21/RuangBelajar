@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Login User - Ruangbelajar</title>
+  
+  <!-- Tailwind and Fonts -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  
+  <!-- Separated Assets -->
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body class="bg-background font-body-md text-on-surface min-h-screen flex flex-col">
+  <main class="flex-grow flex items-center justify-center p-gutter relative overflow-hidden">
+    <!-- Background Decor -->
+    <div class="absolute inset-0 z-0 pointer-events-none">
+      <div class="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-surface-container rounded-full blur-[120px] opacity-60"></div>
+      <div class="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-primary-fixed-dim rounded-full blur-[120px] opacity-40"></div>
+    </div>
+
+    <!-- Login Card -->
+    <div class="w-full max-w-[480px] z-10">
+      <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-lg shadow-[0px_8px_24px_rgba(0,86,179,0.05)]">
+        <div class="text-center mb-xl">
+          <h1 class="font-display-md text-display-md text-primary mb-xs">Ruangbelajar</h1>
+          <p class="font-body-md text-body-md text-on-surface-variant">Selamat datang kembali! Silakan masuk ke akun Anda.</p>
+        </div>
+        
+        <form class="space-y-md">
+          <div class="space-y-xs">
+            <label class="font-label-lg text-label-lg text-on-surface-variant block">Username</label>
+            <div class="relative group">
+              <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
+              <input class="w-full pl-xl pr-md py-sm rounded-lg border border-outline-variant bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface" placeholder="Masukkan username Anda" type="text" />
+            </div>
+          </div>
+          
+          <div class="space-y-xs">
+            <div class="flex justify-between items-center">
+              <label class="font-label-lg text-label-lg text-on-surface-variant block">Password</label>
+              <a class="font-label-md text-label-md text-primary hover:underline" href="#">Lupa Password?</a>
+            </div>
+            <div class="relative group">
+              <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
+              <input class="w-full pl-xl pr-xl py-sm rounded-lg border border-outline-variant bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface" placeholder="Masukkan password Anda" type="password" />
+              <button class="absolute right-sm top-1/2 -translate-y-1/2 text-outline hover:text-on-surface-variant" type="button">
+                <span class="material-symbols-outlined">visibility</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="pt-sm">
+            <button class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-lg text-label-lg hover:bg-primary-container active:scale-[0.98] transition-all shadow-sm" type="submit">
+              Login
+            </button>
+          </div>
+          
+          <div class="relative flex items-center py-sm">
+            <div class="flex-grow border-t border-outline-variant"></div>
+            <span class="flex-shrink mx-md font-label-md text-label-md text-outline">Atau masuk dengan</span>
+            <div class="flex-grow border-t border-outline-variant"></div>
+          </div>
+          
+          <button class="w-full bg-white border border-outline-variant py-sm rounded-lg font-label-lg text-label-lg text-on-surface-variant flex items-center justify-center gap-sm hover:bg-surface-container-low active:scale-[0.98] transition-all" type="button">
+            <img alt="Google Logo" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv1dqfnnMPlE5ZbX-F0eeJNlFAuMcssZJWqAywOqnoXmqBgWv-7qFxHgWAZM0uw9xcZuBrwji9nIVlGFjiFwGQWK-mdyBCXu1Y2FI1_Pl1InqnF63rDxzOzrwsDoIygHTnwxpk9IiD2jlaip5kh3bxGJO_obFGHzZeQQlmhHe8iyrvGAwRZthzns6yVHDM9lMVJ1d26BcGEI7l4AEb3P1caDjlm6nuoQRLCTySnkumR2RPfnTA-wGKLudunQJ6Iq0MsDMdmZ40-C0_" />
+            Masuk dengan Google
+          </button>
+        </form>
+        
+        <div class="mt-lg text-center">
+          <p class="font-body-sm text-body-sm text-on-surface-variant">
+            Belum punya akun?
+            <a class="text-primary font-label-lg text-label-lg hover:underline decoration-primary/30" href="#">Daftar sekarang</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <footer class="w-full border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-950">
+    <div class="max-w-7xl mx-auto py-12 px-6 flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-md md:mb-0">
+        <span class="text-lg font-bold text-slate-900 dark:text-white">Ruangbelajar</span>
+        <p class="font-lexend text-xs text-slate-500 mt-xs">© 2024 Ruangbelajar Educational Platform</p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-md text-xs font-lexend text-slate-500">
+        <a class="hover:text-blue-600 hover:underline" href="#">Kontak Kami</a>
+        <a class="hover:text-blue-600 hover:underline" href="#">Syarat & Ketentuan</a>
+        <a class="hover:text-blue-600 hover:underline" href="#">Kebijakan Privasi</a>
+        <a class="hover:text-blue-600 hover:underline" href="#">Bantuan</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,6 @@
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+.circular-progress {
+    background: radial-gradient(closest-side, white 79%, transparent 80% 100%), conic-gradient(var(--tw-primary-container) calc(var(--progress) * 1%), var(--tw-surface-container) 0);
+}

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>RuangBelajar - Belajar Mudah Dimanapun</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-background text-on-background font-body-md selection:bg-primary-fixed-dim selection:text-primary">
+    <!-- Top Navigation Bar -->
+    <header
+        class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant shadow-sm dark:shadow-none">
+        <nav class="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
+            <div class="text-xl font-bold tracking-tight text-primary font-display-md">RuangBelajar
+            </div>
+
+            <div class="flex items-center gap-base">
+                <button id="theme-toggle"
+                    class="p-xs text-on-surface hover:bg-surface-container transition-colors rounded-full active:scale-95 duration-150 flex items-center justify-center"
+                    title="Toggle Theme">
+                    <span class="material-symbols-outlined">dark_mode</span>
+                </button>
+                <button
+                    class=" px-md py-xs text-muskal hover:text-hayuk rounded-lg font-label-lg hover:bg-muskal transition-colors active:scale-95 duration-150">Masuk</button>
+                <button
+                    class="bg-muskal px-md py-xs text-hayuk hover:text-muskal rounded-lg font-label-lg hover:bg-hayuk transition-colors active:scale-95 duration-150">Daftar</button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="pt-16">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden hero-section pt-12 pb-20 lg:pt-8 lg:pb-32 flex items-center">
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-lg items-center w-full">
+                <div class="space-y-md">
+                    <span
+                        class="inline-block px-base py-xs bg-surface-container-highest text-primary rounded-full font-label-md">#PilihanProgrammerMasaKini</span>
+                    <h1 class="font-display-lg text-on-background tracking-tight">RuangBelajar</h1>
+                    <p class="font-headline-sm text-on-surface-variant max-w-lg">Belajar pemrograman secara mudah
+                        dimanapun anda
+                        berada. Akses puluhan materi berkualitas gratis dengan mentor profesional.</p>
+                    <div class="flex flex-wrap gap-base pt-base">
+                        <button
+                            class="bg-primary text-background hover:text-putih hover:bg-primary-container px-xl py-md rounded-xl font-headline-sm shadow-md hover:shadow-lg transition-all active:scale-95">Daftar
+                            Sekarang</button>
+                        <button
+                            class="bg-surface-container-highest text-muskal px-xl py-md rounded-xl font-headline-sm hover:text-putih hover:bg-primary-container transition-all active:scale-95 border border-primary/10">Login</button>
+                    </div>
+                </div>
+                <div class="relative hidden md:block">
+                    <div class="absolute -top-12 -right-12 w-72 h-72 bg-primary-fixed-dim/20 rounded-full blur-3xl">
+                    </div>
+                    <div class="absolute -bottom-12 -left-12 w-72 h-72 bg-secondary-fixed-dim/20 rounded-full blur-3xl">
+                    </div>
+                    <img alt="Education Hub"
+                        class="relative z-10 w-full aspect-square object-cover rounded-[2rem] shadow-2xl border-4 border-outline-variant"
+                        data-alt="A diverse group of university students collaborating in a bright, modern library setting filled with natural light. The environment features minimalist architectural elements and soft blue accents that align with the educational theme. Students are focused on high-end laptops and textbooks, showcasing a professional and productive atmosphere. The lighting is crisp and optimistic, emphasizing a trusted mentor persona through clean, organized visual structures."
+                        src="hero2.jpg" />
+                </div>
+            </div>
+        </section>
+        <!-- Stats Counter Section -->
+        <section class="py-lg bg-surface relative z-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div
+                    class="grid grid-cols-2 md:grid-cols-4 gap-md py-lg px-xl bg-surface-container rounded-[2rem] border border-outline-variant shadow-sm">
+                    <div class="text-center border-r border-outline-variant last:border-0">
+                        <div class="text-primary font-display-md">250K+</div>
+                        <div class="text-on-surface-variant font-label-lg">Siswa Aktif</div>
+                    </div>
+                    <div class="text-center md:border-r border-outline-variant last:border-0">
+                        <div class="text-primary font-display-md"> 1.2K+</div>
+                        <div class="text-on-surface-variant font-label-lg">Materi Kursus</div>
+                    </div>
+                    <div class="text-center border-r border-outline-variant last:border-0">
+                        <div class="text-primary font-display-md">5</div>
+                        <div class="text-on-surface-variant font-label-lg">Mentor Ahli</div>
+                    </div>
+                    <div class="text-center last:border-0">
+                        <div class="text-primary font-display-md">4.9/5</div>
+                        <div class="text-on-surface-variant font-label-lg">Rating Kepuasan</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Features Grid: 9 Reasons -->
+        <section class="py-xl bg-surface">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto mb-xl">
+                    <h2 class="font-headline-lg text-on-surface mb-base">Alasan Mengapa Harus Belajar Pemrograman di
+                        RuangBelajar
+                    </h2>
+                    <p class="font-body-md text-on-surface-variant">Kami memberikan pengalaman belajar yang dirancang
+                        khusus untuk membantu Anda meraih skill pemrograman dengan cara yang paling efektif.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+                    <!-- Reason Cards -->
+                    <div
+                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                        <div
+                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
+                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                                data-icon="auto_awesome">auto_awesome</span>
+                        </div>
+                        <h3 class="font-headline-sm mb-xs">Kurikulum Terupdate</h3>
+                        <p class="font-body-sm text-on-surface-variant">Materi disusun berdasarkan standar industri
+                            terkini untuk menjamin relevansi di dunia kerja.</p>
+                    </div>
+                    <div
+                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                        <div
+                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
+                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                                data-icon="groups">groups</span>
+                        </div>
+                        <h3 class="font-headline-sm mb-xs">Komunitas Belajar</h3>
+                        <p class="font-body-sm text-on-surface-variant">Bergabung dengan ribuan pelajar lainnya untuk
+                            bertukar ilmu dan berkolaborasi dalam proyek.</p>
+                    </div>
+                    <div
+                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                        <div
+                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
+                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                                data-icon="verified_user">verified_user</span>
+                        </div>
+                        <h3 class="font-headline-sm mb-xs">Sertifikat Resmi</h3>
+                        <p class="font-body-sm text-on-surface-variant">Dapatkan sertifikat penyelesaian yang diakui
+                            secara luas oleh mitra perusahaan kami.</p>
+                    </div>
+                    <div
+                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                        <div
+                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
+                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                                data-icon="video_chat">video_chat</span>
+                        </div>
+                        <h3 class="font-headline-sm mb-xs">Akses Video Selamanya</h3>
+                        <p class="font-body-sm text-on-surface-variant">Dapatkan video yang bisa diakses selamanya.</p>
+                    </div>
+                    <div
+                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                        <div
+                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
+                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                                data-icon="ads_click">ads_click</span>
+                        </div>
+                        <h3 class="font-headline-sm mb-xs">Akses Selamanya</h3>
+                        <p class="font-body-sm text-on-surface-variant">Sekali mendaftar, Anda memiliki akses materi
+                            tanpa batas waktu untuk terus dipelajari kembali.</p>
+                    </div>
+                    <div
+                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                        <div
+                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
+                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                                data-icon="quiz">quiz</span>
+                        </div>
+                        <h3 class="font-headline-sm mb-xs">Kuis Interaktif</h3>
+                        <p class="font-body-sm text-on-surface-variant">Uji pemahaman Anda dengan ratusan kuis yang
+                            dirancang khusus per bab materi.</p>
+                    </div>
+                    <div
+                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                        <div
+                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
+                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                                data-icon="mobile_friendly">mobile_friendly</span>
+                        </div>
+                        <h3 class="font-headline-sm mb-xs">Mobile Responsive</h3>
+                        <p class="font-body-sm text-on-surface-variant">Belajar di mana saja melalui laptop, tablet,
+                            atau smartphone dengan pengalaman yang mulus.</p>
+                    </div>
+                    <div
+                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                        <div
+                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
+                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                                data-icon="work">work</span>
+                        </div>
+                        <h3 class="font-headline-sm mb-xs">Persiapan Kerja</h3>
+                        <p class="font-body-sm text-on-surface-variant">Kami menyediakan modul khusus untuk pembuatan
+                            portofolio dan simulasi wawancara.</p>
+                    </div>
+                    <div
+                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                        <div
+                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
+                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                                data-icon="savings">money_off</span>
+                        </div>
+                        <h3 class="font-headline-sm mb-xs">Gratis</h3>
+                        <p class="font-body-sm text-on-surface-variant">Investasi masa depan terbaik dengan biaya gratis.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Mentors Section -->
+        <section class="py-xl bg-surface">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="flex justify-between items-end mb-xl">
+                    <div class="max-w-2xl">
+                        <h2 class="font-headline-lg text-on-surface">Mentor Kami</h2>
+                        <p class="font-body-md text-on-surface-variant mt-base">Belajar langsung dari para praktisi dan
+                            ahli yang telah berpengalaman bertahun-tahun di bidangnya.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-md">
+                    <!-- Mentor Cards -->
+                    <div
+                        class="group relative bg-surface rounded-2xl overflow-hidden border border-outline-variant hover:border-primary transition-all duration-300">
+                        <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
+                            data-alt="A professional male mentor in his 30s wearing business casual attire, smiling confidently in a modern office background. The lighting is warm and professional, highlighting a clean-shaven face and structured features. The image uses a shallow depth of field to keep the focus on the mentor while the background of glass partitions and minimalist furniture remains soft. Overall tone is encouraging, trustworthy, and expert-driven."
+                            src="afri.jpeg" />
+                        <div class="p-md">
+                            <h4 class="font-label-lg text-on-surface">Afriansyah Maulana Rizki</h4>
+                            <p class="font-caption text-primary">Mentor Frontend</p>
+                        </div>
+                    </div>
+                    <div
+                        class="group relative bg-surface rounded-2xl overflow-hidden border border-outline-variant hover:border-primary transition-all duration-300">
+                        <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
+                            data-alt="An expert female mentor with an professional expression, wearing a tailored blazer in a bright, modern studio. The background is a clean white wall with soft blue lighting accents, creating a high-key and optimistic mood. She has an air of authority and approachability, perfect for the role of a trusted guide in educational technology. The visual style is crisp, minimal, and highly polished."
+                            src="afri.jpeg" />
+                        <div class="p-md">
+                            <h4 class="font-label-lg text-on-surface">Sarah Wijaya</h4>
+                            <p class="font-caption text-primary">Mentor Backend</p>
+                        </div>
+                    </div>
+                    <div
+                        class="group relative bg-surface rounded-2xl overflow-hidden border border-outline-variant hover:border-primary transition-all duration-300">
+                        <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
+                            data-alt="A successful male mentor presenting with confidence, standing in front of a digital display showing data visualizations. He is dressed in professional smart-casual attire, illuminated by natural daylight coming from large windows. The overall aesthetic is one of mental clarity and corporate modernism, using a palette of deep blues and greys. The lighting is soft and even, emphasizing his role as an encouraging authority."
+                            src="afri.jpeg" />
+                        <div class="p-md">
+                            <h4 class="font-label-lg text-on-surface">Muhammad Iqbal Ramadhan</h4>
+                            <p class="font-caption text-primary">Mentor Frontend</p>
+                        </div>
+                    </div>
+                    <div
+                        class="group relative bg-surface rounded-2xl overflow-hidden border border-outline-variant hover:border-primary transition-all duration-300">
+                        <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
+                            data-alt="A friendly female mentor with a warm smile, positioned in a creative workspace with plants and soft lighting. She wears modern, professional clothing and conveys a sense of reliability and efficiency. The lighting is warm and golden, creating an inviting and accessible atmosphere. The visual elements are intentional and elegant, reinforcing the Trusted Mentor brand identity through a balanced and serene composition."
+                            src="afri.jpeg" />
+                        <div class="p-md">
+                            <h4 class="font-label-lg text-on-surface">Dewi Lestari</h4>
+                            <p class="font-caption text-primary">Mentor UI/UX</p>
+                        </div>
+                    </div>
+                    <div
+                        class="group relative bg-surface rounded-2xl overflow-hidden border border-outline-variant hover:border-primary transition-all duration-300">
+                        <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
+                            data-alt="A seasoned male mentor in a professional portrait, wearing a charcoal suit against a minimal architectural backdrop. His expression is one of calm confidence and experience. The lighting is diffused and professional, casting subtle shadows that add depth and character. The image aligns with the Corporate Minimalist style, focusing on high signal-to-noise ratio and functional elegance that guides the viewer's trust."
+                            src="afri.jpeg" />
+                        <div class="p-md">
+                            <h4 class="font-label-lg text-on-surface">Muh Rafiq Hidayah</h4>
+                            <p class="font-caption text-primary">Mentor Backend</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonial Slider Section (Auto-scrolling simulation) -->
+        <section class="py-xl bg-surface-container overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 mb-lg text-center">
+                <h2 class="font-headline-lg text-on-surface">Apa Kata Mereka?</h2>
+            </div>
+            <div class="flex gap-md px-6 animate-scroll overflow-x-auto hide-scrollbar snap-x snap-mandatory">
+                <!-- Testimonial Card 1 -->
+                <div
+                    class="min-w-[320px] md:min-w-[400px] bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant snap-center flex flex-col gap-base">
+                    <div class="flex text-tertiary-fixed-dim">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body-md text-on-surface italic italic">"Belajar di RuangBelajar sangat membantu saya
+                        yang sibuk bekerja. Materinya padat dan langsung ke intinya. Mentornya juga sangat responsif
+                        saat ditanya."</p>
+                    <div class="flex items-center gap-sm mt-auto">
+                        <div
+                            class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center font-bold text-primary">
+                            RR</div>
+                        <div>
+                            <h5 class="font-label-lg text-on-surface">Rizky Ramadhan</h5>
+                            <p class="font-caption text-on-surface-variant">Siswa Web Development</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial Card 2 -->
+                <div
+                    class="min-w-[320px] md:min-w-[400px] bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant snap-center flex flex-col gap-base">
+                    <div class="flex text-tertiary-fixed-dim">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body-md text-on-surface italic">"Kurikulumnya sangat up-to-date. Berkat RuangBelajar,
+                        saya berhasil mendapatkan pekerjaan pertama saya sebagai Junior UI/UX Designer dalam waktu 3
+                        bulan."</p>
+                    <div class="flex items-center gap-sm mt-auto">
+                        <div
+                            class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-on-primary-container">
+                            AN</div>
+                        <div>
+                            <h5 class="font-label-lg text-on-surface">Amanda Nurul</h5>
+                            <p class="font-caption text-on-surface-variant">Alumni UI/UX Design</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial Card 3 -->
+                <div
+                    class="min-w-[320px] md:min-w-[400px] bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant snap-center flex flex-col gap-base">
+                    <div class="flex text-tertiary-fixed-dim">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body-md text-on-surface italic">"Penyampaian materinya sangat mudah dimengerti bahkan
+                        untuk pemula seperti saya. Kuis interaktifnya membantu saya mengukur pemahaman saya."</p>
+                    <div class="flex items-center gap-sm mt-auto">
+                        <div
+                            class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-fixed">
+                            DS</div>
+                        <div>
+                            <h5 class="font-label-lg text-on-surface">Doni Setiawan</h5>
+                            <p class="font-caption text-on-surface-variant">Siswa Data Science</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer Section -->
+    <footer class="bg-surface border-t border-outline-variant">
+        <div class="max-w-7xl mx-auto py-12 px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-lg mb-lg">
+                <div class="space-y-base">
+                    <div class="text-lg font-bold text-on-surface font-display-md">RuangBelajar</div>
+                    <p class="font-body-sm text-on-surface-variant max-w-xs">Platform edukasi pemrograman terpercaya
+                        untuk
+                        meningkatkan skill
+                        masa depan Anda dengan metode belajar yang menyenangkan dan efektif.</p>
+                </div>
+                <div class="space-y-base">
+                    <h6 class="font-label-lg text-on-surface">Alamat</h6>
+                    <p class="font-body-sm text-on-surface-variant">Jl. Perumnas 208 rt 08 rw 21 Gorongan, Condongcatur,
+                        Ngropoh,
+                        Kabupaten, Kec. Depok, Kabupaten Sleman, Daerah Istimewa Yogyakarta 55283
+                    </p>
+                    <div class="flex items-center gap-xs text-on-surface-variant font-body-sm">
+                        <span class="material-symbols-outlined text-sm">phone</span>
+                        (+62) 895-2823-6913
+                    </div>
+                </div>
+                <div class="space-y-base">
+                    <h6 class="font-label-lg text-on-surface">Perusahaan</h6>
+                    <ul class="space-y-xs">
+                        <li><a class="font-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary/30 transition-all duration-300"
+                                href="#">Tentang Kami</a></li>
+                        <li><a class="font-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary/30 transition-all duration-300"
+                                href="#">Kontak Kami</a></li>
+                        <li><a class="font-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary/30 transition-all duration-300"
+                                href="#">Bantuan</a></li>
+                    </ul>
+                </div>
+                <div class="space-y-base">
+                    <h6 class="font-label-lg text-on-surface">Legal</h6>
+                    <ul class="space-y-xs">
+                        <li><a class="font-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary/30 transition-all duration-300"
+                                href="#">Syarat &amp; Ketentuan</a></li>
+                        <li><a class="font-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary/30 transition-all duration-300"
+                                href="#">Kebijakan Privasi</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div
+                class="pt-lg border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-base">
+                <p class="font-lexend text-xs text-on-surface-variant">© 2026 RuangBelajar Educational Platform. All
+                    rights
+                    reserved.</p>
+                <div class="flex gap-md">
+                    <a class="text-outline hover:text-primary" href="#"><span class="material-symbols-outlined"
+                            data-icon="language">language</span></a>
+                    <a class="text-outline hover:text-primary" href="#"><span class="material-symbols-outlined"
+                            data-icon="share">share</span></a>
+                    <a class="text-outline hover:text-primary" href="#"><span class="material-symbols-outlined"
+                            data-icon="mail">mail</span></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Actions -->
+    <div class="floating-actions">
+
+        <!-- WhatsApp Button -->
+        <a href="https://wa.me/6289528236913" target="_blank" class="floating-btn whatsapp" title="Chat on WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path
+                    d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c-.003 1.398.366 2.76 1.062 3.967L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c.004-3.621 2.953-6.57 6.576-6.57 1.75 0 3.396.682 4.634 1.921a6.55 6.55 0 0 1 1.918 4.636c-.004 3.623-2.953 6.572-6.571 6.572zm3.274-4.49c-.179-.09-1.06-.523-1.225-.583-.164-.06-.284-.09-.404.09-.12.18-.464.583-.568.703-.104.12-.208.135-.387.045-.18-.09-.757-.278-1.442-.892-.533-.478-.893-1.06-1.026-1.24-.132-.18-.014-.277.076-.367.081-.08.18-.21.27-.315.09-.105.12-.18.18-.3.06-.12.03-.225-.015-.315-.045-.09-.404-.975-.554-1.335-.147-.354-.296-.305-.404-.31-.104-.004-.225-.005-.345-.005s-.315.045-.48.225c-.165.18-.63.615-.63 1.5s.645 1.725.735 1.845c.09.12 1.258 1.92 3.048 2.67.427.18.76.287 1.02.368.428.136.818.116 1.125.075.343-.046 1.06-.433 1.21-.85.15-.417.15-.775.105-.85-.045-.075-.165-.12-.345-.21z" />
+            </svg>
+        </a>
+    </div>
+</body>
+
+</html>

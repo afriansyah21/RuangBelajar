@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #1d4ed8;
+  --on-primary: #ffffff;
+  --background: #ffffff;
+  --on-background: #0f172a;
+  --surface: #f8fafc;
+  --on-surface: #334155;
+}
+
+.dark {
+  --background: #0f172a;
+  --on-background: #f8fafc;
+  --surface: #1e293b;
+  --on-surface: #94a3b8;
+}
+
+body {
+  @apply bg-background text-on-background;
+}

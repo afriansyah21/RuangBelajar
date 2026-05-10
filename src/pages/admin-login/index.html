@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Admin Login - Ruangbelajar</title>
+    
+    <!-- Tailwind and Fonts -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Separated Assets -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body class="bg-background font-body-md text-on-background min-h-screen flex flex-col">
+    <main class="flex-grow flex items-center justify-center p-gutter relative overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute top-[-10%] right-[-10%] w-[500px] h-[500px] bg-primary-container/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-[-10%] left-[-10%] w-[500px] h-[500px] bg-secondary-container/30 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="w-full max-w-[1100px] grid md:grid-cols-2 bg-surface-container-lowest rounded-xl shadow-xl overflow-hidden relative z-10 border border-outline-variant">
+            <!-- Left Side: Visuals -->
+            <div class="hidden md:flex flex-col justify-between p-xl bg-primary relative overflow-hidden">
+                <div class="relative z-20">
+                    <div class="flex items-center gap-base mb-lg">
+                        <span class="material-symbols-outlined text-surface-container-lowest text-4xl" data-icon="admin_panel_settings">admin_panel_settings</span>
+                        <h1 class="font-display-md text-headline-md text-surface-container-lowest tracking-tight">Ruangbelajar</h1>
+                    </div>
+                    <h2 class="font-display-md text-display-md text-surface-container-lowest mb-md">Admin Portal</h2>
+                    <p class="font-body-md text-body-md text-on-primary-container max-w-sm">Secure management interface for educators and platform administrators. Access course analytics, user management, and platform configuration.</p>
+                </div>
+                <div class="relative z-20">
+                    <div class="bg-primary-container/40 p-md rounded-lg border border-primary-fixed-dim/20 backdrop-blur-sm">
+                        <p class="font-label-md text-label-md text-on-primary-container uppercase tracking-widest mb-xs">Security Notice</p>
+                        <p class="font-caption text-caption text-surface-container-lowest">This is a restricted administrative area. All activities are logged and monitored for security purposes.</p>
+                    </div>
+                </div>
+                <div class="absolute inset-0 z-10 opacity-20">
+                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAA4fzzFly3mhYYluQiTG3r0BASTFwPgAlP4cn2vktgB01wSt732bdjen0_X49VhYQ0BmjsphJ58tPnaZawdjgqmUUnvyqzmr8xvQAp5C-3EGw1vCV9Sy583SuEmNwPFlo4raTOd8bEr0s7kkBdIfuAtZfKyXGN6Fv0uyRHk8aGQTULBT8tSrKlYyc2FSIMK8CT29ycwJ8Mcv616ztk1ZC5fLMUP0Fr5drt_KwLi__Wrdl7Pmky2BnpIPujr_x2fzmYBIM8tyCZ-2Z3"/>
+                </div>
+            </div>
+            
+            <!-- Right Side: Login Form -->
+            <div class="p-md md:p-xl flex flex-col justify-center bg-surface-container-lowest">
+                <div class="max-w-md mx-auto w-full">
+                    <div class="mb-lg md:hidden flex items-center justify-center gap-xs">
+                        <span class="material-symbols-outlined text-primary text-3xl" data-icon="admin_panel_settings">admin_panel_settings</span>
+                        <h1 class="font-headline-sm text-headline-sm text-primary">Ruangbelajar Admin</h1>
+                    </div>
+                    <div class="mb-lg">
+                        <h3 class="font-headline-md text-headline-md text-on-surface mb-xs">Sign In</h3>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant">Enter your administrator credentials to continue.</p>
+                    </div>
+                    
+                    <form class="space-y-md">
+                        <div class="space-y-xs">
+                            <label class="font-label-lg text-label-lg text-on-surface" for="username">Username</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+                                    <span class="material-symbols-outlined text-outline" data-icon="person">person</span>
+                                </div>
+                                <input class="w-full pl-[52px] pr-md py-sm bg-surface border border-outline-variant rounded-lg font-body-md text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-200" id="username" name="username" placeholder="admin_username" type="text"/>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-xs">
+                            <div class="flex justify-between items-center">
+                                <label class="font-label-lg text-label-lg text-on-surface" for="password">Password</label>
+                                <a class="font-label-md text-label-md text-primary hover:underline" href="#">Forgot password?</a>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-md flex items-center pointer-events-none">
+                                    <span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+                                </div>
+                                <input class="w-full pl-[52px] pr-md py-sm bg-surface border border-outline-variant rounded-lg font-body-md text-on-surface placeholder:text-outline focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all duration-200" id="password" name="password" placeholder="••••••••••••" type="password"/>
+                                <div class="absolute inset-y-0 right-0 pr-md flex items-center cursor-pointer">
+                                    <span class="material-symbols-outlined text-outline hover:text-on-surface-variant transition-colors" data-icon="visibility">visibility</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-sm pt-xs">
+                            <input class="w-5 h-5 rounded border-outline-variant text-primary focus:ring-primary/20" id="remember" type="checkbox"/>
+                            <label class="font-body-sm text-body-sm text-on-surface-variant cursor-pointer" for="remember">Remember this device for 30 days</label>
+                        </div>
+                        
+                        <button class="w-full py-md bg-primary text-on-primary font-label-lg text-label-lg rounded-lg shadow-md hover:bg-primary-container active:scale-[0.98] transition-all duration-150 flex items-center justify-center gap-sm mt-md" type="submit">
+                            Authorize Access
+                            <span class="material-symbols-outlined text-body-md" data-icon="arrow_forward">arrow_forward</span>
+                        </button>
+                    </form>
+                    
+                    <div class="mt-xl pt-lg border-t border-slate-100 flex flex-col items-center gap-md">
+                        <p class="font-caption text-caption text-outline">Alternatively, sign in with</p>
+                        <div class="flex gap-md w-full">
+                            <button class="flex-1 flex items-center justify-center gap-sm py-sm border border-outline-variant rounded-lg hover:bg-surface transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-body-md" data-icon="vpn_key">vpn_key</span>
+                                <span class="font-label-md text-label-md">SSO Login</span>
+                            </button>
+                            <button class="flex-1 flex items-center justify-center gap-sm py-sm border border-outline-variant rounded-lg hover:bg-surface transition-colors active:scale-95">
+                                <span class="material-symbols-outlined text-body-md" data-icon="fingerprint">fingerprint</span>
+                                <span class="font-label-md text-label-md">Biometric</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer class="w-full border-t border-slate-100 bg-white">
+        <div class="max-w-7xl mx-auto py-base px-lg flex flex-col md:flex-row justify-between items-center gap-md">
+            <p class="font-caption text-caption text-slate-500">© 2024 Ruangbelajar Educational Platform</p>
+            <div class="flex gap-lg">
+                <a class="font-caption text-caption text-slate-500 hover:text-primary hover:underline transition-colors" href="#">Bantuan</a>
+                <a class="font-caption text-caption text-slate-500 hover:text-primary hover:underline transition-colors" href="#">Kebijakan Privasi</a>
+                <a class="font-caption text-caption text-slate-500 hover:text-primary hover:underline transition-colors" href="#">Syarat & Ketentuan</a>
+            </div>
+            <div class="flex items-center gap-xs text-primary">
+                <span class="material-symbols-outlined text-[16px]" data-icon="shield">shield</span>
+                <span class="font-label-md text-[11px] uppercase tracking-wider font-bold">Secure Environment</span>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
