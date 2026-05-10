@@ -1,8 +1,5 @@
 name: Deploy to Domainesia
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 on:
   push:
     branches:
@@ -10,30 +7,30 @@ on:
 
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
+    - name: Get latest code
       uses: actions/checkout@v4
 
-    - name: ⚙️ Setup Node.js
+    - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '24'
+        node-version: '20'
 
-    - name: 📦 Install dependencies
+    - name: Install dependencies
       run: npm install
 
-    - name: 🏗️ Build project
+    - name: Build project
       run: npm run build
 
-    - name: 📂 Prepare for upload
+    - name: Prepare for upload
       run: |
         mkdir -p deploy
         cp -r dist/* deploy/
         cp -r api deploy/
 
-    - name: 🚀 Sync files to Server
+    - name: Sync files to Server
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
