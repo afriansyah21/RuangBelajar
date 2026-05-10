@@ -10,27 +10,26 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: Get latest code
+    - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: Setup Node.js
+    - name: Setup Node
       uses: actions/setup-node@v4
       with:
-        node-version: '20'
+        node-version: 20
 
-    - name: Install dependencies
-      run: npm install
+    - name: Install and Build
+      run: |
+        npm install
+        npm run build
 
-    - name: Build project
-      run: npm run build
-
-    - name: Prepare for upload
+    - name: Prepare Files
       run: |
         mkdir -p deploy
         cp -r dist/* deploy/
         cp -r api deploy/
 
-    - name: Sync files to Server
+    - name: Sync FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER }}
