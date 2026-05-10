@@ -16,7 +16,7 @@ const AdminLogin: React.FC = () => {
             <div className="relative z-20">
               <div className="flex items-center gap-3 mb-10">
                 <span className="material-symbols-outlined text-4xl">admin_panel_settings</span>
-                <h1 className="text-2xl font-bold font-lexend tracking-tight">Ruangbelajar</h1>
+                <h1 className="text-2xl font-bold font-lexend tracking-tight">RuangBelajar</h1>
               </div>
               <h2 className="text-5xl font-bold font-lexend mb-6">Admin Portal</h2>
               <p className="text-blue-100 max-w-sm leading-relaxed">
@@ -48,7 +48,7 @@ const AdminLogin: React.FC = () => {
             <div className="max-w-md mx-auto w-full">
               <div className="mb-10 md:hidden flex items-center justify-center gap-2">
                 <span className="material-symbols-outlined text-blue-700 text-3xl">admin_panel_settings</span>
-                <h1 className="text-xl font-bold text-blue-700 font-lexend">Ruangbelajar Admin</h1>
+                <h1 className="text-xl font-bold text-blue-700 font-lexend">RuangBelajar Admin</h1>
               </div>
               
               <div className="mb-10">
@@ -124,7 +124,7 @@ const AdminLogin: React.FC = () => {
 
       <footer className="w-full border-t border-slate-100 bg-white">
         <div className="max-w-7xl mx-auto py-6 px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-slate-400 font-lexend">© 2024 Ruangbelajar Educational Platform</p>
+          <p className="text-xs text-slate-400 font-lexend">© 2024 RuangBelajar Educational Platform</p>
           <div className="flex gap-8">
             {['Bantuan', 'Kebijakan Privasi', 'Syarat & Ketentuan'].map(link => (
               <a key={link} className="text-xs text-slate-400 hover:text-blue-700 transition-colors font-medium" href="#">{link}</a>

@@ -6,7 +6,7 @@ const ManajemenKuisAdmin: React.FC = () => {
       {/* SideNavBar */}
       <aside className="fixed left-0 h-full w-64 border-r border-slate-200 bg-slate-50 flex flex-col p-4 gap-2 z-40">
         <div className="mb-10 px-2">
-          <h1 className="text-lg font-black text-blue-800">Admin Portal</h1>
+          <h1 className="text-lg font-black text-blue-800">RuangBelajar Admin</h1>
           <p className="text-xs text-slate-500 font-lexend uppercase tracking-wider">Management</p>
         </div>
         <nav className="flex-grow space-y-1">

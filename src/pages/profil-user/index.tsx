@@ -6,7 +6,7 @@ const ProfilUser: React.FC = () => {
       {/* Navbar */}
       <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100">
         <div className="max-w-7xl mx-auto h-20 px-8 flex justify-between items-center">
-          <div className="text-2xl font-black text-blue-700 font-lexend tracking-tight">Ruangbelajar</div>
+          <div className="text-2xl font-black text-blue-700 font-lexend tracking-tight">RuangBelajar</div>
           <div className="hidden lg:flex items-center gap-12 font-bold text-sm text-slate-500 uppercase tracking-widest">
             {['Beranda', 'Kelas', 'Kuis', 'Tentang'].map(item => (
               <a key={item} className="hover:text-blue-700 transition-colors" href="#">{item}</a>

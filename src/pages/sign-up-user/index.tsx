@@ -51,7 +51,7 @@ const SignUpUser: React.FC = () => {
         <div className="relative z-10">
           <div className="flex items-center gap-3 text-3xl font-black font-lexend tracking-tight">
             <span className="material-symbols-outlined text-4xl">school</span>
-            Ruangbelajar
+            RuangBelajar
           </div>
           <div className="mt-24 max-w-md">
             <h1 className="text-6xl font-black font-lexend leading-[1.1] tracking-tight">Mulai Perjalanan Belajarmu Hari Ini.</h1>
@@ -61,7 +61,7 @@ const SignUpUser: React.FC = () => {
 
         <div className="relative z-10 max-w-sm">
           <div className="p-8 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] shadow-2xl shadow-blue-900/40">
-            <p className="text-lg font-bold leading-relaxed italic">"Belajar jadi lebih terarah dan menyenangkan bersama Ruangbelajar."</p>
+            <p className="text-lg font-bold leading-relaxed italic">"Belajar jadi lebih terarah dan menyenangkan bersama RuangBelajar."</p>
             <div className="mt-6 flex items-center gap-4">
               <div className="w-12 h-12 rounded-2xl bg-blue-50 overflow-hidden shadow-sm">
                 <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrhiwAE2BpAzzlBXooDtT_UcvGZ5KS4mjtTGbOtpUvo1wcyjocqoxGZVW4ur7xew-nn_FDse8b56mfDXfTm1iPS620JgsE1iTsi-JxdeYTO3xK86Bk2Mm7PYLI0sHdGZacygmElIYQVQZHq1_hBotAu0XHyNVk1G-9z6eFIAUiKQkS3HijEpv4H090n8XfcCqikiXyThXuZsOywaj2AnniBH2p3opgaLdgMAfNOMQ2-11j_0nDowQttN-wTeg-oT2nNI96AADUQuAs" alt="User" />

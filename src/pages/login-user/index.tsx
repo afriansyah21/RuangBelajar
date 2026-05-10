@@ -47,7 +47,7 @@ const LoginUser: React.FC = () => {
         <div className="w-full max-w-[480px] z-10">
           <div className="bg-white border border-slate-100 rounded-3xl p-10 shadow-2xl shadow-blue-800/5">
             <div className="text-center mb-10">
-              <h1 className="text-4xl font-black text-blue-700 mb-2 font-lexend">Ruangbelajar</h1>
+              <h1 className="text-4xl font-black text-blue-700 mb-2 font-lexend">RuangBelajar</h1>
               <p className="text-slate-500 font-medium">Selamat datang kembali! Silakan masuk ke akun Anda.</p>
             </div>
 
@@ -126,7 +126,7 @@ const LoginUser: React.FC = () => {
       <footer className="w-full border-t border-slate-100 bg-white py-10">
         <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div>
-            <span className="text-lg font-bold text-slate-900 font-lexend">Ruangbelajar</span>
+            <span className="text-lg font-bold text-slate-900 font-lexend">RuangBelajar</span>
             <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">© 2024 Educational Platform</p>
           </div>
           <div className="flex gap-8">

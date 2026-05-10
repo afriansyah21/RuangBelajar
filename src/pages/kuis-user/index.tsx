@@ -12,7 +12,7 @@ const KuisUser: React.FC = () => {
       {/* TopNavBar */}
       <header className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
         <div className="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
-          <div className="text-xl font-bold tracking-tight text-blue-700 font-lexend">Ruangbelajar</div>
+          <div className="text-xl font-bold tracking-tight text-blue-700 font-lexend">RuangBelajar</div>
           <nav className="hidden md:flex gap-8 items-center h-full">
             {['Beranda', 'Kelas', 'Kuis', 'Tentang', 'Profil'].map((nav) => (
               <a 
@@ -113,13 +113,13 @@ const KuisUser: React.FC = () => {
 
       <footer className="bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto py-12 px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-lg font-bold text-slate-900 font-lexend">Ruangbelajar</div>
+          <div className="text-lg font-bold text-slate-900 font-lexend">RuangBelajar</div>
           <div className="flex flex-wrap justify-center gap-6">
             {['Kontak Kami', 'Syarat & Ketentuan', 'Kebijakan Privasi', 'Bantuan'].map(link => (
               <a key={link} className="text-xs text-slate-500 hover:text-blue-600 transition-colors" href="#">{link}</a>
             ))}
           </div>
-          <p className="text-xs text-slate-500 font-lexend">© 2024 Ruangbelajar Educational Platform</p>
+          <p className="text-xs text-slate-500 font-lexend">© 2024 RuangBelajar Educational Platform</p>
         </div>
       </footer>
     </div>

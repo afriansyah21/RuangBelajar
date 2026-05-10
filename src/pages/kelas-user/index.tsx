@@ -12,7 +12,7 @@ const KelasUser: React.FC = () => {
       {/* TopNavBar */}
       <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
         <div className="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
-          <div className="text-xl font-bold tracking-tight text-blue-700">Ruangbelajar</div>
+          <div className="text-xl font-bold tracking-tight text-blue-700">RuangBelajar</div>
           <div className="hidden md:flex gap-4 items-center font-lexend text-sm font-medium tracking-tight">
             <a className="px-3 py-1 text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-colors duration-200" href="#">Beranda</a>
             <a className="px-3 py-1 text-blue-700 border-b-2 border-blue-700 pb-1" href="#">Kelas</a>
@@ -126,8 +126,8 @@ const KelasUser: React.FC = () => {
       <footer className="w-full border-t border-slate-100 bg-white mt-16">
         <div className="max-w-7xl mx-auto py-12 px-6 flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0 text-center md:text-left">
-            <div className="text-lg font-bold text-slate-900 mb-1">Ruangbelajar</div>
-            <p className="text-xs text-slate-500">© 2024 Ruangbelajar Educational Platform</p>
+            <div className="text-lg font-bold text-slate-900 mb-1">RuangBelajar</div>
+            <p className="text-xs text-slate-500">© 2024 RuangBelajar Educational Platform</p>
           </div>
           <div className="flex flex-wrap justify-center gap-6">
             {['Kontak Kami', 'Syarat & Ketentuan', 'Kebijakan Privasi', 'Bantuan'].map(link => (

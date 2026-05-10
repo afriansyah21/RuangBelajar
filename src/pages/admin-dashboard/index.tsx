@@ -42,7 +42,7 @@ const AdminDashboard: React.FC = () => {
         <header className="flex justify-between items-center mb-10">
           <div className="flex flex-col">
             <h2 className="text-3xl font-bold text-blue-800 font-lexend">Beranda Dashboard</h2>
-            <p className="text-slate-500 text-sm">Selamat datang kembali di panel administrasi Ruangbelajar.</p>
+            <p className="text-slate-500 text-sm">Selamat datang kembali di panel administrasi RuangBelajar.</p>
           </div>
           <div className="flex gap-4 items-center">
             <div className="relative hidden sm:block">
@@ -208,7 +208,7 @@ const AdminDashboard: React.FC = () => {
 
       <footer className="fixed bottom-0 left-64 right-0 bg-white border-t border-slate-100 z-30">
         <div className="max-w-7xl mx-auto py-4 px-8 flex justify-between items-center">
-          <p className="text-slate-400 text-xs font-lexend">© 2024 Ruangbelajar Educational Platform</p>
+          <p className="text-slate-400 text-xs font-lexend">© 2024 RuangBelajar Educational Platform</p>
           <div className="flex gap-6">
             {['Bantuan', 'Kebijakan Privasi', 'Kontak Kami'].map(link => (
               <a key={link} className="text-xs text-slate-400 hover:text-blue-700 transition-colors font-medium" href="#">{link}</a>

@@ -4,7 +4,7 @@ const ManajemenDonasiAdmin: React.FC = () => {
   const donations = [
     { name: 'Budi Santoso', date: '24 Okt, 2024', amount: 'Rp 500.000', status: 'Berhasil', color: 'bg-green-100 text-green-700' },
     { name: 'Siti Aminah', date: '22 Okt, 2024', amount: 'Rp 1.200.000', status: 'Berhasil', color: 'bg-green-100 text-green-700' },
-    { name: 'Anonym', date: '21 Okt, 2024', amount: 'Rp 50.000', status: 'Pending', color: 'bg-amber-100 text-amber-700' },
+    { name: 'Anonim', date: '21 Okt, 2024', amount: 'Rp 50.000', status: 'Pending', color: 'bg-amber-100 text-amber-700' },
     { name: 'Dewi Lestari', date: '19 Okt, 2024', amount: 'Rp 2.000.000', status: 'Berhasil', color: 'bg-green-100 text-green-700' },
   ];
 
@@ -126,7 +126,7 @@ const ManajemenDonasiAdmin: React.FC = () => {
       </main>
 
       <footer className="fixed bottom-0 left-72 right-0 bg-white/80 backdrop-blur-md border-t border-slate-100 px-12 py-4 flex justify-between items-center z-30">
-        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">© 2024 Ruangbelajar Admin</p>
+        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">© 2024 RuangBelajar Admin</p>
         <div className="flex gap-8">
           {['Bantuan', 'Privasi'].map(link => (
             <a key={link} className="text-[10px] font-black text-slate-400 hover:text-blue-700 uppercase tracking-widest" href="#">{link}</a>

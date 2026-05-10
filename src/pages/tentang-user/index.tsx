@@ -6,7 +6,7 @@ const TentangUser: React.FC = () => {
       {/* Navbar */}
       <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-slate-100">
         <div className="max-w-7xl mx-auto h-20 px-8 flex justify-between items-center">
-          <div className="text-2xl font-black text-blue-700 font-lexend tracking-tight">Ruangbelajar</div>
+          <div className="text-2xl font-black text-blue-700 font-lexend tracking-tight">RuangBelajar</div>
           <div className="hidden lg:flex items-center gap-12 font-bold text-sm text-slate-500 uppercase tracking-widest">
             {['Beranda', 'Kelas', 'Kuis'].map(item => (
               <a key={item} className="hover:text-blue-700 transition-colors" href="#">{item}</a>
@@ -34,7 +34,7 @@ const TentangUser: React.FC = () => {
               <div className="space-y-8">
                 <span className="inline-block px-5 py-2 rounded-full bg-blue-500/20 text-blue-300 text-[10px] font-black tracking-[0.2em] uppercase border border-blue-500/30">Evolusi Pendidikan</span>
                 <h1 className="text-white font-black font-lexend text-5xl lg:text-7xl leading-[1.1] tracking-tight">Mendefinisikan Ulang Belajar Digital.</h1>
-                <p className="text-blue-100/70 text-lg font-medium leading-relaxed max-w-xl">Ruangbelajar hadir sebagai jembatan antara potensi individu dan akses pendidikan berkualitas tanpa batas geografis.</p>
+                <p className="text-blue-100/70 text-lg font-medium leading-relaxed max-w-xl">RuangBelajar hadir sebagai jembatan antara potensi individu dan akses pendidikan berkualitas tanpa batas geografis.</p>
                 <div className="flex gap-6">
                   <button className="px-10 py-5 bg-white text-blue-900 font-black text-xs uppercase tracking-widest rounded-2xl shadow-xl hover:shadow-2xl transition-all active:scale-95">Mulai Belajar</button>
                   <button className="px-10 py-5 border-2 border-white/20 text-white font-black text-xs uppercase tracking-widest rounded-2xl hover:bg-white/10 transition-all">Kurikulum</button>
@@ -143,8 +143,8 @@ const TentangUser: React.FC = () => {
       <footer className="border-t border-slate-100 py-20 px-8">
         <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-between items-center gap-12">
           <div className="space-y-4 text-center lg:text-left">
-            <div className="text-2xl font-black text-blue-700 font-lexend">Ruangbelajar</div>
-            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">© 2024 Ruangbelajar Platform</p>
+            <div className="text-2xl font-black text-blue-700 font-lexend">RuangBelajar</div>
+            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">© 2024 RuangBelajar Platform</p>
           </div>
           <div className="flex flex-wrap justify-center gap-10">
             {['Kontak', 'Syarat', 'Privasi', 'Bantuan'].map(link => (

@@ -17,7 +17,7 @@ const ManajemenPenggunaAdmin: React.FC = () => {
       {/* Sidebar */}
       <aside className="fixed left-0 top-0 h-full w-72 bg-white border-r border-slate-100 flex flex-col p-8 z-50">
         <div className="mb-12">
-          <h1 className="text-2xl font-black text-blue-700 font-lexend">EduAdmin</h1>
+          <h1 className="text-2xl font-black text-blue-700 font-lexend">RuangBelajar</h1>
           <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Portal Mentor</p>
         </div>
         <nav className="flex-1 space-y-1">

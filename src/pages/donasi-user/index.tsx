@@ -10,7 +10,7 @@ const DonasiUser: React.FC = () => {
     <div className="bg-background text-on-background font-body-md min-h-screen flex flex-col">
       <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
         <div className="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
-          <div className="text-xl font-bold tracking-tight text-blue-700 font-lexend">Ruangbelajar</div>
+          <div className="text-xl font-bold tracking-tight text-blue-700 font-lexend">RuangBelajar</div>
           <div className="hidden md:flex items-center gap-2">
             {['Beranda', 'Kelas', 'Kuis', 'Tentang'].map((item) => (
               <a key={item} className="font-lexend text-sm font-medium px-4 py-2 text-slate-600 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-all" href="#">{item}</a>
@@ -127,8 +127,8 @@ const DonasiUser: React.FC = () => {
       <footer className="w-full border-t border-slate-100 bg-white">
         <div className="max-w-7xl mx-auto py-12 px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div>
-            <div className="text-xl font-bold text-slate-900 mb-2 font-lexend">Ruangbelajar</div>
-            <p className="text-xs text-slate-400 font-medium">© 2024 Ruangbelajar Educational Platform</p>
+            <div className="text-xl font-bold text-slate-900 mb-2 font-lexend">RuangBelajar</div>
+            <p className="text-xs text-slate-400 font-medium">© 2024 RuangBelajar Educational Platform</p>
           </div>
           <div className="flex gap-10">
             {['Kontak Kami', 'Syarat & Ketentuan', 'Kebijakan Privasi', 'Bantuan'].map(link => (
