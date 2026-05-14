@@ -50,7 +50,7 @@ const SignUpUser: React.FC = () => {
 
         <div className="relative z-10">
           <div className="flex items-center gap-3 text-3xl font-black font-lexend tracking-tight">
-            <span className="material-symbols-outlined text-4xl">school</span>
+            <span className="material-symbols-outlined text-4xl">School</span>
             RuangBelajar
           </div>
           <div className="mt-24 max-w-md">
