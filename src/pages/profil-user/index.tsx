@@ -71,7 +71,7 @@ const ProfilUser: React.FC = () => {
                   { label: 'Nama Lengkap', value: 'Aditya Pratama' },
                   { label: 'Nomor HP', value: '+62 812 3456 7890' },
                   { label: 'Tanggal Lahir', value: '15 Mei 2005' },
-                  { label: 'E-mail', value: 'aditya.pratama@email.com' }
+                  { label: 'E-mail', value: 'aditya.pratama@gmail.com' }
                 ].map(info => (
                   <div key={info.label} className="space-y-2 border-b border-slate-50 pb-4">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{info.label}</label>
