@@ -2,7 +2,7 @@ import React from 'react';
 
 const ManajemenPenggunaAdmin: React.FC = () => {
   const users = [
-    { name: 'Andi Saputra', email: 'andi.saputra@email.com', joinDate: '12 Jan 2024', role: 'Siswa', initials: 'AS' },
+    { name: 'Andi Saputra', email: 'andi.saputra@gmail.com', joinDate: '12 Jan 2024', role: 'Siswa', initials: 'AS' },
     { name: 'Budi Nugraha', email: 'budi.nug@provider.com', joinDate: '15 Jan 2024', role: 'Siswa', initials: 'BN' },
     { name: 'Citra Lestari', email: 'citra.l@school.id', joinDate: '20 Jan 2024', role: 'Siswa', initials: 'CL' },
   ];
