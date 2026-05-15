@@ -3,65 +3,174 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
     <title>Daftar - RuangBelajar</title>
     
-    <!-- Tailwind and Fonts -->
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lexend:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Lexend:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+    <!-- Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
-    <!-- Separated Assets -->
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </head>
-<body class="bg-background font-body-md text-on-background">
-    <main class="min-h-screen flex flex-col md:flex-row">
-        <!-- Branding Side -->
-        <section class="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden flex-col justify-between p-xl text-white">
+
+<body>
+
+    <main class="min-h-screen flex flex-col lg:flex-row overflow-hidden">
+
+        <!-- LEFT SIDE -->
+        <section class="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden flex-col justify-between px-14 py-10 text-white">
+
+            <!-- Blur Decoration -->
+            <div class="absolute top-[-120px] left-[-120px] w-[260px] h-[260px] bg-white/10 rounded-full blur-3xl"></div>
+
             <div class="relative z-10">
-                <a class="text-3xl font-bold font-display-md flex items-center gap-2" href="#">
-                    <span class="material-symbols-outlined text-4xl">School</span> RuangBelajar
+
+                <!-- LOGO -->
+                <a class="text-3xl font-bold flex items-center gap-3" href="#">
+
+                    <div class="w-14 h-14 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/10">
+                        <span class="material-symbols-outlined text-3xl">
+                            school
+                        </span>
+                    </div>
+
+                    RuangBelajar
+
                 </a>
-                <div class="mt-16 max-w-md">
-                    <h1 class="text-5xl font-bold leading-tight font-display-lg">Mulai Perjalanan Belajarmu Hari Ini.</h1>
-                    <p class="mt-6 text-blue-100 text-lg">Platform edukasi terpercaya untuk membantu kamu meraih prestasi akademik terbaik.</p>
+
+                <!-- HERO -->
+                <div class="mt-14 max-w-[520px]">
+
+                    <div class="hero-badge">
+                        Platform Edukasi Modern
+                    </div>
+
+                    <h1 class="text-[72px] leading-[1.05] font-bold mt-8 tracking-[-2px]">
+                        Mulai Perjalanan Belajarmu Hari Ini.
+                    </h1>
+
+                    <p class="mt-6 text-blue-100 text-[18px] leading-[42px] max-w-[520px]">
+                        Platform edukasi terpercaya untuk membantu kamu meraih prestasi akademik terbaik.
+                    </p>
+
                 </div>
+
             </div>
+
+            <!-- TESTIMONIAL -->
             <div class="relative z-10">
-                <div class="p-6 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl max-w-sm">
-                    <p className="text-sm italic">"Belajar jadi lebih terarah dan menyenangkan."</p>
-                    <p className="text-xs font-bold mt-2">— Budi Santoso</p>
+
+                <div class="testimonial-card max-w-[420px]">
+
+                    <p class="text-[15px] italic leading-8 text-white/90">
+                        “Belajar jadi lebih terarah dan menyenangkan.”
+                    </p>
+
+                    <p class="text-sm font-bold mt-4 text-white">
+                        — Budi Santoso
+                    </p>
+
                 </div>
+
             </div>
+
         </section>
 
-        <!-- Form Side -->
-        <section class="flex-1 flex items-center justify-center p-8 bg-white">
-            <div class="w-full max-w-md">
+        <!-- RIGHT SIDE -->
+        <section class="flex-1 flex items-center justify-center p-8">
+
+            <div class="form-card w-full max-w-md">
+
+                <!-- HEADER -->
                 <div class="mb-10">
-                    <h2 class="text-3xl font-bold text-slate-900">Buat Akun Baru</h2>
-                    <p class="text-slate-500 mt-2">Lengkapi data diri Anda untuk memulai.</p>
+
+                    <h2 class="text-3xl font-bold text-slate-900 tracking-[-1px]">
+                        Buat Akun Baru
+                    </h2>
+
+                    <p class="text-slate-500 mt-2">
+                        Lengkapi data diri Anda untuk memulai.
+                    </p>
+
                 </div>
+
+                <!-- FORM -->
                 <form class="space-y-6">
+
+                    <!-- NAMA -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">Nama Lengkap</label>
-                        <input class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-700/20" type="text" placeholder="Andi Wijaya"/>
+
+                        <label class="block text-sm font-bold text-slate-700 mb-2">
+                            Nama Lengkap
+                        </label>
+
+                        <input
+                            class="input-modern"
+                            type="text"
+                            placeholder="Andi Wijaya"
+                        />
+
                     </div>
+
+                    <!-- EMAIL -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">E-mail</label>
-                        <input class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-700/20" type="email" placeholder="nama@gmail.com"/>
+
+                        <label class="block text-sm font-bold text-slate-700 mb-2">
+                            E-mail
+                        </label>
+
+                        <input
+                            class="input-modern"
+                            type="email"
+                            placeholder="nama@gmail.com"
+                        />
+
                     </div>
+
+                    <!-- PASSWORD -->
                     <div>
-                        <label class="block text-sm font-bold text-slate-700 mb-2">Password</label>
-                        <input class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-700/20" type="password" placeholder="••••••••"/>
+
+                        <label class="block text-sm font-bold text-slate-700 mb-2">
+                            Password
+                        </label>
+
+                        <input
+                            class="input-modern"
+                            type="password"
+                            placeholder="••••••••"
+                        />
+
                     </div>
-                    <button class="w-full bg-blue-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-blue-700/20 hover:bg-blue-800 transition-all" type="submit">Sign Up</button>
+
+                    <!-- BUTTON -->
+                    <button class="signup-btn" type="submit">
+                        Sign Up
+                    </button>
+
                 </form>
+
+                <!-- FOOTER -->
                 <p class="mt-8 text-center text-sm text-slate-500">
-                    Sudah punya akun? <a class="text-blue-700 font-bold hover:underline" href="#">Masuk di sini</a>
+
+                    Sudah punya akun?
+
+                    <a class="text-blue-700 font-bold hover:underline" href="#">
+                        Masuk di sini
+                    </a>
+
                 </p>
+
             </div>
+
         </section>
+
     </main>
+
 </body>
 </html>
