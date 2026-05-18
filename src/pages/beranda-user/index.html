@@ -5,126 +5,182 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Beranda User - Ruangbelajar</title>
     
-    <!-- Tailwind and Fonts -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
-    <!-- Separated Assets -->
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
-<body class="bg-background text-on-background font-body-md min-h-screen">
-    <nav class="bg-white/90 dark:bg-slate-900/90 backdrop-blur-md fixed top-0 w-full z-50 border-b border-slate-100 dark:border-slate-800 shadow-sm dark:shadow-none">
-        <div class="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
-            <div class="text-xl font-bold tracking-tight text-blue-700 dark:text-blue-400 font-lexend">Ruangbelajar</div>
-            <div class="hidden md:flex items-center gap-8 font-lexend text-sm font-medium tracking-tight">
-                <a class="text-blue-700 dark:text-blue-400 border-b-2 border-blue-700 dark:border-blue-400 pb-1" href="#">Beranda</a>
-                <a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-200" href="#">Kelas</a>
-                <a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-200" href="#">Kuis</a>
-                <a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-200" href="#">Tentang</a>
-                <a class="text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors duration-200" href="#">Profil</a>
+<body class="bg-slate-50 text-slate-800 font-inter min-h-screen relative overflow-x-hidden">
+    
+    <div class="fixed inset-0 z-[0] pointer-events-none">
+        <div class="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-200 rounded-full blur-[120px] opacity-60"></div>
+        <div class="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-blue-300 rounded-full blur-[120px] opacity-40"></div>
+    </div>
+
+    <div class="relative z-10 flex flex-col min-h-screen">
+        
+        <nav class="bg-white/80 backdrop-blur-md fixed top-0 w-full z-50 border-b border-slate-200 shadow-sm">
+            <div class="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
+                <div class="text-xl font-bold tracking-tight text-blue-700 font-lexend">RuangBelajar</div>
+                <div class="hidden md:flex items-center gap-8 font-lexend text-sm font-medium tracking-tight">
+                    <a class="nav-link active" href="#">Beranda</a>
+                    <a class="nav-link" href="#">Kelas</a>
+                    <a class="nav-link" href="#">Kuis</a>
+                    <a class="nav-link" href="#">Tentang</a>
+                    <a class="nav-link" href="#">Profil</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <button class="material-symbols-outlined p-2 text-slate-600 hover:bg-slate-50 rounded-full transition-colors active:scale-95">logout</button>
+                    <div class="h-9 w-9 rounded-full overflow-hidden avatar-profile">
+                        <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYVeyiNP0Z9i6pW1gIgQgIs2o0PSAzIZ_0i1XD58YuRxo8pNSNyuGm32FC1x2i4A9KG6twIj1MSu08l1SoNo1Gttt8ZZf_goB0p267rlVm6IRGjRb7NOrNkeIDFPPlCvqGZjbU9KMKHKSNri-9KZG43EsDsvnKmLC06AcGVuqljdKAhcZOPx0YozXqXnXIX0D1wkFRcapW_Kwg-6sMEnb8EG_h-2z80NSuSEVDg7snInPgNyZyfBM_eevbIOW3kQXRL0bgn4EJE-y-" alt="Profile"/>
+                    </div>
+                </div>
             </div>
-            <div class="flex items-center gap-4">
-                <button class="material-symbols-outlined p-2 text-slate-600 hover:bg-slate-50 rounded-full transition-colors active:scale-95">logout</button>
-                <div class="h-8 w-8 rounded-full bg-primary-container overflow-hidden ring-2 ring-surface-container">
-                    <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYVeyiNP0Z9i6pW1gIgQgIs2o0PSAzIZ_0i1XD58YuRxo8pNSNyuGm32FC1x2i4A9KG6twIj1MSu08l1SoNo1Gttt8ZZf_goB0p267rlVm6IRGjRb7NOrNkeIDFPPlCvqGZjbU9KMKHKSNri-9KZG43EsDsvnKmLC06AcGVuqljdKAhcZOPx0YozXqXnXIX0D1wkFRcapW_Kwg-6sMEnb8EG_h-2z80NSuSEVDg7snInPgNyZyfBM_eevbIOW3kQXRL0bgn4EJE-y-"/>
-                </div>
+        </nav>
+
+        <main class="pt-28 pb-12 px-6 max-w-7xl mx-auto flex-grow w-full">
+            <header class="mb-8">
+                <h1 class="font-lexend text-3xl font-bold text-slate-800 mb-2">Halo, Selamat Datang Aditya!</h1>
+                <p class="text-slate-600">Satu langkah lebih dekat menuju mimpimu. Mari jadi versi terbaik dirimu hari ini!</p>
+            </header>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <section class="md:col-span-8 flex flex-col gap-6">
+        
+        <div class="dashboard-card p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="font-lexend font-bold text-lg text-slate-800">Progres Kelas</h2>
+                <button class="text-blue-600 font-semibold hover:underline transition-all">Lihat Semua</button>
             </div>
-        </div>
-    </nav>
-
-    <main class="pt-24 pb-12 px-6 max-w-7xl mx-auto">
-        <header class="mb-lg">
-            <h1 class="font-display-md text-display-md text-on-surface mb-xs">Halo, Selamat Datang Kembali!</h1>
-            <p class="font-body-md text-body-md text-on-surface-variant">Teruskan perjalanan belajarmu hari ini.</p>
-        </header>
-
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
-            <!-- Left Side: Progress & Feedback -->
-            <section class="md:col-span-8">
-                <div class="bg-white p-md rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,86,179,0.05)] hover:shadow-[0px_8px_24px_rgba(0,86,179,0.1)] transition-shadow duration-300 mb-gutter">
-                    <div class="flex justify-between items-center mb-md">
-                        <h2 class="font-headline-sm text-headline-sm text-on-surface">Progres Kelas</h2>
-                        <button class="text-primary font-label-lg hover:underline transition-all">Lihat Semua</button>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                
+                <div class="flex flex-col items-center text-center p-4 rounded-xl hover:bg-white/50 transition-all duration-300 group">
+                    <div class="progress-glow relative w-24 h-24 flex items-center justify-center rounded-full mb-4 circular-progress" 
+                         style="--progress: 75; --color: #2563eb;">
+                        <span class="font-bold text-blue-600 text-xl">75%</span>
                     </div>
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-md">
-                        <div class="flex flex-col items-center text-center p-sm rounded-lg hover:bg-surface-container-low transition-colors duration-200">
-                            <div class="relative w-24 h-24 flex items-center justify-center rounded-full mb-base circular-progress" style="--progress: 75; --tw-primary-container: #0056b3; --tw-surface-container: #e5eeff;">
-                                <span class="font-headline-sm text-primary">75%</span>
-                            </div>
-                            <h3 class="font-label-lg text-on-surface">UI/UX Design Masterclass</h3>
-                            <p class="font-caption text-on-surface-variant">Modul 12/16</p>
-                        </div>
-                        <!-- ... other classes ... -->
-                    </div>
+                    <h3 class="font-semibold text-slate-800 text-sm mb-1 group-hover:text-blue-600 transition-colors">UI/UX Design Masterclass</h3>
+                    <p class="text-xs text-slate-500">Modul 12/16</p>
                 </div>
 
-                <div class="bg-white p-md rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,86,179,0.05)]">
-                    <h2 class="font-headline-sm text-headline-sm text-on-surface mb-md">Kritik & Saran</h2>
-                    <form class="space-y-md">
-                        <div>
-                            <label class="block font-label-lg text-on-surface mb-xs">Subjek</label>
-                            <input class="w-full px-base py-sm rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary-container/20 transition-all outline-none bg-white" placeholder="Masukkan subjek masukan anda" type="text"/>
-                        </div>
-                        <div>
-                            <label class="block font-label-lg text-on-surface mb-xs">Pesan Anda</label>
-                            <textarea class="w-full px-base py-sm rounded-lg border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary-container/20 transition-all outline-none bg-white" placeholder="Apa yang bisa kami tingkatkan?" rows="4"></textarea>
-                        </div>
-                        <button class="bg-primary-container text-white font-label-lg px-xl py-sm rounded-lg hover:bg-primary transition-all active:scale-95 shadow-md" type="submit">Kirim Feedback</button>
-                    </form>
-                </div>
-            </section>
-
-            <!-- Right Side: Quiz Status & Help -->
-            <aside class="md:col-span-4">
-                <div class="bg-white p-md rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,86,179,0.05)] h-full">
-                    <h2 class="font-headline-sm text-headline-sm text-on-surface mb-md">Status Kuis Terbaru</h2>
-                    <div class="space-y-sm">
-                        <div class="flex items-center gap-sm p-sm rounded-lg bg-surface-container-low border border-slate-50">
-                            <div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center text-primary">
-                                <span class="material-symbols-outlined">quiz</span>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-label-lg text-on-surface">Quiz 4: Visual Hierarchy</p>
-                                <p class="font-caption text-on-surface-variant">UI/UX Masterclass</p>
-                            </div>
-                            <div class="text-right">
-                                <p class="font-headline-sm text-primary">95</p>
-                                <p class="font-caption text-tertiary font-bold">Lulus</p>
-                            </div>
-                        </div>
+                <div class="flex flex-col items-center text-center p-4 rounded-xl hover:bg-white/50 transition-all duration-300 group">
+                    <div class="progress-glow relative w-24 h-24 flex items-center justify-center rounded-full mb-4 circular-progress" 
+                         style="--progress: 45; --color: #2563eb;">
+                        <span class="font-bold text-blue-600 text-xl">45%</span>
                     </div>
-                    <button class="w-full mt-md py-sm border-2 border-primary-container text-primary-container font-label-lg rounded-lg hover:bg-primary-container hover:text-white transition-all">Riwayat Lengkap</button>
-                    
-                    <div class="mt-lg p-md rounded-xl bg-gradient-to-br from-primary to-primary-container text-white overflow-hidden relative">
-                        <div class="relative z-10">
-                            <h3 class="font-headline-sm mb-xs text-white">Butuh bantuan?</h3>
-                            <p class="font-body-sm text-white/90 mb-md">Hubungi mentor pribadi anda kapan saja.</p>
-                            <button class="bg-white text-primary px-base py-xs rounded-full font-label-md hover:shadow-lg transition-all">Chat Mentor</button>
-                        </div>
-                        <div class="absolute -bottom-4 -right-4 opacity-10">
-                            <span class="material-symbols-outlined text-[100px]" style="font-variation-settings: 'FILL' 1;">support_agent</span>
-                        </div>
-                    </div>
+                    <h3 class="font-semibold text-slate-800 text-sm mb-1 group-hover:text-blue-600 transition-colors">Frontend Mastery: React</h3>
+                    <p class="text-xs text-slate-500">Modul 9/20</p>
                 </div>
-            </aside>
-        </div>
-    </main>
 
-    <footer class="bg-white dark:bg-slate-950 border-t border-slate-100 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto py-12 px-6 flex flex-col md:flex-row justify-between items-center gap-md">
-            <div>
-                <div class="text-lg font-bold text-slate-900 dark:text-white mb-xs">Ruangbelajar</div>
-                <p class="font-lexend text-xs text-slate-500">© 2024 Ruangbelajar Educational Platform</p>
-            </div>
-            <div class="flex gap-md font-lexend text-xs">
-                <a class="text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30 transition-all duration-300" href="#">Kontak Kami</a>
-                <a class="text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30 transition-all duration-300" href="#">Syarat & Ketentuan</a>
-                <a class="text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30 transition-all duration-300" href="#">Kebijakan Privasi</a>
-                <a class="text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30 transition-all duration-300" href="#">Bantuan</a>
+                <div class="flex flex-col items-center text-center p-4 rounded-xl hover:bg-white/50 transition-all duration-300 group">
+                    <div class="progress-glow relative w-24 h-24 flex items-center justify-center rounded-full mb-4 circular-progress" 
+                         style="--progress: 90; --color: #2563eb;">
+                        <span class="font-bold text-blue-600 text-xl">90%</span>
+                    </div>
+                    <h3 class="font-semibold text-slate-800 text-sm mb-1 group-hover:text-blue-600 transition-colors">Graphic Design Principles</h3>
+                    <p class="text-xs text-slate-500">Modul 18/20</p>
+                </div>
+
             </div>
         </div>
-    </footer>
+
+        <div class="dashboard-card p-6">
+            <h2 class="font-lexend font-bold text-lg text-slate-800 mb-6">Kritik & Saran</h2>
+            <form class="space-y-4">
+                <div>
+                    <label class="block font-semibold text-sm text-slate-700 mb-2">Subjek</label>
+                    <input class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none bg-white/80" placeholder="Masukkan subjek masukan anda" type="text"/>
+                </div>
+                <div>
+                    <label class="block font-semibold text-sm text-slate-700 mb-2">Pesan Anda</label>
+                    <textarea class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 transition-all outline-none bg-white/80" placeholder="Apa yang bisa kami tingkatkan?" rows="4"></textarea>
+                </div>
+                <button class="btn-primary text-white font-semibold px-6 py-3 rounded-xl mt-2 w-max" type="submit">Kirim Feedback</button>
+            </form>
+        </div>
+    </section>
+
+   <aside class="md:col-span-4 flex flex-col gap-6">
+    <div class="dashboard-card p-6 h-full flex flex-col">
+        <h2 class="font-lexend font-bold text-lg text-slate-800 mb-6">Status Kuis Terbaru</h2>
+        <div class="space-y-4 flex-grow">
+            
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-white/60 border border-slate-100">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                    <span class="material-symbols-outlined">quiz</span>
+                </div>
+                <div class="flex-1">
+                    <p class="font-semibold text-sm text-slate-800">Quiz 3: Visual Hierarchy</p>
+                    <p class="text-xs text-slate-500">UI/UX Masterclass</p>
+                </div>
+                <div class="flex flex-col items-center justify-center min-w-[60px]">
+                    <p class="font-bold text-xl text-blue-600 leading-none">95</p>
+                    <span class="badge-lulus mt-1">Lulus</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-white/60 border border-slate-100">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                    <span class="material-symbols-outlined">quiz</span>
+                </div>
+                <div class="flex-1">
+                    <p class="font-semibold text-sm text-slate-800">Quiz 2: React Hooks</p>
+                    <p class="text-xs text-slate-500">Frontend Mastery</p>
+                </div>
+                <div class="flex flex-col items-center justify-center min-w-[60px]">
+                    <p class="font-bold text-xl text-blue-600 leading-none">88</p>
+                    <span class="badge-lulus mt-1">Lulus</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-4 rounded-xl bg-white/60 border border-slate-100">
+                <div class="w-12 h-12 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+                    <span class="material-symbols-outlined">quiz</span>
+                </div>
+                <div class="flex-1">
+                    <p class="font-semibold text-sm text-slate-800">Quiz 1: Color Theory</p>
+                    <p class="text-xs text-slate-500">Graphic Design</p>
+                </div>
+                <div class="flex flex-col items-center justify-center min-w-[60px]">
+                    <p class="font-bold text-xl text-blue-600 leading-none">92</p>
+                    <span class="badge-lulus mt-1">Lulus</span>
+                </div>
+            </div>
+
+        </div>
+        
+        <button class="w-full mt-6 py-3 border-2 border-blue-100 text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-all">Riwayat Lengkap</button>
+        
+        <div class="widget-bantuan mt-6 p-6 rounded-2xl text-white overflow-hidden relative">
+            <div class="relative z-10">
+                <h3 class="font-lexend font-bold text-xl mb-2 text-white">Butuh bantuan?</h3>
+                <p class="text-sm text-blue-100 mb-6">Hubungi mentor pribadi anda kapan saja.</p>
+                <button class="bg-white text-blue-600 px-5 py-2.5 rounded-xl font-bold text-sm hover:shadow-lg hover:scale-105 transition-all">Chat Mentor</button>
+            </div>
+            <div class="absolute -bottom-6 -right-4 opacity-20 pointer-events-none">
+                <span class="material-symbols-outlined text-[120px]" style="font-variation-settings: 'FILL' 1;">support_agent</span>
+            </div>
+        </div>
+    </div>
+</aside>
+</div>
+
+        <footer class="bg-white/80 backdrop-blur-md border-t border-slate-200 mt-auto">
+            <div class="max-w-7xl mx-auto py-8 px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <div class="text-lg font-bold text-slate-800 mb-2">RuangBelajar</div>
+                    <p class="font-lexend text-xs text-slate-500">© 2026 RuangBelajar Educational Platform</p>
+                </div>
+                <div class="flex gap-6 font-lexend text-xs">
+                    <a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Kontak Kami</a>
+                    <a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Syarat & Ketentuan</a>
+                    <a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Kebijakan Privasi</a>
+                    <a class="text-slate-500 hover:text-blue-600 transition-colors" href="#">Bantuan</a>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
