@@ -7,79 +7,195 @@
     
     <!-- Tailwind and Fonts -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
     <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     
-    <!-- Separated Assets -->
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </head>
-<body class="bg-background text-on-background font-body-md">
-    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+
+<body class="bg-gradient-to-br from-sky-50 via-blue-50 to-indigo-100 text-slate-800 overflow-hidden">
+
+    <!-- DECORATION -->
+    <div class="blur-circle blur-circle-1"></div>
+    <div class="blur-circle blur-circle-2"></div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar fixed top-0 w-full z-50">
         <div class="max-w-7xl mx-auto h-16 px-6 flex justify-between items-center">
-            <div class="text-xl font-bold text-blue-700 font-display-md">RuangBelajar</div>
-            <div class="hidden md:flex items-center gap-8 font-lexend text-sm font-medium">
-                <a class="text-slate-600 hover:text-blue-600" href="#">Beranda</a>
-                <a class="text-slate-600 hover:text-blue-600" href="#">Kelas</a>
-                <a class="text-slate-600 hover:text-blue-600" href="#">Kuis</a>
-                <a class="text-slate-600 hover:text-blue-600" href="#">Tentang</a>
-                <a class="text-blue-700 border-b-2 border-blue-700 pb-1" href="#">Profil</a>
+
+            <div class="logo">
+                RuangBelajar
             </div>
-            <button class="p-2 text-slate-500 hover:bg-slate-50 rounded-full transition-all">
+
+            <div class="hidden md:flex items-center gap-8 font-lexend text-sm font-medium">
+                <a class="nav-link" href="#">Beranda</a>
+                <a class="nav-link" href="#">Kelas</a>
+                <a class="nav-link" href="#">Kuis</a>
+                <a class="nav-link" href="#">Tentang</a>
+                <a class="nav-link active" href="#">Profil</a>
+            </div>
+
+            <button class="logout-btn">
                 <span class="material-symbols-outlined">logout</span>
             </button>
+
         </div>
     </nav>
 
-    <main class="pt-24 pb-16 px-6 max-w-7xl mx-auto">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            <div class="lg:col-span-4 flex flex-col gap-6">
-                <div class="glass-card rounded-xl p-8 flex flex-col items-center text-center shadow-sm">
-                    <div class="relative group mb-6">
-                        <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-md">
-                            <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXALYy9ZLcuHaXsT23uA7XpTFDZQewGaUQdqK_w4x4uDDyxjPg_s__YTWWzW4igQyTAOzb0eidtzIvGjsCZl73079RChEThbaIGQ-NLUvZGVHIBTgtxyO9voc1a_jDrK6Ae3rOMvNr9KWzu6rcwglCxZwQhzYVHgJ4mXczkmeSyW7epFAlJDWKSOmrPnIKNN3pADuaO_YGWYQlyZttTg_wJqjRZf4eFHQ1xWFxNcytQfLfbe1sC79KJO9XzazBrBUk9eCO-LU6pacI"/>
+    <!-- MAIN -->
+    <main class="profile-main pt-20 px-6 max-w-7xl mx-auto relative z-10">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+            <!-- LEFT -->
+            <div class="lg:col-span-4 flex flex-col gap-5">
+
+                <!-- PROFILE CARD -->
+                <div class="glass-card rounded-3xl p-7 flex flex-col items-center text-center">
+
+                    <div class="relative group mb-5">
+
+                        <div class="profile-ring">
+                            <img
+                                class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXALYy9ZLcuHaXsT23uA7XpTFDZQewGaUQdqK_w4x4uDDyxjPg_s__YTWWzW4igQyTAOzb0eidtzIvGjsCZl73079RChEThbaIGQ-NLUvZGVHIBTgtxyO9voc1a_jDrK6Ae3rOMvNr9KWzu6rcwglCxZwQhzYVHgJ4mXczkmeSyW7epFAlJDWKSOmrPnIKNN3pADuaO_YGWYQlyZttTg_wJqjRZf4eFHQ1xWFxNcytQfLfbe1sC79KJO9XzazBrBUk9eCO-LU6pacI"
+                            />
                         </div>
-                        <button class="absolute bottom-0 right-0 bg-primary p-2 rounded-full text-white shadow-lg">
-                            <span class="material-symbols-outlined !text-[18px]">edit</span>
+
+                        <button class="edit-btn">
+                            <span class="material-symbols-outlined !text-[18px]">
+                                edit
+                            </span>
                         </button>
+
                     </div>
-                    <h1 class="font-headline-md text-on-surface mb-1">Aditya Pratama</h1>
-                    <p class="font-body-sm text-on-surface-variant">Siswa Menengah Atas</p>
-                    <div class="w-full mt-8 space-y-4">
-                        <button class="w-full py-3 bg-primary text-white rounded-lg font-label-lg shadow-md">Sunting Profil</button>
-                        <button class="w-full py-3 bg-white text-primary rounded-lg font-label-lg border border-primary/10">Ganti Password</button>
+
+                    <h1 class="profile-name">
+                        Aditya Pratama
+                    </h1>
+
+                    <p class="profile-role">
+                        Siswa Menengah Atas
+                    </p>
+
+                    <!-- STATS -->
+                    <div class="stats-grid">
+
+                        <div class="stat-card">
+                            <h3>12</h3>
+                            <p>Kelas</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <h3>48</h3>
+                            <p>Kuis</p>
+                        </div>
+
+                        <div class="stat-card">
+                            <h3>92</h3>
+                            <p>Nilai</p>
+                        </div>
+
                     </div>
+
+                    <!-- BUTTON -->
+                    <div class="w-full mt-6 space-y-3">
+
+                        <button class="primary-btn">
+                            Sunting Profil
+                        </button>
+
+                        <button class="secondary-btn">
+                            Ganti Password
+                        </button>
+
+                    </div>
+
                 </div>
+
             </div>
 
-            <div class="lg:col-span-8 flex flex-col gap-8">
-                <section class="glass-card rounded-xl p-8 shadow-sm">
-                    <h2 class="font-headline-sm mb-8 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-primary">Person</span> Informasi Pribadi
+            <!-- RIGHT -->
+            <div class="lg:col-span-8 flex flex-col gap-6">
+
+                <!-- PERSONAL INFO -->
+                <section class="glass-card rounded-3xl p-7">
+
+                    <h2 class="section-title">
+                        <span class="material-symbols-outlined text-primary">
+                            person
+                        </span>
+
+                        Informasi Pribadi
                     </h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div>
-                            <label class="font-label-lg text-on-surface-variant mb-2 block">Nama Lengkap</label>
-                            <p class="font-body-lg text-on-surface font-medium">Aditya Pratama</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+
+                        <div class="info-box">
+                            <label>Nama Lengkap</label>
+                            <p>Aditya Pratama</p>
                         </div>
-                        <div>
-                            <label class="font-label-lg text-on-surface-variant mb-2 block">E-mail</label>
-                            <p class="font-body-lg text-on-surface font-medium">aditya.pratama@gmail.com</p>
+
+                        <div class="info-box">
+                            <label>E-mail</label>
+                            <p>aditya.pratama@gmail.com</p>
                         </div>
+
+                        <div class="info-box">
+                            <label>Nomor Telepon</label>
+                            <p>08123456789</p>
+                        </div>
+
+                        <div class="info-box">
+                            <label>Sekolah</label>
+                            <p>SMAN 1 Yogyakarta</p>
+                        </div>
+
                     </div>
+
                 </section>
-                
-                <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="glass-card rounded-xl p-6 border-l-4 border-l-primary">
-                        <h3 class="font-label-lg text-on-surface-variant mb-1">Class Progress</h3>
-                        <p class="font-headline-md text-on-surface">12/15</p>
-                        <div class="w-full h-2 bg-slate-100 rounded-full mt-4 overflow-hidden">
-                            <div class="h-full bg-primary" style="width: 85%"></div>
+
+                <!-- PROGRESS -->
+                <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                    <div class="glass-card rounded-3xl progress-card">
+
+                        <div class="flex justify-between items-center mb-4">
+
+                            <div>
+                                <h3 class="text-slate-500 text-sm font-medium">
+                                    Class Progress
+                                </h3>
+
+                                <p class="text-3xl font-bold mt-1">
+                                    12/15
+                                </p>
+                            </div>
+
+                            <div class="progress-icon">
+                                <span class="material-symbols-outlined">
+                                    school
+                                </span>
+                            </div>
+
                         </div>
+
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+
                     </div>
+
                 </section>
+
             </div>
+
         </div>
+
     </main>
+
 </body>
 </html>
