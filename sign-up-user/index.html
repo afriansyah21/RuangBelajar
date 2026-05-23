@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Daftar - Ruangbelajar</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lexend:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+
+  <!-- Icons -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+
+  <main class="auth-layout">
+
+    <!-- LEFT -->
+    <section class="branding-side">
+
+      <div class="branding-content">
+
+        <a href="#" class="logo">
+
+          <span class="material-symbols-outlined">
+            school
+          </span>
+
+          RuangBelajar
+
+        </a>
+
+        <div class="hero-text">
+
+          <h1>
+            Mulai Perjalanan Belajarmu Hari Ini.
+          </h1>
+
+          <p>
+            Platform edukasi terpercaya untuk membantu kamu
+            meraih prestasi akademik terbaik.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- RIGHT -->
+    <section class="form-side">
+
+      <div class="form-wrapper">
+
+        <div class="form-header">
+
+          <h2>
+            Buat Akun Baru
+          </h2>
+
+          <p>
+            Lengkapi data diri Anda untuk memulai kursus.
+          </p>
+
+        </div>
+
+        <!-- FORM -->
+        <form class="signup-form">
+
+          <div class="input-grid">
+
+            <div class="input-group">
+              <label>Nama Lengkap</label>
+              <input type="text" placeholder="Contoh: Andi Wijaya">
+            </div>
+
+            <div class="input-group">
+              <label>Nomor HP</label>
+              <input type="tel" placeholder="08123456789">
+            </div>
+
+          </div>
+
+          <div class="input-grid">
+
+            <div class="input-group">
+              <label>Tanggal Lahir</label>
+              <input type="date">
+            </div>
+
+            <div class="input-group">
+              <label>E-mail</label>
+              <input type="email" placeholder="nama@email.com">
+            </div>
+
+          </div>
+
+          <div class="input-grid">
+
+            <div class="input-group password-group">
+
+              <label>Password</label>
+
+              <div class="password-wrapper">
+
+                <input type="password" placeholder="••••••••">
+
+                <button type="button" class="toggle-password">
+
+                  <span class="material-symbols-outlined">
+                    visibility
+                  </span>
+
+                </button>
+
+              </div>
+
+            </div>
+
+            <div class="input-group password-group">
+
+              <label>Verifikasi Password</label>
+
+              <div class="password-wrapper">
+
+                <input type="password" placeholder="••••••••">
+
+                <button type="button" class="toggle-password">
+
+                  <span class="material-symbols-outlined">
+                    visibility
+                  </span>
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- BUTTON -->
+          <button class="signup-btn" type="submit">
+            Sign Up
+          </button>
+
+          <!-- DIVIDER -->
+          <div class="divider">
+
+            <div></div>
+
+            <span>Atau daftar dengan</span>
+
+            <div></div>
+
+          </div>
+
+          <!-- GOOGLE -->
+          <button type="button" class="google-btn">
+
+            <img
+              src="https://www.svgrepo.com/show/475656/google-color.svg"
+              alt="Google">
+
+            Masuk dengan Google
+
+          </button>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>

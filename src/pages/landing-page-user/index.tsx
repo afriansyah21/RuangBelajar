@@ -1,146 +1,110 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { ArrowRight, Star, Loader2, PlayCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
-const LandingPageUser: React.FC = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+}
+
+export default function LandingPageUser() {
+  const [featured, setFeatured] = useState<Post[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
-    setIsDarkMode(savedTheme === 'dark');
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    const fetchFeatured = async () => {
+      try {
+        setLoading(true);
+        // Using JSONPlaceholder to simulate featured content/articles
+        const response = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        setFeatured(response.data);
+      } catch (error) {
+        console.error('Error fetching featured content:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchFeatured();
   }, []);
 
-  const toggleTheme = () => {
-    const newTheme = !isDarkMode ? 'dark' : 'light';
-    setIsDarkMode(!isDarkMode);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.classList.toggle('dark', newTheme === 'dark');
-  };
-
   return (
-    <div className="bg-background text-on-background font-body-md selection:bg-blue-100 selection:text-blue-700">
-      {/* Top Navigation Bar */}
-      <header className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <nav className="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
-          <div className="text-xl font-bold tracking-tight text-blue-700 font-lexend">RuangBelajar</div>
-          <div className="flex items-center gap-4">
-            <button 
-              onClick={toggleTheme}
-              className="p-2 text-slate-600 hover:bg-slate-50 transition-colors rounded-full active:scale-95 flex items-center justify-center"
-            >
-              <span className="material-symbols-outlined">{isDarkMode ? 'light_mode' : 'dark_mode'}</span>
-            </button>
-            <Link to="/login" className="px-6 py-2 text-blue-700 hover:text-blue-800 rounded-xl font-bold transition-all active:scale-95">Masuk</Link>
-            <Link to="/signup" className="bg-blue-700 px-6 py-2 text-white rounded-xl font-bold hover:bg-blue-800 transition-all active:scale-95 shadow-lg shadow-blue-700/20">Daftar</Link>
+    <div className="flex flex-col gap-16 animate-[fadeUp_0.7s_ease] pb-10">
+      
+      {/* HERO SECTION */}
+      <section className="glass-card p-12 text-center md:text-left flex flex-col md:flex-row items-center gap-10 mt-8 relative overflow-hidden">
+        <div className="flex-1 z-10 relative">
+          <h1 className="text-4xl md:text-5xl font-bold font-[family-name:var(--font-lexend)] text-[var(--color-primary)] leading-tight mb-6">
+            Cara Baru Belajar Secara <span className="text-[var(--color-blue)]">Interaktif</span> & Menyenangkan
+          </h1>
+          <p className="text-lg text-[var(--color-secondary)] mb-8 max-w-xl">
+            Tingkatkan keterampilan Anda dengan kurikulum terstruktur, materi yang mudah dipahami, dan mentor yang ahli di bidangnya.
+          </p>
+          <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+            <Link to="/sign-up" className="primary-btn !w-auto px-8 !mt-0 inline-flex items-center gap-2">
+              Mulai Sekarang <ArrowRight size={18} />
+            </Link>
+            <Link to="/kelas-user" className="secondary-btn !w-auto px-8 !mt-0 inline-flex items-center gap-2 bg-white">
+              <PlayCircle size={18} /> Lihat Kelas
+            </Link>
           </div>
-        </nav>
-      </header>
-
-      <main className="pt-16">
-        {/* Hero Section */}
-        <section className="relative overflow-hidden pt-20 pb-32 flex items-center">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center w-full">
-            <div className="space-y-8">
-              <span className="inline-block px-4 py-1.5 bg-blue-50 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider">#PilihanProgrammerMasaKini</span>
-              <h1 className="text-6xl font-black text-slate-900 font-lexend leading-tight tracking-tight">Belajar Cerdas,<br/><span className="text-blue-700">Masa Depan</span> Cerah</h1>
-              <p className="text-lg text-slate-500 max-w-lg leading-relaxed">
-                Belajar pemrograman secara mudah dimanapun anda berada. Akses puluhan materi berkualitas gratis dengan mentor profesional.
-              </p>
-              <div className="flex flex-wrap gap-4 pt-4">
-                <Link to="/signup" className="bg-blue-700 text-white hover:bg-blue-800 px-10 py-4 rounded-2xl font-bold shadow-xl shadow-blue-700/20 transition-all active:scale-95 flex items-center justify-center">Daftar Sekarang</Link>
-                <button className="bg-slate-50 text-slate-700 px-10 py-4 rounded-2xl font-bold hover:bg-slate-100 transition-all active:scale-95 border border-slate-200">Lihat Kursus</button>
-              </div>
+        </div>
+        
+        {/* Hero Graphic / Decoration */}
+        <div className="hidden md:flex flex-1 justify-center relative z-10">
+          <div className="w-[300px] h-[300px] bg-gradient-to-br from-blue-400 to-sky-300 rounded-full flex items-center justify-center shadow-2xl relative">
+            <Star size={100} className="text-white opacity-80" />
+            
+            {/* Floating Element */}
+            <div className="absolute -left-10 top-10 glass-card px-4 py-2 flex items-center gap-2 text-sm font-bold">
+              <span className="w-3 h-3 rounded-full bg-green-500"></span> 500+ Kelas Aktif
             </div>
-            <div className="relative hidden md:block">
-              <div className="absolute -top-12 -right-12 w-72 h-72 bg-blue-400/10 rounded-full blur-3xl"></div>
-              <div className="absolute -bottom-12 -left-12 w-72 h-72 bg-purple-400/10 rounded-full blur-3xl"></div>
-              <div className="relative z-10 bg-white p-4 rounded-[2.5rem] shadow-2xl border border-slate-100">
-                <img 
-                  alt="Hero" 
-                  className="w-full aspect-square object-cover rounded-[2rem]" 
-                  src="hero2.jpg" 
-                />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Section */}
-        <section className="py-12 bg-white">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 px-12 bg-slate-50 rounded-[3rem] border border-slate-100 shadow-inner">
-              {[
-                { label: 'Siswa Aktif', value: '250K+' },
-                { label: 'Materi Kursus', value: '1.2K+' },
-                { label: 'Mentor Ahli', value: '50+' },
-                { label: 'Rating Kepuasan', value: '4.9/5' },
-              ].map((stat, i) => (
-                <div key={i} className="text-center">
-                  <div className="text-3xl font-black text-blue-800 font-lexend mb-1">{stat.value}</div>
-                  <div className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em]">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Features Section */}
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="text-center max-w-2xl mx-auto mb-20">
-              <h2 className="text-4xl font-bold text-slate-900 mb-6 font-lexend">Alasan Mengapa Harus Belajar di RuangBelajar</h2>
-              <p className="text-slate-500">Kami memberikan pengalaman belajar yang dirancang khusus untuk membantu Anda meraih skill pemrograman secara efektif.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                { title: 'Kurikulum Terupdate', desc: 'Materi disusun berdasarkan standar industri terkini untuk menjamin relevansi.', icon: 'auto_awesome' },
-                { title: 'Komunitas Belajar', desc: 'Bergabung dengan ribuan pelajar lainnya untuk bertukar ilmu dan kolaborasi.', icon: 'groups' },
-                { title: 'Sertifikat Resmi', desc: 'Dapatkan sertifikat penyelesaian yang diakui secara luas oleh mitra perusahaan.', icon: 'verified_user' },
-              ].map((feature, i) => (
-                <div key={i} className="p-10 bg-slate-50 rounded-[2rem] border border-transparent hover:border-blue-700/20 hover:bg-white hover:shadow-2xl transition-all duration-500 group">
-                  <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center mb-8 shadow-sm group-hover:bg-blue-700 group-hover:text-white transition-all">
-                    <span className="material-symbols-outlined">{feature.icon}</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-4">{feature.title}</h3>
-                  <p className="text-slate-500 leading-relaxed">{feature.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer className="bg-slate-950 text-white py-20">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-16 mb-20">
-            <div className="space-y-6">
-              <div className="text-2xl font-bold font-lexend">RuangBelajar</div>
-              <p className="text-slate-400 leading-relaxed text-sm">
-                Platform edukasi pemrograman terpercaya untuk meningkatkan skill masa depan Anda dengan metode belajar yang menyenangkan.
-              </p>
-            </div>
-            <div className="space-y-6">
-              <h6 className="text-xs font-black uppercase tracking-widest text-blue-400">Kontak</h6>
-              <p className="text-slate-400 text-sm leading-relaxed">Jl. Perumnas 208, Condongcatur, Sleman, Yogyakarta</p>
-              <div className="flex items-center gap-2 text-slate-400 text-sm">
-                <span className="material-symbols-outlined text-lg">phone</span>
-                (+62) 895-2823-6913
-              </div>
-            </div>
-            {/* ... more footer columns ... */}
-          </div>
-          <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-xs text-slate-500 font-medium">© 2026 RuangBelajar. All rights reserved.</p>
-            <div className="flex gap-8">
-              {['Tentang Kami', 'Kontak', 'Privasi', 'Syarat'].map(link => (
-                <a key={link} className="text-[10px] font-black uppercase tracking-widest text-slate-500 hover:text-white transition-colors" href="#">{link}</a>
-              ))}
+            
+            {/* Floating Element */}
+            <div className="absolute -right-10 bottom-10 glass-card px-4 py-2 flex items-center gap-2 text-sm font-bold">
+              <Star size={16} className="text-amber-500 fill-amber-500" /> 4.9/5 Rating
             </div>
           </div>
         </div>
-      </footer>
+      </section>
+
+      {/* FEATURED ARTICLES / CONTENT FROM API */}
+      <section>
+        <div className="text-center mb-10">
+          <h2 className="text-3xl font-bold mb-4">Artikel & Update Terbaru</h2>
+          <p className="text-[var(--color-secondary)]">Jangan lewatkan informasi seputar dunia pendidikan dan teknologi.</p>
+        </div>
+
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-20">
+            <Loader2 className="animate-spin text-[var(--color-blue)] mb-4" size={48} />
+            <p className="text-[var(--color-secondary)] font-medium">Memuat artikel terbaru...</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {featured.map((post) => (
+              <article key={post.id} className="glass-card p-6 flex flex-col group cursor-pointer hover:-translate-y-2 transition-transform duration-300">
+                <div className="w-full h-40 bg-blue-100 rounded-xl mb-6 overflow-hidden relative">
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
+                  <span className="absolute bottom-3 left-3 bg-white text-blue-700 px-3 py-1 rounded-full text-xs font-bold shadow">
+                    Edukasi
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold mb-3 line-clamp-2 capitalize group-hover:text-[var(--color-blue)] transition-colors">{post.title}</h3>
+                <p className="text-[var(--color-secondary)] text-sm line-clamp-3 mb-6 flex-1">
+                  {post.body}
+                </p>
+                <div className="mt-auto border-t border-[var(--color-border)] pt-4 flex items-center justify-between">
+                  <span className="text-xs text-[var(--color-secondary)]">Oleh RuangBelajar</span>
+                  <button className="text-[var(--color-blue)] font-semibold text-sm hover:underline">Baca Selengkapnya</button>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
     </div>
   );
-};
-
-export default LandingPageUser;
+}

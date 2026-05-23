@@ -1,155 +1,145 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { User, Lock, Mail, Loader2, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const SignUpUser: React.FC = () => {
-  const [username, setUsername] = useState('');
+interface Educator {
+  id: number;
+  name: string;
+  company: {
+    name: string;
+    catchPhrase: string;
+  };
+}
+
+export default function SignUpUser() {
+  const [educators, setEducators] = useState<Educator[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const navigate = useNavigate();
 
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-    setSuccess('');
-
-    if (password !== confirmPassword) {
-      setError('Passwords do not match');
-      return;
-    }
-
-    try {
-      const response = await fetch('/api/signup.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, email, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        setSuccess('Account created successfully! Redirecting to login...');
-        setTimeout(() => navigate('/login'), 2000);
-      } else {
-        setError(data.message || 'Signup failed');
+  useEffect(() => {
+    const fetchEducators = async () => {
+      try {
+        setLoading(true);
+        // Using JSONPlaceholder 'users' endpoint for educators/mentors list
+        const response = await axios.get<Educator[]>('https://jsonplaceholder.typicode.com/users?_limit=10');
+        setEducators(response.data);
+      } catch (error) {
+        console.error('Error fetching educators:', error);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError('An error occurred. Please try again.');
-    }
+    };
+    fetchEducators();
+  }, []);
+
+  const handleRegister = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate('/login');
   };
 
   return (
-    <main className="min-h-screen flex flex-col lg:flex-row font-inter bg-white">
-      {/* Visual Side */}
-      <section className="hidden lg:flex lg:w-1/2 bg-blue-700 relative overflow-hidden flex-col justify-between p-16 text-white">
-        {/* Abstract Background Shapes */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-400/20 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
+    <div className="animate-[fadeUp_0.7s_ease] min-h-[80vh] flex flex-col pt-8">
+      
+      <header className="text-center mb-10">
+        <h1 className="text-4xl font-bold text-[var(--color-primary)] font-[family-name:var(--font-lexend)] mb-2">
+          RuangBelajar
+        </h1>
+        <p className="text-[var(--color-secondary)]">
+          Bergabunglah sekarang dan temukan mentor terbaik untukmu.
+        </p>
+      </header>
 
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 text-3xl font-black font-lexend tracking-tight">
-            <span className="material-symbols-outlined text-4xl">School</span>
-            RuangBelajar
-          </div>
-          <div className="mt-24 max-w-md">
-            <h1 className="text-6xl font-black font-lexend leading-[1.1] tracking-tight">Mulai Perjalanan Belajarmu Hari Ini.</h1>
-            <p className="mt-8 text-blue-100 text-lg font-medium leading-relaxed">Platform edukasi terpercaya untuk membantu kamu meraih prestasi akademik terbaik dengan bimbingan mentor ahli.</p>
-          </div>
-        </div>
-
-        <div className="relative z-10 max-w-sm">
-          <div className="p-8 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[2.5rem] shadow-2xl shadow-blue-900/40">
-            <p className="text-lg font-bold leading-relaxed italic">"Belajar jadi lebih terarah dan menyenangkan bersama RuangBelajar."</p>
-            <div className="mt-6 flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-blue-50 overflow-hidden shadow-sm">
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrhiwAE2BpAzzlBXooDtT_UcvGZ5KS4mjtTGbOtpUvo1wcyjocqoxGZVW4ur7xew-nn_FDse8b56mfDXfTm1iPS620JgsE1iTsi-JxdeYTO3xK86Bk2Mm7PYLI0sHdGZacygmElIYQVQZHq1_hBotAu0XHyNVk1G-9z6eFIAUiKQkS3HijEpv4H090n8XfcCqikiXyThXuZsOywaj2AnniBH2p3opgaLdgMAfNOMQ2-11j_0nDowQttN-wTeg-oT2nNI96AADUQuAs" alt="User" />
+      <div className="flex-1 w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        
+        {/* EDUCATORS FROM API */}
+        <section className="glass-card p-10 hidden lg:flex flex-col h-full max-h-[600px] overflow-hidden order-2 lg:order-1">
+          <h2 className="text-2xl font-bold mb-2">Mentor Tersedia</h2>
+          <p className="text-sm text-[var(--color-secondary)] mb-6">Belajar langsung dari para profesional.</p>
+          
+          <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar flex flex-col gap-4">
+            {loading ? (
+              <div className="flex flex-col items-center justify-center py-20 h-full">
+                <Loader2 className="animate-spin text-[var(--color-blue)] mb-4" size={40} />
+                <p className="text-[var(--color-secondary)] text-sm">Memuat daftar mentor...</p>
               </div>
-              <div>
-                <p className="text-sm font-black uppercase tracking-widest">Budi Santoso</p>
-                <p className="text-[10px] font-bold text-blue-200 uppercase tracking-[0.2em]">Mahasiswa UI</p>
+            ) : (
+              educators.map((edu) => (
+                <div key={edu.id} className="p-4 rounded-2xl bg-[rgba(255,255,255,0.4)] border border-[var(--color-border)] hover:bg-[rgba(255,255,255,0.6)] transition-colors">
+                  <h4 className="font-bold text-sm mb-1 text-[var(--color-blue)]">{edu.name}</h4>
+                  <p className="text-xs text-[var(--color-secondary)] font-medium">{edu.company.name}</p>
+                  <p className="text-[11px] text-[var(--color-secondary)] italic">"{edu.company.catchPhrase}"</p>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+
+        {/* REGISTER FORM */}
+        <section className="glass-card p-10 max-w-md w-full mx-auto lg:mx-0 order-1 lg:order-2">
+          <h2 className="text-2xl font-bold mb-8 text-center">Buat Akun Baru</h2>
+          <form onSubmit={handleRegister} className="flex flex-col gap-6">
+            
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-semibold text-[var(--color-secondary)]">Nama Lengkap</label>
+              <div className="relative">
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-secondary)]" size={20} />
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Masukkan nama lengkap"
+                  className="w-full h-12 pl-12 pr-4 rounded-xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.4)] focus:border-[var(--color-blue)] focus:outline-none transition-colors"
+                  required
+                />
               </div>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Form Side */}
-      <section className="flex-1 flex items-center justify-center p-12 lg:p-24">
-        <div className="w-full max-w-[500px]">
-          <div className="mb-12">
-            <h2 className="text-4xl font-black text-slate-900 font-lexend tracking-tight">Buat Akun Baru</h2>
-            <p className="text-slate-500 font-medium mt-4">Lengkapi data diri Anda untuk memulai perjalanan cerdas.</p>
-          </div>
-
-          {error && <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-xl text-sm font-bold border border-red-100">{error}</div>}
-          {success && <div className="mb-6 p-4 bg-green-50 text-green-600 rounded-xl text-sm font-bold border border-green-100">{success}</div>}
-
-          <form onSubmit={handleSignUp} className="space-y-8">
-            <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Username</label>
-              <input 
-                className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-4 focus:ring-blue-700/5 transition-all text-sm font-bold text-slate-900" 
-                type="text" 
-                placeholder="AndiWijaya"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-semibold text-[var(--color-secondary)]">Alamat Email</label>
+              <div className="relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-secondary)]" size={20} />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Masukkan email Anda"
+                  className="w-full h-12 pl-12 pr-4 rounded-xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.4)] focus:border-[var(--color-blue)] focus:outline-none transition-colors"
+                  required
+                />
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">E-mail</label>
-              <input 
-                className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-4 focus:ring-blue-700/5 transition-all text-sm font-bold text-slate-900" 
-                type="email" 
-                placeholder="nama@email.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Password</label>
-                <input 
-                  className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-4 focus:ring-blue-700/5 transition-all text-sm font-bold text-slate-900" 
-                  type="password" 
-                  placeholder="••••••••"
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-semibold text-[var(--color-secondary)]">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-secondary)]" size={20} />
+                <input
+                  type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Verifikasi</label>
-                <input 
-                  className="w-full px-6 py-4 bg-slate-50 border-none rounded-2xl focus:ring-4 focus:ring-blue-700/5 transition-all text-sm font-bold text-slate-900" 
-                  type="password" 
-                  placeholder="••••••••"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Buat password baru"
+                  className="w-full h-12 pl-12 pr-4 rounded-xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.4)] focus:border-[var(--color-blue)] focus:outline-none transition-colors"
                   required
                 />
               </div>
             </div>
 
-            <button className="w-full py-5 bg-blue-700 text-white rounded-3xl font-black text-sm uppercase tracking-widest shadow-2xl shadow-blue-700/20 hover:bg-blue-800 transition-all transform active:scale-95" type="submit">
-              Daftar Sekarang
+            <button type="submit" className="primary-btn flex items-center justify-center gap-2">
+              Daftar Sekarang <ArrowRight size={18} />
             </button>
+
+            <p className="text-center text-sm text-[var(--color-secondary)] mt-4">
+              Sudah punya akun? <Link to="/login" className="text-[var(--color-blue)] font-bold hover:underline">Masuk di sini</Link>
+            </p>
           </form>
+        </section>
 
-          <p className="mt-12 text-center text-xs font-bold text-slate-500 uppercase tracking-widest">
-            Sudah punya akun? 
-            <Link className="text-blue-700 ml-2 hover:underline" to="/login">Masuk di sini</Link>
-          </p>
-        </div>
-      </section>
-    </main>
+      </div>
+    </div>
   );
-};
-
-export default SignUpUser;
-
+}

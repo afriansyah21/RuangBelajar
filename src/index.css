@@ -1,23 +1,79 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --primary: #1d4ed8;
-  --on-primary: #ffffff;
-  --background: #ffffff;
-  --on-background: #0f172a;
-  --surface: #f8fafc;
-  --on-surface: #334155;
+@theme {
+  --color-primary: #0f172a;
+  --color-secondary: #64748b;
+  --color-blue: #2563eb;
+  --color-blue-dark: #0f4ba8;
+  --color-bg-primary: #f8fbff;
+  --color-bg-secondary: #f1f5f9;
+  --color-card-bg: rgba(255, 255, 255, 0.55);
+  --color-border: rgba(255, 255, 255, 0.4);
+
+  --font-sans: "Inter", sans-serif;
+  --font-lexend: "Lexend", sans-serif;
 }
 
-.dark {
-  --background: #0f172a;
-  --on-background: #f8fafc;
-  --surface: #1e293b;
-  --on-surface: #94a3b8;
+@layer base {
+  body {
+    background: radial-gradient(
+        circle at top left,
+        rgba(96, 165, 250, 0.18),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at bottom right,
+        rgba(125, 211, 252, 0.16),
+        transparent 30%
+      ),
+      linear-gradient(to bottom, var(--color-bg-primary), var(--color-bg-secondary));
+    min-height: 100vh;
+    font-family: var(--font-sans);
+    color: var(--color-primary);
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+  }
+
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("https://www.transparenttextures.com/patterns/noise.png");
+    opacity: 0.03;
+    pointer-events: none;
+  }
 }
 
-body {
-  @apply bg-background text-on-background;
+@layer components {
+  .bg-blur {
+    @apply fixed rounded-full blur-[120px] -z-10 opacity-[0.18];
+  }
+
+  .blur-1 {
+    @apply w-[400px] h-[400px] bg-blue-400 -top-[120px] -left-[120px];
+  }
+
+  .blur-2 {
+    @apply w-[400px] h-[400px] bg-sky-300 -bottom-[120px] -right-[120px];
+  }
+
+  .glass-card {
+    @apply bg-[var(--color-card-bg)] backdrop-blur-[18px] border border-[var(--color-border)] rounded-3xl transition-all duration-300;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05),
+      inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  }
+
+  .glass-card:hover {
+    @apply -translate-y-1.5 scale-100;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06),
+      0 0 0 1px rgba(255, 255, 255, 0.4);
+  }
+
+  .primary-btn {
+    @apply w-full h-[50px] mt-[18px] border-none rounded-2xl text-[15px] font-semibold cursor-pointer transition-all duration-300 bg-[var(--color-blue-dark)] text-white hover:-translate-y-0.5;
+  }
+
+  .secondary-btn {
+    @apply w-full h-[50px] mt-[18px] border-none rounded-2xl text-[15px] font-semibold cursor-pointer transition-all duration-300 bg-[rgba(37,99,235,0.12)] text-[var(--color-blue-dark)] hover:-translate-y-0.5;
+  }
 }

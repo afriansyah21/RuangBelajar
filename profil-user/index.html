@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>RuangBelajar Dashboard</title>
+
+  <!-- FONT -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ICON -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="container navbar-content">
+
+      <!-- LOGO -->
+      <div class="logo">
+        RuangBelajar
+      </div>
+
+      <!-- MENU -->
+      <div class="nav-menu">
+
+        <a href="#" class="nav-link active">
+          <span>Beranda</span>
+        </a>
+
+        <a href="#" class="nav-link">
+          <span>Kelas</span>
+        </a>
+
+        <a href="#" class="nav-link">
+          <span>Kuis</span>
+        </a>
+
+        <a href="#" class="nav-link">
+          <span>Tentang</span>
+        </a>
+
+        <a href="#" class="nav-link">
+          <span>Profil</span>
+        </a>
+
+      </div>
+
+      <!-- ACTION -->
+      <button class="logout-btn">
+
+        <span class="material-symbols-outlined">
+          logout
+        </span>
+
+      </button>
+
+    </div>
+
+  </nav>
+
+  <!-- MAIN -->
+  <main class="container main-layout">
+
+    <!-- LEFT -->
+    <div class="left-side">
+
+      <!-- PROFILE -->
+      <div class="glass-card profile-card">
+
+        <div class="profile-image-wrapper">
+
+          <img
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXALYy9ZLcuHaXsT23uA7XpTFDZQewGaUQdqK_w4x4uDDyxjPg_s__YTWWzW4igQyTAOzb0eidtzIvGjsCZl73079RChEThbaIGQ-NLUvZGVHIBTgtxyO9voc1a_jDrK6Ae3rOMvNr9KWzu6rcwglCxZwQhzYVHgJ4mXczkmeSyW7epFAlJDWKSOmrPnIKNN3pADuaO_YGWYQlyZttTg_wJqjRZf4eFHQ1xWFxNcytQfLfbe1sC79KJO9XzazBrBUk9eCO-LU6pacI"
+            alt="profile">
+
+          <button class="edit-btn">
+
+            <span class="material-symbols-outlined">
+              edit
+            </span>
+
+          </button>
+
+        </div>
+
+        <h1>Aditya Pratama</h1>
+
+        <p>Siswa Menengah Atas</p>
+
+        <button class="primary-btn">
+          Edit Profil
+        </button>
+
+        <button class="secondary-btn">
+          Ubah Password
+        </button>
+
+      </div>
+
+      <!-- ACHIEVEMENT -->
+      <div class="glass-card achievement-card">
+
+        <h2>
+
+          <span class="material-symbols-outlined filled">
+            stars
+          </span>
+
+          Pencapaian
+
+        </h2>
+
+        <div class="achievement-list">
+
+          <span class="badge">
+            Juara Kuis Matematika
+          </span>
+
+          <span class="badge">
+            Belajar 7 Hari Beruntun
+          </span>
+
+          <span class="badge">
+            Pelajar Teladan
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right-side">
+
+      <!-- INFO -->
+      <section class="glass-card info-card">
+
+        <h2>
+
+          <span class="material-symbols-outlined">
+            person
+          </span>
+
+          Informasi Pribadi
+
+        </h2>
+
+        <div class="info-grid">
+
+          <div>
+            <label>Nama Lengkap</label>
+            <p>Aditya Pratama</p>
+          </div>
+
+          <div>
+            <label>Nomor HP</label>
+            <p>+62 812 3456 7890</p>
+          </div>
+
+          <div>
+            <label>Tanggal Lahir</label>
+            <p>15 Mei 2005</p>
+          </div>
+
+          <div>
+            <label>E-mail</label>
+            <p>aditya.pratama@email.com</p>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- STATS -->
+      <section class="stats-grid">
+
+        <!-- CARD -->
+        <div class="stats-card blue">
+
+          <div class="stats-top">
+
+            <span class="material-symbols-outlined">
+              school
+            </span>
+
+            <span>85%</span>
+
+          </div>
+
+          <h3>Class Progress</h3>
+
+          <p>12/15</p>
+
+          <div class="progress-bar">
+            <div class="progress-fill blue-fill"></div>
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+        <div class="stats-card yellow">
+
+          <div class="stats-top">
+
+            <span class="material-symbols-outlined">
+              quiz
+            </span>
+
+            <span>70%</span>
+
+          </div>
+
+          <h3>Quiz Progress</h3>
+
+          <p>21/30</p>
+
+          <div class="progress-bar">
+            <div class="progress-fill yellow-fill"></div>
+          </div>
+
+        </div>
+
+        <!-- CARD -->
+        <div class="stats-card red">
+
+          <div class="stats-top">
+
+            <span class="material-symbols-outlined">
+              trending_up
+            </span>
+
+            <span>Grade A</span>
+
+          </div>
+
+          <h3>Avg Score</h3>
+
+          <p>92.4</p>
+
+          <div class="progress-bar">
+            <div class="progress-fill red-fill"></div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- COURSE -->
+      <section class="glass-card course-section">
+
+        <h2>
+          Kelas yang Sedang Diikuti
+        </h2>
+
+        <div class="course-list">
+
+          <!-- ITEM -->
+          <div class="course-item">
+
+            <div class="course-icon blue-icon">
+
+              <span class="material-symbols-outlined">
+                functions
+              </span>
+
+            </div>
+
+            <div class="course-content">
+
+              <h4>
+                Matematika Dasar: Aljabar & Logika
+              </h4>
+
+              <p>
+                Terakhir dipelajari 2 jam yang lalu
+              </p>
+
+            </div>
+
+            <span class="material-symbols-outlined arrow">
+              arrow_forward
+            </span>
+
+          </div>
+
+          <!-- ITEM -->
+          <div class="course-item">
+
+            <div class="course-icon yellow-icon">
+
+              <span class="material-symbols-outlined">
+                language
+              </span>
+
+            </div>
+
+            <div class="course-content">
+
+              <h4>
+                Bahasa Inggris: Persiapan TOEFL
+              </h4>
+
+              <p>
+                Terakhir dipelajari Kemarin
+              </p>
+
+            </div>
+
+            <span class="material-symbols-outlined arrow">
+              arrow_forward
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>

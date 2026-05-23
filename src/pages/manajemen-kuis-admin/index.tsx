@@ -1,140 +1,89 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Search, Edit, Trash2, Loader2, HelpCircle } from 'lucide-react';
 
-const ManajemenKuisAdmin: React.FC = () => {
+interface QuizItem {
+  id: number;
+  title: string;
+  completed: boolean;
+}
+
+export default function ManajemenKuisAdmin() {
+  const [quizzes, setQuizzes] = useState<QuizItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get<QuizItem[]>('https://jsonplaceholder.typicode.com/todos?_limit=10');
+        setQuizzes(res.data);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="bg-background font-body-md text-on-background min-h-screen">
-      {/* SideNavBar */}
-      <aside className="fixed left-0 h-full w-64 border-r border-slate-200 bg-slate-50 flex flex-col p-4 gap-2 z-40">
-        <div className="mb-10 px-2">
-          <h1 className="text-lg font-black text-blue-800">RuangBelajar Admin</h1>
-          <p className="text-xs text-slate-500 font-lexend uppercase tracking-wider">Management</p>
+    <div className="animate-[fadeUp_0.7s_ease]">
+      <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-[var(--color-primary)] mb-2 flex items-center gap-2"><HelpCircle className="text-amber-500"/> Manajemen Kuis</h1>
+          <p className="text-[var(--color-secondary)] text-sm">Kelola daftar bank soal dan kuis.</p>
         </div>
-        <nav className="flex-grow space-y-1">
-          {[
-            { name: 'Dashboard', icon: 'dashboard', active: false },
-            { name: 'Pengguna', icon: 'group', active: false },
-            { name: 'Kelas', icon: 'school', active: false },
-            { name: 'Kuis', icon: 'quiz', active: true },
-            { name: 'Donasi', icon: 'volunteer_activism', active: false },
-          ].map((item) => (
-            <a
-              key={item.name}
-              className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-transform duration-200 font-lexend text-sm font-semibold ${
-                item.active ? 'bg-blue-50 text-blue-700 border-r-4 border-blue-700' : 'text-slate-500 hover:bg-slate-100'
-              }`}
-              href="#"
-            >
-              <span className="material-symbols-outlined">{item.icon}</span>
-              {item.name}
-            </a>
-          ))}
-        </nav>
-        <div className="mt-auto border-t border-slate-200 pt-4">
-          <button className="flex w-full items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg active:opacity-80 transition-colors">
-            <span className="material-symbols-outlined">logout</span>
-            <span className="font-lexend text-sm font-semibold">Logout</span>
-          </button>
-        </div>
-      </aside>
+        <button className="primary-btn !mt-0 !w-auto px-6">Tambah Kuis</button>
+      </header>
 
-      <main className="ml-64 min-h-screen">
-        <header className="bg-white/90 backdrop-blur-md border-b border-slate-100 h-16 sticky top-0 z-30 px-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <h2 className="text-lg font-semibold text-blue-800">Manajemen Kuis</h2>
-            <span className="text-slate-300">/</span>
-            <span className="text-sm text-slate-500">Semua Kuis</span>
+      <section className="glass-card p-6 mb-8">
+        <form onSubmit={(e) => e.preventDefault()} className="flex gap-4">
+          <div className="relative flex-1">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-secondary)]" size={20} />
+            <input type="text" placeholder="Cari kuis..." className="w-full h-12 pl-12 pr-4 rounded-xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.4)] focus:outline-none" />
           </div>
-          <button className="bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-blue-800 transition-all active:scale-95">
-            <span className="material-symbols-outlined text-lg">add</span>
-            Tambah Kuis Baru
-          </button>
-        </header>
+        </form>
+      </section>
 
-        <div className="p-8 max-w-7xl mx-auto">
-          <div className="grid grid-cols-12 gap-6 items-start">
-            {/* Left: Quiz List Section */}
-            <section className="col-span-12 lg:col-span-5 space-y-6">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-xl font-bold text-slate-900">Daftar Kuis Aktif</h3>
-                <span className="bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">4 Kuis</span>
-              </div>
-              <div className="space-y-3">
-                {[
-                  { name: 'Dasar Pemrograman Python', info: '15 Pertanyaan • Terakhir diubah 2 jam lalu', active: false },
-                  { name: 'Matematika Aljabar Linear', info: '10 Pertanyaan • Sedang diedit', active: true },
-                  { name: 'Struktur Data Lanjut', info: '20 Pertanyaan • Draft', active: false },
-                ].map((quiz, i) => (
-                  <div
-                    key={i}
-                    className={`p-4 rounded-xl flex items-center gap-4 group transition-all ${
-                      quiz.active
-                        ? 'bg-blue-50/50 border-2 border-blue-700 shadow-lg'
-                        : 'bg-white border border-slate-100 hover:border-blue-200'
-                    }`}
-                  >
-                    <div className="text-slate-300">
-                      <span className="material-symbols-outlined">drag_indicator</span>
-                    </div>
-                    <div className="flex-grow">
-                      <h4 className={`font-semibold ${quiz.active ? 'text-blue-800' : 'text-slate-900'}`}>{quiz.name}</h4>
-                      <p className={`text-xs ${quiz.active ? 'text-blue-600/70' : 'text-slate-500'}`}>{quiz.info}</p>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <button className="p-2 text-slate-400 hover:text-blue-700 transition-colors">
-                        <span className="material-symbols-outlined text-lg">edit</span>
-                      </button>
-                      <button className="p-2 text-slate-400 hover:text-red-600 transition-colors">
-                        <span className="material-symbols-outlined text-lg">delete</span>
-                      </button>
-                    </div>
-                  </div>
+      {loading ? (
+        <div className="flex flex-col items-center py-20">
+          <Loader2 className="animate-spin text-[var(--color-blue)] mb-4" size={48} />
+          <p className="text-[var(--color-secondary)]">Memuat data kuis...</p>
+        </div>
+      ) : (
+        <section className="glass-card overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-[rgba(255,255,255,0.6)] text-[var(--color-secondary)] text-sm border-b border-[var(--color-border)]">
+                  <th className="p-4 font-semibold">ID</th>
+                  <th className="p-4 font-semibold">Judul Kuis</th>
+                  <th className="p-4 font-semibold">Status (Contoh)</th>
+                  <th className="p-4 font-semibold text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {quizzes.map((item) => (
+                  <tr key={item.id} className="border-b border-[var(--color-border)] hover:bg-[rgba(255,255,255,0.4)] transition-colors">
+                    <td className="p-4 text-sm font-medium">{item.id}</td>
+                    <td className="p-4 font-semibold capitalize">{item.title}</td>
+                    <td className="p-4 text-sm">
+                      <span className={`px-3 py-1 rounded-full text-xs font-semibold ${item.completed ? 'bg-green-100 text-green-700' : 'bg-amber-100 text-amber-700'}`}>
+                        {item.completed ? 'Selesai Dibuat' : 'Draft'}
+                      </span>
+                    </td>
+                    <td className="p-4 flex items-center justify-center gap-2">
+                      <button className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"><Edit size={16} /></button>
+                      <button className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"><Trash2 size={16} /></button>
+                    </td>
+                  </tr>
                 ))}
-              </div>
-            </section>
-
-            {/* Right: Edit View */}
-            <section className="col-span-12 lg:col-span-7 bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
-              <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
-                <div>
-                  <h3 className="text-xl font-bold text-blue-800">Edit Pertanyaan: Aljabar Linear</h3>
-                  <p className="text-sm text-slate-500">Modul 4 • Tingkat Lanjut</p>
-                </div>
-                <div className="flex gap-2">
-                  <button className="px-4 py-2 rounded-lg border border-slate-200 text-slate-600 text-sm font-semibold hover:bg-slate-100 transition-colors">Batal</button>
-                  <button className="px-4 py-2 rounded-lg bg-blue-700 text-white text-sm font-semibold hover:bg-blue-800 transition-all">Simpan</button>
-                </div>
-              </div>
-              <div className="p-6 space-y-6">
-                <div className="p-4 rounded-xl border border-blue-100 bg-blue-50/30 space-y-4">
-                  <div className="flex items-start justify-between">
-                    <span className="bg-blue-700 text-white px-2 py-1 rounded text-xs font-bold">Pertanyaan 1</span>
-                    <button className="text-slate-400 hover:text-red-600 transition-colors">
-                      <span className="material-symbols-outlined">delete</span>
-                    </button>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-slate-900">Teks Pertanyaan</label>
-                    <textarea className="w-full rounded-lg border-slate-200 focus:ring-2 focus:ring-blue-700/20 focus:border-blue-700 text-sm" rows={2} defaultValue="Manakah yang merupakan definisi dari Matriks Identitas?" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Pilihan Jawaban</label>
-                    <div className="flex items-center gap-3">
-                      <input type="radio" defaultChecked className="text-blue-700" />
-                      <input className="flex-grow rounded-lg border-slate-200 text-sm py-1.5" type="text" defaultValue="Matriks persegi dengan elemen diagonal utama adalah 1." />
-                    </div>
-                  </div>
-                </div>
-                <button className="w-full py-4 border-2 border-dashed border-slate-200 rounded-xl text-slate-400 flex items-center justify-center gap-2 hover:bg-slate-50 hover:border-blue-300 hover:text-blue-700 transition-all">
-                  <span className="material-symbols-outlined">add_circle</span>
-                  <span className="font-semibold text-sm">Tambah Pertanyaan Baru</span>
-                </button>
-              </div>
-            </section>
+              </tbody>
+            </table>
           </div>
-        </div>
-      </main>
+        </section>
+      )}
     </div>
   );
-};
-
-export default ManajemenKuisAdmin;
+}

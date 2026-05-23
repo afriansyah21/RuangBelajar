@@ -1,144 +1,127 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { User, Lock, Loader2, ArrowRight } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const LoginUser: React.FC = () => {
-  const [email, setEmail] = useState('');
+interface Testimonial {
+  id: number;
+  name: string;
+  body: string;
+}
+
+export default function LoginUser() {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-
-    try {
-      const response = await fetch('/api/login.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        localStorage.setItem('user', JSON.stringify(data.user));
-        if (data.user.role === 'admin') {
-          navigate('/admin');
-        } else {
-          navigate('/beranda');
-        }
-      } else {
-        setError(data.message || 'Login failed');
+  useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        setLoading(true);
+        // Using JSONPlaceholder 'comments' endpoint for testimonials
+        const response = await axios.get<Testimonial[]>('https://jsonplaceholder.typicode.com/comments?_limit=10');
+        setTestimonials(response.data);
+      } catch (error) {
+        console.error('Error fetching testimonials:', error);
+      } finally {
+        setLoading(false);
       }
-    } catch (err) {
-      setError('An error occurred. Please try again.');
-    }
+    };
+    fetchTestimonials();
+  }, []);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    navigate('/');
   };
 
   return (
-    <div className="bg-background font-body-md text-on-surface min-h-screen flex flex-col">
-      <main className="flex-grow flex items-center justify-center p-8 relative overflow-hidden">
-        {/* Decorative Background */}
-        <div className="absolute inset-0 z-0 pointer-events-none">
-          <div className="absolute top-[-10%] left-[-5%] w-[40%] h-[40%] bg-blue-100/50 rounded-full blur-[120px] opacity-60"></div>
-          <div className="absolute bottom-[-10%] right-[-5%] w-[40%] h-[40%] bg-blue-400/10 rounded-full blur-[120px] opacity-40"></div>
-        </div>
+    <div className="animate-[fadeUp_0.7s_ease] min-h-[80vh] flex flex-col pt-8">
+      
+      <header className="text-center mb-10">
+        <h1 className="text-4xl font-bold text-[var(--color-primary)] font-[family-name:var(--font-lexend)] mb-2">
+          RuangBelajar
+        </h1>
+        <p className="text-[var(--color-secondary)]">
+          Masuk ke akun Anda dan lanjutkan perjalanan belajar.
+        </p>
+      </header>
 
-        <div className="w-full max-w-[480px] z-10">
-          <div className="bg-white border border-slate-100 rounded-3xl p-10 shadow-2xl shadow-blue-800/5">
-            <div className="text-center mb-10">
-              <h1 className="text-4xl font-black text-blue-700 mb-2 font-lexend">RuangBelajar</h1>
-              <p className="text-slate-500 font-medium">Selamat datang kembali! Silakan masuk ke akun Anda.</p>
+      <div className="flex-1 w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        
+        {/* LOGIN FORM */}
+        <section className="glass-card p-10 max-w-md w-full mx-auto lg:mx-0">
+          <h2 className="text-2xl font-bold mb-8 text-center">Masuk ke Akun</h2>
+          <form onSubmit={handleLogin} className="flex flex-col gap-6">
+            
+            <div className="flex flex-col gap-2">
+              <label className="text-sm font-semibold text-[var(--color-secondary)]">Username</label>
+              <div className="relative">
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-secondary)]" size={20} />
+                <input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Masukkan username Anda"
+                  className="w-full h-12 pl-12 pr-4 rounded-xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.4)] focus:border-[var(--color-blue)] focus:outline-none transition-colors"
+                  required
+                />
+              </div>
             </div>
 
-            {error && (
-              <div className="mb-6 p-4 bg-red-50 text-red-600 rounded-xl text-sm font-bold border border-red-100">
-                {error}
+            <div className="flex flex-col gap-2">
+              <div className="flex justify-between items-center">
+                <label className="text-sm font-semibold text-[var(--color-secondary)]">Password</label>
+                <a href="#" className="text-xs text-[var(--color-blue)] hover:underline">Lupa Password?</a>
               </div>
+              <div className="relative">
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-secondary)]" size={20} />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Masukkan password Anda"
+                  className="w-full h-12 pl-12 pr-4 rounded-xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.4)] focus:border-[var(--color-blue)] focus:outline-none transition-colors"
+                  required
+                />
+              </div>
+            </div>
+
+            <button type="submit" className="primary-btn flex items-center justify-center gap-2">
+              Login <ArrowRight size={18} />
+            </button>
+
+            <p className="text-center text-sm text-[var(--color-secondary)] mt-4">
+              Belum punya akun? <Link to="/sign-up" className="text-[var(--color-blue)] font-bold hover:underline">Daftar sekarang</Link>
+            </p>
+          </form>
+        </section>
+
+        {/* TESTIMONIALS FROM API */}
+        <section className="glass-card p-10 hidden lg:flex flex-col h-full max-h-[600px] overflow-hidden">
+          <h2 className="text-2xl font-bold mb-2">Kata Mereka</h2>
+          <p className="text-sm text-[var(--color-secondary)] mb-6">Cerita sukses dari para pelajar di seluruh dunia.</p>
+          
+          <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar flex flex-col gap-4">
+            {loading ? (
+              <div className="flex flex-col items-center justify-center py-20 h-full">
+                <Loader2 className="animate-spin text-[var(--color-blue)] mb-4" size={40} />
+                <p className="text-[var(--color-secondary)] text-sm">Memuat ulasan pengguna...</p>
+              </div>
+            ) : (
+              testimonials.map((testi) => (
+                <div key={testi.id} className="p-4 rounded-2xl bg-[rgba(255,255,255,0.4)] border border-[var(--color-border)] hover:bg-[rgba(255,255,255,0.6)] transition-colors">
+                  <h4 className="font-bold text-sm mb-1 truncate">{testi.name}</h4>
+                  <p className="text-xs text-[var(--color-secondary)] line-clamp-2">{testi.body}</p>
+                </div>
+              ))
             )}
-
-            <form onSubmit={handleLogin} className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-sm font-bold text-slate-700 block">Email</label>
-                <div className="relative group">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-700 transition-colors">email</span>
-                  <input 
-                    className="w-full pl-12 pr-4 py-4 rounded-2xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-blue-700/5 focus:border-blue-700 transition-all text-slate-900 font-semibold" 
-                    placeholder="Masukkan email Anda" 
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <div className="flex justify-between items-center">
-                  <label className="text-sm font-bold text-slate-700 block">Password</label>
-                  <a className="text-xs font-black text-blue-700 hover:underline uppercase tracking-wider" href="#">Lupa Password?</a>
-                </div>
-                <div className="relative group">
-                  <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-blue-700 transition-colors">lock</span>
-                  <input 
-                    className="w-full pl-12 pr-12 py-4 rounded-2xl border border-slate-200 bg-slate-50 focus:outline-none focus:ring-4 focus:ring-blue-700/5 focus:border-blue-700 transition-all text-slate-900 font-semibold" 
-                    placeholder="Masukkan password Anda" 
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
-
-              <button 
-                className="w-full bg-blue-700 text-white py-4 rounded-2xl font-bold shadow-lg shadow-blue-700/20 hover:bg-blue-800 active:scale-[0.98] transition-all" 
-                type="submit"
-              >
-                Masuk ke Akun
-              </button>
-
-              <div className="relative flex items-center py-4">
-                <div className="flex-grow border-t border-slate-100"></div>
-                <span className="flex-shrink mx-4 text-[10px] font-black uppercase tracking-widest text-slate-400">Atau masuk dengan</span>
-                <div className="flex-grow border-t border-slate-100"></div>
-              </div>
-
-              <button 
-                className="w-full bg-white border border-slate-200 py-4 rounded-2xl font-bold text-slate-700 flex items-center justify-center gap-3 hover:bg-slate-50 active:scale-[0.98] transition-all shadow-sm" 
-                type="button"
-              >
-                <img alt="Google" className="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBv1dqfnnMPlE5ZbX-F0eeJNlFAuMcssZJWqAywOqnoXmqBgWv-7qFxHgWAZM0uw9xcZuBrwji9nIVlGFjiFwGQWK-mdyBCXu1Y2FI1_Pl1InqnF63rDxzOzrwsDoIygHTnwxpk9IiD2jlaip5kh3bxGJO_obFGHzZeQQlmhHe8iyrvGAwRZthzns6yVHDM9lMVJ1d26BcGEI7l4AEb3P1caDjlm6nuoQRLCTySnkumR2RPfnTA-wGKLudunQJ6Iq0MsDMdmZ40-C0_" />
-                Lanjutkan dengan Google
-              </button>
-            </form>
-
-            <div className="mt-10 text-center">
-              <p className="text-sm font-medium text-slate-500">
-                Belum punya akun? {' '}
-                <Link className="text-blue-700 font-bold hover:underline" to="/signup">Daftar sekarang</Link>
-              </p>
-            </div>
           </div>
-        </div>
-      </main>
+        </section>
 
-      <footer className="w-full border-t border-slate-100 bg-white py-10">
-        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <div>
-            <span className="text-lg font-bold text-slate-900 font-lexend">RuangBelajar</span>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">© 2024 Educational Platform</p>
-          </div>
-          <div className="flex gap-8">
-            {['Kontak', 'Syarat', 'Privasi', 'Bantuan'].map(link => (
-              <a key={link} className="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-blue-700 transition-colors" href="#">{link}</a>
-            ))}
-          </div>
-        </div>
-      </footer>
+      </div>
     </div>
   );
-};
-
-export default LoginUser;
-
+}

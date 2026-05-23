@@ -1,140 +1,85 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Search, Edit, Trash2, Loader2, Heart } from 'lucide-react';
 
-const ManajemenDonasiAdmin: React.FC = () => {
-  const donations = [
-    { name: 'Budi Santoso', date: '24 Okt, 2024', amount: 'Rp 500.000', status: 'Berhasil', color: 'bg-green-100 text-green-700' },
-    { name: 'Siti Aminah', date: '22 Okt, 2024', amount: 'Rp 1.200.000', status: 'Berhasil', color: 'bg-green-100 text-green-700' },
-    { name: 'Anonim', date: '21 Okt, 2024', amount: 'Rp 50.000', status: 'Pending', color: 'bg-amber-100 text-amber-700' },
-    { name: 'Dewi Lestari', date: '19 Okt, 2024', amount: 'Rp 2.000.000', status: 'Berhasil', color: 'bg-green-100 text-green-700' },
-  ];
+interface Donation {
+  id: number;
+  title: string;
+  body: string;
+}
+
+export default function ManajemenDonasiAdmin() {
+  const [donations, setDonations] = useState<Donation[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get<Donation[]>('https://jsonplaceholder.typicode.com/posts?_limit=10');
+        setDonations(res.data);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
-    <div className="bg-slate-50 min-h-screen flex font-inter">
-      {/* Sidebar */}
-      <aside className="fixed left-0 h-full w-72 bg-slate-900 text-white flex flex-col p-8 z-40">
-        <div className="mb-12">
-          <h1 className="text-2xl font-black text-blue-400 font-lexend">Admin Portal</h1>
-          <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mt-1">Management System</p>
+    <div className="animate-[fadeUp_0.7s_ease]">
+      <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-[var(--color-primary)] mb-2 flex items-center gap-2"><Heart className="text-red-500"/> Manajemen Donasi</h1>
+          <p className="text-[var(--color-secondary)] text-sm">Kelola kampanye donasi pengguna.</p>
         </div>
-        <nav className="flex-1 space-y-2">
-          {['Dashboard', 'Pengguna', 'Kelas', 'Kuis'].map((item) => (
-            <a key={item} className="flex items-center gap-4 px-6 py-4 text-slate-400 hover:bg-white/5 hover:text-white rounded-2xl transition-all font-bold text-sm" href="#">
-              <span className="material-symbols-outlined text-xl">{item.toLowerCase()}</span>
-              {item}
-            </a>
-          ))}
-          <a className="flex items-center gap-4 px-6 py-4 bg-blue-700 text-white rounded-2xl shadow-lg shadow-blue-700/20 font-bold text-sm" href="#">
-            <span className="material-symbols-outlined text-xl">volunteer_activism</span>
-            Donasi
-          </a>
-        </nav>
-        <button className="mt-auto flex items-center gap-4 px-6 py-4 text-slate-400 hover:text-red-400 transition-colors font-bold text-sm">
-          <span className="material-symbols-outlined text-xl">logout</span>
-          Keluar
-        </button>
-      </aside>
+        <button className="primary-btn !mt-0 !w-auto px-6">Tambah Kampanye</button>
+      </header>
 
-      {/* Content */}
-      <main className="ml-72 flex-1 p-12 max-w-7xl mx-auto w-full">
-        <header className="flex justify-between items-end mb-12">
-          <div>
-            <h2 className="text-4xl font-black text-slate-900 font-lexend">Manajemen Donasi</h2>
-            <p className="text-slate-500 font-medium mt-2">Pantau dan kelola aliran dana dukungan pendidikan.</p>
+      <section className="glass-card p-6 mb-8">
+        <form onSubmit={(e) => e.preventDefault()} className="flex gap-4">
+          <div className="relative flex-1">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-secondary)]" size={20} />
+            <input type="text" placeholder="Cari kampanye..." className="w-full h-12 pl-12 pr-4 rounded-xl border border-[var(--color-border)] bg-[rgba(255,255,255,0.4)] focus:outline-none" />
           </div>
-          <div className="bg-white p-6 rounded-[2rem] shadow-xl shadow-blue-800/5 border border-slate-100 flex items-center gap-6">
-            <div className="w-14 h-14 bg-blue-100 flex items-center justify-center rounded-2xl">
-              <span className="material-symbols-outlined text-blue-700 text-3xl">payments</span>
-            </div>
-            <div>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Total Terkumpul</p>
-              <p className="text-2xl font-black text-slate-900 font-lexend">Rp 24.500.000</p>
-            </div>
-          </div>
-        </header>
+        </form>
+      </section>
 
-        <div className="grid grid-cols-12 gap-8">
-          <div className="col-span-12 lg:col-span-4 space-y-8">
-            <div className="bg-white rounded-[2.5rem] p-8 shadow-xl shadow-blue-800/5 border border-slate-100">
-              <div className="flex justify-between items-center mb-8">
-                <h3 className="text-xl font-bold text-slate-900">Metode Utama</h3>
-                <button className="text-blue-700 hover:bg-blue-50 p-2 rounded-xl transition-colors">
-                  <span className="material-symbols-outlined">edit</span>
-                </button>
-              </div>
-              <div className="text-center space-y-6">
-                <div className="bg-slate-50 p-6 rounded-[2rem] border border-slate-100 shadow-inner">
-                  <img 
-                    alt="QRIS" 
-                    className="w-full aspect-square object-contain rounded-2xl" 
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRIFdVQnLs-PaEntgeZ-PeI9xv9envyT1Q_RexdedbUbXwqmU9RxvgkOl6OlnZTGE-tuQ5ZnElkSkcPXftlDLUeAZ4kPMCYMqWB-Z2iW1v7XZ2UwlDe1vcVol-6oyYwqYFnTRE-UMteFopN46nW_4Li0bVVVpUeO3snVTTeWlrBIDfqf15SkWE8xRxvhtLZNCtrq2Yz3fAZ391FrnQscpGKLN-0QeTlcF-729k09cQJxTNSHbITz7VvBLLGjaq6m7vzxUkawPz3KRg" 
-                  />
-                </div>
-                <div className="text-left space-y-4">
-                  <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Bank Penerima</p>
-                    <p className="text-sm font-bold text-slate-900">Bank Central Asia (BCA)</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Nomor Rekening</p>
-                    <p className="text-lg font-black text-blue-700 tracking-wider">882-031-4452</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-span-12 lg:col-span-8">
-            <div className="bg-white rounded-[2.5rem] shadow-xl shadow-blue-800/5 border border-slate-100 overflow-hidden">
-              <div className="p-8 border-b border-slate-50 flex justify-between items-center bg-slate-50/50">
-                <h3 className="text-xl font-bold text-slate-900">Riwayat Terbaru</h3>
-                <span className="text-[10px] font-black text-blue-700 bg-blue-50 px-4 py-1.5 rounded-full uppercase tracking-widest">Minggu Ini</span>
-              </div>
-              <div className="overflow-x-auto">
-                <table className="w-full text-left">
-                  <thead>
-                    <tr className="bg-white">
-                      <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Donatur</th>
-                      <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Tanggal</th>
-                      <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Jumlah</th>
-                      <th className="px-8 py-6 text-[10px] font-black text-slate-400 uppercase tracking-widest">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-50">
-                    {donations.map((d, i) => (
-                      <tr key={i} className="hover:bg-slate-50/50 transition-colors">
-                        <td className="px-8 py-6">
-                          <div className="flex items-center gap-3">
-                            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center font-bold text-blue-700">{d.name[0]}</div>
-                            <span className="text-sm font-bold text-slate-900">{d.name}</span>
-                          </div>
-                        </td>
-                        <td className="px-8 py-6 text-sm font-medium text-slate-500">{d.date}</td>
-                        <td className="px-8 py-6 text-sm font-black text-slate-900">{d.amount}</td>
-                        <td className="px-8 py-6">
-                          <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${d.color}`}>
-                            {d.status}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+      {loading ? (
+        <div className="flex flex-col items-center py-20">
+          <Loader2 className="animate-spin text-[var(--color-blue)] mb-4" size={48} />
+          <p className="text-[var(--color-secondary)]">Memuat data kampanye...</p>
         </div>
-      </main>
-
-      <footer className="fixed bottom-0 left-72 right-0 bg-white/80 backdrop-blur-md border-t border-slate-100 px-12 py-4 flex justify-between items-center z-30">
-        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">© 2024 RuangBelajar Admin</p>
-        <div className="flex gap-8">
-          {['Bantuan', 'Privasi'].map(link => (
-            <a key={link} className="text-[10px] font-black text-slate-400 hover:text-blue-700 uppercase tracking-widest" href="#">{link}</a>
-          ))}
-        </div>
-      </footer>
+      ) : (
+        <section className="glass-card overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse">
+              <thead>
+                <tr className="bg-[rgba(255,255,255,0.6)] text-[var(--color-secondary)] text-sm border-b border-[var(--color-border)]">
+                  <th className="p-4 font-semibold">ID</th>
+                  <th className="p-4 font-semibold">Judul Kampanye</th>
+                  <th className="p-4 font-semibold">Deskripsi</th>
+                  <th className="p-4 font-semibold text-center">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {donations.map((item) => (
+                  <tr key={item.id} className="border-b border-[var(--color-border)] hover:bg-[rgba(255,255,255,0.4)] transition-colors">
+                    <td className="p-4 text-sm font-medium">{item.id}</td>
+                    <td className="p-4 font-semibold capitalize">{item.title.substring(0, 30)}...</td>
+                    <td className="p-4 text-sm text-[var(--color-secondary)]">{item.body.substring(0, 50)}...</td>
+                    <td className="p-4 flex items-center justify-center gap-2">
+                      <button className="p-2 text-blue-600 hover:bg-blue-100 rounded-lg transition-colors"><Edit size={16} /></button>
+                      <button className="p-2 text-red-600 hover:bg-red-100 rounded-lg transition-colors"><Trash2 size={16} /></button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
     </div>
   );
-};
-
-export default ManajemenDonasiAdmin;
+}
