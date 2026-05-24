@@ -13,6 +13,9 @@
     <!-- Separated Assets -->
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body class="bg-background font-body-md text-on-background min-h-screen flex flex-col">
     <main class="flex-grow flex items-center justify-center p-gutter relative overflow-hidden">
@@ -91,6 +94,18 @@
                             Authorize Access
                             <span class="material-symbols-outlined text-body-md" data-icon="arrow_forward">arrow_forward</span>
                         </button>
+                        
+                        <!-- System Status from Axios -->
+                        <div id="system-status-container" class="mt-md flex flex-col items-center justify-center min-h-[40px] text-xs text-on-surface-variant/70 border-t border-outline-variant/30 pt-sm">
+                            <div id="status-loading" class="flex items-center gap-xs">
+                                <span class="material-symbols-outlined animate-spin text-primary text-sm">progress_activity</span>
+                                <span>Checking system status...</span>
+                            </div>
+                            <div id="status-result" class="hidden flex items-center gap-xs text-green-600 font-semibold">
+                                <span class="material-symbols-outlined text-sm">check_circle</span>
+                                <span id="status-text">System Status: 10 services running normally.</span>
+                            </div>
+                        </div>
                     </form>
                     
                     <div class="mt-xl pt-lg border-t border-slate-100 flex flex-col items-center gap-md">
@@ -125,5 +140,35 @@
             </div>
         </div>
     </footer>
+    
+    <!-- Axios Fetch Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingEl = document.getElementById('status-loading');
+            const resultEl = document.getElementById('status-result');
+            const textEl = document.getElementById('status-text');
+
+            axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+                .then(function (response) {
+                    setTimeout(function() {
+                        if (loadingEl) loadingEl.classList.add('hidden');
+                        if (resultEl) resultEl.classList.remove('hidden');
+                        if (textEl) textEl.textContent = 'System Status: ' + response.data.length + ' services running normally.';
+                    }, 1000);
+                })
+                .catch(function (error) {
+                    setTimeout(function() {
+                        if (loadingEl) loadingEl.classList.add('hidden');
+                        if (resultEl) {
+                            resultEl.classList.remove('hidden');
+                            resultEl.classList.remove('text-green-600');
+                            resultEl.classList.add('text-red-500');
+                        }
+                        if (textEl) textEl.textContent = 'System Status: Connection error.';
+                    }, 1000);
+                    console.error('Error fetching system logs:', error);
+                });
+        });
+    </script>
 </body>
 </html>
