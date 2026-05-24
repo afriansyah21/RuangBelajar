@@ -101,4 +101,18 @@ tailwind.config = {
 // Add interactivity here if needed
 document.addEventListener('DOMContentLoaded', () => {
     console.log('RuangBelajar Kelas User Page Loaded');
+    
+    // --- Simulasi Loading Indicator ---
+    const loadingIndicator = document.getElementById('loading-indicator');
+    if (loadingIndicator) {
+        // Tampilkan loading saat halaman dibuka
+        loadingIndicator.classList.remove('hidden');
+        loadingIndicator.classList.add('flex');
+        
+        // Sembunyikan setelah 3 detik
+        setTimeout(() => {
+            loadingIndicator.classList.add('hidden');
+            loadingIndicator.classList.remove('flex');
+        }, 3000);
+    }
 });

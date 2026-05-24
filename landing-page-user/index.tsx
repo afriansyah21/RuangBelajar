@@ -1,13 +1,44 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const LandingPageUser: React.FC = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [isSearching, setIsSearching] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mentors, setMentors] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/users?_limit=10')
+      .then(res => {
+        setMentors(res.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching mentors:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') || 'light';
     setIsDarkMode(savedTheme === 'dark');
     document.documentElement.classList.toggle('dark', savedTheme === 'dark');
   }, []);
+
+  useEffect(() => {
+    setIsSearching(searchQuery.length > 0);
+  }, [searchQuery]);
 
   const toggleTheme = () => {
     const newTheme = !isDarkMode ? 'dark' : 'light';
@@ -19,10 +50,10 @@ const LandingPageUser: React.FC = () => {
   return (
     <div className="bg-background text-on-background font-body-md selection:bg-blue-100 selection:text-blue-700">
       {/* Top Navigation Bar */}
-      <header className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <nav className="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
+      <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm py-2' : 'bg-white/80 backdrop-blur-sm py-4'}`}>
+        <nav className="flex justify-between items-center px-6 max-w-7xl mx-auto">
           <div className="text-xl font-bold tracking-tight text-blue-700 font-lexend">RuangBelajar</div>
-          <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4">
             <button 
               onClick={toggleTheme}
               className="p-2 text-slate-600 hover:bg-slate-50 transition-colors rounded-full active:scale-95 flex items-center justify-center"
@@ -32,7 +63,32 @@ const LandingPageUser: React.FC = () => {
             <button className="px-6 py-2 text-blue-700 hover:text-blue-800 rounded-xl font-bold transition-all active:scale-95">Masuk</button>
             <button className="bg-blue-700 px-6 py-2 text-white rounded-xl font-bold hover:bg-blue-800 transition-all active:scale-95 shadow-lg shadow-blue-700/20">Daftar</button>
           </div>
+          <div className="md:hidden flex items-center gap-2">
+            <button 
+              onClick={toggleTheme}
+              className="p-2 text-slate-600 hover:bg-slate-50 transition-colors rounded-full active:scale-95 flex items-center justify-center"
+            >
+              <span className="material-symbols-outlined">{isDarkMode ? 'light_mode' : 'dark_mode'}</span>
+            </button>
+            <button 
+              className="material-symbols-outlined text-slate-600 p-2 rounded-lg hover:bg-slate-100"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? 'close' : 'menu'}
+            </button>
+          </div>
         </nav>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 shadow-lg px-6 py-4 flex flex-col gap-4 animate-in slide-in-from-top-2">
+            <button className="w-full text-left font-bold text-slate-700 py-2 border-b border-slate-100">Beranda</button>
+            <button className="w-full text-left font-bold text-slate-700 py-2 border-b border-slate-100">Kelas</button>
+            <button className="w-full text-left font-bold text-slate-700 py-2 border-b border-slate-100">Kuis</button>
+            <button className="w-full text-center py-2 text-blue-700 font-bold border border-blue-700 rounded-xl mt-2">Masuk</button>
+            <button className="w-full text-center py-2 bg-blue-700 text-white font-bold rounded-xl">Daftar</button>
+          </div>
+        )}
       </header>
 
       <main className="pt-16">
@@ -42,10 +98,28 @@ const LandingPageUser: React.FC = () => {
             <div className="space-y-8">
               <span className="inline-block px-4 py-1.5 bg-blue-50 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider">#PilihanProgrammerMasaKini</span>
               <h1 className="text-6xl font-black text-slate-900 font-lexend leading-tight tracking-tight">Belajar Cerdas,<br/><span className="text-blue-700">Masa Depan</span> Cerah</h1>
-              <p className="text-lg text-slate-500 max-w-lg leading-relaxed">
+              <p className="text-lg text-slate-500 max-w-lg leading-relaxed mb-6">
                 Belajar pemrograman secara mudah dimanapun anda berada. Akses puluhan materi berkualitas gratis dengan mentor profesional.
               </p>
-              <div className="flex flex-wrap gap-4 pt-4">
+              
+              <form className="flex gap-2 max-w-md bg-white p-2 rounded-2xl shadow-lg border border-slate-100" onSubmit={(e) => e.preventDefault()}>
+                <input 
+                  type="text" 
+                  placeholder="Temukan kursus impianmu..." 
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="flex-1 px-4 py-2 bg-transparent focus:outline-none text-slate-900"
+                />
+                <button type="submit" className="bg-blue-700 text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-800 transition-all">Cari</button>
+              </form>
+              
+              {isSearching && (
+                <div className="text-sm font-semibold text-blue-700 mt-2">
+                  Mencari hasil untuk "{searchQuery}"...
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-4 pt-4 mt-2">
                 <button className="bg-blue-700 text-white hover:bg-blue-800 px-10 py-4 rounded-2xl font-bold shadow-xl shadow-blue-700/20 transition-all active:scale-95">Daftar Sekarang</button>
                 <button className="bg-slate-50 text-slate-700 px-10 py-4 rounded-2xl font-bold hover:bg-slate-100 transition-all active:scale-95 border border-slate-200">Lihat Kursus</button>
               </div>
@@ -105,6 +179,39 @@ const LandingPageUser: React.FC = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Mentors Section */}
+        <section className="py-24 bg-slate-50 border-t border-slate-100">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="text-center max-w-2xl mx-auto mb-16">
+              <span className="inline-block px-4 py-1.5 bg-blue-100 text-blue-800 rounded-full text-xs font-bold uppercase tracking-wider mb-4">Mentor Kami</span>
+              <h2 className="text-4xl font-bold text-slate-900 mb-6 font-lexend">Belajar Langsung dari Ahlinya</h2>
+              <p className="text-slate-500">Para ahli di industri teknologi yang siap membantu Anda dalam proses belajar.</p>
+            </div>
+            
+            {loading ? (
+              <div className="flex justify-center items-center py-20">
+                <div className="w-10 h-10 border-4 border-slate-200 border-t-blue-700 rounded-full animate-spin"></div>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                {mentors.map((mentor, idx) => (
+                  <div key={idx} className="bg-white p-6 rounded-[1.5rem] border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all text-center group">
+                    <div className="w-20 h-20 bg-blue-50 rounded-full mx-auto mb-4 flex items-center justify-center overflow-hidden border-2 border-white shadow-sm group-hover:border-blue-100 transition-all">
+                      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${mentor.username}`} alt={mentor.name} className="w-full h-full object-cover" />
+                    </div>
+                    <h3 className="font-bold text-slate-900 line-clamp-1">{mentor.name}</h3>
+                    <p className="text-xs text-slate-500 mb-4 line-clamp-1">{mentor.company?.name || 'Tech Lead'}</p>
+                    <div className="flex justify-center gap-2">
+                      <span className="material-symbols-outlined text-slate-400 hover:text-blue-600 cursor-pointer text-sm transition-colors">public</span>
+                      <span className="material-symbols-outlined text-slate-400 hover:text-blue-600 cursor-pointer text-sm transition-colors">mail</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       </main>

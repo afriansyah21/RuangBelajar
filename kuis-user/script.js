@@ -102,6 +102,28 @@ tailwind.config = {
 document.addEventListener('DOMContentLoaded', () => {
     console.log('RuangBelajar Kuis User Page Loaded');
     
+    function updateToggleIcon(theme) {
+        if (!themeToggle) return;
+        const icon = themeToggle.querySelector('.material-symbols-outlined');
+        if (icon) {
+            icon.textContent = theme === 'dark' ? 'light_mode' : 'dark_mode';
+        }
+    }
+
+    // --- Simulasi Loading Indicator ---
+    const loadingIndicator = document.getElementById('loading-indicator');
+    if (loadingIndicator) {
+        // Tampilkan loading saat halaman dibuka
+        loadingIndicator.classList.remove('hidden');
+        loadingIndicator.classList.add('flex');
+        
+        // Sembunyikan setelah 3 detik
+        setTimeout(() => {
+            loadingIndicator.classList.add('hidden');
+            loadingIndicator.classList.remove('flex');
+        }, 3000);
+    }
+
     // Example: Handle option selection
     const options = document.querySelectorAll('button.group');
     options.forEach(option => {

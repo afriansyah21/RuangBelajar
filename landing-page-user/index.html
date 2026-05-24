@@ -13,11 +13,20 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-background text-on-background font-body-md selection:bg-primary-fixed-dim selection:text-primary">
+    <!-- Global Loading Indicator -->
+    <div id="loading-indicator" class="fixed inset-0 z-[100] hidden items-center justify-center bg-white/80 backdrop-blur-sm">
+        <div class="flex flex-col items-center gap-4">
+            <div class="w-12 h-12 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin"></div>
+            <p class="font-body-md text-slate-600 font-medium">Memuat data...</p>
+        </div>
+    </div>
+
     <!-- Top Navigation Bar -->
     <header
         class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant shadow-sm dark:shadow-none">
