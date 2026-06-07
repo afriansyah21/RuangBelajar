@@ -1,209 +1,252 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="id">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Admin Dashboard - Ruangbelajar</title>
-    
-    <!-- Tailwind and Fonts -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
-    <!-- Separated Assets -->
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin Dashboard - Ruangbelajar</title>
+
+  <!-- FONT -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ICON -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
 </head>
-<body class="bg-background text-on-background min-h-screen font-body-md">
-    <!-- Shell: SideNavBar -->
-    <aside class="fixed left-0 h-full w-64 border-r bg-slate-50 border-slate-200 z-40 hidden md:flex flex-col p-4 gap-2">
-        <div class="px-4 py-6 mb-4">
-            <h1 class="text-lg font-black text-blue-800 font-headline-sm">Admin Portal</h1>
-            <p class="text-slate-500 font-label-md">Management</p>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="container navbar-content">
+
+      <div class="logo">
+        Admin RuangBelajar
+      </div>
+
+      <!-- Hamburger Button -->
+      <button class="hamburger-btn" id="hamburger-btn">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+
+      <div class="nav-menu" id="nav-menu">
+
+        <a href="#" class="nav-link active">
+          Dashboard
+        </a>
+
+        <a href="#" class="nav-link">
+          Pengguna
+        </a>
+
+        <a href="#" class="nav-link">
+          Kelas
+        </a>
+
+        <a href="#" class="nav-link">
+          Kuis
+        </a>
+
+        <a href="#" class="nav-link">
+          Donasi
+        </a>
+
+        <a href="#" class="nav-link nav-link-logout">
+          <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">logout</span> Logout
+        </a>
+
+      </div>
+
+      <div class="nav-actions">
+          <span class="material-symbols-outlined logout-icon-desktop" data-icon="logout">logout</span>
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- MAIN CANVAS -->
+  <main class="container">
+    
+    <!-- Top Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-title">
+            <h1>Beranda Dashboard</h1>
+            <p>Selamat datang kembali di panel administrasi Ruangbelajar.</p>
         </div>
-        <nav class="flex flex-col gap-1">
-            <a class="flex items-center gap-3 px-4 py-3 bg-blue-50 text-blue-700 border-r-4 border-blue-700 font-lexend text-sm font-semibold hover:translate-x-1 transition-transform duration-200 active:opacity-80" href="#">
-                <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-                Dashboard
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 font-lexend text-sm font-semibold hover:translate-x-1 transition-transform duration-200 active:opacity-80" href="#">
-                <span class="material-symbols-outlined" data-icon="group">group</span>
-                Pengguna
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 font-lexend text-sm font-semibold hover:translate-x-1 transition-transform duration-200 active:opacity-80" href="#">
-                <span class="material-symbols-outlined" data-icon="school">school</span>
-                Kelas
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 font-lexend text-sm font-semibold hover:translate-x-1 transition-transform duration-200 active:opacity-80" href="#">
-                <span class="material-symbols-outlined" data-icon="quiz">quiz</span>
-                Kuis
-            </a>
-            <a class="flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 font-lexend text-sm font-semibold hover:translate-x-1 transition-transform duration-200 active:opacity-80" href="#">
-                <span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
-                Donasi
-            </a>
-        </nav>
-        <div class="mt-auto pt-4 border-t border-slate-200">
-            <button class="w-full flex items-center gap-3 px-4 py-3 text-slate-500 hover:bg-slate-100 font-lexend text-sm font-semibold transition-transform duration-200 active:opacity-80">
-                <span class="material-symbols-outlined" data-icon="logout">logout</span>
-                Logout
+        <div class="dashboard-actions">
+            <div class="search-box">
+                <span class="material-symbols-outlined">search</span>
+                <input placeholder="Cari data..." type="text"/>
+            </div>
+            <button class="icon-btn">
+                <span class="material-symbols-outlined">notifications</span>
             </button>
+            <div class="avatar">
+                <img alt="Admin Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjbz8RS_nhq7JPVzp656AkSeOZO73W2K4vMxrPzihOma0lLX-T20Ejo_DFNYpYMoljjfR4YK_zXKUxx75Kv8UziseNNh4BN1_f2pgZZN_-ZKPJk2oLslRCjPoxn3vTZmvHQpX2MImdO3_gHe-33zh-fK2vjnOhjCBw2zM9p8VdrpyCnmPtxAgfG1QPvjSd56iMkt0MwgLa9bUr288aWymuDhSs4HiNCzkAWVvMR30IgVDu5qojP511vG4-GS2myVclEjM3f_duY9uh"/>
+            </div>
         </div>
-    </aside>
+    </header>
 
-    <!-- Main Canvas -->
-    <main class="md:ml-64 p-base md:p-lg min-h-screen">
-        <!-- Top Header -->
-        <header class="flex justify-between items-center mb-lg">
-            <div class="flex flex-col">
-                <h2 class="font-headline-lg text-primary">Beranda Dashboard</h2>
-                <p class="font-body-sm text-on-surface-variant">Selamat datang kembali di panel administrasi Ruangbelajar.</p>
-            </div>
-            <div class="flex gap-sm items-center">
-                <div class="relative hidden sm:block">
-                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
-                    <input class="pl-10 pr-4 py-2 border border-outline-variant rounded-lg bg-white focus:ring-2 focus:ring-primary focus:outline-none transition-all w-64" placeholder="Cari data..." type="text"/>
+    <!-- Bento Grid Stats Section -->
+    <section class="stats-bento">
+        <!-- Total Pengguna Card -->
+        <div class="admin-glass-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">group</span>
                 </div>
-                <button class="p-2 rounded-full hover:bg-surface-container-high transition-colors text-on-surface-variant">
-                    <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-                </button>
-                <div class="w-10 h-10 rounded-full border-2 border-primary overflow-hidden">
-                    <img alt="Admin Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjbz8RS_nhq7JPVzp656AkSeOZO73W2K4vMxrPzihOma0lLX-T20Ejo_DFNYpYMoljjfR4YK_zXKUxx75Kv8UziseNNh4BN1_f2pgZZN_-ZKPJk2oLslRCjPoxn3vTZmvHQpX2MImdO3_gHe-33zh-fK2vjnOhjCBw2zM9p8VdrpyCnmPtxAgfG1QPvjSd56iMkt0MwgLa9bUr288aWymuDhSs4HiNCzkAWVvMR30IgVDu5qojP511vG4-GS2myVclEjM3f_duY9uh"/>
-                </div>
+                <span class="stat-badge">
+                    <span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span>
+                    12%
+                </span>
             </div>
-        </header>
+            <h3 class="stat-title">Total Pengguna</h3>
+            <p class="stat-value">12,845</p>
+            <p class="stat-desc">2,400 pengguna baru bulan ini</p>
+        </div>
 
-        <!-- Bento Grid Stats Section -->
-        <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter mb-lg">
-            <!-- Total Pengguna Card -->
-            <div class="bg-white p-md rounded-xl border border-slate-200 level-1-shadow hover:level-2-shadow transition-all group">
-                <div class="flex justify-between items-start mb-base">
-                    <div class="p-3 bg-blue-50 text-primary rounded-lg group-hover:bg-primary group-hover:text-white transition-colors">
-                        <span class="material-symbols-outlined" data-icon="group">group</span>
-                    </div>
-                    <span class="text-green-600 bg-green-50 px-2 py-1 rounded-full text-caption font-bold flex items-center gap-1">
-                        <span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
-                        12%
-                    </span>
+        <!-- Pemasukan Donasi Card -->
+        <div class="admin-glass-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">volunteer_activism</span>
                 </div>
-                <h3 class="font-label-lg text-on-surface-variant">Total Pengguna</h3>
-                <p class="font-display-md text-primary mt-xs">12,845</p>
-                <p class="font-caption text-outline mt-sm">2,400 pengguna baru bulan ini</p>
+                <span class="stat-badge">
+                    <span class="material-symbols-outlined" style="font-size: 14px;">trending_up</span>
+                    8.4%
+                </span>
             </div>
-            <!-- Pemasukan Donasi Card -->
-            <div class="bg-white p-md rounded-xl border border-slate-200 level-1-shadow hover:level-2-shadow transition-all group">
-                <div class="flex justify-between items-start mb-base">
-                    <div class="p-3 bg-blue-50 text-primary rounded-lg group-hover:bg-primary group-hover:text-white transition-colors">
-                        <span class="material-symbols-outlined" data-icon="volunteer_activism">volunteer_activism</span>
-                    </div>
-                    <span class="text-green-600 bg-green-50 px-2 py-1 rounded-full text-caption font-bold flex items-center gap-1">
-                        <span class="material-symbols-outlined text-[14px]" data-icon="trending_up">trending_up</span>
-                        8.4%
-                    </span>
-                </div>
-                <h3 class="font-label-lg text-on-surface-variant">Pemasukan Donasi</h3>
-                <p class="font-display-md text-primary mt-xs">Rp 84.2M</p>
-                <p class="font-caption text-outline mt-sm">Meningkat dari Rp 77.6M</p>
-            </div>
-            <!-- Total Kelas Card -->
-            <div class="bg-white p-md rounded-xl border border-slate-200 level-1-shadow hover:level-2-shadow transition-all group">
-                <div class="flex justify-between items-start mb-base">
-                    <div class="p-3 bg-blue-50 text-primary rounded-lg group-hover:bg-primary group-hover:text-white transition-colors">
-                        <span class="material-symbols-outlined" data-icon="school">school</span>
-                    </div>
-                </div>
-                <h3 class="font-label-lg text-on-surface-variant">Total Kelas Aktif</h3>
-                <p class="font-display-md text-primary mt-xs">342</p>
-                <p class="font-caption text-outline mt-sm">12 kelas baru dalam validasi</p>
-            </div>
-            <!-- Rata-rata Kuis Card -->
-            <div class="bg-white p-md rounded-xl border border-slate-200 level-1-shadow hover:level-2-shadow transition-all group">
-                <div class="flex justify-between items-start mb-base">
-                    <div class="p-3 bg-blue-50 text-primary rounded-lg group-hover:bg-primary group-hover:text-white transition-colors">
-                        <span class="material-symbols-outlined" data-icon="quiz">quiz</span>
-                    </div>
-                </div>
-                <h3 class="font-label-lg text-on-surface-variant">Skor Rata-rata Kuis</h3>
-                <p class="font-display-md text-primary mt-xs">84.5</p>
-                <div class="w-full bg-slate-100 h-2 rounded-full mt-sm overflow-hidden">
-                    <div class="bg-gradient-to-r from-primary to-tertiary-fixed-dim h-full w-[84%]"></div>
-                </div>
-            </div>
-        </section>
+            <h3 class="stat-title">Pemasukan Donasi</h3>
+            <p class="stat-value">Rp 84.2M</p>
+            <p class="stat-desc">Meningkat dari Rp 77.6M</p>
+        </div>
 
-        <!-- Main Content Layout -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
-            <div class="lg:col-span-2 flex flex-col gap-gutter">
-                <div class="bg-white rounded-xl border border-slate-200 level-1-shadow p-md">
-                    <div class="flex justify-between items-center mb-lg">
-                        <h3 class="font-headline-sm text-on-surface">Analisis Pertumbuhan Pengguna</h3>
-                        <div class="flex gap-xs">
-                            <button class="px-3 py-1 text-label-md bg-surface-container text-primary rounded-full">Bulanan</button>
-                            <button class="px-3 py-1 text-label-md text-on-surface-variant hover:bg-slate-50 rounded-full">Tahunan</button>
-                        </div>
-                    </div>
-                    <div class="relative w-full aspect-[21/9] bg-slate-50 rounded-lg flex items-center justify-center overflow-hidden">
-                        <div class="absolute inset-0 opacity-20">
-                            <div class="w-full h-full" style="background-image: linear-gradient(to right, #e2e8f0 1px, transparent 1px), linear-gradient(to bottom, #e2e8f0 1px, transparent 1px); background-size: 40px 40px;"></div>
-                        </div>
-                        <div class="relative w-[90%] h-[60%] border-b border-l border-slate-300">
-                            <svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 40">
-                                <path d="M0 40 L10 35 L20 38 L30 25 L40 28 L50 15 L60 18 L70 5 L80 10 L90 2 L100 8" fill="none" stroke="#003f87" stroke-width="2"></path>
-                                <path d="M0 40 L10 35 L20 38 L30 25 L40 28 L50 15 L60 18 L70 5 L80 10 L90 2 L100 8 V40 H0 Z" fill="url(#grad)" opacity="0.1"></path>
-                                <defs>
-                                    <lineargradient id="grad" x1="0%" x2="0%" y1="0%" y2="100%">
-                                        <stop offset="0%" style="stop-color:#003f87;stop-opacity:1"></stop>
-                                        <stop offset="100%" style="stop-color:#003f87;stop-opacity:0"></stop>
-                                    </lineargradient>
-                                </defs>
-                            </svg>
-                        </div>
+        <!-- Total Kelas Card -->
+        <div class="admin-glass-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">school</span>
+                </div>
+            </div>
+            <h3 class="stat-title">Total Kelas Aktif</h3>
+            <p class="stat-value">342</p>
+            <p class="stat-desc">12 kelas baru dalam validasi</p>
+        </div>
+
+        <!-- Rata-rata Kuis Card -->
+        <div class="admin-glass-card">
+            <div class="stat-header">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">quiz</span>
+                </div>
+            </div>
+            <h3 class="stat-title">Skor Rata-rata Kuis</h3>
+            <p class="stat-value">84.5</p>
+            <div class="stat-progress">
+                <div class="stat-progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Layout -->
+    <div class="dashboard-content-grid">
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+            <!-- Chart Card -->
+            <div class="admin-glass-card chart-card">
+                <div class="chart-header">
+                    <h3>Analisis Pertumbuhan Pengguna</h3>
+                    <div class="chart-filters">
+                        <button class="active">Bulanan</button>
+                        <button>Tahunan</button>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl border border-slate-200 level-1-shadow p-md">
-                    <h3 class="font-headline-sm text-on-surface mb-md">Transaksi Donasi Terakhir</h3>
-                    <div class="space-y-sm">
-                        <div class="flex items-center justify-between p-sm hover:bg-slate-50 rounded-lg border-b border-slate-100 last:border-0 group transition-colors">
-                            <div class="flex items-center gap-sm">
-                                <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-primary font-bold">JD</div>
-                                <div>
-                                    <p class="font-label-lg text-on-surface">John Doe</p>
-                                    <p class="font-caption text-outline">Donasi via Bank Transfer</p>
-                                </div>
-                            </div>
-                            <div class="text-right">
-                                <p class="font-label-lg text-primary">Rp 500.000</p>
-                                <p class="font-caption text-outline">10 menit yang lalu</p>
+                <div class="chart-area">
+                    <div class="chart-grid-bg"></div>
+                    <div style="position: relative; width: 90%; height: 60%; border-bottom: 1px solid #cbd5e1; border-left: 1px solid #cbd5e1; z-index: 2;">
+                        <svg style="width: 100%; height: 100%;" preserveAspectRatio="none" viewBox="0 0 100 40">
+                            <path d="M0 40 L10 35 L20 38 L30 25 L40 28 L50 15 L60 18 L70 5 L80 10 L90 2 L100 8" fill="none" stroke="#2563eb" stroke-width="2"></path>
+                            <path d="M0 40 L10 35 L20 38 L30 25 L40 28 L50 15 L60 18 L70 5 L80 10 L90 2 L100 8 V40 H0 Z" fill="url(#grad)" opacity="0.1"></path>
+                            <defs>
+                                <linearGradient id="grad" x1="0%" x2="0%" y1="0%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1"></stop>
+                                    <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0"></stop>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction Card -->
+            <div class="admin-glass-card tx-card">
+                <h3>Transaksi Donasi Terakhir</h3>
+                <div class="tx-list">
+                    <div class="tx-item">
+                        <div class="tx-info">
+                            <div class="tx-avatar">JD</div>
+                            <div>
+                                <h4>John Doe</h4>
+                                <p>Donasi via Bank Transfer</p>
                             </div>
                         </div>
-                    </div>
-                    <button class="w-full mt-md py-2 text-primary font-label-lg hover:bg-blue-50 rounded-lg transition-colors">Lihat Semua Transaksi</button>
-                </div>
-            </div>
-            <div class="flex flex-col gap-gutter">
-                <div class="bg-primary text-white rounded-xl p-md level-1-shadow relative overflow-hidden">
-                    <div class="relative z-10">
-                        <h3 class="font-label-lg mb-xs opacity-90">Kesehatan Sistem</h3>
-                        <p class="font-headline-md mb-md">Lancar (99.9%)</p>
-                        <div class="flex items-center gap-base">
-                            <span class="flex h-2 w-2 rounded-full bg-green-400"></span>
-                            <span class="font-caption">Semua layanan beroperasi normal</span>
+                        <div class="tx-amount">
+                            <strong>Rp 500.000</strong>
+                            <span>10 menit yang lalu</span>
                         </div>
                     </div>
                 </div>
+                <button class="btn-view-all">Lihat Semua Transaksi</button>
             </div>
         </div>
-    </main>
 
-    <footer class="md:ml-64 bg-white border-t border-slate-100">
-        <div class="max-w-7xl mx-auto py-base px-lg flex flex-col md:flex-row justify-between items-center">
-            <p class="font-lexend text-xs text-slate-500">© 2024 Ruangbelajar Educational Platform</p>
-            <div class="flex gap-md mt-sm md:mt-0">
-                <a class="font-lexend text-xs text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30" href="#">Bantuan</a>
-                <a class="font-lexend text-xs text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30" href="#">Kebijakan Privasi</a>
-                <a class="font-lexend text-xs text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30" href="#">Kontak Kami</a>
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+            <!-- Health Card -->
+            <div class="system-health-card">
+                <h3>Kesehatan Sistem</h3>
+                <h2>Lancar (99.9%)</h2>
+                <div class="health-status">
+                    <div class="health-dot"></div>
+                    <span>Semua layanan beroperasi normal</span>
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <h3>RuangBelajar Admin</h3>
+        <p>© 2026 RuangBelajar Educational Platform</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Bantuan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Kontak Kami</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
 </body>
+
 </html>

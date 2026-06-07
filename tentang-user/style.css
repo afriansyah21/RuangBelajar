@@ -221,6 +221,19 @@ body {
   background: #1d4ed8;
 }
 
+/* HAMBURGER */
+.hamburger-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #2563eb;
+}
+
+.hamburger-btn .material-symbols-outlined {
+  font-size: 32px;
+}
+
 /* HERO */
 .hero-section {
 
@@ -585,7 +598,69 @@ body {
 
   .nav-menu {
 
+    position: fixed;
+    top: 74px;
+    right: -100%;
+    width: 280px;
+    height: calc(100vh - 74px);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(14px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 24px;
+    gap: 24px;
+    transition: right 0.3s ease-in-out;
+    box-shadow: -10px 0 20px rgba(0,0,0,0.05);
+  }
+
+  .nav-menu.active {
+    right: 0;
+  }
+
+  .nav-actions {
     display: none;
   }
 
+  .hamburger-btn {
+    display: block;
+    margin-left: auto;
+  }
+
+}
+
+/* LOGOUT MENU HAMBURGER (MOBILE ONLY) */
+.nav-link-logout {
+  display: none;
+}
+
+.nav-link-logout:hover {
+  color: #ef4444 !important;
+}
+
+.nav-link-logout::after {
+  background: #ef4444 !important;
+}
+
+@media(max-width: 1100px) {
+  .nav-link-logout {
+    display: block;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(226,232,240,0.5);
+    width: 100%;
+  }
+}
+
+/* DESKTOP LOGOUT ICON */
+.logout-icon-desktop {
+  cursor: pointer;
+  color: #64748b;
+  padding: 8px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.logout-icon-desktop:hover {
+  color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
 }

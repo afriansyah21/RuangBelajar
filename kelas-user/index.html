@@ -1,233 +1,249 @@
 <!DOCTYPE html>
-<html class="light" lang="id">
+<html lang="id">
+
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Ruangbelajar - Kelas User</title>
-    
-    <!-- Tailwind and Fonts -->
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    
-    <!-- Separated Assets -->
-    <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="script.js" defer></script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Ruangbelajar - Kelas User</title>
+
+  <!-- FONT -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ICON -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
 </head>
-<body class="bg-surface font-body-md text-on-surface antialiased">
-    <!-- Global Loading Indicator -->
-    <div id="loading-indicator" class="fixed inset-0 z-[100] hidden items-center justify-center bg-white/80 backdrop-blur-sm">
-        <div class="flex flex-col items-center gap-4">
-            <div class="w-12 h-12 border-4 border-slate-200 border-t-blue-600 rounded-full animate-spin"></div>
-            <p class="font-body-md text-slate-600 font-medium">Memuat data...</p>
-        </div>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="container navbar-content">
+
+      <div class="logo">
+        RuangBelajar
+      </div>
+
+      <!-- Hamburger Button -->
+      <button class="hamburger-btn" id="hamburger-btn">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+
+      <div class="nav-menu" id="nav-menu">
+
+        <a href="#" class="nav-link">
+          Beranda
+        </a>
+
+        <a href="#" class="nav-link active">
+          Kelas
+        </a>
+
+        <a href="#" class="nav-link">
+          Kuis
+        </a>
+
+        <a href="#" class="nav-link">
+          Tentang
+        </a>
+
+        <a href="#" class="nav-link">
+          Profil
+        </a>
+
+  <a href="#" class="nav-link nav-link-logout">
+
+    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">logout</span> Logout
+
+  </a>
+
+
+
+</div>
+
+<div class="nav-actions">
+          <span class="material-symbols-outlined logout-icon-desktop" data-icon="logout">logout</span>
+      </div>
+
     </div>
 
-    <!-- TopNavBar -->
-    <nav class="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div class="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
-            <div class="text-xl font-bold tracking-tight text-blue-700">Ruangbelajar</div>
-            <div class="hidden md:flex gap-base items-center font-lexend text-sm font-medium tracking-tight">
-                <a class="px-sm py-xs text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-colors duration-200" href="#">Beranda</a>
-                <a class="px-sm py-xs text-blue-700 border-b-2 border-blue-700 pb-1" href="#">Kelas</a>
-                <a class="px-sm py-xs text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-colors duration-200" href="#">Kuis</a>
-                <a class="px-sm py-xs text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-colors duration-200" href="#">Tentang</a>
-                <a class="px-sm py-xs text-slate-600 hover:text-blue-600 hover:bg-slate-50 transition-colors duration-200" href="#">Profil</a>
-            </div>
-            <div class="flex items-center gap-xs">
-                <span class="material-symbols-outlined text-slate-500 cursor-pointer p-xs hover:bg-slate-100 rounded-full" data-icon="logout">logout</span>
-            </div>
+  </nav>
+
+  <main class="container">
+    
+    <!-- Header Section -->
+    <section class="section-header">
+      <h1>Mulai Belajar Hari Ini</h1>
+      <p>Pilih kategori pelajaran Anda dan lanjutkan perjalanan akademik dengan kurikulum terstruktur dan materi berkualitas tinggi.</p>
+    </section>
+
+    <!-- Category Grid -->
+    <section class="kelas-grid">
+      <!-- Frontend -->
+      <div class="kelas-card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">calculate</span>
         </div>
-    </nav>
-
-    <main class="pt-24 pb-xl max-w-7xl mx-auto px-6">
-        <!-- Header Section -->
-        <section class="mb-lg">
-            <h1 class="font-display-md text-display-md text-on-surface mb-xs">Mulai Belajar Hari Ini</h1>
-            <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Pilih kategori pelajaran Anda dan lanjutkan perjalanan akademik dengan kurikulum terstruktur dan materi berkualitas tinggi.</p>
-        </section>
-
-        <!-- Category Grid (Bento Style) -->
-        <section class="grid grid-cols-1 md:grid-cols-3 gap-md mb-xl">
-            <!-- Matematika -->
-            <div class="group relative overflow-hidden bg-white rounded-xl p-md border border-outline-variant shadow-[0px_4px_12px_rgba(0,86,179,0.05)] hover:shadow-[0px_8px_24px_rgba(0,86,179,0.1)] transition-all duration-300 cursor-pointer">
-                <div class="flex justify-between items-start mb-md">
-                    <div class="p-base bg-surface-container-high rounded-lg text-primary">
-                        <span class="material-symbols-outlined" data-icon="calculate">calculate</span>
-                    </div>
-                    <span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-md text-label-md">12 Materi</span>
-                </div>
-                <h3 class="font-headline-sm text-headline-sm mb-xs">Frontend</h3>
-                <p class="font-body-sm text-body-sm text-on-surface-variant mb-base">Logika, Aljabar, dan Kalkulus untuk membangun dasar berpikir kritis.</p>
-                <div class="flex items-center text-primary font-label-md text-label-md gap-xs group-hover:translate-x-1 transition-transform">
-                    Lihat Kelas <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
-                </div>
-            </div>
-
-            <!-- Fisika (Active State) -->
-            <div class="group relative overflow-hidden bg-primary-container text-on-primary rounded-xl p-md border-2 border-primary shadow-[0px_8px_24px_rgba(0,86,179,0.1)] transition-all duration-300">
-                <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-bl-full"></div>
-                <div class="flex justify-between items-start mb-md">
-                    <div class="p-base bg-white/20 rounded-lg text-white">
-                        <span class="material-symbols-outlined" data-icon="rocket_launch" data-weight="fill" style="font-variation-settings: 'FILL' 1;">rocket_launch</span>
-                    </div>
-                    <span class="bg-white/20 text-white px-sm py-xs rounded-full font-label-md text-label-md">Sedang Dipelajari</span>
-                </div>
-                <h3 class="font-headline-sm text-headline-sm mb-xs">Fisika</h3>
-                <p class="font-body-sm text-body-sm text-on-primary-container mb-base">Memahami hukum alam semesta mulai dari mekanika hingga kuantum.</p>
-                <div class="flex items-center font-label-md text-label-md gap-xs">
-                    Melanjutkan <span class="material-symbols-outlined text-[18px]" data-icon="play_circle">play_circle</span>
-                </div>
-            </div>
-
-            <!-- Kimia -->
-            <div class="group relative overflow-hidden bg-white rounded-xl p-md border border-outline-variant shadow-[0px_4px_12px_rgba(0,86,179,0.05)] hover:shadow-[0px_8px_24px_rgba(0,86,179,0.1)] transition-all duration-300 cursor-pointer">
-                <div class="flex justify-between items-start mb-md">
-                    <div class="p-base bg-surface-container-high rounded-lg text-primary">
-                        <span class="material-symbols-outlined" data-icon="science">science</span>
-                    </div>
-                    <span class="bg-secondary-container text-on-secondary-container px-sm py-xs rounded-full font-label-md text-label-md">10 Materi</span>
-                </div>
-                <h3 class="font-headline-sm text-headline-sm mb-xs">Kimia</h3>
-                <p class="font-body-sm text-body-sm text-on-surface-variant mb-base">Eksplorasi struktur atom dan reaksi kimia dalam kehidupan sehari-hari.</p>
-                <div class="flex items-center text-primary font-label-md text-label-md gap-xs group-hover:translate-x-1 transition-transform">
-                    Lihat Kelas <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Active Class Details (Fisika Selected) -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
-            <!-- Left Column: Video & Progress -->
-            <div class="lg:col-span-8 flex flex-col gap-md">
-                <!-- Progress Header -->
-                <div class="bg-white rounded-xl p-md border border-outline-variant shadow-sm">
-                    <div class="flex justify-between items-end mb-sm">
-                        <div>
-                            <span class="font-label-md text-label-md text-primary uppercase tracking-wider">Progress Belajar</span>
-                            <h2 class="font-headline-md text-headline-md mt-xs">Fisika: Kinematika Gerak Lurus</h2>
-                        </div>
-                        <span class="font-headline-sm text-headline-sm text-primary">65%</span>
-                    </div>
-                    <div class="w-full h-3 bg-secondary-container rounded-full overflow-hidden">
-                        <div class="h-full custom-progress-gradient rounded-full" style="width: 65%;"></div>
-                    </div>
-                </div>
-
-                <!-- Video Player Placeholder -->
-                <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-slate-900 shadow-lg group">
-                    <img alt="Materi Video Fisika" class="w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt7a8wG9EEGHMkScMVTZEVkz5q9pwzQXomm4E7osUDaT9j-KgRRKccMB-haHHVny8mhAch3rEj46s2ik5AXb8dtP6Cl-qn36HRB_RsJUsXn5O9SEZjt4HhLXpHaGWY2hrUc8V3wCwcf78lc_n7HnkogqzPEIytGCdh3dGW9vPXICdY5wFZMDxwSWgZTA6zqzH6xzUwKgmC5ls1DmUx11PGL6KskEAyULS5AQd4xeUVDKN7eO4guImFblckIlkARY-HvUtqetBRj0uB"/>
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <button class="w-20 h-20 bg-primary/90 text-white rounded-full flex items-center justify-center hover:scale-110 active:scale-95 transition-all shadow-xl">
-                            <span class="material-symbols-outlined text-4xl" data-icon="play_arrow" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-                        </button>
-                    </div>
-                    <div class="absolute bottom-0 left-0 w-full p-md bg-gradient-to-t from-black/80 to-transparent">
-                        <p class="text-white font-label-lg text-label-lg">Lesson 4: Percepatan dan Perlambatan</p>
-                    </div>
-                </div>
-
-                <!-- Rangkuman Materi -->
-                <div class="bg-white rounded-xl p-md border border-outline-variant shadow-sm">
-                    <div class="flex items-center gap-base mb-base">
-                        <span class="material-symbols-outlined text-primary" data-icon="description">description</span>
-                        <h3 class="font-headline-sm text-headline-sm">Rangkuman Materi</h3>
-                    </div>
-                    <div class="prose prose-slate max-w-none text-on-surface-variant font-body-md text-body-md">
-                        <p class="mb-base">Kinematika adalah cabang dari mekanika klasik yang membahas gerak benda tanpa mempersoalkan penyebabnya. Pada pertemuan ini, kita fokus pada Gerak Lurus Beraturan (GLB) dan Gerak Lurus Berubah Beraturan (GLBB).</p>
-                        <ul class="list-disc pl-base space-y-xs">
-                            <li><strong>Jarak vs Perpindahan:</strong> Jarak adalah total lintasan, perpindahan adalah perubahan posisi awal ke akhir.</li>
-                            <li><strong>Kecepatan Rata-rata:</strong> Hasil bagi perpindahan dengan selang waktu yang ditempuh.</li>
-                            <li><strong>Rumus Utama GLBB:</strong> v = v0 + at; s = v0t + 1/2 at².</li>
-                        </ul>
-                    </div>
-                    <button class="mt-md flex items-center gap-xs font-label-lg text-label-lg text-primary border border-primary/20 bg-primary-fixed/30 px-md py-base rounded-lg hover:bg-primary-fixed/50 transition-colors">
-                        <span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
-                        Unduh PDF Rangkuman
-                    </button>
-                </div>
-            </div>
-
-            <!-- Right Column: Materials List -->
-            <div class="lg:col-span-4 flex flex-col gap-md">
-                <div class="bg-white rounded-xl border border-outline-variant shadow-sm overflow-hidden sticky top-24">
-                    <div class="p-md border-b border-slate-100 bg-surface-container-low">
-                        <h3 class="font-headline-sm text-headline-sm">Daftar Materi</h3>
-                        <p class="font-caption text-caption text-on-surface-variant">8 Video & 4 Kuis</p>
-                    </div>
-                    <div class="flex flex-col">
-                        <!-- Item 1: Completed -->
-                        <div class="flex items-center p-md border-b border-slate-100 hover:bg-slate-50 transition-colors group">
-                            <div class="mr-base text-primary">
-                                <span class="material-symbols-outlined" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-label-lg text-label-lg text-on-surface">1. Pengantar Mekanika</p>
-                                <p class="font-caption text-caption text-on-surface-variant">08:45 • Video</p>
-                            </div>
-                        </div>
-                        <!-- Item 2: Completed -->
-                        <div class="flex items-center p-md border-b border-slate-100 hover:bg-slate-50 transition-colors group">
-                            <div class="mr-base text-primary">
-                                <span class="material-symbols-outlined" data-icon="check_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-label-lg text-label-lg text-on-surface">2. Besaran dan Satuan</p>
-                                <p class="font-caption text-caption text-on-surface-variant">12:20 • Video</p>
-                            </div>
-                        </div>
-                        <!-- Item 3: Current -->
-                        <div class="flex items-center p-md border-b border-slate-100 bg-primary-fixed/20 border-l-4 border-l-primary group">
-                            <div class="mr-base text-primary">
-                                <span class="material-symbols-outlined animate-pulse" data-icon="play_circle">play_circle</span>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-label-lg text-label-lg text-primary">3. Kinematika Gerak Lurus</p>
-                                <p class="font-caption text-caption text-primary/80">15:10 • Video • Sedang Dipelajari</p>
-                            </div>
-                        </div>
-                        <!-- Item 4: Locked -->
-                        <div class="flex items-center p-md border-b border-slate-100 opacity-60 group">
-                            <div class="mr-base text-slate-400">
-                                <span class="material-symbols-outlined" data-icon="lock">lock</span>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-label-lg text-label-lg text-on-surface">4. Dinamika Partikel</p>
-                                <p class="font-caption text-caption text-on-surface-variant">18:30 • Video</p>
-                            </div>
-                        </div>
-                        <!-- Item 5: Quiz -->
-                        <div class="flex items-center p-md border-b border-slate-100 hover:bg-slate-50 transition-colors group">
-                            <div class="mr-base text-slate-500">
-                                <span class="material-symbols-outlined" data-icon="quiz">quiz</span>
-                            </div>
-                            <div class="flex-1">
-                                <p class="font-label-lg text-label-lg text-on-surface">Kuis: Dasar Mekanika</p>
-                                <p class="font-caption text-caption text-on-surface-variant">15 Pertanyaan</p>
-                            </div>
-                            <span class="material-symbols-outlined text-slate-400 text-[18px]" data-icon="chevron_right">chevron_right</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <h3>Frontend</h3>
+        <p>Logika, Aljabar, dan Kalkulus untuk membangun dasar berpikir kritis.</p>
+        <div class="card-action">
+          Lihat Kelas <span class="material-symbols-outlined">arrow_forward</span>
         </div>
-    </main>
+      </div>
 
-    <!-- Footer -->
-    <footer class="w-full border-t border-slate-100 bg-white">
-        <div class="max-w-7xl mx-auto py-12 px-6 flex flex-col md:flex-row justify-between items-center">
-            <div class="mb-md md:mb-0">
-                <div class="text-lg font-bold text-slate-900 mb-xs">Ruangbelajar</div>
-                <p class="font-lexend text-xs text-slate-500">© 2024 Ruangbelajar Educational Platform</p>
-            </div>
-            <div class="flex flex-wrap justify-center gap-md">
-                <a class="font-lexend text-xs text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30 transition-opacity duration-300" href="#">Kontak Kami</a>
-                <a class="font-lexend text-xs text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30 transition-opacity duration-300" href="#">Syarat & Ketentuan</a>
-                <a class="font-lexend text-xs text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30 transition-opacity duration-300" href="#">Kebijakan Privasi</a>
-                <a class="font-lexend text-xs text-slate-500 hover:text-blue-600 hover:underline decoration-blue-500/30 transition-opacity duration-300" href="#">Bantuan</a>
-            </div>
+      <!-- Fisika (Active State) -->
+      <div class="kelas-card active">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">rocket_launch</span>
         </div>
-    </footer>
+        <h3>Fisika</h3>
+        <p>Memahami hukum alam semesta mulai dari mekanika hingga kuantum.</p>
+        <div class="card-action">
+          Melanjutkan <span class="material-symbols-outlined">play_circle</span>
+        </div>
+      </div>
+
+      <!-- Kimia -->
+      <div class="kelas-card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">science</span>
+        </div>
+        <h3>Kimia</h3>
+        <p>Eksplorasi struktur atom dan reaksi kimia dalam kehidupan sehari-hari.</p>
+        <div class="card-action">
+          Lihat Kelas <span class="material-symbols-outlined">arrow_forward</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Active Class Details -->
+    <section class="course-details-grid">
+      
+      <!-- Left Column: Video & Progress -->
+      <div>
+        <!-- Video Card -->
+        <div class="video-container">
+          <div class="video-header">
+            <div>
+              <span>Progress Belajar</span>
+              <h2>Fisika: Kinematika Gerak Lurus</h2>
+            </div>
+            <div class="progress-text">65%</div>
+          </div>
+          
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 65%;"></div>
+          </div>
+
+          <div class="video-player">
+            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt7a8wG9EEGHMkScMVTZEVkz5q9pwzQXomm4E7osUDaT9j-KgRRKccMB-haHHVny8mhAch3rEj46s2ik5AXb8dtP6Cl-qn36HRB_RsJUsXn5O9SEZjt4HhLXpHaGWY2hrUc8V3wCwcf78lc_n7HnkogqzPEIytGCdh3dGW9vPXICdY5wFZMDxwSWgZTA6zqzH6xzUwKgmC5ls1DmUx11PGL6KskEAyULS5AQd4xeUVDKN7eO4guImFblckIlkARY-HvUtqetBRj0uB" alt="Materi Fisika">
+            <button class="play-button">
+              <span class="material-symbols-outlined">play_arrow</span>
+            </button>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: #2563eb;">
+              <span class="material-symbols-outlined">description</span>
+              <h3 style="font-size: 20px;">Rangkuman Materi</h3>
+          </div>
+          <p style="color: #64748b; line-height: 1.6; font-size: 14px; margin-bottom: 12px;">Kinematika adalah cabang dari mekanika klasik yang membahas gerak benda tanpa mempersoalkan penyebabnya. Pada pertemuan ini, kita fokus pada Gerak Lurus Beraturan (GLB) dan Gerak Lurus Berubah Beraturan (GLBB).</p>
+          <ul style="color: #64748b; line-height: 1.6; font-size: 14px; padding-left: 20px; margin-bottom: 24px;">
+              <li><strong>Jarak vs Perpindahan:</strong> Jarak adalah total lintasan, perpindahan adalah perubahan posisi awal ke akhir.</li>
+              <li><strong>Kecepatan Rata-rata:</strong> Hasil bagi perpindahan dengan selang waktu yang ditempuh.</li>
+              <li><strong>Rumus Utama GLBB:</strong> v = v0 + at; s = v0t + 1/2 at².</li>
+          </ul>
+          <button class="secondary-btn" style="display: flex; align-items: center; gap: 8px; color: #2563eb; background: rgba(37,99,235,0.1); border: none;">
+              <span class="material-symbols-outlined">download</span> Unduh PDF Rangkuman
+          </button>
+        </div>
+      </div>
+
+      <!-- Right Column: Materials List -->
+      <div>
+        <div class="materials-list">
+          <div class="materials-header">
+            <h3>Daftar Materi</h3>
+            <p>8 Video & 4 Kuis</p>
+          </div>
+
+          <div class="material-item">
+            <span class="material-symbols-outlined material-icon">check_circle</span>
+            <div class="material-info">
+              <h4>1. Pengantar Mekanika</h4>
+              <p>08:45 • Video</p>
+            </div>
+          </div>
+
+          <div class="material-item">
+            <span class="material-symbols-outlined material-icon">check_circle</span>
+            <div class="material-info">
+              <h4>2. Besaran dan Satuan</h4>
+              <p>12:20 • Video</p>
+            </div>
+          </div>
+
+          <div class="material-item active">
+            <span class="material-symbols-outlined material-icon">play_circle</span>
+            <div class="material-info">
+              <h4>3. Kinematika Gerak Lurus</h4>
+              <p>15:10 • Video • Sedang Dipelajari</p>
+            </div>
+          </div>
+
+          <div class="material-item locked">
+            <span class="material-symbols-outlined material-icon">lock</span>
+            <div class="material-info">
+              <h4>4. Dinamika Partikel</h4>
+              <p>18:30 • Video</p>
+            </div>
+          </div>
+
+          <div class="material-item">
+            <span class="material-symbols-outlined material-icon" style="color: #64748b;">quiz</span>
+            <div class="material-info">
+              <h4 style="color: #64748b;">Kuis: Dasar Mekanika</h4>
+              <p>15 Pertanyaan</p>
+            </div>
+            <span class="material-symbols-outlined" style="margin-left: auto; color: #cbd5e1;">chevron_right</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <h3>RuangBelajar</h3>
+        <p>© 2026 RuangBelajar Educational Platform</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Kontak Kami</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Bantuan</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+
 </body>
+
 </html>
