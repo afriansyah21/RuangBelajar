@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materi Kelas - RuangBelajar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+  
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">RuangBelajar</div>
+      <button class="hamburger-btn" id="hamburger-btn">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="nav-menu" id="nav-menu">
+        <a href="../beranda-user/index.html" class="nav-link">Beranda</a>
+        <a href="../kelas-user/index.html" class="nav-link active">Kelas</a>
+        <a href="../kuis-user/index.html" class="nav-link">Kuis</a>
+        <a href="../tentang-user/index.html" class="nav-link">Tentang</a>
+        <a href="../profil-user/index.html" class="nav-link">Profil</a>
+        <a href="#" class="nav-link nav-link-logout">
+          <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">logout</span> Logout
+        </a>
+      </div>
+      <div class="nav-actions">
+          <span class="material-symbols-outlined logout-icon-desktop" data-icon="logout">logout</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="dashboard-header">
+        <div class="dashboard-title">
+            <button class="btn-back" onclick="window.location.href='../kelas-user/index.html'">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Kembali
+            </button>
+            <h1>Materi Kelas: Front End</h1>
+            <p>Daftar materi dan video pembelajaran untuk kelas ini.</p>
+        </div>
+    </header>
+
+    <div class="dashboard-content">
+        <div class="materi-list">
+            
+            <div class="materi-item">
+                <div class="materi-info">
+                    <div class="materi-icon">
+                        <span class="material-symbols-outlined">play_circle</span>
+                    </div>
+                    <div>
+                        <h4>01. Pengenalan HTML</h4>
+                        <p>Durasi: 12:30 â€¢ Video Dasar</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-primary" onclick="window.location.href='../tonton-materi-user/index.html'" style="padding: 6px 12px; font-size: 14px;">Lihat Materi</button>
+                </div>
+            </div>
+
+            <div class="materi-item">
+                <div class="materi-info">
+                    <div class="materi-icon">
+                        <span class="material-symbols-outlined">play_circle</span>
+                    </div>
+                    <div>
+                        <h4>02. CSS Dasar</h4>
+                        <p>Durasi: 15:45 â€¢ Styling</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-primary" onclick="window.location.href='../tonton-materi-user/index.html'" style="padding: 6px 12px; font-size: 14px;">Lihat Materi</button>
+                </div>
+            </div>
+
+            <div class="materi-item">
+                <div class="materi-info">
+                    <div class="materi-icon">
+                        <span class="material-symbols-outlined">play_circle</span>
+                    </div>
+                    <div>
+                        <h4>03. Javascript Interaktif</h4>
+                        <p>Durasi: 20:15 â€¢ Scripting</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-primary" onclick="window.location.href='../tonton-materi-user/index.html'" style="padding: 6px 12px; font-size: 14px;">Lihat Materi</button>
+                </div>
+            </div>
+
+        
+            
+    </div>
+  </main>
+
+  <footer class="footer" style="margin-top: auto;">
+    <div class="container footer-content">
+      <div>
+        <h3>RuangBelajar</h3>
+        <p>Â© 2026 RuangBelajar Educational Platform</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Bantuan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Kontak Kami</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+

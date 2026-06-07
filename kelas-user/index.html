@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Ruangbelajar - Kelas User</title>
+  <title>Kelas - RuangBelajar</title>
 
   <!-- FONT -->
   <link
@@ -43,39 +43,35 @@
         <span class="material-symbols-outlined">menu</span>
       </button>
 
-      <div class="nav-menu" id="nav-menu">
+            <div class="nav-menu" id="nav-menu">
 
-        <a href="#" class="nav-link">
+        <a href="../beranda-user/index.html" class="nav-link">
           Beranda
         </a>
 
-        <a href="#" class="nav-link active">
+        <a href="../kelas-user/index.html" class="nav-link active">
           Kelas
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="../kuis-user/index.html" class="nav-link ">
           Kuis
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="../tentang-user/index.html" class="nav-link">
           Tentang
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="../profil-user/index.html" class="nav-link">
           Profil
         </a>
 
-  <a href="#" class="nav-link nav-link-logout">
+        <a href="#" class="nav-link nav-link-logout">
+          <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">logout</span> Logout
+        </a>
 
-    <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">logout</span> Logout
+      </div>
 
-  </a>
-
-
-
-</div>
-
-<div class="nav-actions">
+      <div class="nav-actions">
           <span class="material-symbols-outlined logout-icon-desktop" data-icon="logout">logout</span>
       </div>
 
@@ -83,147 +79,70 @@
 
   </nav>
 
+  <!-- MAIN CANVAS -->
   <main class="container">
     
-    <!-- Header Section -->
-    <section class="section-header">
-      <h1>Mulai Belajar Hari Ini</h1>
-      <p>Pilih kategori pelajaran Anda dan lanjutkan perjalanan akademik dengan kurikulum terstruktur dan materi berkualitas tinggi.</p>
-    </section>
+    <!-- Top Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-title">
+            <h1>Daftar Kelas</h1>
+            <p>Kumpulan kelas kelas yang tersedia di RuangBelajar.</p>
+        </div>
+        
+    </header>
 
-    <!-- Category Grid -->
-    <section class="kelas-grid">
-      <!-- Frontend -->
-      <div class="kelas-card">
-        <div class="card-icon">
-          <span class="material-symbols-outlined">calculate</span>
-        </div>
-        <h3>Frontend</h3>
-        <p>Logika, Aljabar, dan Kalkulus untuk membangun dasar berpikir kritis.</p>
-        <div class="card-action">
-          Lihat Kelas <span class="material-symbols-outlined">arrow_forward</span>
-        </div>
-      </div>
-
-      <!-- Fisika (Active State) -->
-      <div class="kelas-card active">
-        <div class="card-icon">
-          <span class="material-symbols-outlined">rocket_launch</span>
-        </div>
-        <h3>Fisika</h3>
-        <p>Memahami hukum alam semesta mulai dari mekanika hingga kuantum.</p>
-        <div class="card-action">
-          Melanjutkan <span class="material-symbols-outlined">play_circle</span>
-        </div>
-      </div>
-
-      <!-- Kimia -->
-      <div class="kelas-card">
-        <div class="card-icon">
-          <span class="material-symbols-outlined">science</span>
-        </div>
-        <h3>Kimia</h3>
-        <p>Eksplorasi struktur atom dan reaksi kimia dalam kehidupan sehari-hari.</p>
-        <div class="card-action">
-          Lihat Kelas <span class="material-symbols-outlined">arrow_forward</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Active Class Details -->
-    <section class="course-details-grid">
-      
-      <!-- Left Column: Video & Progress -->
-      <div>
-        <!-- Video Card -->
-        <div class="video-container">
-          <div class="video-header">
-            <div>
-              <span>Progress Belajar</span>
-              <h2>Fisika: Kinematika Gerak Lurus</h2>
+    <!-- Main Content Layout -->
+    <div class="dashboard-content-grid">
+        
+        <!-- Left Column: Lesson List -->
+        <div style="display: flex; flex-direction: column;">
+            
+            <div class="lesson-list-header">
+                <h3>Daftar Kelas (3)</h3>
             </div>
-            <div class="progress-text">65%</div>
-          </div>
-          
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: 65%;"></div>
-          </div>
+            
+            <!-- Lesson Card 1 -->
+            <a href="../detail-kelas-user/index.html" class="lesson-card" style="border-color: #cbd5e1; box-shadow: none; cursor: pointer; text-decoration: none; color: inherit; display: flex;">
+                <div class="lesson-img-wrapper">
+                    <img alt="Thumbnail" src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2000&auto=format&fit=crop"/>
+                </div>
+                <div class="lesson-content">
+                    <h4 style="color: #0f172a;">01. Front End</h4>
+                    <p>Pelajari dasar pembuatan antarmuka web yang interaktif.</p>
+                </div>
+                
+                
+            </a>
 
-          <div class="video-player">
-            <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt7a8wG9EEGHMkScMVTZEVkz5q9pwzQXomm4E7osUDaT9j-KgRRKccMB-haHHVny8mhAch3rEj46s2ik5AXb8dtP6Cl-qn36HRB_RsJUsXn5O9SEZjt4HhLXpHaGWY2hrUc8V3wCwcf78lc_n7HnkogqzPEIytGCdh3dGW9vPXICdY5wFZMDxwSWgZTA6zqzH6xzUwKgmC5ls1DmUx11PGL6KskEAyULS5AQd4xeUVDKN7eO4guImFblckIlkARY-HvUtqetBRj0uB" alt="Materi Fisika">
-            <button class="play-button">
-              <span class="material-symbols-outlined">play_arrow</span>
-            </button>
-          </div>
+            <!-- Lesson Card 2 -->
+            <a href="../detail-kelas-user/index.html" class="lesson-card" style="border-color: #cbd5e1; box-shadow: none; cursor: pointer; text-decoration: none; color: inherit; display: flex;">
+                <div class="lesson-img-wrapper">
+                    <img alt="Thumbnail" src="https://images.unsplash.com/photo-1623479322729-28b25c16b011?q=80&w=2000&auto=format&fit=crop"/>
+                </div>
+                <div class="lesson-content">
+                    <h4 style="color: #0f172a;">02. Back End</h4>
+                    <p>Memahami logika server, database, dan API.</p>
+                </div>
+                
+                
+            </a>
 
-          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; color: #2563eb;">
-              <span class="material-symbols-outlined">description</span>
-              <h3 style="font-size: 20px;">Rangkuman Materi</h3>
-          </div>
-          <p style="color: #64748b; line-height: 1.6; font-size: 14px; margin-bottom: 12px;">Kinematika adalah cabang dari mekanika klasik yang membahas gerak benda tanpa mempersoalkan penyebabnya. Pada pertemuan ini, kita fokus pada Gerak Lurus Beraturan (GLB) dan Gerak Lurus Berubah Beraturan (GLBB).</p>
-          <ul style="color: #64748b; line-height: 1.6; font-size: 14px; padding-left: 20px; margin-bottom: 24px;">
-              <li><strong>Jarak vs Perpindahan:</strong> Jarak adalah total lintasan, perpindahan adalah perubahan posisi awal ke akhir.</li>
-              <li><strong>Kecepatan Rata-rata:</strong> Hasil bagi perpindahan dengan selang waktu yang ditempuh.</li>
-              <li><strong>Rumus Utama GLBB:</strong> v = v0 + at; s = v0t + 1/2 at².</li>
-          </ul>
-          <button class="secondary-btn" style="display: flex; align-items: center; gap: 8px; color: #2563eb; background: rgba(37,99,235,0.1); border: none;">
-              <span class="material-symbols-outlined">download</span> Unduh PDF Rangkuman
-          </button>
+            <!-- Lesson Card 3 -->
+            <a href="../detail-kelas-user/index.html" class="lesson-card" style="border-color: #cbd5e1; box-shadow: none; cursor: pointer; text-decoration: none; color: inherit; display: flex;">
+                <div class="lesson-img-wrapper">
+                    <img alt="Thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATLUS9ZsLTzLYfXbZdYGKavScc8BlMRp9qCnP89IjwiqpDd_aJQNIzAQpHZmjmqlZ1A-RnztBolomZB0FnsL3LzWHG9WTYrcwoPopEsfG8QaAjAFj3rpXPL-mphWLa_SLv_yJ6tVAliVH-xIrYu0ctxJvNQ_DRvWwf8gDmlu0euYoIJxF2C3IWg1wkYRZ1QhKX6fEIzmtlFkp1Iw3mdgP99pgI82DafxEjBpq0ggqEKcJGYUVWg-GTiPbCOzWfkH0_JQANvDQeIyss"/>
+                </div>
+                <div class="lesson-content">
+                    <h4 style="color: #0f172a;">03. UI/UX</h4>
+                    <p>Pelajari konsep dasar pengalaman pengguna dan antarmuka visual.</p>
+                </div>
+                
+                
+            </a>
+
         </div>
-      </div>
 
-      <!-- Right Column: Materials List -->
-      <div>
-        <div class="materials-list">
-          <div class="materials-header">
-            <h3>Daftar Materi</h3>
-            <p>8 Video & 4 Kuis</p>
-          </div>
-
-          <div class="material-item">
-            <span class="material-symbols-outlined material-icon">check_circle</span>
-            <div class="material-info">
-              <h4>1. Pengantar Mekanika</h4>
-              <p>08:45 • Video</p>
-            </div>
-          </div>
-
-          <div class="material-item">
-            <span class="material-symbols-outlined material-icon">check_circle</span>
-            <div class="material-info">
-              <h4>2. Besaran dan Satuan</h4>
-              <p>12:20 • Video</p>
-            </div>
-          </div>
-
-          <div class="material-item active">
-            <span class="material-symbols-outlined material-icon">play_circle</span>
-            <div class="material-info">
-              <h4>3. Kinematika Gerak Lurus</h4>
-              <p>15:10 • Video • Sedang Dipelajari</p>
-            </div>
-          </div>
-
-          <div class="material-item locked">
-            <span class="material-symbols-outlined material-icon">lock</span>
-            <div class="material-info">
-              <h4>4. Dinamika Partikel</h4>
-              <p>18:30 • Video</p>
-            </div>
-          </div>
-
-          <div class="material-item">
-            <span class="material-symbols-outlined material-icon" style="color: #64748b;">quiz</span>
-            <div class="material-info">
-              <h4 style="color: #64748b;">Kuis: Dasar Mekanika</h4>
-              <p>15 Pertanyaan</p>
-            </div>
-            <span class="material-symbols-outlined" style="margin-left: auto; color: #cbd5e1;">chevron_right</span>
-          </div>
-        </div>
-      </div>
-
-    </section>
+    </div>
 
   </main>
 
@@ -232,18 +151,25 @@
     <div class="container footer-content">
       <div>
         <h3>RuangBelajar</h3>
-        <p>© 2026 RuangBelajar Educational Platform</p>
+        <p>Â© 2026 RuangBelajar Educational Platform</p>
       </div>
       <div class="footer-links">
-        <a href="#">Kontak Kami</a>
-        <a href="#">Kebijakan Privasi</a>
         <a href="#">Bantuan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Kontak Kami</a>
       </div>
     </div>
   </footer>
 
+  <!-- JS -->
   <script src="script.js"></script>
 
 </body>
 
 </html>
+
+
+
+
+
+

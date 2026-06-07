@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daftar Kuis Kelas - RuangBelajar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+  
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">RuangBelajar</div>
+      <button class="hamburger-btn" id="hamburger-btn">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="nav-menu" id="nav-menu">
+        <a href="../beranda-user/index.html" class="nav-link">Beranda</a>
+        <a href="../kelas-user/index.html" class="nav-link">Kelas</a>
+        <a href="../kuis-user/index.html" class="nav-link active">Kuis</a>
+        <a href="../tentang-user/index.html" class="nav-link">Tentang</a>
+        <a href="../profil-user/index.html" class="nav-link">Profil</a>
+        <a href="#" class="nav-link nav-link-logout">
+          <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">logout</span> Logout
+        </a>
+      </div>
+      <div class="nav-actions">
+          <span class="material-symbols-outlined logout-icon-desktop" data-icon="logout">logout</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="dashboard-header">
+        <div class="dashboard-title">
+            <button class="btn-back" onclick="window.location.href='../kuis-user/index.html'">
+                <span class="material-symbols-outlined">arrow_back</span> Kembali ke Daftar Kuis
+            </button>
+            <h1 style="margin-top: 16px;">Kuis Kelas: Front End</h1>
+            <p>Daftar kuis yang tersedia untuk menguji pemahaman Anda di kelas ini.</p>
+        </div>
+    </header>
+
+    <div class="dashboard-content">
+        <div class="materi-list">
+            
+            <!-- Kuis 1 (Sudah Dikerjakan) -->
+            <div class="materi-item" style="border-left: 4px solid #22c55e; background-color: #f0fdf4;">
+                <div class="materi-info">
+                    <div class="materi-icon" style="color: #22c55e; background-color: rgba(34, 197, 94, 0.1);">
+                        <span class="material-symbols-outlined">task_alt</span>
+                    </div>
+                    <div>
+                        <h4 style="color: #15803d; font-size: 16px;">01. Kuis Dasar HTML & CSS</h4>
+                        <p style="color: #16a34a; font-size: 14px;">Status: Sudah Dikerjakan • Nilai: 66/100</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-primary" onclick="window.location.href='../hasil-kuis-user/index.html'" style="padding: 8px 16px; font-size: 14px; background-color: #22c55e; color: white;">Lihat Hasil</button>
+                </div>
+            </div>
+
+            <!-- Kuis 2 (Belum Dikerjakan) -->
+            <div class="materi-item" style="border-left: 4px solid #f59e0b; background-color: #fffbeb;">
+                <div class="materi-info">
+                    <div class="materi-icon" style="color: #f59e0b; background-color: rgba(245, 158, 11, 0.1);">
+                        <span class="material-symbols-outlined">quiz</span>
+                    </div>
+                    <div>
+                        <h4 style="color: #b45309; font-size: 16px;">02. Kuis Interaktivitas Javascript</h4>
+                        <p style="color: #d97706; font-size: 14px;">Status: Belum Dikerjakan • 5 Pertanyaan</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-primary" onclick="window.location.href='../kerjakan-kuis-user/index.html'" style="padding: 8px 16px; font-size: 14px; background-color: #f59e0b; color: white;">Kerjakan Kuis</button>
+                </div>
+            </div>
+
+            <!-- Kuis 3 (Belum Dikerjakan) -->
+            <div class="materi-item" style="border-left: 4px solid #f59e0b; background-color: #fffbeb;">
+                <div class="materi-info">
+                    <div class="materi-icon" style="color: #f59e0b; background-color: rgba(245, 158, 11, 0.1);">
+                        <span class="material-symbols-outlined">quiz</span>
+                    </div>
+                    <div>
+                        <h4 style="color: #b45309; font-size: 16px;">03. Kuis Integrasi API & Fetch</h4>
+                        <p style="color: #d97706; font-size: 14px;">Status: Belum Dikerjakan • 4 Pertanyaan</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-primary" onclick="window.location.href='../kerjakan-kuis-user/index.html'" style="padding: 8px 16px; font-size: 14px; background-color: #f59e0b; color: white;">Kerjakan Kuis</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+  </main>
+
+  <footer class="footer" style="margin-top: auto;">
+    <div class="container footer-content">
+      <div>
+        <h3>RuangBelajar</h3>
+        <p>© 2026 RuangBelajar Educational Platform</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Bantuan</a>
+        <a href="#">Kebijakan Privasi</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

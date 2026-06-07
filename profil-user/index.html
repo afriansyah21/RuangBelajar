@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -45,23 +45,23 @@
 
       <div class="nav-menu" id="nav-menu">
 
-        <a href="#" class="nav-link">
+        <a href="../beranda-user/index.html" class="nav-link">
           Beranda
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="../kelas-user/index.html" class="nav-link">
           Kelas
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="../kuis-user/index.html" class="nav-link">
           Kuis
         </a>
 
-        <a href="#" class="nav-link">
+        <a href="../tentang-user/index.html" class="nav-link">
           Tentang
         </a>
 
-        <a href="#" class="nav-link active">
+        <a href="../profil-user/index.html" class="nav-link active">
           Profil
         </a>
 
@@ -94,17 +94,12 @@
 
         <div class="profile-image-wrapper">
           <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXALYy9ZLcuHaXsT23uA7XpTFDZQewGaUQdqK_w4x4uDDyxjPg_s__YTWWzW4igQyTAOzb0eidtzIvGjsCZl73079RChEThbaIGQ-NLUvZGVHIBTgtxyO9voc1a_jDrK6Ae3rOMvNr9KWzu6rcwglCxZwQhzYVHgJ4mXczkmeSyW7epFAlJDWKSOmrPnIKNN3pADuaO_YGWYQlyZttTg_wJqjRZf4eFHQ1xWFxNcytQfLfbe1sC79KJO9XzazBrBUk9eCO-LU6pacI" alt="profile">
-          <button class="edit-btn">
+          <button class="edit-btn" onclick="openEditModal()">
             <span class="material-symbols-outlined">edit</span>
           </button>
         </div>
 
         <h1>Aditya Pratama</h1>
-        <p>Siswa Menengah Atas</p>
-
-        <button class="primary-btn-profile">
-          Sunting Profil
-        </button>
 
         <button class="secondary-btn-profile">
           Ganti Password
@@ -112,21 +107,6 @@
 
       </div>
 
-      <!-- ACHIEVEMENT -->
-      <div class="glass-card achievement-card">
-
-        <h2>
-          <span class="material-symbols-outlined filled">stars</span>
-          Pencapaian
-        </h2>
-
-        <div class="achievement-list">
-          <span class="badge">Juara Kuis Matematika</span>
-          <span class="badge">Belajar 7 Hari Beruntun</span>
-          <span class="badge">Pelajar Teladan</span>
-        </div>
-
-      </div>
 
     </div>
 
@@ -246,7 +226,7 @@
     <div class="container footer-content">
       <div>
         <h3>RuangBelajar</h3>
-        <p>© 2026 RuangBelajar Educational Platform</p>
+        <p>Â© 2026 RuangBelajar Educational Platform</p>
       </div>
       <div class="footer-links">
         <a href="#">Kontak Kami</a>
@@ -258,8 +238,42 @@
   </footer>
 
   <!-- JS -->
-  <script src="script.js"></script>
+    <!-- EDIT PROFILE MODAL -->
+  <div class="modal-overlay" id="editProfileModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeEditModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h2 class="modal-title">Edit Profil</h2>
+      
+      <div class="form-group">
+        <label>Foto Profil</label>
+        <input type="file" accept="image/*">
+      </div>
+      
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" value="Aditya Pratama" placeholder="Masukkan nama lengkap">
+      </div>
 
+      <div class="form-group">
+        <label>Tanggal Lahir</label>
+        <input type="date" value="2005-08-15">
+      </div>
+
+      <div class="form-group">
+        <label>Nomor HP</label>
+        <input type="tel" value="081234567890" placeholder="08xxxxxxxxxx">
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-cancel" onclick="closeEditModal()">Batal</button>
+        <button class="btn-save" onclick="closeEditModal()">Simpan Perubahan</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 
 </html>

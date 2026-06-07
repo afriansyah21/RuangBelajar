@@ -15,13 +15,21 @@ body {
       #f1f5f9);
   color: #0f172a;
   overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }
 
 /* CONTAINER */
 .container {
-  max-width: 1280px;
-  margin: auto;
-  padding: 0 24px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0 32px;
 }
 
 /* BLUR */
@@ -500,5 +508,69 @@ td {
 
 .logout-icon-desktop:hover {
   color: #ef4444;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+/* BUTTONS */
+.btn-outline, .btn-primary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-outline {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid #e2e8f0;
+  color: #2563eb;
+}
+
+.btn-outline:hover {
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.btn-primary {
+  background: #2563eb;
+  border: 1px solid #2563eb;
+  color: white;
+  box-shadow: 0 4px 12px rgba(37,99,235,0.2);
+}
+
+.btn-primary:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(37,99,235,0.3);
+}
+
+.btn-icon {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.btn-edit {
+  color: #f59e0b;
+}
+.btn-edit:hover {
+  background: rgba(245, 158, 11, 0.1);
+}
+
+.btn-delete {
+  color: #ef4444;
+}
+.btn-delete:hover {
   background: rgba(239, 68, 68, 0.1);
 }

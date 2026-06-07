@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Detail Kuis - Admin Portal</title>
+
+  <!-- FONT -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ICON -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="container navbar-content">
+
+      <div class="logo">
+        Admin RuangBelajar
+      </div>
+
+      <!-- Hamburger Button -->
+      <button class="hamburger-btn" id="hamburger-btn">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+
+      <div class="nav-menu" id="nav-menu">
+
+        <a href="../admin-dashboard/index.html" class="nav-link">
+          Dashboard
+        </a>
+
+        <a href="../manajemen-pengguna-admin/index.html" class="nav-link">
+          Pengguna
+        </a>
+
+        <a href="../manajemen-kelas-admin/index.html" class="nav-link">
+          Kelas
+        </a>
+
+        <a href="../manajemen-kuis-admin/index.html" class="nav-link active">
+          Kuis
+        </a>
+
+        <a href="../manajemen-donasi-admin/index.html" class="nav-link">
+          Donasi
+        </a>
+
+        <a href="#" class="nav-link nav-link-logout">
+
+          <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">logout</span> Logout
+
+        </a>
+
+      </div>
+
+      <div class="nav-actions">
+          <span class="material-symbols-outlined logout-icon-desktop" data-icon="logout">logout</span>
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- MAIN CANVAS -->
+  <main class="container">
+    
+    <!-- Top Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-title">
+            <button class="btn-back" onclick="window.location.href='../manajemen-kuis-admin/index.html'">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Kembali
+            </button>
+            <h1>Daftar Pertanyaan: Kuis Front End</h1>
+            <p>Kelola daftar pertanyaan dan opsi jawaban untuk kuis ini.</p>
+        </div>
+        <div class="dashboard-actions">
+            <button class="btn-primary" onclick="window.location.href='../tambah-pertanyaan-admin/index.html'">
+                <span class="material-symbols-outlined">add</span>
+                Tambah Pertanyaan
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <div class="dashboard-content">
+        
+        <div class="materi-list">
+            
+            <!-- Materi Item 1 -->
+            <div class="materi-item">
+                <div class="materi-info">
+                    <div class="materi-icon">
+                        <span class="material-symbols-outlined">help</span>
+                    </div>
+                    <div>
+                        <h4>01. Apa kepanjangan dari HTML?</h4>
+                        <p>Tipe: Pilihan Ganda • 4 Opsi</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-icon btn-edit" title="Edit Pertanyaan" onclick="window.location.href='../edit-pertanyaan-admin/index.html'">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                    <button class="btn-icon btn-delete" title="Hapus Pertanyaan">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Materi Item 2 -->
+            <div class="materi-item">
+                <div class="materi-info">
+                    <div class="materi-icon">
+                        <span class="material-symbols-outlined">help</span>
+                    </div>
+                    <div>
+                        <h4>02. Properti CSS untuk mengubah warna teks?</h4>
+                        <p>Tipe: Pilihan Ganda • 4 Opsi</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-icon btn-edit" title="Edit Pertanyaan" onclick="window.location.href='../edit-pertanyaan-admin/index.html'">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                    <button class="btn-icon btn-delete" title="Hapus Pertanyaan">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Materi Item 3 -->
+            <div class="materi-item">
+                <div class="materi-info">
+                    <div class="materi-icon">
+                        <span class="material-symbols-outlined">help</span>
+                    </div>
+                    <div>
+                        <h4>03. Cara mendeklarasikan variabel di JS?</h4>
+                        <p>Tipe: Pilihan Ganda • 4 Opsi</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-icon btn-edit" title="Edit Pertanyaan" onclick="window.location.href='../edit-pertanyaan-admin/index.html'">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                    <button class="btn-icon btn-delete" title="Hapus Pertanyaan">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <h3>RuangBelajar Admin</h3>
+        <p>© 2026 RuangBelajar Educational Platform</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Bantuan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Kontak Kami</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tambah Donasi - Admin Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="logo">Admin RuangBelajar</div>
+      <button class="hamburger-btn" id="hamburger-btn">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <div class="nav-menu" id="nav-menu">
+        <a href="../admin-dashboard/index.html" class="nav-link">Dashboard</a>
+        <a href="../manajemen-pengguna-admin/index.html" class="nav-link">Pengguna</a>
+        <a href="../manajemen-kelas-admin/index.html" class="nav-link">Kelas</a>
+        <a href="../manajemen-kuis-admin/index.html" class="nav-link">Kuis</a>
+        <a href="../manajemen-donasi-admin/index.html" class="nav-link active">Donasi</a>
+        <a href="#" class="nav-link nav-link-logout">
+          <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">logout</span> Logout
+        </a>
+      </div>
+      <div class="nav-actions">
+          <span class="material-symbols-outlined logout-icon-desktop" data-icon="logout">logout</span>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="dashboard-header">
+        <div class="dashboard-title">
+            <button class="btn-back" onclick="window.location.href='../manajemen-donasi-admin/index.html'">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Kembali
+            </button>
+            <h1>Tambah Donasi</h1>
+            <p>Masukkan detail donasi baru yang diterima.</p>
+        </div>
+    </header>
+
+    <div class="dashboard-content">
+        <div class="form-card" style="width: 100%;">
+            <form>
+                <div class="form-group">
+                    <label>Nama Donatur</label>
+                    <input type="text" placeholder="Contoh: Budi Santoso" />
+                </div>
+
+                <div class="form-group">
+                    <label>Donasi Melalui</label>
+                    <select style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 15px; outline: none; background: white;">
+                        <option value="BCA">Bank Central Asia (BCA)</option>
+                        <option value="Mandiri">Bank Mandiri</option>
+                        <option value="QRIS">QRIS</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tanggal</label>
+                    <input type="date" />
+                </div>
+                
+                <div class="form-group">
+                    <label>Jumlah</label>
+                    <input type="number" placeholder="Contoh: 500000" />
+                </div>
+                
+                <div class="form-actions" style="margin-top: 32px; display: flex; gap: 16px;">
+                    <button type="button" class="btn-outline" onclick="window.location.href='../manajemen-donasi-admin/index.html'">Batal</button>
+                    <button type="button" class="btn-primary" onclick="window.location.href='../manajemen-donasi-admin/index.html'">Simpan Donasi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <h3>RuangBelajar Admin</h3>
+        <p>© 2026 RuangBelajar Educational Platform</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Bantuan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Kontak Kami</a>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

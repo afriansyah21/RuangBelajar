@@ -1,6 +1,6 @@
 // Toggle Hamburger Menu
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('RuangBelajar Kuis User Page Loaded');
+    console.log('RuangBelajar Admin Manajemen Kuis Page Loaded');
     
     // Hamburger Menu Logic
     const hamburgerBtn = document.getElementById('hamburger-btn');
@@ -19,17 +19,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // Quiz Option Selection Logic
-    const options = document.querySelectorAll('.quiz-option');
-    options.forEach(option => {
-        option.addEventListener('click', () => {
-            // Remove selection from others
-            options.forEach(opt => {
-                opt.classList.remove('active');
-            });
-            // Add selection to clicked
-            option.classList.add('active');
-        });
-    });
 });

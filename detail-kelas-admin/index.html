@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Materi Kelas - Admin Portal</title>
+
+  <!-- FONT -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <!-- ICON -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="bg-blur blur-1"></div>
+  <div class="bg-blur blur-2"></div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+
+    <div class="container navbar-content">
+
+      <div class="logo">
+        Admin RuangBelajar
+      </div>
+
+      <!-- Hamburger Button -->
+      <button class="hamburger-btn" id="hamburger-btn">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+
+      <div class="nav-menu" id="nav-menu">
+
+        <a href="../admin-dashboard/index.html" class="nav-link">
+          Dashboard
+        </a>
+
+        <a href="../manajemen-pengguna-admin/index.html" class="nav-link">
+          Pengguna
+        </a>
+
+        <a href="../manajemen-kelas-admin/index.html" class="nav-link active">
+          Kelas
+        </a>
+
+        <a href="../manajemen-kuis-admin/index.html" class="nav-link">
+          Kuis
+        </a>
+
+        <a href="../manajemen-donasi-admin/index.html" class="nav-link">
+          Donasi
+        </a>
+
+        <a href="#" class="nav-link nav-link-logout">
+
+          <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">logout</span> Logout
+
+        </a>
+
+      </div>
+
+      <div class="nav-actions">
+          <span class="material-symbols-outlined logout-icon-desktop" data-icon="logout">logout</span>
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- MAIN CANVAS -->
+  <main class="container">
+    
+    <!-- Top Header -->
+    <header class="dashboard-header">
+        <div class="dashboard-title">
+            <button class="btn-back" onclick="window.location.href='../manajemen-kelas-admin/index.html'">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Kembali
+            </button>
+            <h1>Materi Kelas: Front End</h1>
+            <p>Kelola daftar materi dan video pembelajaran untuk kelas ini.</p>
+        </div>
+        <div class="dashboard-actions">
+            <button class="btn-primary" onclick="window.location.href='../tambah-materi-admin/index.html'">
+                <span class="material-symbols-outlined">add</span>
+                Tambah Materi
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <div class="dashboard-content">
+        
+        <div class="materi-list">
+            
+            <!-- Materi Item 1 -->
+            <div class="materi-item" style="cursor: pointer;" onclick="window.location.href='../tonton-materi-user/index.html'">
+                <div class="materi-info">
+                    <div class="materi-icon">
+                        <span class="material-symbols-outlined">play_circle</span>
+                    </div>
+                    <div>
+                        <h4>01. Pengenalan HTML</h4>
+                        <p>Durasi: 12:30 â€¢ Video Dasar</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-icon btn-edit" title="Edit Materi" onclick="window.location.href='../edit-materi-admin/index.html'">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                    <button class="btn-icon btn-delete" title="Hapus Materi">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Materi Item 2 -->
+            <div class="materi-item" style="cursor: pointer;" onclick="window.location.href='../tonton-materi-user/index.html'">
+                <div class="materi-info">
+                    <div class="materi-icon">
+                        <span class="material-symbols-outlined">play_circle</span>
+                    </div>
+                    <div>
+                        <h4>02. Struktur Dasar CSS</h4>
+                        <p>Durasi: 15:45 â€¢ Styling</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-icon btn-edit" title="Edit Materi" onclick="window.location.href='../edit-materi-admin/index.html'">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                    <button class="btn-icon btn-delete" title="Hapus Materi">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Materi Item 3 -->
+            <div class="materi-item" style="cursor: pointer;" onclick="window.location.href='../tonton-materi-user/index.html'">
+                <div class="materi-info">
+                    <div class="materi-icon">
+                        <span class="material-symbols-outlined">play_circle</span>
+                    </div>
+                    <div>
+                        <h4>03. Konsep Javascript</h4>
+                        <p>Durasi: 20:10 â€¢ Interaktivitas</p>
+                    </div>
+                </div>
+                <div class="materi-actions">
+                    <button class="btn-icon btn-edit" title="Edit Materi" onclick="window.location.href='../edit-materi-admin/index.html'">
+                        <span class="material-symbols-outlined">edit</span>
+                    </button>
+                    <button class="btn-icon btn-delete" title="Hapus Materi">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <h3>RuangBelajar Admin</h3>
+        <p>Â© 2026 RuangBelajar Educational Platform</p>
+      </div>
+      <div class="footer-links">
+        <a href="#">Bantuan</a>
+        <a href="#">Kebijakan Privasi</a>
+        <a href="#">Kontak Kami</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>
+
+

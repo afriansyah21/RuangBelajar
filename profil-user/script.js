@@ -1,22 +1,24 @@
-// Toggle Hamburger Menu
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('RuangBelajar Profil User Page Loaded');
-    
-    // Hamburger Menu Logic
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const navMenu = document.getElementById('nav-menu');
+﻿// Hamburger Menu Logic
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const navMenu = document.getElementById('nav-menu');
 
-    if (hamburgerBtn && navMenu) {
-        hamburgerBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            
-            // Toggle icon
-            const icon = hamburgerBtn.querySelector('span');
-            if (navMenu.classList.contains('active')) {
-                icon.textContent = 'close';
-            } else {
-                icon.textContent = 'menu';
-            }
-        });
-    }
-});
+if (hamburgerBtn && navMenu) {
+  hamburgerBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+  });
+}
+
+// Modal Logic
+function openEditModal() {
+  const modal = document.getElementById('editProfileModal');
+  if (modal) {
+    modal.classList.add('active');
+  }
+}
+
+function closeEditModal() {
+  const modal = document.getElementById('editProfileModal');
+  if (modal) {
+    modal.classList.remove('active');
+  }
+}
