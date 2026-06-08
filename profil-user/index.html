@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -101,7 +101,7 @@
 
         <h1>Aditya Pratama</h1>
 
-        <button class="secondary-btn-profile">
+        <button class="secondary-btn-profile" onclick="openChangePasswordModal()">
           Ganti Password
         </button>
 
@@ -270,6 +270,47 @@
         <button class="btn-cancel" onclick="closeEditModal()">Batal</button>
         <button class="btn-save" onclick="closeEditModal()">Simpan Perubahan</button>
       </div>
+    </div>
+  </div>
+
+  <!-- CHANGE PASSWORD MODAL -->
+  <div class="modal-overlay" id="changePasswordModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeChangePasswordModal()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <h2 class="modal-title">Ganti Password</h2>
+      
+      <!-- Step 1: Masukkan Password Saat Ini -->
+      <div id="passwordStep1">
+        <p style="margin-bottom: 1rem; color: #666; font-size: 0.95rem;">Masukkan password Anda saat ini untuk melanjutkan.</p>
+        <div class="form-group">
+          <label>Password Saat Ini</label>
+          <input type="password" id="currentPassword" placeholder="Masukkan password saat ini">
+        </div>
+        <div class="modal-actions">
+          <button class="btn-cancel" onclick="closeChangePasswordModal()">Batal</button>
+          <button class="btn-save" onclick="nextPasswordStep()">Lanjut</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Masukkan Password Baru -->
+      <div id="passwordStep2" style="display: none;">
+        <p style="margin-bottom: 1rem; color: #666; font-size: 0.95rem;">Silakan masukkan password baru Anda.</p>
+        <div class="form-group">
+          <label>Password Baru</label>
+          <input type="password" id="newPassword" placeholder="Masukkan password baru">
+        </div>
+        <div class="form-group">
+          <label>Konfirmasi Password Baru</label>
+          <input type="password" id="confirmNewPassword" placeholder="Konfirmasi password baru">
+        </div>
+        <div class="modal-actions">
+          <button class="btn-cancel" onclick="closeChangePasswordModal()">Batal</button>
+          <button class="btn-save" onclick="saveNewPassword()">Simpan Password</button>
+        </div>
+      </div>
+      
     </div>
   </div>
 
