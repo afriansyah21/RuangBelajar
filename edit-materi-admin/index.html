@@ -21,6 +21,9 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
+  <!-- Axios CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body>
@@ -87,11 +90,11 @@
     <!-- Top Header -->
     <header class="dashboard-header">
         <div class="dashboard-title">
-            <button class="btn-back" onclick="window.location.href='../detail-kelas-admin/index.html'">
+            <button class="btn-back" id="btn-kembali">
                 <span class="material-symbols-outlined">arrow_back</span>
                 Kembali
             </button>
-            <h1>Edit Materi</h1>
+            <h1 id="page-title">Edit Materi</h1>
             <p>Perbarui detail materi pembelajaran untuk kelas ini.</p>
         </div>
     </header>
@@ -100,31 +103,31 @@
     <div class="dashboard-content">
         
         <div class="form-card">
-            <form>
+            <form id="form-edit-materi">
                 
                 <div class="form-group">
-                    <label>Link Youtube</label>
-                    <input type="text" placeholder="Contoh: https://youtube.com/watch?v=..." />
+                    <label>Link Youtube (Video URL)</label>
+                    <input type="text" id="video-input" placeholder="Contoh: https://youtube.com/watch?v=..." required />
                 </div>
 
                 <div class="form-group">
-                    <label>Judul</label>
-                    <input type="text" placeholder="Contoh: Pengenalan HTML Dasar" />
+                    <label>Judul Materi</label>
+                    <input type="text" id="title-input" placeholder="Contoh: Pengenalan HTML Dasar" required />
                 </div>
 
                 <div class="form-group">
                     <label>Deskripsi Singkat</label>
-                    <textarea rows="3" placeholder="Tuliskan deskripsi singkat materi ini..."></textarea>
+                    <textarea id="description-input" rows="3" placeholder="Tuliskan deskripsi singkat materi ini..."></textarea>
                 </div>
                 
                 <div class="form-group">
                     <label>Rangkuman Materi</label>
-                    <textarea rows="10" placeholder="Tuliskan rangkuman atau poin penting dari materi ini..."></textarea>
+                    <textarea id="content-input" rows="10" placeholder="Tuliskan rangkuman atau poin penting dari materi ini..."></textarea>
                 </div>
                 
                 <div class="form-actions">
-                    <button type="button" class="btn-outline" onclick="window.location.href='../detail-kelas-admin/index.html'">Batal</button>
-                    <button type="button" class="btn-primary" onclick="window.location.href='../detail-kelas-admin/index.html'">Simpan Perubahan</button>
+                    <button type="button" class="btn-outline" id="btn-batal">Batal</button>
+                    <button type="submit" class="btn-primary">Simpan Perubahan</button>
                 </div>
             </form>
         </div>
@@ -149,7 +152,7 @@
   </footer>
 
   <!-- JS -->
-  <script src="script.js"></script>
+  <script src="script.js?v=1"></script>
 
 </body>
 

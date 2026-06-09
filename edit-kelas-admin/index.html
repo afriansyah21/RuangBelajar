@@ -21,6 +21,9 @@
   <!-- CSS -->
   <link rel="stylesheet" href="style.css">
 
+  <!-- Axios CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 </head>
 
 <body>
@@ -106,24 +109,24 @@
                     <label>Upload Gambar Thumbnail</label>
                     <div class="upload-area" id="upload-area" onclick="document.getElementById('gambar-kelas').click()">
                         <span class="material-symbols-outlined upload-icon">cloud_upload</span>
-                        <p>Klik atau seret gambar ke sini</p>
-                        <input type="file" id="gambar-kelas" accept="image/*" hidden />
+                        <p id="file-name-display">Klik atau seret gambar ke sini untuk mengganti</p>
+                        <input type="file" id="gambar-kelas" accept="image/*" hidden onchange="document.getElementById('file-name-display').innerText = this.files[0] ? this.files[0].name : 'Klik atau seret gambar ke sini untuk mengganti'" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label>Nama Kelas</label>
-                    <input type="text" placeholder="Contoh: Front End Development" />
+                    <input type="text" id="title-input" value="Front End Development" />
                 </div>
 
                 <div class="form-group">
                     <label>Deskripsi Kelas</label>
-                    <textarea rows="5" placeholder="Tuliskan deskripsi singkat tentang kelas ini..."></textarea>
+                    <textarea id="desc-input" rows="5">Pelajari dasar pembuatan antarmuka web yang interaktif.</textarea>
                 </div>
                 
                 <div class="form-actions">
                     <button type="button" class="btn-outline" onclick="window.location.href='../manajemen-kelas-admin/index.html'">Batal</button>
-                    <button type="button" class="btn-primary" onclick="window.location.href='../manajemen-kelas-admin/index.html'">Simpan Perubahan</button>
+                    <button type="button" class="btn-primary" onclick="updateCourse()">Simpan Perubahan</button>
                 </div>
             </form>
         </div>

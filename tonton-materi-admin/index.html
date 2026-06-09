@@ -6,7 +6,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Manajemen Kelas - Admin Portal</title>
+  <title>Tonton Materi - Admin Portal</title>
 
   <!-- FONT -->
   <link
@@ -19,6 +19,7 @@
     rel="stylesheet" />
 
   <!-- CSS -->
+  <link rel="stylesheet" href="../manajemen-kelas-admin/style.css">
   <link rel="stylesheet" href="style.css">
 
   <!-- Axios CDN -->
@@ -74,8 +75,6 @@
 
         </a>
 
-      
-
       </div>
 
       <div class="nav-actions">
@@ -92,31 +91,31 @@
     <!-- Top Header -->
     <header class="dashboard-header">
         <div class="dashboard-title">
-            <h1>Manajemen Kelas</h1>
-            <p>Kelola kurikulum video, urutan pelajaran, dan detail konten.</p>
-        </div>
-        <div class="dashboard-actions">
-            <button class="btn-primary" onclick="window.location.href='../tambah-kelas-admin/index.html'">
-                <span class="material-symbols-outlined">add</span>
-                Tambah Kelas
+            <button class="btn-back" id="btn-kembali">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Kembali
             </button>
+            <h1 id="materi-title">Memuat Materi...</h1>
         </div>
     </header>
 
     <!-- Main Content Layout -->
-    <div class="dashboard-content-grid">
+    <div class="dashboard-content">
         
-        <!-- Left Column: Lesson List -->
-        <div style="display: flex; flex-direction: column;">
-            
-            <div class="lesson-list-header">
-                <h3>Daftar Kelas</h3>
+        <div class="video-container-wrapper">
+            <div class="video-player">
+                <iframe id="video-iframe" src="" allowfullscreen></iframe>
             </div>
             
-            <div id="course-list-container" style="display: flex; flex-direction: column; gap: 1rem; width: 100%;">
-                <p>Memuat data kelas...</p>
+            <div class="video-details">
+                <h3>Deskripsi</h3>
+                <p id="materi-desc">Memuat deskripsi...</p>
+                
+                <h3 style="margin-top: 24px;">Rangkuman Materi</h3>
+                <div class="content-box">
+                    <p id="materi-content" style="white-space: pre-wrap;">Memuat rangkuman...</p>
+                </div>
             </div>
-
         </div>
 
     </div>
@@ -139,7 +138,7 @@
   </footer>
 
   <!-- JS -->
-  <script src="script.js?v=2"></script>
+  <script src="script.js?v=1"></script>
 
 </body>
 
