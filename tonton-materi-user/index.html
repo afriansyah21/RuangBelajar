@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -37,7 +37,7 @@
   <main class="container">
     <header class="dashboard-header" style="margin-bottom: 24px;">
         <div class="dashboard-title">
-            <button class="btn-back" onclick="window.location.href='../detail-kelas-user/index.html'">
+            <button class="btn-back" id="btn-back-course" onclick="window.location.href='../kelas-user/index.html'">
                 <span class="material-symbols-outlined">arrow_back</span>
                 Kembali ke Daftar Materi
             </button>
@@ -47,26 +47,19 @@
     <div class="dashboard-content">
         <!-- Video Section -->
         <div class="video-container" style="margin-bottom: 24px; width: 100%; aspect-ratio: 16/9; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 25px -5px rgba(37,99,235,0.1);">
-            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display: block;"></iframe>
+            <iframe id="materi-video" width="100%" height="100%" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="display: block;"></iframe>
         </div>
 
         <!-- Materi Info Section -->
         <div class="materi-details-card" style="background: white; border: 1px solid #e2e8f0; border-radius: 16px; padding: 32px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 60px;">
-            <h1 style="font-family: 'Lexend', sans-serif; font-size: 28px; color: #0f172a; margin-bottom: 12px;">Pengenalan HTML dan Struktur Web</h1>
-            <p style="font-size: 16px; color: #64748b; line-height: 1.6; margin-bottom: 24px;">Materi pertama ini akan membahas bagaimana cara membangun fondasi dari sebuah halaman web menggunakan tag-tag dasar HTML5.</p>
+            <h1 id="materi-title" style="font-family: 'Lexend', sans-serif; font-size: 28px; color: #0f172a; margin-bottom: 12px;">Memuat Judul Materi...</h1>
+            <p id="materi-desc" style="font-size: 16px; color: #64748b; line-height: 1.6; margin-bottom: 24px;">Memuat deskripsi...</p>
             
             <hr style="border: none; border-top: 1px solid #e2e8f0; margin-bottom: 24px;">
             
             <h3 style="font-size: 20px; color: #0f172a; margin-bottom: 12px;">Ringkasan Materi</h3>
-            <div style="background: #f8fafc; border-left: 4px solid #2563eb; padding: 20px; border-radius: 8px;">
-                <p style="font-size: 15px; color: #475569; line-height: 1.6;">
-                    <strong>Poin Penting:</strong><br><br>
-                    1. <strong>HTML (HyperText Markup Language)</strong> adalah tulang punggung dari semua halaman website.<br>
-                    2. Tag wajib seperti <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, dan <code>&lt;body&gt;</code> harus selalu ada.<br>
-                    3. Bagian <code>&lt;head&gt;</code> digunakan untuk metadata, pengaturan font, CSS, dan judul tab browser.<br>
-                    4. Semua konten yang dilihat pengguna (teks, gambar, video) ditulis di dalam tag <code>&lt;body&gt;</code>.<br>
-                    5. Selalu gunakan Semantic HTML (seperti <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>) untuk aksesibilitas dan SEO yang baik.
-                </p>
+            <div id="materi-content" style="background: #f8fafc; border-left: 4px solid #2563eb; padding: 20px; border-radius: 8px;">
+                <p>Memuat ringkasan materi...</p>
             </div>
         </div>
     </div>
@@ -86,6 +79,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

@@ -41,61 +41,15 @@
                 <span class="material-symbols-outlined">arrow_back</span>
                 Kembali
             </button>
-            <h1>Materi Kelas: Front End</h1>
-            <p>Daftar materi dan video pembelajaran untuk kelas ini.</p>
+            <h1 id="course-title">Materi Kelas: Memuat...</h1>
+            <p id="course-desc">Daftar materi dan video pembelajaran untuk kelas ini.</p>
         </div>
     </header>
 
     <div class="dashboard-content">
-        <div class="materi-list">
-            
-            <div class="materi-item">
-                <div class="materi-info">
-                    <div class="materi-icon">
-                        <span class="material-symbols-outlined">play_circle</span>
-                    </div>
-                    <div>
-                        <h4>01. Pengenalan HTML</h4>
-                        <p>Durasi: 12:30 â€¢ Video Dasar</p>
-                    </div>
-                </div>
-                <div class="materi-actions">
-                    <button class="btn-primary" onclick="window.location.href='../tonton-materi-user/index.html'" style="padding: 6px 12px; font-size: 14px;">Lihat Materi</button>
-                </div>
-            </div>
-
-            <div class="materi-item">
-                <div class="materi-info">
-                    <div class="materi-icon">
-                        <span class="material-symbols-outlined">play_circle</span>
-                    </div>
-                    <div>
-                        <h4>02. CSS Dasar</h4>
-                        <p>Durasi: 15:45 â€¢ Styling</p>
-                    </div>
-                </div>
-                <div class="materi-actions">
-                    <button class="btn-primary" onclick="window.location.href='../tonton-materi-user/index.html'" style="padding: 6px 12px; font-size: 14px;">Lihat Materi</button>
-                </div>
-            </div>
-
-            <div class="materi-item">
-                <div class="materi-info">
-                    <div class="materi-icon">
-                        <span class="material-symbols-outlined">play_circle</span>
-                    </div>
-                    <div>
-                        <h4>03. Javascript Interaktif</h4>
-                        <p>Durasi: 20:15 â€¢ Scripting</p>
-                    </div>
-                </div>
-                <div class="materi-actions">
-                    <button class="btn-primary" onclick="window.location.href='../tonton-materi-user/index.html'" style="padding: 6px 12px; font-size: 14px;">Lihat Materi</button>
-                </div>
-            </div>
-
-        
-            
+        <div class="materi-list" id="materi-list">
+            <p>Memuat materi...</p>
+        </div>
     </div>
   </main>
 
@@ -113,6 +67,7 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
