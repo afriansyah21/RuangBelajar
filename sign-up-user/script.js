@@ -96,3 +96,68 @@ tailwind.config = {
         },
     },
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    const signupForm = document.getElementById('signup-form');
+    if (signupForm) {
+        signupForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('full_name').value;
+            const phoneNumber = document.getElementById('phone_number').value;
+            const birthDate = document.getElementById('birth_date').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Password dan Verifikasi Password tidak cocok!');
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/users/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        full_name: fullName,
+                        phone_number: phoneNumber,
+                        birth_date: birthDate,
+                        email: email,
+                        password: password
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    alert('Pendaftaran berhasil! Silakan login.');
+                    window.location.href = '../login-user/index.html';
+                } else {
+                    alert('Gagal mendaftar: ' + (data.error || 'Terjadi kesalahan'));
+                }
+            } catch (error) {
+                console.error('Error during registration:', error);
+                alert('Gagal terhubung ke server. Pastikan server backend berjalan di port 3000.');
+            }
+        });
+    }
+
+    // Toggle password visibility
+    const toggleButtons = document.querySelectorAll('.toggle-password');
+    toggleButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const input = btn.previousElementSibling;
+            const icon = btn.querySelector('span');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        });
+    });
+});

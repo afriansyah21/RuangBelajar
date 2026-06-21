@@ -25,17 +25,22 @@
     <!-- Login Card -->
     <div class="w-full max-w-[480px] z-10">
       <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-xl p-lg shadow-[0px_8px_24px_rgba(0,86,179,0.05)]">
+        <a href="../landing-page-user/index.html" class="inline-flex items-center text-gray-500 hover:text-gray-900 mb-6 transition-colors">
+          <span class="material-symbols-outlined mr-2">arrow_back</span>
+          Kembali
+        </a>
+
         <div class="text-center mb-xl">
           <h1 class="font-display-md text-display-md text-primary mb-xs">RuangBelajar</h1>
           <p class="font-body-md text-body-md text-on-surface-variant">Sedikit lagi jadi lebih jago dari kemarin. Yuk, lanjutin progresmu!</p>
         </div>
         
-        <form class="space-y-md">
+        <form class="space-y-md" id="login-form">
           <div class="space-y-xs">
             <label class="font-label-lg text-label-lg text-on-surface-variant block">Username</label>
             <div class="relative group">
               <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
-              <input class="w-full pl-xl pr-md py-sm rounded-lg border border-outline-variant bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface" placeholder="Masukkan username Anda" type="text" />
+              <input id="username" class="w-full pl-xl pr-md py-sm rounded-lg border border-outline-variant bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface" placeholder="Masukkan username (email) Anda" type="text" required />
             </div>
           </div>
           
@@ -46,13 +51,14 @@
             </div>
             <div class="relative group">
               <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
-              <input class="w-full pl-xl pr-xl py-sm rounded-lg border border-outline-variant bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface" placeholder="Masukkan password Anda" type="password" />
-              <button class="absolute right-sm top-1/2 -translate-y-1/2 text-outline hover:text-on-surface-variant" type="button">
-                <span class="material-symbols-outlined">visibility</span>
+              <input id="password" class="w-full pl-xl pr-xl py-sm rounded-lg border border-outline-variant bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface" placeholder="Masukkan password Anda" type="password" required />
+              <button class="toggle-password absolute right-sm top-1/2 -translate-y-1/2 text-outline hover:text-on-surface-variant z-20" type="button" style="z-index: 20;">
+                <span class="material-symbols-outlined text-xl">visibility</span>
               </button>
             </div>
           </div>
           
+          <div id="error-message" class="hidden bg-error-container text-error px-md py-sm rounded-lg text-sm font-medium"></div>
           <div class="pt-sm">
             <button class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-lg text-label-lg hover:bg-primary-container active:scale-[0.98] transition-all shadow-sm" type="submit">
               Login
@@ -74,7 +80,7 @@
         <div class="mt-lg text-center">
           <p class="font-body-sm text-body-sm text-on-surface-variant">
             Belum punya akun?
-            <a class="text-primary font-label-lg text-label-lg hover:underline decoration-primary/30" href="#">Daftar sekarang</a>
+            <a class="text-primary font-label-lg text-label-lg hover:underline decoration-primary/30" href="../sign-up-user/index.html">Daftar sekarang</a>
           </p>
         </div>
       </div>

@@ -96,3 +96,56 @@ tailwind.config = {
     },
   },
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/users/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await response.json();
+                
+                const errorMsgEl = document.getElementById('error-message');
+                if (response.ok) {
+                    errorMsgEl.classList.add('hidden');
+                    // Redirect to dashboard user
+                    window.location.href = '../beranda-user/index.html';
+                } else {
+                    errorMsgEl.textContent = data.error || 'Username atau password salah';
+                    errorMsgEl.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                const errorMsgEl = document.getElementById('error-message');
+                errorMsgEl.textContent = 'Gagal terhubung ke server.';
+                errorMsgEl.classList.remove('hidden');
+            }
+        });
+    }
+
+    // Toggle password visibility
+    const togglePasswords = document.querySelectorAll('.toggle-password');
+    togglePasswords.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const icon = this.querySelector('span');
+
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.textContent = 'visibility_off';
+            } else {
+                input.type = 'password';
+                icon.textContent = 'visibility';
+            }
+        });
+    });
+});

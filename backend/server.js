@@ -192,6 +192,55 @@ app.delete('/api/materials/:id', async (req, res) => {
     }
 });
 
+// --- USERS API ---
+// Register new user
+app.post('/api/users/register', async (req, res) => {
+    try {
+        const { full_name, phone_number, birth_date, email, password } = req.body;
+        
+        // Cek jika email sudah terdaftar
+        const [existingUsers] = await db.query('SELECT id FROM users WHERE email = ?', [email]);
+        if (existingUsers.length > 0) {
+            return res.status(400).json({ error: 'Email sudah terdaftar' });
+        }
+
+        const [result] = await db.query(
+            'INSERT INTO users (full_name, phone_number, birth_date, email, password) VALUES (?, ?, ?, ?, ?)',
+            [full_name, phone_number, birth_date, email, password]
+        );
+        
+        res.status(201).json({ id: result.insertId, message: 'User berhasil didaftarkan' });
+    } catch (error) {
+        console.error('Error registering user:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Login user
+app.post('/api/users/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        // Cek email dulu
+        const [users] = await db.query('SELECT id, full_name, email, password FROM users WHERE email = ?', [username]);
+        
+        if (users.length === 0) {
+            return res.status(401).json({ error: 'Email salah' });
+        }
+        
+        const user = users[0];
+        if (user.password !== password) {
+            return res.status(401).json({ error: 'Password salah' });
+        }
+        
+        // Remove password from response
+        delete user.password;
+        res.json({ message: 'Login successful', user });
+    } catch (error) {
+        console.error('Error during login:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Backend server running at http://localhost:${port}`);
 });

@@ -17,6 +17,16 @@ CREATE TABLE IF NOT EXISTS materials (
     FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    full_name VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(20),
+    birth_date DATE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Hapus dummy data (clear table)
 TRUNCATE TABLE materials;
 -- Truncate causes foreign key constraint issues. Better to delete.
