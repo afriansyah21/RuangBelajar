@@ -8,7 +8,8 @@ const app = express();
 const port = 3000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
 // Sajikan folder uploads sebagai static folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -522,7 +523,45 @@ app.delete('/api/admin/question-groups/:groupId', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+// --- PAYMENT METHODS API ---
 
+// Get all payment methods
+app.get('/api/admin/payment-methods', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM payment_methods ORDER BY id ASC');
+        res.json(rows);
+    } catch (error) {
+        console.error('Error fetching payment methods:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Bulk update payment methods (delete all then insert new)
+app.post('/api/admin/payment-methods/bulk', async (req, res) => {
+    try {
+        const { methods } = req.body; // Expecting { methods: [{type, bank_name, account_number, image_data}] }
+        
+        if (!Array.isArray(methods)) {
+            return res.status(400).json({ error: 'Methods must be an array' });
+        }
+
+        // Delete all existing methods
+        await db.query('DELETE FROM payment_methods');
+
+        // Insert new methods
+        for (const m of methods) {
+            await db.query(
+                'INSERT INTO payment_methods (type, bank_name, account_number, image_data) VALUES (?, ?, ?, ?)',
+                [m.type, m.bank_name || null, m.account_number || null, m.image_data || null]
+            );
+        }
+
+        res.json({ message: 'Payment methods updated successfully' });
+    } catch (error) {
+        console.error('Error updating payment methods:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 app.listen(port, () => {
     console.log(`Backend server running at http://localhost:${port}`);
 });
