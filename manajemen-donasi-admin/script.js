@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadPaymentMethods();
+    loadDonations();
 });
 
 async function loadPaymentMethods() {
@@ -60,5 +61,68 @@ async function loadPaymentMethods() {
     } catch (error) {
         console.error('Error fetching payment methods:', error);
         document.getElementById('payment-methods-container').innerHTML = '<p style="color: red;">Gagal memuat metode pembayaran.</p>';
+    }
+}
+
+async function loadDonations() {
+    try {
+        const res = await axios.get('http://localhost:3000/api/admin/donations');
+        const donations = res.data;
+        const tbody = document.getElementById('donations-tbody');
+        
+        tbody.innerHTML = '';
+        
+        let totalAmount = 0;
+
+        if (donations.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Belum ada riwayat donasi.</td></tr>';
+            document.getElementById('total-donasi-terkumpul').textContent = 'Rp 0';
+            return;
+        }
+
+        donations.forEach(d => {
+            totalAmount += parseFloat(d.amount);
+
+            const dateStr = new Date(d.donation_date).toLocaleDateString('id-ID', {
+                day: 'numeric', month: 'short', year: 'numeric'
+            });
+            const amountStr = 'Rp ' + Number(d.amount).toLocaleString('id-ID');
+
+            tbody.innerHTML += `
+                <tr>
+                    <td style="font-weight: 500;">${d.donator_name}</td>
+                    <td style="color: #64748b;">${d.donation_method}</td>
+                    <td style="color: #64748b;">${dateStr}</td>
+                    <td style="font-weight: 700;">${amountStr}</td>
+                    <td>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="btn-icon btn-edit" title="Edit Donasi" onclick="window.location.href='../edit-donasi-admin/index.html?id=${d.id}'">
+                                <span class="material-symbols-outlined" style="font-size: 20px;">edit</span>
+                            </button>
+                            <button class="btn-icon btn-delete" title="Hapus Donasi" onclick="deleteDonation(${d.id})">
+                                <span class="material-symbols-outlined" style="font-size: 20px;">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        });
+
+        document.getElementById('total-donasi-terkumpul').textContent = 'Rp ' + totalAmount.toLocaleString('id-ID');
+    } catch (error) {
+        console.error('Error fetching donations:', error);
+        document.getElementById('donations-tbody').innerHTML = '<tr><td colspan="5" style="text-align: center; color: red;">Gagal memuat riwayat donasi.</td></tr>';
+    }
+}
+
+async function deleteDonation(id) {
+    if (confirm('Yakin ingin menghapus donasi ini?')) {
+        try {
+            await axios.delete(`http://localhost:3000/api/admin/donations/${id}`);
+            loadDonations();
+        } catch (error) {
+            console.error('Error deleting donation:', error);
+            alert('Gagal menghapus donasi.');
+        }
     }
 }

@@ -562,6 +562,81 @@ app.post('/api/admin/payment-methods/bulk', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+// --- DONATIONS API ---
+
+// Add new donation
+app.post('/api/admin/donations', async (req, res) => {
+    try {
+        const { donator_name, donation_method, donation_date, amount } = req.body;
+        if (!donator_name || !donation_method || !donation_date || !amount) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        const [result] = await db.query(
+            'INSERT INTO donations (donator_name, donation_method, donation_date, amount) VALUES (?, ?, ?, ?)',
+            [donator_name, donation_method, donation_date, amount]
+        );
+
+        res.status(201).json({ id: result.insertId, message: 'Donation saved successfully' });
+    } catch (error) {
+        console.error('Error saving donation:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Get all donations
+app.get('/api/admin/donations', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM donations ORDER BY id DESC');
+        res.json(rows);
+    } catch (error) {
+        console.error('Error fetching donations:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Get single donation
+app.get('/api/admin/donations/:id', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM donations WHERE id = ?', [req.params.id]);
+        if (rows.length === 0) return res.status(404).json({ error: 'Donation not found' });
+        res.json(rows[0]);
+    } catch (error) {
+        console.error('Error fetching donation:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Update donation
+app.put('/api/admin/donations/:id', async (req, res) => {
+    try {
+        const { donator_name, donation_method, donation_date, amount } = req.body;
+        if (!donator_name || !donation_method || !donation_date || !amount) {
+            return res.status(400).json({ error: 'All fields are required' });
+        }
+
+        await db.query(
+            'UPDATE donations SET donator_name = ?, donation_method = ?, donation_date = ?, amount = ? WHERE id = ?',
+            [donator_name, donation_method, donation_date, amount, req.params.id]
+        );
+        res.json({ message: 'Donation updated successfully' });
+    } catch (error) {
+        console.error('Error updating donation:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// Delete donation
+app.delete('/api/admin/donations/:id', async (req, res) => {
+    try {
+        await db.query('DELETE FROM donations WHERE id = ?', [req.params.id]);
+        res.json({ message: 'Donation deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting donation:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Backend server running at http://localhost:${port}`);
 });

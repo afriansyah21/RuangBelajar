@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
@@ -7,6 +7,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="style.css">
+  <!-- Axios CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
   <div class="bg-blur blur-1"></div>
@@ -47,15 +49,15 @@
 
     <div class="dashboard-content">
         <div class="form-card" style="width: 100%;">
-            <form>
+            <form id="add-donation-form">
                 <div class="form-group">
                     <label>Nama Donatur</label>
-                    <input type="text" placeholder="Contoh: Budi Santoso" />
+                    <input type="text" id="donator-name" placeholder="Contoh: Budi Santoso" required />
                 </div>
 
                 <div class="form-group">
                     <label>Donasi Melalui</label>
-                    <select style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 15px; outline: none; background: white;">
+                    <select id="donation-method" style="width: 100%; padding: 12px 16px; border: 1px solid #cbd5e1; border-radius: 12px; font-size: 15px; outline: none; background: white;" required>
                         <option value="BCA">Bank Central Asia (BCA)</option>
                         <option value="Mandiri">Bank Mandiri</option>
                         <option value="QRIS">QRIS</option>
@@ -65,17 +67,17 @@
 
                 <div class="form-group">
                     <label>Tanggal</label>
-                    <input type="date" />
+                    <input type="date" id="donation-date" required />
                 </div>
                 
                 <div class="form-group">
                     <label>Jumlah</label>
-                    <input type="number" placeholder="Contoh: 500000" />
+                    <input type="number" id="donation-amount" placeholder="Contoh: 500000" required />
                 </div>
                 
                 <div class="form-actions" style="margin-top: 32px; display: flex; gap: 16px;">
                     <button type="button" class="btn-outline" onclick="window.location.href='../manajemen-donasi-admin/index.html'">Batal</button>
-                    <button type="button" class="btn-primary" onclick="window.location.href='../manajemen-donasi-admin/index.html'">Simpan Donasi</button>
+                    <button type="submit" class="btn-primary">Simpan Donasi</button>
                 </div>
             </form>
         </div>
