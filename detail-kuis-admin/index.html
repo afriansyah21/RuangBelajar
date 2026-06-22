@@ -91,11 +91,11 @@
                 <span class="material-symbols-outlined">arrow_back</span>
                 Kembali
             </button>
-            <h1>Daftar Pertanyaan: Kuis Front End</h1>
+            <h1 id="quiz-title-display">Daftar Pertanyaan Kuis</h1>
             <p>Kelola daftar pertanyaan dan opsi jawaban untuk kuis ini.</p>
         </div>
         <div class="dashboard-actions">
-            <button class="btn-primary" onclick="window.location.href='../tambah-pertanyaan-admin/index.html'">
+            <button class="btn-primary" id="btn-add-question-nav">
                 <span class="material-symbols-outlined">add</span>
                 Tambah Pertanyaan
             </button>
@@ -105,71 +105,8 @@
     <!-- Main Content Layout -->
     <div class="dashboard-content">
         
-        <div class="materi-list">
-            
-            <!-- Materi Item 1 -->
-            <div class="materi-item">
-                <div class="materi-info">
-                    <div class="materi-icon">
-                        <span class="material-symbols-outlined">help</span>
-                    </div>
-                    <div>
-                        <h4>01. Apa kepanjangan dari HTML?</h4>
-                        <p>Tipe: Pilihan Ganda • 4 Opsi</p>
-                    </div>
-                </div>
-                <div class="materi-actions">
-                    <button class="btn-icon btn-edit" title="Edit Pertanyaan" onclick="window.location.href='../edit-pertanyaan-admin/index.html'">
-                        <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="btn-icon btn-delete" title="Hapus Pertanyaan">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Materi Item 2 -->
-            <div class="materi-item">
-                <div class="materi-info">
-                    <div class="materi-icon">
-                        <span class="material-symbols-outlined">help</span>
-                    </div>
-                    <div>
-                        <h4>02. Properti CSS untuk mengubah warna teks?</h4>
-                        <p>Tipe: Pilihan Ganda • 4 Opsi</p>
-                    </div>
-                </div>
-                <div class="materi-actions">
-                    <button class="btn-icon btn-edit" title="Edit Pertanyaan" onclick="window.location.href='../edit-pertanyaan-admin/index.html'">
-                        <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="btn-icon btn-delete" title="Hapus Pertanyaan">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Materi Item 3 -->
-            <div class="materi-item">
-                <div class="materi-info">
-                    <div class="materi-icon">
-                        <span class="material-symbols-outlined">help</span>
-                    </div>
-                    <div>
-                        <h4>03. Cara mendeklarasikan variabel di JS?</h4>
-                        <p>Tipe: Pilihan Ganda • 4 Opsi</p>
-                    </div>
-                </div>
-                <div class="materi-actions">
-                    <button class="btn-icon btn-edit" title="Edit Pertanyaan" onclick="window.location.href='../edit-pertanyaan-admin/index.html'">
-                        <span class="material-symbols-outlined">edit</span>
-                    </button>
-                    <button class="btn-icon btn-delete" title="Hapus Pertanyaan">
-                        <span class="material-symbols-outlined">delete</span>
-                    </button>
-                </div>
-            </div>
-
+        <div class="materi-list" id="questions-list-container">
+            <!-- Questions will be rendered here by JS -->
         </div>
 
     </div>

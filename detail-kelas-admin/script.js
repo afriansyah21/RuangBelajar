@@ -35,13 +35,11 @@ async function loadCourseAndMaterials() {
     };
 
     try {
-        // Fetch course details
+        // Fetch course details and materials
         const courseRes = await axios.get(`http://localhost:3000/api/courses/${courseId}`);
         document.getElementById('course-title').innerText = `Materi Kelas: ${courseRes.data.title}`;
 
-        // Fetch materials
-        const materialsRes = await axios.get(`http://localhost:3000/api/courses/${courseId}/materials`);
-        const materials = materialsRes.data;
+        const materials = courseRes.data.materials || [];
 
         const container = document.getElementById('materi-list-container');
         container.innerHTML = '';
@@ -64,14 +62,14 @@ async function loadCourseAndMaterials() {
                     </div>
                     <div>
                         <h4>${String(index + 1).padStart(2, '0')}. ${materi.title}</h4>
-                        <p>${materi.description ? materi.description.substring(0, 50) + '...' : 'Tidak ada deskripsi'}</p>
+                        <p>${materi.short_description ? materi.short_description.substring(0, 50) + '...' : 'Tidak ada deskripsi'}</p>
                     </div>
                 </div>
                 <div class="materi-actions">
                     <button class="btn-icon btn-edit" title="Edit Materi" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='../edit-materi-admin/index.html?id=${materi.id}';">
                         <span class="material-symbols-outlined" style="pointer-events: none;">edit</span>
                     </button>
-                    <button class="btn-icon btn-delete" title="Hapus Materi" onclick="event.preventDefault(); event.stopPropagation(); if(confirm('Apakah Anda yakin ingin menghapus materi ini?')){ axios.delete('http://localhost:3000/api/materials/${materi.id}').then(() => window.location.reload()).catch(e => alert('Gagal menghapus materi')); }">
+                    <button class="btn-icon btn-delete" title="Hapus Materi" onclick="event.preventDefault(); event.stopPropagation(); if(confirm('Apakah Anda yakin ingin menghapus materi ini?')){ axios.delete('http://localhost:3000/api/admin/materials/${materi.id}').then(() => window.location.reload()).catch(e => alert('Gagal menghapus materi')); }">
                         <span class="material-symbols-outlined" style="pointer-events: none;">delete</span>
                     </button>
                 </div>

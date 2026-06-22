@@ -50,14 +50,20 @@ app.get('/api/courses', async (req, res) => {
     }
 });
 
-// Get a specific course
+// Get a specific course and its materials
 app.get('/api/courses/:id', async (req, res) => {
     try {
         const [rows] = await db.query('SELECT * FROM courses WHERE id = ?', [req.params.id]);
         if (rows.length === 0) {
             return res.status(404).json({ error: 'Course not found' });
         }
-        res.json(rows[0]);
+        
+        const [materials] = await db.query('SELECT id, title, youtube_link, short_description, summary, created_at FROM materials WHERE course_id = ? ORDER BY id ASC', [req.params.id]);
+        
+        res.json({
+            ...rows[0],
+            materials
+        });
     } catch (error) {
         console.error('Error fetching course:', error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -116,7 +122,7 @@ app.delete('/api/courses/:id', async (req, res) => {
 app.get('/api/courses/:courseId/materials', async (req, res) => {
     try {
         const [rows] = await db.query(
-            'SELECT * FROM materials WHERE course_id = ? ORDER BY order_num ASC',
+            'SELECT * FROM materials WHERE course_id = ? ORDER BY id ASC',
             [req.params.courseId]
         );
         res.json(rows);
@@ -127,7 +133,7 @@ app.get('/api/courses/:courseId/materials', async (req, res) => {
 });
 
 // Get a specific material
-app.get('/api/materials/:id', async (req, res) => {
+app.get('/api/admin/materials/:id', async (req, res) => {
     try {
         const [rows] = await db.query('SELECT * FROM materials WHERE id = ?', [req.params.id]);
         if (rows.length === 0) {
@@ -141,17 +147,14 @@ app.get('/api/materials/:id', async (req, res) => {
 });
 
 // Create a new material
-app.post('/api/materials', async (req, res) => {
+app.post('/api/admin/courses/:courseId/materials', async (req, res) => {
     try {
-        const { course_id, title, video_url, description, content } = req.body;
+        const course_id = req.params.courseId;
+        const { title, youtube_link, short_description, summary } = req.body;
         
-        // Auto-increment order_num based on existing materials
-        const [rows] = await db.query('SELECT MAX(order_num) as max_order FROM materials WHERE course_id = ?', [course_id]);
-        const nextOrderNum = (rows[0].max_order || 0) + 1;
-
         const [result] = await db.query(
-            'INSERT INTO materials (course_id, title, video_url, description, content, order_num) VALUES (?, ?, ?, ?, ?, ?)',
-            [course_id, title, video_url, description, content, nextOrderNum]
+            'INSERT INTO materials (course_id, title, youtube_link, short_description, summary) VALUES (?, ?, ?, ?, ?)',
+            [course_id, title, youtube_link, short_description, summary]
         );
         res.status(201).json({ id: result.insertId });
     } catch (error) {
@@ -161,12 +164,12 @@ app.post('/api/materials', async (req, res) => {
 });
 
 // Update a material
-app.put('/api/materials/:id', async (req, res) => {
+app.put('/api/admin/materials/:id', async (req, res) => {
     try {
-        const { title, video_url, description, content } = req.body;
+        const { title, youtube_link, short_description, summary } = req.body;
         const [result] = await db.query(
-            'UPDATE materials SET title = ?, video_url = ?, description = ?, content = ? WHERE id = ?',
-            [title, video_url, description, content, req.params.id]
+            'UPDATE materials SET title = ?, youtube_link = ?, short_description = ?, summary = ? WHERE id = ?',
+            [title, youtube_link, short_description, summary, req.params.id]
         );
         if (result.affectedRows === 0) {
             return res.status(404).json({ error: 'Material not found' });
@@ -179,7 +182,7 @@ app.put('/api/materials/:id', async (req, res) => {
 });
 
 // Delete a material
-app.delete('/api/materials/:id', async (req, res) => {
+app.delete('/api/admin/materials/:id', async (req, res) => {
     try {
         const [result] = await db.query('DELETE FROM materials WHERE id = ?', [req.params.id]);
         if (result.affectedRows === 0) {
@@ -221,7 +224,7 @@ app.post('/api/users/login', async (req, res) => {
     try {
         const { username, password } = req.body;
         // Cek email dulu
-        const [users] = await db.query('SELECT id, full_name, email, password FROM users WHERE email = ?', [username]);
+        const [users] = await db.query('SELECT id, full_name, email, password, phone_number, birth_date FROM users WHERE email = ?', [username]);
         
         if (users.length === 0) {
             return res.status(401).json({ error: 'Email salah' });
@@ -237,6 +240,285 @@ app.post('/api/users/login', async (req, res) => {
         res.json({ message: 'Login successful', user });
     } catch (error) {
         console.error('Error during login:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// --- PROGRESS & QUIZ ROUTES ---
+
+// 1. Get User Progress Summary
+app.get('/api/progress/:userId', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        
+        // Material Progress
+        const [totalMaterials] = await db.query('SELECT COUNT(*) as count FROM materials');
+        const [completedMaterials] = await db.query('SELECT COUNT(*) as count FROM user_material_progress WHERE user_id = ? AND is_completed = TRUE', [userId]);
+        
+        // Quiz Progress
+        const [totalQuizzes] = await db.query('SELECT COUNT(*) as count FROM quizzes');
+        const [completedQuizzes] = await db.query('SELECT COUNT(DISTINCT quiz_id) as count FROM user_quiz_results WHERE user_id = ?', [userId]);
+        
+        // Average Score
+        const [avgScoreResult] = await db.query('SELECT AVG(score) as avg_score FROM user_quiz_results WHERE user_id = ?', [userId]);
+        
+        res.json({
+            material: {
+                completed: completedMaterials[0].count,
+                total: totalMaterials[0].count,
+                percentage: totalMaterials[0].count > 0 ? Math.round((completedMaterials[0].count / totalMaterials[0].count) * 100) : 0
+            },
+            quiz: {
+                completed: completedQuizzes[0].count,
+                total: totalQuizzes[0].count,
+                percentage: totalQuizzes[0].count > 0 ? Math.round((completedQuizzes[0].count / totalQuizzes[0].count) * 100) : 0
+            },
+            averageScore: avgScoreResult[0].avg_score ? parseFloat(avgScoreResult[0].avg_score).toFixed(1) : 0
+        });
+    } catch (error) {
+        console.error('Error fetching progress:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 2. Mark Material as Completed
+app.post('/api/progress/material', async (req, res) => {
+    try {
+        const { userId, materialId } = req.body;
+        await db.query(
+            'INSERT IGNORE INTO user_material_progress (user_id, material_id, is_completed) VALUES (?, ?, TRUE)',
+            [userId, materialId]
+        );
+        res.json({ message: 'Progress saved' });
+    } catch (error) {
+        console.error('Error saving progress:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 3. Get Quizzes by Course
+app.get('/api/quizzes/course/:courseId', async (req, res) => {
+    try {
+        const [quizzes] = await db.query('SELECT id, title, created_at FROM quizzes WHERE course_id = ?', [req.params.courseId]);
+        res.json(quizzes);
+    } catch (error) {
+        console.error('Error fetching quizzes:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 4. Get Quiz Details & Question Groups
+app.get('/api/quizzes/:quizId', async (req, res) => {
+    try {
+        const [quiz] = await db.query('SELECT * FROM quizzes WHERE id = ?', [req.params.quizId]);
+        if (quiz.length === 0) return res.status(404).json({ error: 'Quiz not found' });
+        
+        const [groups] = await db.query('SELECT * FROM quiz_question_groups WHERE quiz_id = ?', [req.params.quizId]);
+        const [questions] = await db.query('SELECT id, group_id, question_text, options, correct_answer_index, explanation FROM quiz_questions WHERE quiz_id = ?', [req.params.quizId]);
+        
+        // Parse options JSON
+        const parsedQuestions = questions.map(q => ({
+            ...q,
+            options: typeof q.options === 'string' ? JSON.parse(q.options) : q.options
+        }));
+        
+        const groupsWithQuestions = groups.map(g => ({
+            ...g,
+            questions: parsedQuestions.filter(q => q.group_id === g.id)
+        }));
+        
+        res.json({
+            ...quiz[0],
+            groups: groupsWithQuestions
+        });
+    } catch (error) {
+        console.error('Error fetching quiz details:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 5. Submit Quiz
+app.post('/api/quizzes/:quizId/submit', async (req, res) => {
+    try {
+        const quizId = req.params.quizId;
+        const { userId, answers } = req.body; // answers is object: { questionId: selectedIndex }
+        
+        const [questions] = await db.query('SELECT id, correct_answer_index FROM quiz_questions WHERE quiz_id = ?', [quizId]);
+        
+        if (questions.length === 0) return res.status(400).json({ error: 'Quiz has no questions' });
+        
+        let correctCount = 0;
+        questions.forEach(q => {
+            if (answers[q.id] !== undefined && answers[q.id] === q.correct_answer_index) {
+                correctCount++;
+            }
+        });
+        
+        const score = Math.round((correctCount / questions.length) * 100);
+        
+        await db.query(
+            'INSERT INTO user_quiz_results (user_id, quiz_id, score) VALUES (?, ?, ?)',
+            [userId, quizId, score]
+        );
+        
+        res.json({
+            score,
+            correctAnswers: correctCount,
+            totalQuestions: questions.length
+        });
+    } catch (error) {
+        console.error('Error submitting quiz:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// --- ADMIN QUIZ ROUTES ---
+
+// 1. Get All Quizzes
+app.get('/api/admin/quizzes', async (req, res) => {
+    try {
+        const query = `
+            SELECT q.id, q.title as quiz_title, c.title as course_title, q.description, q.thumbnail_url
+            FROM quizzes q
+            JOIN courses c ON q.course_id = c.id
+            ORDER BY q.created_at DESC
+        `;
+        const [quizzes] = await db.query(query);
+        res.json(quizzes);
+    } catch (error) {
+        console.error('Error fetching admin quizzes:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 2. Create Quiz
+app.post('/api/admin/quizzes', async (req, res) => {
+    try {
+        const { course_id, title, description, thumbnail_url } = req.body;
+        if (!course_id || !title) return res.status(400).json({ error: 'Course ID and Title are required' });
+        
+        const [result] = await db.query(
+            'INSERT INTO quizzes (course_id, title, description, thumbnail_url) VALUES (?, ?, ?, ?)',
+            [course_id, title, description || null, thumbnail_url || null]
+        );
+        res.status(201).json({ id: result.insertId, message: 'Quiz created successfully' });
+    } catch (error) {
+        console.error('Error creating quiz:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 3. Update Quiz
+app.put('/api/admin/quizzes/:id', async (req, res) => {
+    try {
+        const { course_id, title, description, thumbnail_url } = req.body;
+        await db.query(
+            'UPDATE quizzes SET course_id = ?, title = ?, description = ?, thumbnail_url = ? WHERE id = ?',
+            [course_id, title, description || null, thumbnail_url || null, req.params.id]
+        );
+        res.json({ message: 'Quiz updated successfully' });
+    } catch (error) {
+        console.error('Error updating quiz:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 4. Delete Quiz
+app.delete('/api/admin/quizzes/:id', async (req, res) => {
+    try {
+        await db.query('DELETE FROM quizzes WHERE id = ?', [req.params.id]);
+        res.json({ message: 'Quiz deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting quiz:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 5. Get Question Group Details
+app.get('/api/admin/question-groups/:groupId', async (req, res) => {
+    try {
+        const [groups] = await db.query('SELECT * FROM quiz_question_groups WHERE id = ?', [req.params.groupId]);
+        if (groups.length === 0) return res.status(404).json({ error: 'Group not found' });
+        
+        const [questions] = await db.query('SELECT * FROM quiz_questions WHERE group_id = ?', [req.params.groupId]);
+        const parsedQuestions = questions.map(q => ({
+            ...q,
+            options: typeof q.options === 'string' ? JSON.parse(q.options) : q.options
+        }));
+        
+        res.json({
+            ...groups[0],
+            questions: parsedQuestions
+        });
+    } catch (error) {
+        console.error('Error fetching group details:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 6. Create Question Group
+app.post('/api/admin/quizzes/:quizId/question-groups', async (req, res) => {
+    try {
+        const quizId = req.params.quizId;
+        const { title, questions } = req.body;
+
+        if (!title) return res.status(400).json({ error: 'Group title is required' });
+        if (!Array.isArray(questions)) return res.status(400).json({ error: 'Questions must be an array' });
+
+        const [groupRes] = await db.query('INSERT INTO quiz_question_groups (quiz_id, title) VALUES (?, ?)', [quizId, title]);
+        const groupId = groupRes.insertId;
+
+        for (const q of questions) {
+            await db.query(
+                'INSERT INTO quiz_questions (quiz_id, group_id, question_text, options, correct_answer_index, explanation) VALUES (?, ?, ?, ?, ?, ?)',
+                [quizId, groupId, q.question_text, JSON.stringify(q.options), q.correct_answer_index, q.explanation || null]
+            );
+        }
+
+        res.status(201).json({ message: 'Group created successfully', groupId });
+    } catch (error) {
+        console.error('Error creating question group:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 7. Update Question Group
+app.put('/api/admin/question-groups/:groupId', async (req, res) => {
+    try {
+        const groupId = req.params.groupId;
+        const { title, questions } = req.body;
+
+        if (!title) return res.status(400).json({ error: 'Group title is required' });
+        if (!Array.isArray(questions)) return res.status(400).json({ error: 'Questions must be an array' });
+
+        await db.query('UPDATE quiz_question_groups SET title = ? WHERE id = ?', [title, groupId]);
+        await db.query('DELETE FROM quiz_questions WHERE group_id = ?', [groupId]);
+
+        const [group] = await db.query('SELECT quiz_id FROM quiz_question_groups WHERE id = ?', [groupId]);
+        if (group.length > 0) {
+            const quizId = group[0].quiz_id;
+            for (const q of questions) {
+                await db.query(
+                    'INSERT INTO quiz_questions (quiz_id, group_id, question_text, options, correct_answer_index, explanation) VALUES (?, ?, ?, ?, ?, ?)',
+                    [quizId, groupId, q.question_text, JSON.stringify(q.options), q.correct_answer_index, q.explanation || null]
+                );
+            }
+        }
+
+        res.json({ message: 'Group updated successfully' });
+    } catch (error) {
+        console.error('Error updating question group:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// 8. Delete Question Group
+app.delete('/api/admin/question-groups/:groupId', async (req, res) => {
+    try {
+        await db.query('DELETE FROM quiz_question_groups WHERE id = ?', [req.params.groupId]);
+        res.json({ message: 'Group deleted successfully' });
+    } catch (error) {
+        console.error('Error deleting question group:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });

@@ -38,18 +38,17 @@ function initForm() {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const video_url = document.getElementById('video-input').value;
+        const youtube_link = document.getElementById('video-input').value;
         const title = document.getElementById('title-input').value;
-        const description = document.getElementById('description-input').value;
-        const content = document.getElementById('content-input').value;
+        const short_description = document.getElementById('description-input').value;
+        const summary = document.getElementById('content-input').value;
 
         try {
-            await axios.post('http://localhost:3000/api/materials', {
-                course_id: courseId,
+            await axios.post(`http://localhost:3000/api/admin/courses/${courseId}/materials`, {
                 title,
-                video_url,
-                description,
-                content
+                youtube_link,
+                short_description,
+                summary
             });
             alert('Materi berhasil ditambahkan!');
             window.location.href = backUrl;

@@ -117,6 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const errorMsgEl = document.getElementById('error-message');
                 if (response.ok) {
                     errorMsgEl.classList.add('hidden');
+                    // Simpan data user ke localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(data.user));
                     // Redirect to dashboard user
                     window.location.href = '../beranda-user/index.html';
                 } else {

@@ -57,7 +57,7 @@ async function loadMaterial() {
 
     try {
         // Ambil data materi dari backend
-        const res = await axios.get(`http://localhost:3000/api/materials/${materialId}`);
+        const res = await axios.get(`http://localhost:3000/api/admin/materials/${materialId}`);
         const material = res.data;
 
         // Set tombol kembali agar kembali ke detail kelas (lebih spesifik)
@@ -67,14 +67,14 @@ async function loadMaterial() {
 
         // Render data ke dalam HTML
         document.getElementById('materi-title').innerText = material.title || 'Materi Tanpa Judul';
-        document.getElementById('materi-desc').innerText = material.description || 'Tidak ada deskripsi.';
-        document.getElementById('materi-content').innerText = material.content || 'Tidak ada rangkuman.';
+        document.getElementById('materi-desc').innerText = material.short_description || 'Tidak ada deskripsi.';
+        document.getElementById('materi-content').innerText = material.summary || 'Tidak ada rangkuman.';
         
         // Render iframe YouTube
         const iframe = document.getElementById('video-iframe');
-        const embedUrl = getEmbedUrl(material.video_url);
+        const embedUrl = getEmbedUrl(material.youtube_link);
         
-        console.log('Video URL Asli:', material.video_url);
+        console.log('Video URL Asli:', material.youtube_link);
         console.log('Video Embed URL:', embedUrl);
         
         if (embedUrl) {

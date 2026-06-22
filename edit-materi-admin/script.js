@@ -32,14 +32,14 @@ async function initForm() {
 
     try {
         // Load data lama
-        const res = await axios.get(`http://localhost:3000/api/materials/${materialId}`);
+        const res = await axios.get(`http://localhost:3000/api/admin/materials/${materialId}`);
         const material = res.data;
         courseIdToReturn = material.course_id;
 
-        document.getElementById('video-input').value = material.video_url || '';
+        document.getElementById('video-input').value = material.youtube_link || '';
         document.getElementById('title-input').value = material.title || '';
-        document.getElementById('description-input').value = material.description || '';
-        document.getElementById('content-input').value = material.content || '';
+        document.getElementById('description-input').value = material.short_description || '';
+        document.getElementById('content-input').value = material.summary || '';
 
         // Set tombol kembali & batal
         const backUrl = `../detail-kelas-admin/index.html?course_id=${courseIdToReturn}`;
@@ -51,17 +51,17 @@ async function initForm() {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const video_url = document.getElementById('video-input').value;
+            const youtube_link = document.getElementById('video-input').value;
             const title = document.getElementById('title-input').value;
-            const description = document.getElementById('description-input').value;
-            const content = document.getElementById('content-input').value;
+            const short_description = document.getElementById('description-input').value;
+            const summary = document.getElementById('content-input').value;
 
             try {
-                await axios.put(`http://localhost:3000/api/materials/${materialId}`, {
+                await axios.put(`http://localhost:3000/api/admin/materials/${materialId}`, {
                     title,
-                    video_url,
-                    description,
-                    content
+                    youtube_link,
+                    short_description,
+                    summary
                 });
                 alert('Materi berhasil diperbarui!');
                 window.location.href = backUrl;

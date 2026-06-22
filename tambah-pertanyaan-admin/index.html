@@ -53,6 +53,13 @@
 
     <div class="dashboard-content">
         <form id="questions-form">
+            <div class="form-card" style="margin-bottom: 24px; border-left: 4px solid var(--primary-color);">
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label style="font-size: 1.1rem; color: var(--primary-color);">Nama Judul Pertanyaan (Topik)</label>
+                    <input type="text" id="group-title-input" placeholder="Contoh: Konsep Dasar HTML" required />
+                </div>
+            </div>
+
             <div id="questions-container">
                 <!-- Question cards will be added here by JS -->
             </div>
@@ -64,7 +71,7 @@
             
             <div class="form-actions" style="margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 24px;">
                 <button type="button" class="btn-outline" onclick="window.location.href='../detail-kuis-admin/index.html'">Batal</button>
-                <button type="button" class="btn-primary" onclick="window.location.href='../detail-kuis-admin/index.html'">Simpan Semua Pertanyaan</button>
+                <button type="submit" class="btn-primary">Simpan Semua Pertanyaan</button>
             </div>
         </form>
     </div>

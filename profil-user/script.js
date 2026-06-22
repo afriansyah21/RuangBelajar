@@ -73,3 +73,36 @@ function saveNewPassword() {
   alert('Password berhasil diubah!');
   closeChangePasswordModal();
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const userJson = localStorage.getItem('currentUser');
+  if (userJson) {
+    const user = JSON.parse(userJson);
+    
+    const nameHeaderEl = document.getElementById('profile-name-header');
+    if (nameHeaderEl) nameHeaderEl.textContent = user.full_name || '-';
+    
+    const fullnameEl = document.getElementById('profile-fullname');
+    if (fullnameEl) fullnameEl.textContent = user.full_name || '-';
+    
+    const phoneEl = document.getElementById('profile-phone');
+    if (phoneEl) phoneEl.textContent = user.phone_number || '-';
+    
+    const birthdateEl = document.getElementById('profile-birthdate');
+    if (birthdateEl && user.birth_date) {
+      const dateObj = new Date(user.birth_date);
+      const formattedDate = dateObj.toLocaleDateString('id-ID', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+      birthdateEl.textContent = formattedDate;
+    } else if (birthdateEl) {
+      birthdateEl.textContent = '-';
+    }
+    
+    const emailEl = document.getElementById('profile-email');
+    if (emailEl) emailEl.textContent = user.email || '-';
+  } else {
+    // Redirect to login if no user data
+    window.location.href = '../login-user/index.html';
+  }
+});
