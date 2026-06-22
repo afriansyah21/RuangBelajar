@@ -67,7 +67,7 @@ async function loadCourseMaterials(courseId) {
                     </div>
                     <div>
                         <h4>${String(index + 1).padStart(2, '0')}. ${materi.title}</h4>
-                        <p>${materi.description || 'Video Pembelajaran'}</p>
+                        <p>${materi.short_description || 'Video Pembelajaran'}</p>
                     </div>
                 </div>
                 <div class="materi-actions">

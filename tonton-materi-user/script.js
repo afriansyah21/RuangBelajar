@@ -52,22 +52,22 @@ function getEmbedUrl(url) {
 
 async function loadMaterial(id) {
     try {
-        const response = await axios.get(`http://localhost:3000/api/materials/${id}`);
+        const response = await axios.get(`http://localhost:3000/api/admin/materials/${id}`);
         const materi = response.data;
         
         document.getElementById('materi-title').textContent = materi.title;
-        document.getElementById('materi-desc').textContent = materi.description || '';
+        document.getElementById('materi-desc').textContent = materi.short_description || '';
         
         const contentContainer = document.getElementById('materi-content');
-        if (materi.content) {
-            contentContainer.innerHTML = `<p style="font-size: 15px; color: #475569; line-height: 1.6;">${materi.content.replace(/\n/g, '<br>')}</p>`;
+        if (materi.summary) {
+            contentContainer.innerHTML = `<p style="font-size: 15px; color: #475569; line-height: 1.6;">${materi.summary.replace(/\n/g, '<br>')}</p>`;
         } else {
             contentContainer.innerHTML = '<p>Tidak ada konten ringkasan.</p>';
         }
 
         const videoIframe = document.getElementById('materi-video');
-        if (materi.video_url) {
-            videoIframe.src = getEmbedUrl(materi.video_url);
+        if (materi.youtube_link) {
+            videoIframe.src = getEmbedUrl(materi.youtube_link);
             videoIframe.parentElement.style.display = 'block';
         } else {
             videoIframe.parentElement.style.display = 'none';
