@@ -6,7 +6,7 @@
   <title>Edit Donasi - Admin Portal</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=4">
   <!-- Axios CDN -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
@@ -25,12 +25,12 @@
         <a href="../manajemen-kelas-admin/index.html" class="nav-link">Kelas</a>
         <a href="../manajemen-kuis-admin/index.html" class="nav-link">Kuis</a>
         <a href="../manajemen-donasi-admin/index.html" class="nav-link active">Donasi</a>
-        <a href="#" class="nav-link nav-link-logout">
+        <a href="../admin-login/index.html" class="nav-link nav-link-logout">
           <span class="material-symbols-outlined" style="vertical-align: middle; margin-right: 4px;">logout</span> Logout
         </a>
       </div>
       <div class="nav-actions">
-          <span class="material-symbols-outlined logout-icon-desktop" data-icon="logout">logout</span>
+          <a href="../admin-login/index.html" style="text-decoration:none; color:inherit;"><span class="material-symbols-outlined logout-icon-desktop" data-icon="logout">logout</span></a>
       </div>
     </div>
   </nav>

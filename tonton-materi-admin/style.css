@@ -73,3 +73,9 @@
 .btn-back:hover {
   color: #2563eb;
 }
+
+
+/* Force scrollbar */
+body {
+  overflow-y: scroll !important;
+}

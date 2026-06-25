@@ -49,3 +49,9 @@ a, a:hover, a:active, a:focus {
     border-bottom: none !important; 
     outline: none !important;
 }
+
+
+/* Force scrollbar */
+body {
+  overflow-y: scroll !important;
+}
