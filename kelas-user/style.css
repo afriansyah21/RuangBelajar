@@ -15,6 +15,7 @@ body {
       #f1f5f9);
   color: #0f172a;
   overflow-x: hidden;
+  overflow-y: scroll;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -27,9 +28,9 @@ main {
 /* CONTAINER */
 .container {
   width: 100%;
-  max-width: 100%;
-  margin: 0;
-  padding: 0 32px;
+  max-width: 1280px;
+  margin: auto;
+  padding: 0 24px;
 }
 
 /* BLUR */
