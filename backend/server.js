@@ -236,7 +236,7 @@ app.post('/api/users/login', async (req, res) => {
     try {
         const { username, password } = req.body;
         // Cek email dulu
-        const [users] = await db.query('SELECT id, full_name, email, password, phone_number, birth_date FROM users WHERE email = ?', [username]);
+        const [users] = await db.query('SELECT id, full_name, email, password, phone_number, birth_date, profile_picture FROM users WHERE email = ?', [username]);
         
         if (users.length === 0) {
             return res.status(401).json({ error: 'Email salah' });
@@ -740,6 +740,38 @@ app.delete('/api/admin/donations/:id', async (req, res) => {
         res.json({ message: 'Donation deleted successfully' });
     } catch (error) {
         console.error('Error deleting donation:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// --- USER PROFILE API ---
+app.put('/api/users/:id', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const { full_name, birth_date, phone_number, profile_picture } = req.body;
+        
+        let updateQuery = 'UPDATE users SET full_name = ?, birth_date = ?, phone_number = ?';
+        let queryParams = [full_name, birth_date, phone_number];
+        
+        if (profile_picture !== undefined) {
+            updateQuery += ', profile_picture = ?';
+            queryParams.push(profile_picture);
+        }
+        
+        updateQuery += ' WHERE id = ?';
+        queryParams.push(userId);
+        
+        await db.query(updateQuery, queryParams);
+        
+        // Fetch updated user to return
+        const [users] = await db.query('SELECT id, full_name, email, birth_date, phone_number, profile_picture, created_at FROM users WHERE id = ?', [userId]);
+        if (users.length > 0) {
+            res.json(users[0]);
+        } else {
+            res.status(404).json({ error: 'User not found' });
+        }
+    } catch (error) {
+        console.error('Error updating user profile:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });

@@ -12,6 +12,23 @@ if (hamburgerBtn && navMenu) {
 function openEditModal() {
   const modal = document.getElementById('editProfileModal');
   if (modal) {
+    const userJson = localStorage.getItem('currentUser');
+    if (userJson) {
+      const user = JSON.parse(userJson);
+      document.getElementById('edit-nama').value = user.full_name || '';
+      
+      if (user.birth_date) {
+        const d = new Date(user.birth_date);
+        const yyyy = d.getFullYear();
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        document.getElementById('edit-tanggal').value = `${yyyy}-${mm}-${dd}`;
+      } else {
+        document.getElementById('edit-tanggal').value = '';
+      }
+      
+      document.getElementById('edit-hp').value = user.phone_number || '';
+    }
     modal.classList.add('active');
   }
 }
@@ -101,8 +118,65 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const emailEl = document.getElementById('profile-email');
     if (emailEl) emailEl.textContent = user.email || '-';
+
+    const profilePicEl = document.getElementById('profile-picture-display');
+    if (profilePicEl) {
+      profilePicEl.src = user.profile_picture || 'default-avatar.jpg';
+    }
+
   } else {
     // Redirect to login if no user data
     window.location.href = '../login-user/index.html';
   }
 });
+
+async function saveProfile() {
+  const userJson = localStorage.getItem('currentUser');
+  if (!userJson) return;
+  const user = JSON.parse(userJson);
+
+  const fullName = document.getElementById('edit-nama').value;
+  const birthDate = document.getElementById('edit-tanggal').value;
+  const phone = document.getElementById('edit-hp').value;
+  const fileInput = document.getElementById('edit-foto');
+  
+  let profilePicture = undefined;
+
+  try {
+    if (fileInput.files && fileInput.files[0]) {
+      const file = fileInput.files[0];
+      profilePicture = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
+    }
+
+    const payload = {
+      full_name: fullName,
+      birth_date: birthDate || null,
+      phone_number: phone
+    };
+    if (profilePicture !== undefined) {
+      payload.profile_picture = profilePicture;
+    }
+
+    const res = await fetch(`http://localhost:3000/api/users/${user.id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!res.ok) throw new Error('Gagal menyimpan profil');
+    
+    const updatedUser = await res.json();
+    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+    
+    // Refresh page to show changes
+    window.location.reload();
+  } catch (error) {
+    console.error('Error saving profile:', error);
+    alert('Gagal menyimpan profil: ' + error.message);
+  }
+}
