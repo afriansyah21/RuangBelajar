@@ -776,6 +776,51 @@ app.put('/api/users/:id', async (req, res) => {
     }
 });
 
+app.put('/api/users/:id/password', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const { currentPassword, newPassword } = req.body;
+        
+        const [users] = await db.query('SELECT password FROM users WHERE id = ?', [userId]);
+        if (users.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        
+        const user = users[0];
+        if (user.password !== currentPassword) {
+            return res.status(401).json({ error: 'Password saat ini salah' });
+        }
+        
+        await db.query('UPDATE users SET password = ? WHERE id = ?', [newPassword, userId]);
+        res.json({ message: 'Password berhasil diubah' });
+    } catch (error) {
+        console.error('Error changing password:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.post('/api/users/:id/verify-password', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const { currentPassword } = req.body;
+        
+        const [users] = await db.query('SELECT password FROM users WHERE id = ?', [userId]);
+        if (users.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+        
+        const user = users[0];
+        if (user.password !== currentPassword) {
+            return res.status(401).json({ error: 'Password saat ini salah' });
+        }
+        
+        res.json({ message: 'Password benar' });
+    } catch (error) {
+        console.error('Error verifying password:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Backend server running at http://localhost:${port}`);
 });

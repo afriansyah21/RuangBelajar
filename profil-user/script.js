@@ -51,6 +51,11 @@ function openChangePasswordModal() {
     document.getElementById('currentPassword').value = '';
     document.getElementById('newPassword').value = '';
     document.getElementById('confirmNewPassword').value = '';
+    
+    const errorEl1 = document.getElementById('password-error-1');
+    if (errorEl1) errorEl1.style.display = 'none';
+    const errorEl2 = document.getElementById('password-error-2');
+    if (errorEl2) errorEl2.style.display = 'none';
   }
 }
 
@@ -61,34 +66,86 @@ function closeChangePasswordModal() {
   }
 }
 
-function nextPasswordStep() {
+async function nextPasswordStep() {
   const currentPass = document.getElementById('currentPassword').value;
+  const errorEl = document.getElementById('password-error-1');
+  errorEl.style.display = 'none';
+
   if (currentPass.trim() === '') {
-    alert('Harap masukkan password saat ini!');
+    errorEl.textContent = 'Harap masukkan password saat ini!';
+    errorEl.style.display = 'block';
     return;
   }
   
-  // Lanjut ke step 2
-  document.getElementById('passwordStep1').style.display = 'none';
-  document.getElementById('passwordStep2').style.display = 'block';
+  const userJson = localStorage.getItem('currentUser');
+  if (!userJson) return;
+  const user = JSON.parse(userJson);
+
+  try {
+    const res = await fetch(`http://localhost:3000/api/users/${user.id}/verify-password`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ currentPassword: currentPass })
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || 'Password saat ini salah');
+    }
+    
+    // Lanjut ke step 2
+    document.getElementById('passwordStep1').style.display = 'none';
+    document.getElementById('passwordStep2').style.display = 'block';
+  } catch (error) {
+    console.error('Error verifying password:', error);
+    errorEl.textContent = error.message;
+    errorEl.style.display = 'block';
+  }
 }
 
-function saveNewPassword() {
+async function saveNewPassword() {
+  const currentPass = document.getElementById('currentPassword').value;
   const newPass = document.getElementById('newPassword').value;
   const confirmPass = document.getElementById('confirmNewPassword').value;
   
+  const errorEl = document.getElementById('password-error-2');
+  errorEl.style.display = 'none';
+
   if (newPass.trim() === '') {
-    alert('Harap masukkan password baru!');
+    errorEl.textContent = 'Harap masukkan password baru!';
+    errorEl.style.display = 'block';
     return;
   }
 
   if (newPass !== confirmPass) {
-    alert('Konfirmasi password tidak cocok!');
+    errorEl.textContent = 'Konfirmasi password tidak cocok!';
+    errorEl.style.display = 'block';
     return;
   }
   
-  alert('Password berhasil diubah!');
-  closeChangePasswordModal();
+  const userJson = localStorage.getItem('currentUser');
+  if (!userJson) return;
+  const user = JSON.parse(userJson);
+
+  try {
+    const res = await fetch(`http://localhost:3000/api/users/${user.id}/password`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ currentPassword: currentPass, newPassword: newPass })
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error || 'Gagal mengubah password');
+    }
+
+    alert('Password berhasil diubah!');
+    closeChangePasswordModal();
+  } catch (error) {
+    console.error('Error changing password:', error);
+    errorEl.textContent = error.message;
+    errorEl.style.display = 'block';
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
