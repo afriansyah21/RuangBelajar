@@ -220,6 +220,17 @@ app.post('/api/users/register', async (req, res) => {
     }
 });
 
+// Get all users for admin
+app.get('/api/admin/users', async (req, res) => {
+    try {
+        const [users] = await db.query('SELECT id, full_name, email, birth_date, created_at FROM users ORDER BY created_at DESC');
+        res.json(users);
+    } catch (error) {
+        console.error('Error fetching users:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 // Login user
 app.post('/api/users/login', async (req, res) => {
     try {
