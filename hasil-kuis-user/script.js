@@ -24,7 +24,15 @@ document.addEventListener('DOMContentLoaded', () => {
 async function renderResult() {
     const urlParams = new URLSearchParams(window.location.search);
     const groupId = urlParams.get('groupId');
+    const quizId = urlParams.get('quizId');
     const container = document.getElementById('result-container');
+
+    if (quizId) {
+        const backBtn = document.querySelector('.btn-back');
+        if (backBtn) {
+            backBtn.setAttribute('onclick', `window.location.href='../detail-kuis-user/index.html?quizId=${quizId}'`);
+        }
+    }
 
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!currentUser) {

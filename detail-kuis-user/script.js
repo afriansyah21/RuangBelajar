@@ -87,7 +87,7 @@ async function fetchQuizDetails(quizId) {
                         </div>
                     </div>
                     <div class="materi-actions">
-                        <button class="btn-primary" onclick="window.location.href='../hasil-kuis-user/index.html?groupId=${group.id}'" style="padding: 8px 16px; font-size: 14px; background-color: #22c55e; color: white;">Lihat Hasil</button>
+                        <button class="btn-primary" onclick="window.location.href='../hasil-kuis-user/index.html?groupId=${group.id}&quizId=${quizId}'" style="padding: 8px 16px; font-size: 14px; background-color: #22c55e; color: white;">Lihat Hasil</button>
                     </div>
                 `;
             } else {
@@ -104,7 +104,7 @@ async function fetchQuizDetails(quizId) {
                         </div>
                     </div>
                     <div class="materi-actions">
-                        <button class="btn-primary" onclick="window.location.href='../kerjakan-kuis-user/index.html?groupId=${group.id}'" style="padding: 8px 16px; font-size: 14px; background-color: #f59e0b; color: white;">Kerjakan Kuis</button>
+                        <button class="btn-primary" onclick="window.location.href='../kerjakan-kuis-user/index.html?groupId=${group.id}&quizId=${quizId}'" style="padding: 8px 16px; font-size: 14px; background-color: #f59e0b; color: white;">Kerjakan Kuis</button>
                     </div>
                 `;
             }

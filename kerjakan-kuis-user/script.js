@@ -20,7 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const urlParams = new URLSearchParams(window.location.search);
     const groupId = urlParams.get('groupId');
+    const quizId = urlParams.get('quizId');
     if (groupId) {
+        if (quizId) {
+            const backBtn = document.querySelector('.btn-back');
+            if (backBtn) {
+                backBtn.setAttribute('onclick', `window.location.href='../detail-kuis-user/index.html?quizId=${quizId}'`);
+            }
+        }
         fetchGroupDetails(groupId);
     } else {
         document.getElementById('quiz-questions-container').innerHTML = '<p style="color: red;">ID kuis tidak ditemukan.</p>';
@@ -125,9 +132,11 @@ async function submitQuiz(groupId) {
             })
         });
 
-        if (!response.ok) throw new Error('Failed to submit quiz');
-        
-        window.location.href = `../hasil-kuis-user/index.html?groupId=${groupId}`;
+        const urlParams = new URLSearchParams(window.location.search);
+        const quizId = urlParams.get('quizId');
+        let redirectUrl = `../hasil-kuis-user/index.html?groupId=${groupId}`;
+        if (quizId) redirectUrl += `&quizId=${quizId}`;
+        window.location.href = redirectUrl;
     } catch (error) {
         console.error('Error submitting quiz:', error);
         alert('Gagal mengirimkan jawaban kuis. Silakan coba lagi.');
