@@ -41,74 +41,13 @@
             <button class="btn-back" onclick="window.location.href='../detail-kuis-user/index.html'">
                 <span class="material-symbols-outlined">arrow_back</span> Batal & Kembali
             </button>
-            <h1 style="margin-top: 16px;">Kuis: HTML & CSS Dasar</h1>
-            <p>Selesaikan 3 pertanyaan di bawah ini dengan memilih satu jawaban yang paling tepat.</p>
+            <h1 style="margin-top: 16px;" id="quiz-title">Memuat Kuis...</h1>
+            <p id="quiz-desc">Silakan tunggu sebentar.</p>
         </div>
     </header>
 
-    <div class="dashboard-content">
-        
-        <!-- Question 1 -->
-        <div class="materi-details-card" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px;">
-            <h3 style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #0f172a; margin-bottom: 16px;">1. Apa kepanjangan dari HTML?</h3>
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                    <input type="radio" name="q1" value="a" style="width: 18px; height: 18px;">
-                    <span style="color: #334155;">HyperText Markup Language</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                    <input type="radio" name="q1" value="b" style="width: 18px; height: 18px;">
-                    <span style="color: #334155;">Hyper Tool Multi Language</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                    <input type="radio" name="q1" value="c" style="width: 18px; height: 18px;">
-                    <span style="color: #334155;">HyperText Multiple Language</span>
-                </label>
-            </div>
-        </div>
-
-        <!-- Question 2 -->
-        <div class="materi-details-card" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px;">
-            <h3 style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #0f172a; margin-bottom: 16px;">2. Properti CSS untuk mengubah warna teks?</h3>
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                    <input type="radio" name="q2" value="a" style="width: 18px; height: 18px;">
-                    <span style="color: #334155;">font-color</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                    <input type="radio" name="q2" value="b" style="width: 18px; height: 18px;">
-                    <span style="color: #334155;">text-color</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                    <input type="radio" name="q2" value="c" style="width: 18px; height: 18px;">
-                    <span style="color: #334155;">color</span>
-                </label>
-            </div>
-        </div>
-
-        <!-- Question 3 -->
-        <div class="materi-details-card" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 32px;">
-            <h3 style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #0f172a; margin-bottom: 16px;">3. Cara mendeklarasikan variabel di JS?</h3>
-            <div style="display: flex; flex-direction: column; gap: 12px;">
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                    <input type="radio" name="q3" value="a" style="width: 18px; height: 18px;">
-                    <span style="color: #334155;">v myVar;</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                    <input type="radio" name="q3" value="b" style="width: 18px; height: 18px;">
-                    <span style="color: #334155;">let myVar;</span>
-                </label>
-                <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
-                    <input type="radio" name="q3" value="c" style="width: 18px; height: 18px;">
-                    <span style="color: #334155;">variable myVar;</span>
-                </label>
-            </div>
-        </div>
-
-        <div style="display: flex; justify-content: flex-end; margin-bottom: 60px;">
-            <button class="btn-primary" onclick="window.location.href='../hasil-kuis-user/index.html'" style="padding: 12px 24px; font-size: 16px;">Selesai & Kumpulkan Kuis</button>
-        </div>
-
+    <div class="dashboard-content" id="quiz-questions-container">
+        <p>Memuat soal...</p>
     </div>
   </main>
 

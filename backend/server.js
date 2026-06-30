@@ -384,6 +384,102 @@ app.post('/api/quizzes/:quizId/submit', async (req, res) => {
     }
 });
 
+// 5b. Submit Quiz Group
+app.post('/api/question-groups/:groupId/submit', async (req, res) => {
+    try {
+        const groupId = req.params.groupId;
+        const { userId, answers } = req.body;
+        
+        const [groups] = await db.query('SELECT quiz_id FROM quiz_question_groups WHERE id = ?', [groupId]);
+        if (groups.length === 0) return res.status(404).json({ error: 'Group not found' });
+        const quizId = groups[0].quiz_id;
+
+        const [questions] = await db.query('SELECT * FROM quiz_questions WHERE group_id = ?', [groupId]);
+        if (questions.length === 0) return res.status(400).json({ error: 'Group has no questions' });
+        
+        let correctCount = 0;
+        const results = [];
+
+        questions.forEach(q => {
+            const isCorrect = answers[q.id] !== undefined && parseInt(answers[q.id]) === q.correct_answer_index;
+            if (isCorrect) correctCount++;
+            
+            results.push({
+                question_id: q.id,
+                question_text: q.question_text,
+                user_answer_index: answers[q.id] !== undefined ? parseInt(answers[q.id]) : null,
+                correct_answer_index: q.correct_answer_index,
+                is_correct: isCorrect,
+                explanation: q.explanation,
+                options: typeof q.options === 'string' ? JSON.parse(q.options) : q.options
+            });
+        });
+        
+        const score = Math.round((correctCount / questions.length) * 100);
+        const answersJson = JSON.stringify({
+            details: results,
+            correctAnswers: correctCount,
+            totalQuestions: questions.length
+        });
+        
+        await db.query(
+            'INSERT INTO user_quiz_results (user_id, quiz_id, group_id, score, answers_json) VALUES (?, ?, ?, ?, ?)',
+            [userId, quizId, groupId, score, answersJson]
+        );
+        
+        res.json({
+            score,
+            correctAnswers: correctCount,
+            totalQuestions: questions.length,
+            details: results
+        });
+    } catch (error) {
+        console.error('Error submitting group quiz:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/api/user-quiz-results/:groupId/:userId', async (req, res) => {
+    try {
+        const { groupId, userId } = req.params;
+        const [rows] = await db.query(
+            'SELECT score, answers_json FROM user_quiz_results WHERE group_id = ? AND user_id = ? ORDER BY created_at DESC LIMIT 1',
+            [groupId, userId]
+        );
+
+        if (rows.length === 0) {
+            return res.status(404).json({ error: 'Result not found' });
+        }
+
+        const data = rows[0];
+        let answersData = null;
+        if (data.answers_json) {
+            answersData = JSON.parse(data.answers_json);
+        }
+
+        res.json({
+            score: data.score,
+            details: answersData ? answersData.details : [],
+            correctAnswers: answersData ? answersData.correctAnswers : 0,
+            totalQuestions: answersData ? answersData.totalQuestions : 0
+        });
+    } catch (error) {
+        console.error('Error fetching user quiz results:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/api/users/:userId/completed-groups', async (req, res) => {
+    try {
+        const userId = req.params.userId;
+        const [rows] = await db.query('SELECT DISTINCT group_id FROM user_quiz_results WHERE user_id = ? AND group_id IS NOT NULL', [userId]);
+        res.json(rows.map(r => r.group_id));
+    } catch (error) {
+        console.error('Error fetching completed groups:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 // --- ADMIN QUIZ ROUTES ---
 
 // 1. Get All Quizzes

@@ -17,4 +17,119 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupId = urlParams.get('groupId');
+    if (groupId) {
+        fetchGroupDetails(groupId);
+    } else {
+        document.getElementById('quiz-questions-container').innerHTML = '<p style="color: red;">ID kuis tidak ditemukan.</p>';
+        document.getElementById('quiz-title').textContent = 'Error';
+        document.getElementById('quiz-desc').textContent = '';
+    }
 });
+
+async function fetchGroupDetails(groupId) {
+    try {
+        const response = await fetch(`http://localhost:3000/api/admin/question-groups/${groupId}`);
+        if (!response.ok) throw new Error('Gagal memuat kuis');
+        const group = await response.json();
+
+        document.getElementById('quiz-title').textContent = `Kuis: ${group.title || `Grup ${groupId}`}`;
+        document.getElementById('quiz-desc').textContent = 'Pilih jawaban yang paling tepat.';
+
+        const container = document.getElementById('quiz-questions-container');
+        container.innerHTML = '';
+
+        if (!group.questions || group.questions.length === 0) {
+            container.innerHTML = '<p>Kuis ini belum memiliki soal.</p>';
+            return;
+        }
+
+        let qNumber = 1;
+        group.questions.forEach(q => {
+            const qDiv = document.createElement('div');
+            qDiv.className = 'materi-details-card';
+            qDiv.style.background = 'white';
+            qDiv.style.border = '1px solid #e2e8f0';
+            qDiv.style.borderRadius = '12px';
+            qDiv.style.padding = '24px';
+            qDiv.style.boxShadow = '0 4px 6px -1px rgba(0,0,0,0.05)';
+            qDiv.style.marginBottom = '20px';
+
+            let optionsHtml = '';
+            if (q.options && Array.isArray(q.options)) {
+                q.options.forEach((opt, idx) => {
+                    optionsHtml += `
+                        <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
+                            <input type="radio" name="q_${q.id}" value="${idx}" style="width: 18px; height: 18px;">
+                            <span style="color: #334155;">${opt}</span>
+                        </label>
+                    `;
+                });
+            }
+
+            qDiv.innerHTML = `
+                <h3 style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #0f172a; margin-bottom: 16px;">${qNumber}. ${q.question_text}</h3>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    ${optionsHtml}
+                </div>
+            `;
+            container.appendChild(qDiv);
+            qNumber++;
+        });
+
+        // Add submit button
+        const submitDiv = document.createElement('div');
+        submitDiv.style.display = 'flex';
+        submitDiv.style.justifyContent = 'flex-end';
+        submitDiv.style.marginBottom = '60px';
+        submitDiv.innerHTML = `
+            <button class="btn-primary" onclick="submitQuiz(${groupId})" style="padding: 12px 24px; font-size: 16px;">Selesai & Kumpulkan Kuis</button>
+        `;
+        container.appendChild(submitDiv);
+
+    } catch (error) {
+        console.error('Error fetching group details:', error);
+        document.getElementById('quiz-questions-container').innerHTML = '<p style="color: red;">Terjadi kesalahan saat memuat kuis.</p>';
+        document.getElementById('quiz-title').textContent = 'Error';
+        document.getElementById('quiz-desc').textContent = '';
+    }
+}
+
+async function submitQuiz(groupId) {
+    const answers = {};
+    const radios = document.querySelectorAll('input[type="radio"]:checked');
+    radios.forEach(radio => {
+        const name = radio.name; // e.g. q_15
+        const questionId = name.split('_')[1];
+        answers[questionId] = parseInt(radio.value);
+    });
+
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) {
+        alert('Silakan login terlebih dahulu untuk mengerjakan kuis.');
+        window.location.href = '../login-user/index.html';
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:3000/api/question-groups/${groupId}/submit`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userId: currentUser.id,
+                answers: answers
+            })
+        });
+
+        if (!response.ok) throw new Error('Failed to submit quiz');
+        
+        window.location.href = `../hasil-kuis-user/index.html?groupId=${groupId}`;
+    } catch (error) {
+        console.error('Error submitting quiz:', error);
+        alert('Gagal mengirimkan jawaban kuis. Silakan coba lagi.');
+    }
+}

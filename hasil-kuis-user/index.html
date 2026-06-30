@@ -46,69 +46,8 @@
         </div>
     </header>
 
-    <div class="dashboard-content">
-        
-        <!-- Score Card -->
-        <div class="materi-details-card" style="background: white; border: 1px solid #e2e8f0; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 32px; text-align: center;">
-            <h2 style="font-family: 'Lexend', sans-serif; color: #0f172a; margin-bottom: 8px;">Nilai Akhir Anda</h2>
-            <div style="font-size: 48px; font-weight: 700; color: #22c55e;">66 / 100</div>
-            <p style="color: #64748b; margin-top: 8px;">Anda menjawab 2 dari 3 pertanyaan dengan benar.</p>
-        </div>
-
-        <!-- Question 1: CORRECT -->
-        <div class="materi-details-card" style="background: white; border: 1px solid #22c55e; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px;">
-            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px;">
-                <h3 style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #0f172a;">1. Apa kepanjangan dari HTML?</h3>
-                <span class="material-symbols-outlined" style="color: #22c55e; font-size: 28px;">check_circle</span>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
-                <div style="padding: 12px; border: 1px solid #22c55e; border-radius: 8px; background: #f0fdf4;">
-                    <span style="color: #15803d; font-weight: 500;">Jawaban Anda:</span> HyperText Markup Language
-                </div>
-            </div>
-            <div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 16px; border-radius: 0 8px 8px 0;">
-                <h4 style="font-size: 14px; color: #3b82f6; margin-bottom: 8px;">Penjelasan:</h4>
-                <p style="font-size: 14px; color: #475569; line-height: 1.5;">Benar! HTML adalah singkatan dari HyperText Markup Language, bahasa markup standar untuk membuat halaman web.</p>
-            </div>
-        </div>
-
-        <!-- Question 2: INCORRECT -->
-        <div class="materi-details-card" style="background: white; border: 1px solid #ef4444; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 20px;">
-            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px;">
-                <h3 style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #0f172a;">2. Properti CSS untuk mengubah warna teks?</h3>
-                <span class="material-symbols-outlined" style="color: #ef4444; font-size: 28px;">cancel</span>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
-                <div style="padding: 12px; border: 1px solid #ef4444; border-radius: 8px; background: #fef2f2;">
-                    <span style="color: #b91c1c; font-weight: 500;">Jawaban Anda:</span> text-color <span style="font-size: 12px; color: #ef4444; margin-left: 8px;">(Salah)</span>
-                </div>
-                <div style="padding: 12px; border: 1px solid #22c55e; border-radius: 8px; background: #f0fdf4;">
-                    <span style="color: #15803d; font-weight: 500;">Jawaban Benar:</span> color
-                </div>
-            </div>
-            <div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 16px; border-radius: 0 8px 8px 0;">
-                <h4 style="font-size: 14px; color: #3b82f6; margin-bottom: 8px;">Penjelasan:</h4>
-                <p style="font-size: 14px; color: #475569; line-height: 1.5;">Dalam CSS, properti untuk merubah warna pada tulisan/teks hanyalah color, sedangkan 	ext-color tidak ada (invalid).</p>
-            </div>
-        </div>
-
-        <!-- Question 3: CORRECT -->
-        <div class="materi-details-card" style="background: white; border: 1px solid #22c55e; border-radius: 12px; padding: 24px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); margin-bottom: 32px;">
-            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px;">
-                <h3 style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #0f172a;">3. Cara mendeklarasikan variabel di JS?</h3>
-                <span class="material-symbols-outlined" style="color: #22c55e; font-size: 28px;">check_circle</span>
-            </div>
-            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 16px;">
-                <div style="padding: 12px; border: 1px solid #22c55e; border-radius: 8px; background: #f0fdf4;">
-                    <span style="color: #15803d; font-weight: 500;">Jawaban Anda:</span> let myVar;
-                </div>
-            </div>
-            <div style="background: #f8fafc; border-left: 4px solid #3b82f6; padding: 16px; border-radius: 0 8px 8px 0;">
-                <h4 style="font-size: 14px; color: #3b82f6; margin-bottom: 8px;">Penjelasan:</h4>
-                <p style="font-size: 14px; color: #475569; line-height: 1.5;">Di Javascript modern, variabel dapat dideklarasikan menggunakan kata kunci let, const, atau ar.</p>
-            </div>
-        </div>
-
+    <div class="dashboard-content" id="result-container">
+        <!-- Results will be injected here via JS -->
     </div>
   </main>
 
