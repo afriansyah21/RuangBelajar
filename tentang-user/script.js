@@ -117,4 +117,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Load active students count
+    fetch('http://localhost:3000/api/admin/dashboard-stats')
+        .then(res => res.json())
+        .then(data => {
+            const countEl = document.getElementById('active-students-count');
+            if (countEl && data.totalUsers !== undefined) {
+                countEl.textContent = data.totalUsers;
+            }
+        })
+        .catch(err => console.error('Error fetching stats:', err));
 });
