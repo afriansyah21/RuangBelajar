@@ -96,3 +96,51 @@ tailwind.config = {
         },
     },
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('admin-login-form');
+    const usernameInput = document.getElementById('admin-username');
+    const passwordInput = document.getElementById('admin-password');
+    const errorContainer = document.getElementById('login-error');
+    const togglePasswordBtn = document.getElementById('toggle-password');
+
+    // Toggle password visibility
+    if (togglePasswordBtn) {
+        togglePasswordBtn.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            const icon = togglePasswordBtn.querySelector('span');
+            icon.textContent = type === 'password' ? 'visibility' : 'visibility_off';
+        });
+    }
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+
+            // Reset error
+            errorContainer.classList.add('hidden');
+            errorContainer.textContent = '';
+
+            // Validasi input kosong
+            if (!username || !password) {
+                errorContainer.textContent = 'Username dan password harus diisi';
+                errorContainer.classList.remove('hidden');
+                return;
+            }
+
+            // Validasi kredensial (admin tunggal)
+            if (username === 'admin' && password === 'admin123') {
+                // Berhasil login
+                window.location.href = '../admin-dashboard/index.html';
+            } else {
+                // Gagal login
+                errorContainer.textContent = 'Username atau password salah';
+                errorContainer.classList.remove('hidden');
+            }
+        });
+    }
+});

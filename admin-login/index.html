@@ -33,12 +33,15 @@
           <p class="font-body-md text-body-md text-on-surface-variant">Secure management interface for educators and platform administrators.</p>
         </div>
         
-        <form class="space-y-md">
+        <form class="space-y-md" id="admin-login-form">
+          <!-- Error Message Container -->
+          <div id="login-error" class="hidden text-error text-center font-body-sm font-bold bg-error/10 py-2 rounded-lg"></div>
+          
           <div class="space-y-xs">
             <label class="font-label-lg text-label-lg text-on-surface-variant block">Username</label>
             <div class="relative group">
               <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
-              <input class="w-full pl-xl pr-md py-sm rounded-lg border border-outline-variant bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface" placeholder="Masukkan username admin" type="text" />
+              <input id="admin-username" class="w-full pl-xl pr-md py-sm rounded-lg border border-outline-variant bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface" placeholder="Masukkan username admin" type="text" />
             </div>
           </div>
           
@@ -49,8 +52,8 @@
             </div>
             <div class="relative group">
               <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
-              <input class="w-full pl-xl pr-xl py-sm rounded-lg border border-outline-variant bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface" placeholder="Masukkan password admin" type="password" />
-              <button class="absolute right-sm top-1/2 -translate-y-1/2 text-outline hover:text-on-surface-variant" type="button">
+              <input id="admin-password" class="w-full pl-xl pr-xl py-sm rounded-lg border border-outline-variant bg-white focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all font-body-md text-on-surface" placeholder="Masukkan password admin" type="password" />
+              <button class="absolute right-sm top-1/2 -translate-y-1/2 text-outline hover:text-on-surface-variant" type="button" id="toggle-password">
                 <span class="material-symbols-outlined">visibility</span>
               </button>
             </div>
