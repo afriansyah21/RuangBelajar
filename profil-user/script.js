@@ -181,6 +181,9 @@ document.addEventListener('DOMContentLoaded', () => {
       profilePicEl.src = user.profile_picture || 'default-avatar.jpg';
     }
 
+    loadProfileStats(user.id);
+    loadUserCourses();
+
   } else {
     // Redirect to login if no user data
     window.location.href = '../login-user/index.html';
@@ -237,3 +240,91 @@ async function saveProfile() {
     alert('Gagal menyimpan profil: ' + error.message);
   }
 }
+
+// Fetch and render profile stats
+async function loadProfileStats(userId) {
+  try {
+    const res = await fetch(`http://localhost:3000/api/users/${userId}/profile-stats`);
+    if (!res.ok) return;
+    const stats = await res.json();
+    
+    // Progres Kuis
+    const total = stats.total_quizzes || 0;
+    const completed = stats.completed_quizzes || 0;
+    const quizPct = total > 0 ? Math.round((completed / total) * 100) : 0;
+    
+    const quizFractionEl = document.getElementById('quiz-fraction');
+    const quizPercentageEl = document.getElementById('quiz-percentage');
+    const quizProgressBarEl = document.getElementById('quiz-progress-bar');
+    if(quizFractionEl) quizFractionEl.textContent = `${completed}/${total}`;
+    if(quizPercentageEl) quizPercentageEl.textContent = `${quizPct}%`;
+    if(quizProgressBarEl) quizProgressBarEl.style.width = `${quizPct}%`;
+    
+    // Nilai Rata-rata
+    const avg = parseFloat(stats.average_score) || 0;
+    let grade = 'E';
+    if (avg >= 81) grade = 'A';
+    else if (avg >= 61) grade = 'B';
+    else if (avg >= 41) grade = 'C';
+    else if (avg >= 21) grade = 'D';
+    else grade = 'E';
+    
+    const avgScoreEl = document.getElementById('avg-score');
+    const avgGradeEl = document.getElementById('avg-grade');
+    const avgProgressBarEl = document.getElementById('avg-progress-bar');
+    if(avgScoreEl) avgScoreEl.textContent = avg.toFixed(1);
+    if(avgGradeEl) avgGradeEl.textContent = `Grade ${grade}`;
+    if(avgProgressBarEl) avgProgressBarEl.style.width = `${avg}%`;
+  } catch (err) {
+    console.error('Error fetching profile stats:', err);
+  }
+}
+
+// Fetch and render user courses
+async function loadUserCourses() {
+  try {
+    const res = await fetch(`http://localhost:3000/api/courses`);
+    if (!res.ok) return;
+    const courses = await res.json();
+    
+    const listEl = document.getElementById('user-course-list');
+    if (!listEl) return;
+    
+    listEl.innerHTML = '';
+    
+    if (courses.length > 0) {
+      const colors = ['blue-icon', 'yellow-icon', 'red-icon', 'green-icon'];
+      const icons = ['functions', 'language', 'science', 'computer'];
+      
+      courses.forEach((course, index) => {
+        const item = document.createElement('a');
+        item.href = `../detail-kelas-user/index.html?course_id=${course.id}`;
+        item.className = 'course-item';
+        item.style.textDecoration = 'none';
+        item.style.color = 'inherit';
+        
+        const thumbnailHtml = course.thumbnail_url 
+            ? `<img src="${course.thumbnail_url}" alt="${course.title}" style="width: 48px; height: 48px; border-radius: 12px; object-fit: cover; flex-shrink: 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05);" onerror="this.style.display='none'">` 
+            : `<div class="course-icon blue-icon" style="flex-shrink: 0;"><span class="material-symbols-outlined">menu_book</span></div>`;
+
+        item.innerHTML = `
+          ${thumbnailHtml}
+          <div class="course-content">
+            <h4>${course.title}</h4>
+            <p>${course.description || 'Kelas RuangBelajar'}</p>
+          </div>
+          <span class="material-symbols-outlined arrow">arrow_forward</span>
+        `;
+        
+        listEl.appendChild(item);
+      });
+    } else {
+      listEl.innerHTML = '<div class="text-slate-500 py-4 w-full text-center">Belum ada kelas yang tersedia.</div>';
+    }
+  } catch (err) {
+    console.error('Error fetching courses:', err);
+    const listEl = document.getElementById('user-course-list');
+    if (listEl) listEl.innerHTML = '<div class="text-red-500 py-4 w-full text-center">Gagal memuat kelas.</div>';
+  }
+}
+

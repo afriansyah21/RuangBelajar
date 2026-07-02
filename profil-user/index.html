@@ -147,29 +147,17 @@
       <!-- STATS -->
       <section class="stats-profile-grid">
 
-        <!-- CARD -->
-        <div class="stats-profile-card blue">
-          <div class="stats-profile-top">
-            <span class="material-symbols-outlined">school</span>
-            <span>85%</span>
-          </div>
-          <h3>Class Progress</h3>
-          <p>12/15</p>
-          <div class="progress-bar-sm">
-            <div class="progress-fill blue-fill"></div>
-          </div>
-        </div>
 
         <!-- CARD -->
         <div class="stats-profile-card yellow">
           <div class="stats-profile-top">
             <span class="material-symbols-outlined">quiz</span>
-            <span>70%</span>
+            <span id="quiz-percentage">0%</span>
           </div>
-          <h3>Quiz Progress</h3>
-          <p>21/30</p>
+          <h3>Progres Kuis</h3>
+          <p id="quiz-fraction">0/0</p>
           <div class="progress-bar-sm">
-            <div class="progress-fill yellow-fill"></div>
+            <div class="progress-fill yellow-fill" id="quiz-progress-bar" style="width: 0%;"></div>
           </div>
         </div>
 
@@ -177,12 +165,12 @@
         <div class="stats-profile-card red">
           <div class="stats-profile-top">
             <span class="material-symbols-outlined">trending_up</span>
-            <span>Grade A</span>
+            <span id="avg-grade">Grade -</span>
           </div>
-          <h3>Avg Score</h3>
-          <p>92.4</p>
+          <h3>Nilai Rata-Rata</h3>
+          <p id="avg-score">0</p>
           <div class="progress-bar-sm">
-            <div class="progress-fill red-fill"></div>
+            <div class="progress-fill red-fill" id="avg-progress-bar" style="width: 0%;"></div>
           </div>
         </div>
 
@@ -192,32 +180,8 @@
       <section class="glass-card course-section">
         <h2>Kelas yang Sedang Diikuti</h2>
 
-        <div class="course-list">
-          
-          <!-- ITEM -->
-          <div class="course-item">
-            <div class="course-icon blue-icon">
-              <span class="material-symbols-outlined">functions</span>
-            </div>
-            <div class="course-content">
-              <h4>Matematika Dasar: Aljabar & Logika</h4>
-              <p>Terakhir dipelajari 2 jam yang lalu</p>
-            </div>
-            <span class="material-symbols-outlined arrow">arrow_forward</span>
-          </div>
-
-          <!-- ITEM -->
-          <div class="course-item">
-            <div class="course-icon yellow-icon">
-              <span class="material-symbols-outlined">language</span>
-            </div>
-            <div class="course-content">
-              <h4>Bahasa Inggris: Persiapan TOEFL</h4>
-              <p>Terakhir dipelajari Kemarin</p>
-            </div>
-            <span class="material-symbols-outlined arrow">arrow_forward</span>
-          </div>
-
+        <div class="course-list" id="user-course-list">
+          <div class="text-slate-500 py-4 w-full text-center">Memuat kelas...</div>
         </div>
       </section>
 

@@ -787,6 +787,33 @@ app.get('/api/users/:id/quiz-progress', async (req, res) => {
     }
 });
 
+// --- USER PROFILE STATS API ---
+app.get('/api/users/:id/profile-stats', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const [totalQuizzes] = await db.query(`SELECT COUNT(*) as count FROM quizzes`);
+        const [completedQuizzes] = await db.query(`SELECT COUNT(DISTINCT quiz_id) as count FROM user_quiz_results WHERE user_id = ?`, [userId]);
+        const [avgScoreResult] = await db.query(`
+            SELECT AVG(max_score) as avg_score 
+            FROM (
+                SELECT MAX(score) as max_score 
+                FROM user_quiz_results 
+                WHERE user_id = ? 
+                GROUP BY quiz_id
+            ) as t
+        `, [userId]);
+        
+        res.json({
+            total_quizzes: totalQuizzes[0].count,
+            completed_quizzes: completedQuizzes[0].count,
+            average_score: avgScoreResult[0].avg_score || 0
+        });
+    } catch (error) {
+        console.error('Error fetching profile stats:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 // --- USER PROFILE API ---
 app.put('/api/users/:id', async (req, res) => {
     try {
