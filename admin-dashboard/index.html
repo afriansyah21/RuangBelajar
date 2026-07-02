@@ -20,7 +20,6 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="style.css?v=4">
-
 </head>
 
 <body>
@@ -89,16 +88,6 @@
             <p>Selamat datang kembali di panel administrasi Ruangbelajar.</p>
         </div>
         <div class="dashboard-actions">
-            <div class="search-box">
-                <span class="material-symbols-outlined">search</span>
-                <input placeholder="Cari data..." type="text"/>
-            </div>
-            <button class="icon-btn">
-                <span class="material-symbols-outlined">notifications</span>
-            </button>
-            <div class="avatar">
-                <img alt="Admin Profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjbz8RS_nhq7JPVzp656AkSeOZO73W2K4vMxrPzihOma0lLX-T20Ejo_DFNYpYMoljjfR4YK_zXKUxx75Kv8UziseNNh4BN1_f2pgZZN_-ZKPJk2oLslRCjPoxn3vTZmvHQpX2MImdO3_gHe-33zh-fK2vjnOhjCBw2zM9p8VdrpyCnmPtxAgfG1QPvjSd56iMkt0MwgLa9bUr288aWymuDhSs4HiNCzkAWVvMR30IgVDu5qojP511vG4-GS2myVclEjM3f_duY9uh"/>
-            </div>
         </div>
     </header>
 
@@ -116,8 +105,8 @@
                 </span>
             </div>
             <h3 class="stat-title">Total Pengguna</h3>
-            <p class="stat-value">12,845</p>
-            <p class="stat-desc">2,400 pengguna baru bulan ini</p>
+            <p class="stat-value" id="stat-total-users">-</p>
+            <p class="stat-desc">pengguna terdaftar</p>
         </div>
 
         <!-- Pemasukan Donasi Card -->
@@ -132,8 +121,8 @@
                 </span>
             </div>
             <h3 class="stat-title">Pemasukan Donasi</h3>
-            <p class="stat-value">Rp 84.2M</p>
-            <p class="stat-desc">Meningkat dari Rp 77.6M</p>
+            <p class="stat-value" id="stat-total-donations">-</p>
+            <p class="stat-desc">Total donasi masuk</p>
         </div>
 
         <!-- Total Kelas Card -->
@@ -144,8 +133,8 @@
                 </div>
             </div>
             <h3 class="stat-title">Total Kelas Aktif</h3>
-            <p class="stat-value">342</p>
-            <p class="stat-desc">12 kelas baru dalam validasi</p>
+            <p class="stat-value" id="stat-total-courses">-</p>
+            <p class="stat-desc">Kelas tersedia di sistem</p>
         </div>
 
         <!-- Rata-rata Kuis Card -->
@@ -156,7 +145,7 @@
                 </div>
             </div>
             <h3 class="stat-title">Skor Rata-rata Kuis</h3>
-            <p class="stat-value">84.5</p>
+            <p class="stat-value" id="stat-avg-quiz">-</p>
             <div class="stat-progress">
                 <div class="stat-progress-fill"></div>
             </div>
@@ -171,23 +160,11 @@
                 <div class="chart-header">
                     <h3>Analisis Pertumbuhan Pengguna</h3>
                     <div class="chart-filters">
-                        <button class="active">Bulanan</button>
-                        <button>Tahunan</button>
+                        <button class="active" id="filter-monthly">Bulanan</button>
+                        <button id="filter-yearly">Tahunan</button>
                     </div>
-                </div>
-                <div class="chart-area">
-                    <div class="chart-grid-bg"></div>
-                    <div style="position: relative; width: 90%; height: 60%; border-bottom: 1px solid #cbd5e1; border-left: 1px solid #cbd5e1; z-index: 2;">
-                        <svg style="width: 100%; height: 100%;" preserveAspectRatio="none" viewBox="0 0 100 40">
-                            <path d="M0 40 L10 35 L20 38 L30 25 L40 28 L50 15 L60 18 L70 5 L80 10 L90 2 L100 8" fill="none" stroke="#2563eb" stroke-width="2"></path>
-                            <path d="M0 40 L10 35 L20 38 L30 25 L40 28 L50 15 L60 18 L70 5 L80 10 L90 2 L100 8 V40 H0 Z" fill="url(#grad)" opacity="0.1"></path>
-                            <defs>
-                                <linearGradient id="grad" x1="0%" x2="0%" y1="0%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1"></stop>
-                                    <stop offset="100%" style="stop-color:#2563eb;stop-opacity:0"></stop>
-                                </linearGradient>
-                            </defs>
-                        </svg>
+                    <div id="simple-bar-chart" style="display: flex; align-items: flex-end; justify-content: space-around; width: 100%; height: 250px; padding-top: 20px;">
+                        <!-- Bars injected by JS -->
                     </div>
                 </div>
             </div>
@@ -195,36 +172,14 @@
             <!-- Transaction Card -->
             <div class="admin-glass-card tx-card">
                 <h3>Transaksi Donasi Terakhir</h3>
-                <div class="tx-list">
-                    <div class="tx-item">
-                        <div class="tx-info">
-                            <div class="tx-avatar">JD</div>
-                            <div>
-                                <h4>John Doe</h4>
-                                <p>Donasi via Bank Transfer</p>
-                            </div>
-                        </div>
-                        <div class="tx-amount">
-                            <strong>Rp 500.000</strong>
-                            <span>10 menit yang lalu</span>
-                        </div>
-                    </div>
+                <div class="tx-list" id="recent-donations-list">
+                    <div class="text-center text-slate-500 py-4">Memuat transaksi...</div>
                 </div>
-                <button class="btn-view-all">Lihat Semua Transaksi</button>
+                <a href="../manajemen-donasi-admin/index.html" class="btn-view-all" style="display:block; text-align:center; text-decoration:none;">Lihat Semua Transaksi</a>
             </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 24px;">
-            <!-- Health Card -->
-            <div class="system-health-card">
-                <h3>Kesehatan Sistem</h3>
-                <h2>Lancar (99.9%)</h2>
-                <div class="health-status">
-                    <div class="health-dot"></div>
-                    <span>Semua layanan beroperasi normal</span>
-                </div>
-            </div>
-        </div>
+
     </div>
 
   </main>

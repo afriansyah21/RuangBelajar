@@ -849,6 +849,35 @@ app.get('/api/admin/feedbacks', async (req, res) => {
     }
 });
 
+// --- DASHBOARD API ---
+app.get('/api/admin/dashboard-stats', async (req, res) => {
+    try {
+        const [[{ total_users }]] = await db.query('SELECT COUNT(*) AS total_users FROM users');
+        const [[{ total_donations }]] = await db.query('SELECT SUM(amount) AS total_donations FROM donations');
+        const [[{ total_courses }]] = await db.query('SELECT COUNT(*) AS total_courses FROM courses');
+        const [[{ avg_score }]] = await db.query('SELECT AVG(score) AS avg_score FROM user_quiz_results');
+        
+        // Growth (Mocked properly based on created_at but grouped)
+        const [monthlyGrowth] = await db.query("SELECT DATE_FORMAT(created_at, '%Y-%m') as label, COUNT(*) as count FROM users GROUP BY label ORDER BY label LIMIT 12");
+        const [yearlyGrowth] = await db.query("SELECT DATE_FORMAT(created_at, '%Y') as label, COUNT(*) as count FROM users GROUP BY label ORDER BY label LIMIT 5");
+
+        const [recentDonations] = await db.query('SELECT donator_name, donation_method, amount, created_at FROM donations ORDER BY created_at DESC LIMIT 5');
+
+        res.json({
+            totalUsers: total_users || 0,
+            totalDonations: total_donations || 0,
+            totalCourses: total_courses || 0,
+            avgQuizScore: Math.round((avg_score || 0) * 10) / 10,
+            monthlyGrowth,
+            yearlyGrowth,
+            recentDonations
+        });
+    } catch (error) {
+        console.error('Error fetching dashboard stats:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Backend server running at http://localhost:${port}`);
 });
