@@ -86,7 +86,7 @@
   <main class="container">
     
     <div class="dashboard-header">
-      <h1>Halo, Selamat Datang Aditya!</h1>
+      <h1 id="user-greeting">Halo, Selamat Datang Aditya!</h1>
       <p>Satu langkah lebih dekat menuju mimpimu. Mari jadi versi terbaik dirimu hari ini!</p>
     </div>
 
@@ -137,14 +137,14 @@
             <h2>Kritik & Saran</h2>
           </div>
           
-          <form class="feedback-form">
+          <form class="feedback-form" id="feedback-form">
             <div class="form-group">
               <label>Subjek</label>
-              <input type="text" class="form-input" placeholder="Masukkan subjek masukan anda">
+              <input type="text" id="feedback-subject" class="form-input" placeholder="Masukkan subjek masukan anda" required>
             </div>
             <div class="form-group">
               <label>Pesan Anda</label>
-              <textarea class="form-textarea" placeholder="Apa yang bisa kami tingkatkan?"></textarea>
+              <textarea id="feedback-message" class="form-textarea" placeholder="Apa yang bisa kami tingkatkan?" required></textarea>
             </div>
             <button type="submit" class="btn-submit">Kirim Feedback</button>
           </form>

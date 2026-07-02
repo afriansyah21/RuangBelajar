@@ -821,6 +821,34 @@ app.post('/api/users/:id/verify-password', async (req, res) => {
     }
 });
 
+// --- FEEDBACK API ---
+app.post('/api/feedback', async (req, res) => {
+    try {
+        const { subject, message, user_name } = req.body;
+        if (!subject || !message) {
+            return res.status(400).json({ error: 'Subject and message are required' });
+        }
+        const [result] = await db.query(
+            'INSERT INTO feedbacks (user_name, subject, message) VALUES (?, ?, ?)',
+            [user_name || 'Pengguna', subject, message]
+        );
+        res.status(201).json({ id: result.insertId, message: 'Feedback sent successfully' });
+    } catch (error) {
+        console.error('Error adding feedback:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+app.get('/api/admin/feedbacks', async (req, res) => {
+    try {
+        const [rows] = await db.query('SELECT * FROM feedbacks ORDER BY created_at DESC');
+        res.json(rows);
+    } catch (error) {
+        console.error('Error fetching feedbacks:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 app.listen(port, () => {
     console.log(`Backend server running at http://localhost:${port}`);
 });
