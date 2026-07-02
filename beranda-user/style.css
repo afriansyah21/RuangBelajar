@@ -926,6 +926,7 @@ body {
   color: white;
   position: relative;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .widget-bantuan-content {
@@ -945,6 +946,11 @@ body {
 }
 
 .btn-chat {
+  display: block;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  text-decoration: none;
   background: white;
   color: #2563eb;
   padding: 10px 20px;

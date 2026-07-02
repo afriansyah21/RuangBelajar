@@ -95,39 +95,14 @@
       <!-- Kolom Kiri: Main Content -->
       <div class="dashboard-main">
         
-        <!-- Progres Kelas -->
+        <!-- Progress Kuis -->
         <div class="dashboard-card">
           <div class="dashboard-card-header">
-            <h2>Progres Kelas</h2>
-            <a href="#">Lihat Semua</a>
+            <h2>Progress Kuis</h2>
           </div>
           
-          <div class="progress-grid">
-            
-            <div class="progress-item">
-              <div class="circular-progress" style="--progress: 75;">
-                <span>75%</span>
-              </div>
-              <h3>UI/UX Design Masterclass</h3>
-              <p>Modul 12/16</p>
-            </div>
-            
-            <div class="progress-item">
-              <div class="circular-progress" style="--progress: 45;">
-                <span>45%</span>
-              </div>
-              <h3>Frontend Mastery: React</h3>
-              <p>Modul 9/20</p>
-            </div>
-            
-            <div class="progress-item">
-              <div class="circular-progress" style="--progress: 90;">
-                <span>90%</span>
-              </div>
-              <h3>Graphic Design Principles</h3>
-              <p>Modul 18/20</p>
-            </div>
-
+          <div class="progress-grid" id="progress-kuis-grid">
+            <div class="text-slate-500 py-4 w-full text-center" style="grid-column: 1 / -1;">Memuat progress...</div>
           </div>
         </div>
 
@@ -161,50 +136,8 @@
             <h2>Status Kuis Terbaru</h2>
           </div>
           
-          <div class="quiz-status-list">
-            
-            <div class="quiz-status-item">
-              <div class="quiz-icon">
-                <span class="material-symbols-outlined">quiz</span>
-              </div>
-              <div class="quiz-info">
-                <h4>Quiz 3: Visual Hierarchy</h4>
-                <p>UI/UX Masterclass</p>
-              </div>
-              <div class="quiz-score">
-                <strong>95</strong>
-                <span class="badge-lulus">Lulus</span>
-              </div>
-            </div>
-
-            <div class="quiz-status-item">
-              <div class="quiz-icon">
-                <span class="material-symbols-outlined">quiz</span>
-              </div>
-              <div class="quiz-info">
-                <h4>Quiz 2: React Hooks</h4>
-                <p>Frontend Mastery</p>
-              </div>
-              <div class="quiz-score">
-                <strong>88</strong>
-                <span class="badge-lulus">Lulus</span>
-              </div>
-            </div>
-
-            <div class="quiz-status-item">
-              <div class="quiz-icon">
-                <span class="material-symbols-outlined">quiz</span>
-              </div>
-              <div class="quiz-info">
-                <h4>Quiz 1: Color Theory</h4>
-                <p>Graphic Design</p>
-              </div>
-              <div class="quiz-score">
-                <strong>92</strong>
-                <span class="badge-lulus">Lulus</span>
-              </div>
-            </div>
-
+          <div class="quiz-status-list" id="recent-quizzes-list">
+            <div class="text-slate-500 py-4 w-full text-center">Memuat kuis...</div>
           </div>
         </div>
         
@@ -213,7 +146,7 @@
           <div class="widget-bantuan-content">
             <h3>Butuh bantuan?</h3>
             <p>Hubungi admin kapan saja.</p>
-            <button class="btn-chat">Chat Admin</button>
+            <a href="https://wa.me/6289528236913" target="_blank" class="btn-chat">Chat Admin</a>
           </div>
           <span class="material-symbols-outlined widget-bg-icon">support_agent</span>
         </div>

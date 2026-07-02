@@ -744,6 +744,49 @@ app.delete('/api/admin/donations/:id', async (req, res) => {
     }
 });
 
+// --- RECENT QUIZZES API ---
+app.get('/api/users/:id/recent-quizzes', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const [results] = await db.query(`
+            SELECT q.title as quiz_title, c.title as course_title, uqr.score, uqr.created_at
+            FROM user_quiz_results uqr
+            JOIN quizzes q ON uqr.quiz_id = q.id
+            JOIN courses c ON q.course_id = c.id
+            WHERE uqr.user_id = ?
+            ORDER BY uqr.created_at DESC
+            LIMIT 5
+        `, [userId]);
+        res.json(results);
+    } catch (error) {
+        console.error('Error fetching recent quizzes:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// --- USER QUIZ PROGRESS API ---
+app.get('/api/users/:id/quiz-progress', async (req, res) => {
+    try {
+        const userId = req.params.id;
+        const [results] = await db.query(`
+            SELECT q.title as quiz_title, q.description as quiz_description, c.title as course_title, COALESCE(uqr.score, 0) as score 
+            FROM quizzes q 
+            LEFT JOIN courses c ON q.course_id = c.id 
+            LEFT JOIN (
+                SELECT quiz_id, MAX(score) as score
+                FROM user_quiz_results
+                WHERE user_id = ?
+                GROUP BY quiz_id
+            ) uqr ON q.id = uqr.quiz_id
+            ORDER BY DATE(q.created_at) DESC, q.id ASC
+        `, [userId]);
+        res.json(results);
+    } catch (error) {
+        console.error('Error fetching quiz progress:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 // --- USER PROFILE API ---
 app.put('/api/users/:id', async (req, res) => {
     try {
