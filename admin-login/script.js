@@ -143,4 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Warmup backend saat halaman admin-login dibuka
+    if (typeof API_BASE_URL !== 'undefined') {
+        fetch(`${API_BASE_URL}/api/warmup`).catch(() => {});
+    }
 });

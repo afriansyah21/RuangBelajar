@@ -21,6 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     loadCourses();
+
+    // Warmup backend jika diakses langsung
+    if (typeof API_BASE_URL !== 'undefined') {
+        fetch(`${API_BASE_URL}/api/warmup`).catch(() => {});
+    }
 });
 
 async function loadCourses() {
