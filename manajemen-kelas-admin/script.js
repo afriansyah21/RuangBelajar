@@ -28,7 +28,7 @@ async function loadCourses() {
     if (!container) return;
 
     try {
-        const response = await axios.get(`${API_BASE_URL}/api/courses`);
+        const response = await axios.get(`${API_BASE_URL}/api/courses`, { timeout: 15000 });
         const courses = response.data;
         
         container.innerHTML = '';
@@ -68,6 +68,15 @@ async function loadCourses() {
         
     } catch (error) {
         console.error('Error fetching courses:', error);
-        container.innerHTML = '<p style="color: red;">Gagal memuat data kelas dari server.</p>';
+        const isTimeout = error.code === 'ECONNABORTED' || error.message.includes('timeout');
+        container.innerHTML = `
+            <div style="text-align:center; padding: 20px;">
+                <p style="color: #ef4444; margin-bottom: 10px;">
+                    ${isTimeout ? '⏱️ Server sedang dalam proses startup, mohon tunggu sebentar.' : '❌ Gagal memuat data kelas dari server.'}
+                </p>
+                <button onclick="loadCourses()" style="background:#2563eb;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;">
+                    🔄 Coba Lagi
+                </button>
+            </div>`;
     }
 }
