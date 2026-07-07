@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error('Group not found');
             const data = await response.json();
             
-            currentQuizId = data.quiz_id;
+            window.currentQuizId = data.quiz_id;
             
             if (groupTitleInput) {
                 groupTitleInput.value = data.title || '';
@@ -170,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (response.ok) {
                     alert('Kelompok soal berhasil diperbarui!');
-                    if (currentQuizId) {
-                        window.location.href = `../detail-kuis-admin/index.html?id=${currentQuizId}`;
+                    if (window.currentQuizId) {
+                        window.location.href = `../detail-kuis-admin/index.html?id=${window.currentQuizId}`;
                     } else {
                         window.history.back();
                     }
@@ -239,3 +239,10 @@ window.updateCorrectAnswerOptions = function(qId) {
         select.value = select.options[0].value;
     }
 }
+window.goBack = function() {
+    if (window.currentQuizId) {
+        window.location.href = `../detail-kuis-admin/index.html?id=${window.currentQuizId}`;
+    } else {
+        window.history.back();
+    }
+};
