@@ -49,7 +49,7 @@ async function loadCourseMaterials(courseId) {
         const response = await axios.get(`${API_BASE_URL}/api/courses/${courseId}/materials`);
         const materials = response.data;
 
-        container.innerHTML = `';
+        container.innerHTML = '';
 
         if (materials.length === 0) {
             container.innerHTML = '<p>Belum ada materi untuk kelas ini.</p>';

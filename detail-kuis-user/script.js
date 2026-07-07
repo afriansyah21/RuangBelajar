@@ -45,7 +45,7 @@ async function fetchQuizDetails(quizId) {
 
         const [quizRes, completedRes] = await Promise.all(fetchPromises);
 
-        if (!quizRes.ok) throw new Error(`Failed to fetch quiz details');
+        if (!quizRes.ok) throw new Error('Failed to fetch quiz details');
         const quiz = await quizRes.json();
         
         let completedGroups = [];
