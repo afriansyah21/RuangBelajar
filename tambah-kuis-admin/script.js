@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadCourses() {
     try {
-        const response = await fetch('http://localhost:3000/api/courses');
+        const response = await fetch(`${API_BASE_URL}/api/courses`);
         const courses = await response.json();
         
         const select = document.getElementById('course-id');
@@ -56,7 +56,7 @@ async function createQuiz(event) {
             const formData = new FormData();
             formData.append('image', imageInput.files[0]);
             
-            const uploadRes = await fetch('http://localhost:3000/api/upload', {
+            const uploadRes = await fetch(`${API_BASE_URL}/api/upload`, {
                 method: 'POST',
                 body: formData
             });
@@ -71,7 +71,7 @@ async function createQuiz(event) {
         }
         
         // Simpan data kuis
-        const response = await fetch('http://localhost:3000/api/admin/quizzes', {
+        const response = await fetch(`${API_BASE_URL}/api/admin/quizzes`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

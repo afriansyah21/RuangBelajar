@@ -31,9 +31,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadCourseDetails(courseId) {
     try {
-        const response = await axios.get(`http://localhost:3000/api/courses/${courseId}`);
+        const response = await axios.get(`${API_BASE_URL}/api/courses/${courseId}`);
         const course = response.data;
-        document.getElementById('course-title').textContent = `Materi Kelas: ${course.title}`;
+        document.getElementById(`course-title').textContent = `Materi Kelas: ${course.title}`;
         document.getElementById('course-desc').textContent = course.description || 'Daftar materi dan video pembelajaran untuk kelas ini.';
     } catch (error) {
         console.error('Error fetching course details:', error);
@@ -46,10 +46,10 @@ async function loadCourseMaterials(courseId) {
     if (!container) return;
 
     try {
-        const response = await axios.get(`http://localhost:3000/api/courses/${courseId}/materials`);
+        const response = await axios.get(`${API_BASE_URL}/api/courses/${courseId}/materials`);
         const materials = response.data;
 
-        container.innerHTML = '';
+        container.innerHTML = `';
 
         if (materials.length === 0) {
             container.innerHTML = '<p>Belum ada materi untuk kelas ini.</p>';

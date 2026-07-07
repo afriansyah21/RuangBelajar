@@ -46,10 +46,10 @@ async function renderResult() {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/user-quiz-results/${groupId}/${currentUser.id}`);
+        const response = await fetch(`${API_BASE_URL}/api/user-quiz-results/${groupId}/${currentUser.id}`);
         if (!response.ok) {
             if (response.status === 404) {
-                container.innerHTML = '<p style="color: red;">Tidak ada data hasil kuis ditemukan. Silakan kerjakan kuis terlebih dahulu.</p>';
+                container.innerHTML = `<p style="color: red;">Tidak ada data hasil kuis ditemukan. Silakan kerjakan kuis terlebih dahulu.</p>';
             } else {
                 container.innerHTML = '<p style="color: red;">Gagal memuat hasil kuis.</p>';
             }

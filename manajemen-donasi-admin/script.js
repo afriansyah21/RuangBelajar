@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadPaymentMethods() {
     try {
-        const res = await axios.get('http://localhost:3000/api/admin/payment-methods');
+        const res = await axios.get(`${API_BASE_URL}/api/admin/payment-methods`);
         const methods = res.data;
         const container = document.getElementById('payment-methods-container');
         
@@ -92,7 +92,7 @@ async function loadPaymentMethods() {
 
 async function loadDonations() {
     try {
-        const res = await axios.get('http://localhost:3000/api/admin/donations');
+        const res = await axios.get(`${API_BASE_URL}/api/admin/donations`);
         const rawDonations = res.data;
         
         let totalAmount = 0;
@@ -175,10 +175,10 @@ function renderDonations() {
 async function deleteDonation(id) {
     if (confirm('Yakin ingin menghapus donasi ini?')) {
         try {
-            await axios.delete(`http://localhost:3000/api/admin/donations/${id}`);
+            await axios.delete(`${API_BASE_URL}/api/admin/donations/${id}`);
             loadDonations();
         } catch (error) {
-            console.error('Error deleting donation:', error);
+            console.error(`Error deleting donation:', error);
             alert('Gagal menghapus donasi.');
         }
     }

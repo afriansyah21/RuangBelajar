@@ -36,8 +36,8 @@ async function loadCourseAndMaterials() {
 
     try {
         // Fetch course details and materials
-        const courseRes = await axios.get(`http://localhost:3000/api/courses/${courseId}`);
-        document.getElementById('course-title').innerText = `Materi Kelas: ${courseRes.data.title}`;
+        const courseRes = await axios.get(`${API_BASE_URL}/api/courses/${courseId}`);
+        document.getElementById(`course-title').innerText = `Materi Kelas: ${courseRes.data.title}`;
 
         const materials = courseRes.data.materials || [];
 
@@ -69,7 +69,7 @@ async function loadCourseAndMaterials() {
                     <button class="btn-icon btn-edit" title="Edit Materi" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='../edit-materi-admin/index.html?id=${materi.id}';">
                         <span class="material-symbols-outlined" style="pointer-events: none;">edit</span>
                     </button>
-                    <button class="btn-icon btn-delete" title="Hapus Materi" onclick="event.preventDefault(); event.stopPropagation(); if(confirm('Apakah Anda yakin ingin menghapus materi ini?')){ axios.delete('http://localhost:3000/api/admin/materials/${materi.id}').then(() => window.location.reload()).catch(e => alert('Gagal menghapus materi')); }">
+                    <button class="btn-icon btn-delete" title="Hapus Materi" onclick="event.preventDefault(); event.stopPropagation(); if(confirm('Apakah Anda yakin ingin menghapus materi ini?')){ axios.delete(`${API_BASE_URL}/api/admin/materials/${materi.id}`).then(() => window.location.reload()).catch(e => alert('Gagal menghapus materi')); }">
                         <span class="material-symbols-outlined" style="pointer-events: none;">delete</span>
                     </button>
                 </div>

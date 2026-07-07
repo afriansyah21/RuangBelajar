@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadCourses() {
     try {
-        const response = await fetch('http://localhost:3000/api/courses');
+        const response = await fetch(`${API_BASE_URL}/api/courses`);
         const courses = await response.json();
         
         const select = document.getElementById('course-id');
@@ -57,8 +57,8 @@ async function loadCourses() {
 
 async function loadQuizDetails() {
     try {
-        const response = await fetch(`http://localhost:3000/api/quizzes/${currentQuizId}`);
-        if (!response.ok) throw new Error('Quiz not found');
+        const response = await fetch(`${API_BASE_URL}/api/quizzes/${currentQuizId}`);
+        if (!response.ok) throw new Error(`Quiz not found');
         
         const data = await response.json();
         const quiz = data.quiz; // the API returns { quiz, questions } wait, let me check the endpoint again!
@@ -95,7 +95,7 @@ async function updateQuiz(event) {
             const formData = new FormData();
             formData.append('image', imageInput.files[0]);
             
-            const uploadRes = await fetch('http://localhost:3000/api/upload', {
+            const uploadRes = await fetch(`${API_BASE_URL}/api/upload`, {
                 method: 'POST',
                 body: formData
             });
@@ -109,8 +109,8 @@ async function updateQuiz(event) {
             }
         }
         
-        const response = await fetch(`http://localhost:3000/api/admin/quizzes/${currentQuizId}`, {
-            method: 'PUT',
+        const response = await fetch(`${API_BASE_URL}/api/admin/quizzes/${currentQuizId}`, {
+            method: `PUT',
             headers: {
                 'Content-Type': 'application/json'
             },

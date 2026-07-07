@@ -37,15 +37,15 @@ async function fetchQuizDetails(quizId) {
     }
 
     try {
-        const fetchPromises = [fetch(`http://localhost:3000/api/quizzes/${quizId}`)];
+        const fetchPromises = [fetch(`${API_BASE_URL}/api/quizzes/${quizId}`)];
         
         if (userId) {
-            fetchPromises.push(fetch(`http://localhost:3000/api/users/${userId}/completed-groups`));
+            fetchPromises.push(fetch(`${API_BASE_URL}/api/users/${userId}/completed-groups`));
         }
 
         const [quizRes, completedRes] = await Promise.all(fetchPromises);
 
-        if (!quizRes.ok) throw new Error('Failed to fetch quiz details');
+        if (!quizRes.ok) throw new Error(`Failed to fetch quiz details');
         const quiz = await quizRes.json();
         
         let completedGroups = [];

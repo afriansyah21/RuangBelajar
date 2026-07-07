@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================
     async function initStats() {
         try {
-            const res = await fetch('http://localhost:3000/api/public/landing-stats');
+            const res = await fetch(`${API_BASE_URL}/api/public/landing-stats`);
             if (res.ok) {
                 const stats = await res.json();
                 const siswaEl = document.getElementById('stat-siswa-aktif');

@@ -29,10 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load Data
     async function loadDonation() {
         try {
-            const res = await axios.get(`http://localhost:3000/api/admin/donations/${donationId}`);
+            const res = await axios.get(`${API_BASE_URL}/api/admin/donations/${donationId}`);
             const data = res.data;
 
-            document.getElementById('donator-name').value = data.donator_name;
+            document.getElementById(`donator-name').value = data.donator_name;
             document.getElementById('donation-method').value = data.donation_method;
             
             // Format date to YYYY-MM-DD for input[type="date"]
@@ -65,14 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const amount = document.getElementById('donation-amount').value;
 
         try {
-            await axios.put(`http://localhost:3000/api/admin/donations/${donationId}`, {
+            await axios.put(`${API_BASE_URL}/api/admin/donations/${donationId}`, {
                 donator_name,
                 donation_method,
                 donation_date,
                 amount
             });
             
-            alert('Donasi berhasil diperbarui!');
+            alert(`Donasi berhasil diperbarui!');
             window.location.href = '../manajemen-donasi-admin/index.html';
         } catch (error) {
             console.error('Error updating donation:', error);

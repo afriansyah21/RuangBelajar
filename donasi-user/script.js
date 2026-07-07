@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchPaymentMethods() {
     try {
-        const response = await fetch('http://localhost:3000/api/admin/payment-methods');
+        const response = await fetch(`${API_BASE_URL}/api/admin/payment-methods`);
         if (!response.ok) throw new Error('Gagal mengambil data metode pembayaran');
         const methods = await response.json();
 

@@ -44,13 +44,13 @@ function initForm() {
         const summary = document.getElementById('content-input').value;
 
         try {
-            await axios.post(`http://localhost:3000/api/admin/courses/${courseId}/materials`, {
+            await axios.post(`${API_BASE_URL}/api/admin/courses/${courseId}/materials`, {
                 title,
                 youtube_link,
                 short_description,
                 summary
             });
-            alert('Materi berhasil ditambahkan!');
+            alert(`Materi berhasil ditambahkan!');
             window.location.href = backUrl;
         } catch (error) {
             console.error('Error saving material:', error);

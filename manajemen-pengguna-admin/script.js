@@ -47,7 +47,7 @@ const feedbacksPerPage = 10;
 
 async function fetchUsers() {
     try {
-        const response = await fetch('http://localhost:3000/api/admin/users');
+        const response = await fetch(`${API_BASE_URL}/api/admin/users`);
         if (!response.ok) throw new Error('Gagal mengambil data pengguna');
         allUsers = await response.json();
         currentPage = 1;
@@ -167,7 +167,7 @@ function timeSince(date) {
 
 async function fetchFeedbacks() {
     try {
-        const response = await fetch('http://localhost:3000/api/admin/feedbacks');
+        const response = await fetch(`${API_BASE_URL}/api/admin/feedbacks`);
         if (!response.ok) throw new Error('Gagal mengambil data feedback');
         const rawFeedbacks = await response.json();
         

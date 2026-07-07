@@ -28,7 +28,7 @@ async function loadCourses() {
     if (!container) return;
 
     try {
-        const response = await axios.get('http://localhost:3000/api/courses');
+        const response = await axios.get(`${API_BASE_URL}/api/courses`);
         const courses = response.data;
         
         // Remove existing items except header

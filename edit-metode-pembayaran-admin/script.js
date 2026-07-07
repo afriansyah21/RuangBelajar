@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load existing payment methods
     async function loadData() {
         try {
-            const res = await axios.get('http://localhost:3000/api/admin/payment-methods');
+            const res = await axios.get(`${API_BASE_URL}/api/admin/payment-methods`);
             const methods = res.data;
             let hasQris = false;
 
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         try {
-            await axios.post('http://localhost:3000/api/admin/payment-methods/bulk', { methods });
+            await axios.post(`${API_BASE_URL}/api/admin/payment-methods/bulk`, { methods });
             alert('Metode pembayaran berhasil disimpan!');
             window.location.href = '../manajemen-donasi-admin/index.html';
         } catch (error) {

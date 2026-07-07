@@ -46,7 +46,7 @@ function timeSince(date) {
 
 async function fetchDashboardStats() {
     try {
-        const response = await fetch('http://localhost:3000/api/admin/dashboard-stats');
+        const response = await fetch(`${API_BASE_URL}/api/admin/dashboard-stats`);
         if (!response.ok) throw new Error('Gagal mengambil data statistik');
         const data = await response.json();
 

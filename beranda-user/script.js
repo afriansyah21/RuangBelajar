@@ -26,10 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!grid) return;
 
         try {
-            const response = await fetch(`http://localhost:3000/api/users/${userId}/quiz-progress`);
+            const response = await fetch(`${API_BASE_URL}/api/users/${userId}/quiz-progress`);
             if (response.ok) {
                 const results = await response.json();
-                grid.innerHTML = '';
+                grid.innerHTML = `';
                 
                 if (results.length > 0) {
                     results.forEach(res => {
@@ -63,10 +63,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!list) return;
 
         try {
-            const response = await fetch(`http://localhost:3000/api/users/${userId}/recent-quizzes`);
+            const response = await fetch(`${API_BASE_URL}/api/users/${userId}/recent-quizzes`);
             if (response.ok) {
                 const results = await response.json();
-                list.innerHTML = '';
+                list.innerHTML = `';
                 
                 if (results.length > 0) {
                     results.forEach(res => {
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const response = await fetch('http://localhost:3000/api/feedback', {
+                const response = await fetch(`${API_BASE_URL}/api/feedback`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({

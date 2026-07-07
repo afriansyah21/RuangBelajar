@@ -100,8 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fetch existing group and questions
     async function fetchQuestions() {
         try {
-            const response = await fetch(`http://localhost:3000/api/admin/question-groups/${groupId}`);
-            if (!response.ok) throw new Error('Group not found');
+            const response = await fetch(`${API_BASE_URL}/api/admin/question-groups/${groupId}`);
+            if (!response.ok) throw new Error(`Group not found');
             const data = await response.json();
             
             window.currentQuizId = data.quiz_id;
@@ -162,8 +162,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             try {
-                const response = await fetch(`http://localhost:3000/api/admin/question-groups/${groupId}`, {
-                    method: 'PUT',
+                const response = await fetch(`${API_BASE_URL}/api/admin/question-groups/${groupId}`, {
+                    method: `PUT',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ title: groupTitle, questions: questions })
                 });

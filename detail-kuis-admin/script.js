@@ -35,8 +35,8 @@ async function loadQuizDetails() {
     const quizId = urlParams.get('id');
     
     try {
-        const response = await fetch(`http://localhost:3000/api/quizzes/${quizId}`);
-        if (!response.ok) throw new Error('Gagal memuat detail kuis');
+        const response = await fetch(`${API_BASE_URL}/api/quizzes/${quizId}`);
+        if (!response.ok) throw new Error(`Gagal memuat detail kuis');
         
         const data = await response.json();
         
@@ -97,8 +97,8 @@ window.deleteGroup = async function(groupId) {
     }
     
     try {
-        const response = await fetch(`http://localhost:3000/api/admin/question-groups/${groupId}`, {
-            method: 'DELETE'
+        const response = await fetch(`${API_BASE_URL}/api/admin/question-groups/${groupId}`, {
+            method: `DELETE'
         });
         
         if (response.ok) {

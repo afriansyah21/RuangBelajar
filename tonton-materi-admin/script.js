@@ -57,11 +57,11 @@ async function loadMaterial() {
 
     try {
         // Ambil data materi dari backend
-        const res = await axios.get(`http://localhost:3000/api/admin/materials/${materialId}`);
+        const res = await axios.get(`${API_BASE_URL}/api/admin/materials/${materialId}`);
         const material = res.data;
 
         // Set tombol kembali agar kembali ke detail kelas (lebih spesifik)
-        document.getElementById('btn-kembali').onclick = () => {
+        document.getElementById(`btn-kembali').onclick = () => {
             window.location.href = `../detail-kelas-admin/index.html?course_id=${material.course_id}`;
         };
 

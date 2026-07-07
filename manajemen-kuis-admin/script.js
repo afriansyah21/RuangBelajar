@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchQuizzes() {
     try {
-        const response = await fetch('http://localhost:3000/api/admin/quizzes');
+        const response = await fetch(`${API_BASE_URL}/api/admin/quizzes`);
         const quizzes = await response.json();
         
         const container = document.getElementById('quiz-list-container');
@@ -72,8 +72,8 @@ async function deleteQuiz(id) {
     if (!confirm('Apakah Anda yakin ingin menghapus kuis ini? Semua soal di dalamnya juga akan terhapus.')) return;
     
     try {
-        const response = await fetch(`http://localhost:3000/api/admin/quizzes/${id}`, {
-            method: 'DELETE'
+        const response = await fetch(`${API_BASE_URL}/api/admin/quizzes/${id}`, {
+            method: `DELETE'
         });
         
         if (response.ok) {

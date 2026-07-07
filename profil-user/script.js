@@ -82,8 +82,8 @@ async function nextPasswordStep() {
   const user = JSON.parse(userJson);
 
   try {
-    const res = await fetch(`http://localhost:3000/api/users/${user.id}/verify-password`, {
-      method: 'POST',
+    const res = await fetch(`${API_BASE_URL}/api/users/${user.id}/verify-password`, {
+      method: `POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ currentPassword: currentPass })
     });
@@ -128,8 +128,8 @@ async function saveNewPassword() {
   const user = JSON.parse(userJson);
 
   try {
-    const res = await fetch(`http://localhost:3000/api/users/${user.id}/password`, {
-      method: 'PUT',
+    const res = await fetch(`${API_BASE_URL}/api/users/${user.id}/password`, {
+      method: `PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ currentPassword: currentPass, newPassword: newPass })
     });
@@ -222,8 +222,8 @@ async function saveProfile() {
       payload.profile_picture = profilePicture;
     }
 
-    const res = await fetch(`http://localhost:3000/api/users/${user.id}`, {
-      method: 'PUT',
+    const res = await fetch(`${API_BASE_URL}/api/users/${user.id}`, {
+      method: `PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
@@ -244,7 +244,7 @@ async function saveProfile() {
 // Fetch and render profile stats
 async function loadProfileStats(userId) {
   try {
-    const res = await fetch(`http://localhost:3000/api/users/${userId}/profile-stats`);
+    const res = await fetch(`${API_BASE_URL}/api/users/${userId}/profile-stats`);
     if (!res.ok) return;
     const stats = await res.json();
     
@@ -253,7 +253,7 @@ async function loadProfileStats(userId) {
     const completed = stats.completed_quizzes || 0;
     const quizPct = total > 0 ? Math.round((completed / total) * 100) : 0;
     
-    const quizFractionEl = document.getElementById('quiz-fraction');
+    const quizFractionEl = document.getElementById(`quiz-fraction');
     const quizPercentageEl = document.getElementById('quiz-percentage');
     const quizProgressBarEl = document.getElementById('quiz-progress-bar');
     if(quizFractionEl) quizFractionEl.textContent = `${completed}/${total}`;
@@ -283,11 +283,11 @@ async function loadProfileStats(userId) {
 // Fetch and render user courses
 async function loadUserCourses() {
   try {
-    const res = await fetch(`http://localhost:3000/api/courses`);
+    const res = await fetch(`${API_BASE_URL}/api/courses`);
     if (!res.ok) return;
     const courses = await res.json();
     
-    const listEl = document.getElementById('user-course-list');
+    const listEl = document.getElementById(`user-course-list');
     if (!listEl) return;
     
     listEl.innerHTML = '';

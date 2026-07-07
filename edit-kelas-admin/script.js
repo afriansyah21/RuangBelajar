@@ -26,10 +26,10 @@ let currentCourseId = null;
 async function loadCourseData(id) {
     currentCourseId = id;
     try {
-        const response = await axios.get(`http://localhost:3000/api/courses/${id}`);
+        const response = await axios.get(`${API_BASE_URL}/api/courses/${id}`);
         const course = response.data;
         
-        document.getElementById('title-input').value = course.title;
+        document.getElementById(`title-input').value = course.title;
         document.getElementById('desc-input').value = course.description;
         // Kita juga bisa menset thumbnail img src jika ada elemennya
     } catch (error) {
@@ -51,26 +51,26 @@ async function updateCourse() {
 
     try {
         // Ambil data course saat ini untuk mendapatkan thumbnail url yang lama
-        const currentCourse = await axios.get(`http://localhost:3000/api/courses/${currentCourseId}`);
+        const currentCourse = await axios.get(`${API_BASE_URL}/api/courses/${currentCourseId}`);
         let thumbnail_url = currentCourse.data.thumbnail_url;
 
         // Jika user memilih file baru, unggah file tersebut
         if (fileInput && fileInput.files.length > 0) {
             const formData = new FormData();
-            formData.append('image', fileInput.files[0]);
+            formData.append(`image', fileInput.files[0]);
             
-            const uploadRes = await axios.post('http://localhost:3000/api/upload', formData, {
+            const uploadRes = await axios.post(`${API_BASE_URL}/api/upload`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             thumbnail_url = uploadRes.data.url;
         }
 
-        await axios.put(`http://localhost:3000/api/courses/${currentCourseId}`, {
+        await axios.put(`${API_BASE_URL}/api/courses/${currentCourseId}`, {
             title,
             description,
             thumbnail_url
         });
-        alert('Perubahan berhasil disimpan!');
+        alert(`Perubahan berhasil disimpan!');
         window.location.href = '../manajemen-kelas-admin/index.html';
     } catch (error) {
         console.error('Error updating course:', error);

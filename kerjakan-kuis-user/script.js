@@ -38,8 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchGroupDetails(groupId) {
     try {
-        const response = await fetch(`http://localhost:3000/api/admin/question-groups/${groupId}`);
-        if (!response.ok) throw new Error('Gagal memuat kuis');
+        const response = await fetch(`${API_BASE_URL}/api/admin/question-groups/${groupId}`);
+        if (!response.ok) throw new Error(`Gagal memuat kuis');
         const group = await response.json();
 
         document.getElementById('quiz-title').textContent = `Kuis: ${group.title || `Grup ${groupId}`}`;
@@ -121,8 +121,8 @@ async function submitQuiz(groupId) {
     }
 
     try {
-        const response = await fetch(`http://localhost:3000/api/question-groups/${groupId}/submit`, {
-            method: 'POST',
+        const response = await fetch(`${API_BASE_URL}/api/question-groups/${groupId}/submit`, {
+            method: `POST',
             headers: {
                 'Content-Type': 'application/json'
             },

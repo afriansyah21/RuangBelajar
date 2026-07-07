@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const amount = document.getElementById('donation-amount').value;
 
             try {
-                await axios.post('http://localhost:3000/api/admin/donations', {
+                await axios.post(`${API_BASE_URL}/api/admin/donations`, {
                     donator_name,
                     donation_method,
                     donation_date,

@@ -119,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Load active students count
-    fetch('http://localhost:3000/api/admin/dashboard-stats')
+    fetch(`${API_BASE_URL}/api/admin/dashboard-stats`)
         .then(res => res.json())
         .then(data => {
             const countEl = document.getElementById('active-students-count');

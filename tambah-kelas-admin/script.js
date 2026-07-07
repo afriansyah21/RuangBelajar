@@ -28,14 +28,14 @@ async function saveCourse() {
             const formData = new FormData();
             formData.append('image', fileInput.files[0]);
             
-            const uploadRes = await axios.post('http://localhost:3000/api/upload', formData, {
+            const uploadRes = await axios.post(`${API_BASE_URL}/api/upload`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             thumbnail_url = uploadRes.data.url;
         }
 
         // Simpan data kelas
-        await axios.post('http://localhost:3000/api/courses', {
+        await axios.post(`${API_BASE_URL}/api/courses`, {
             title,
             description,
             thumbnail_url
