@@ -1032,12 +1032,12 @@ app.get('/api/admin/dashboard-stats', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 
-// Untuk local development
-if (process.env.NODE_ENV !== 'production') {
+// Selalu jalankan server kecuali di Vercel (serverless)
+if (!process.env.VERCEL) {
     app.listen(PORT, () => {
         console.log(`Backend server running at http://localhost:${PORT}`);
     });
 }
 
-// Export untuk Vercel Serverless
+// Export untuk Vercel Serverless (jika masih dipakai)
 module.exports = app;
