@@ -37,7 +37,7 @@ async function loadCourseAndMaterials() {
     try {
         // Fetch course details and materials
         const courseRes = await axios.get(`${API_BASE_URL}/api/courses/${courseId}`);
-        document.getElementById(`course-title').innerText = `Materi Kelas: ${courseRes.data.title}`;
+        document.getElementById('course-title').innerText = `Materi Kelas: ${courseRes.data.title}`;
 
         const materials = courseRes.data.materials || [];
 

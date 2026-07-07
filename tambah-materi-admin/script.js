@@ -50,7 +50,7 @@ function initForm() {
                 short_description,
                 summary
             });
-            alert(`Materi berhasil ditambahkan!');
+            alert('Materi berhasil ditambahkan!');
             window.location.href = backUrl;
         } catch (error) {
             console.error('Error saving material:', error);

@@ -61,7 +61,7 @@ async function loadMaterial() {
         const material = res.data;
 
         // Set tombol kembali agar kembali ke detail kelas (lebih spesifik)
-        document.getElementById(`btn-kembali').onclick = () => {
+        document.getElementById('btn-kembali').onclick = () => {
             window.location.href = `../detail-kelas-admin/index.html?course_id=${material.course_id}`;
         };
 

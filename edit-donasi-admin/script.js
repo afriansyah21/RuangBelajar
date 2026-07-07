@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const res = await axios.get(`${API_BASE_URL}/api/admin/donations/${donationId}`);
             const data = res.data;
 
-            document.getElementById(`donator-name').value = data.donator_name;
+            document.getElementById('donator-name').value = data.donator_name;
             document.getElementById('donation-method').value = data.donation_method;
             
             // Format date to YYYY-MM-DD for input[type="date"]
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 amount
             });
             
-            alert(`Donasi berhasil diperbarui!');
+            alert('Donasi berhasil diperbarui!');
             window.location.href = '../manajemen-donasi-admin/index.html';
         } catch (error) {
             console.error('Error updating donation:', error);

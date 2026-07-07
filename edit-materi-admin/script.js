@@ -36,7 +36,7 @@ async function initForm() {
         const material = res.data;
         courseIdToReturn = material.course_id;
 
-        document.getElementById(`video-input').value = material.youtube_link || '';
+        document.getElementById('video-input').value = material.youtube_link || '';
         document.getElementById('title-input').value = material.title || '';
         document.getElementById('description-input').value = material.short_description || '';
         document.getElementById('content-input').value = material.summary || '';
@@ -63,7 +63,7 @@ async function initForm() {
                     short_description,
                     summary
                 });
-                alert(`Materi berhasil diperbarui!');
+                alert('Materi berhasil diperbarui!');
                 window.location.href = backUrl;
             } catch (error) {
                 console.error('Error updating material:', error);

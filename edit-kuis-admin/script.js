@@ -58,7 +58,7 @@ async function loadCourses() {
 async function loadQuizDetails() {
     try {
         const response = await fetch(`${API_BASE_URL}/api/quizzes/${currentQuizId}`);
-        if (!response.ok) throw new Error(`Quiz not found');
+        if (!response.ok) throw new Error('Quiz not found');
         
         const data = await response.json();
         const quiz = data.quiz; // the API returns { quiz, questions } wait, let me check the endpoint again!
@@ -110,7 +110,7 @@ async function updateQuiz(event) {
         }
         
         const response = await fetch(`${API_BASE_URL}/api/admin/quizzes/${currentQuizId}`, {
-            method: `PUT',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },

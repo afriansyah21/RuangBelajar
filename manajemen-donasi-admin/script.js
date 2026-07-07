@@ -178,7 +178,7 @@ async function deleteDonation(id) {
             await axios.delete(`${API_BASE_URL}/api/admin/donations/${id}`);
             loadDonations();
         } catch (error) {
-            console.error(`Error deleting donation:', error);
+            console.error('Error deleting donation:', error);
             alert('Gagal menghapus donasi.');
         }
     }

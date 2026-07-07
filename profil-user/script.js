@@ -83,7 +83,7 @@ async function nextPasswordStep() {
 
   try {
     const res = await fetch(`${API_BASE_URL}/api/users/${user.id}/verify-password`, {
-      method: `POST',
+      method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ currentPassword: currentPass })
     });
@@ -129,7 +129,7 @@ async function saveNewPassword() {
 
   try {
     const res = await fetch(`${API_BASE_URL}/api/users/${user.id}/password`, {
-      method: `PUT',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ currentPassword: currentPass, newPassword: newPass })
     });
@@ -223,7 +223,7 @@ async function saveProfile() {
     }
 
     const res = await fetch(`${API_BASE_URL}/api/users/${user.id}`, {
-      method: `PUT',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
@@ -253,7 +253,7 @@ async function loadProfileStats(userId) {
     const completed = stats.completed_quizzes || 0;
     const quizPct = total > 0 ? Math.round((completed / total) * 100) : 0;
     
-    const quizFractionEl = document.getElementById(`quiz-fraction');
+    const quizFractionEl = document.getElementById('quiz-fraction');
     const quizPercentageEl = document.getElementById('quiz-percentage');
     const quizProgressBarEl = document.getElementById('quiz-progress-bar');
     if(quizFractionEl) quizFractionEl.textContent = `${completed}/${total}`;
@@ -287,7 +287,7 @@ async function loadUserCourses() {
     if (!res.ok) return;
     const courses = await res.json();
     
-    const listEl = document.getElementById(`user-course-list');
+    const listEl = document.getElementById('user-course-list');
     if (!listEl) return;
     
     listEl.innerHTML = '';

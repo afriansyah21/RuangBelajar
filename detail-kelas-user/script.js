@@ -33,7 +33,7 @@ async function loadCourseDetails(courseId) {
     try {
         const response = await axios.get(`${API_BASE_URL}/api/courses/${courseId}`);
         const course = response.data;
-        document.getElementById(`course-title').textContent = `Materi Kelas: ${course.title}`;
+        document.getElementById('course-title').textContent = `Materi Kelas: ${course.title}`;
         document.getElementById('course-desc').textContent = course.description || 'Daftar materi dan video pembelajaran untuk kelas ini.';
     } catch (error) {
         console.error('Error fetching course details:', error);

@@ -55,7 +55,7 @@ async function loadMaterial(id) {
         const response = await axios.get(`${API_BASE_URL}/api/admin/materials/${id}`);
         const materi = response.data;
         
-        document.getElementById(`materi-title').textContent = materi.title;
+        document.getElementById('materi-title').textContent = materi.title;
         document.getElementById('materi-desc').textContent = materi.short_description || '';
         
         const contentContainer = document.getElementById('materi-content');

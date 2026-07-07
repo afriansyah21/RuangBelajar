@@ -29,7 +29,7 @@ async function loadCourseData(id) {
         const response = await axios.get(`${API_BASE_URL}/api/courses/${id}`);
         const course = response.data;
         
-        document.getElementById(`title-input').value = course.title;
+        document.getElementById('title-input').value = course.title;
         document.getElementById('desc-input').value = course.description;
         // Kita juga bisa menset thumbnail img src jika ada elemennya
     } catch (error) {
@@ -57,7 +57,7 @@ async function updateCourse() {
         // Jika user memilih file baru, unggah file tersebut
         if (fileInput && fileInput.files.length > 0) {
             const formData = new FormData();
-            formData.append(`image', fileInput.files[0]);
+            formData.append('image', fileInput.files[0]);
             
             const uploadRes = await axios.post(`${API_BASE_URL}/api/upload`, formData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
@@ -70,7 +70,7 @@ async function updateCourse() {
             description,
             thumbnail_url
         });
-        alert(`Perubahan berhasil disimpan!');
+        alert('Perubahan berhasil disimpan!');
         window.location.href = '../manajemen-kelas-admin/index.html';
     } catch (error) {
         console.error('Error updating course:', error);
