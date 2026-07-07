@@ -16,11 +16,15 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function fetchQuizzes() {
+    const container = document.getElementById('quiz-list-container');
     try {
-        const response = await fetch(`${API_BASE_URL}/api/admin/quizzes`);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000);
+        
+        const response = await fetch(`${API_BASE_URL}/api/admin/quizzes`, { signal: controller.signal });
+        clearTimeout(timeoutId);
         const quizzes = await response.json();
         
-        const container = document.getElementById('quiz-list-container');
         const countHeader = document.getElementById('quiz-count');
         
         if (countHeader) countHeader.textContent = `Daftar Kuis (${quizzes.length})`;
@@ -35,9 +39,7 @@ async function fetchQuizzes() {
             card.style.cursor = 'pointer';
             card.onclick = () => window.location.href = `../detail-kuis-admin/index.html?id=${quiz.id}`;
             
-            // Gunakan thumbnail kuis, jika tidak ada, gunakan default
             const thumbnail = quiz.thumbnail_url || 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2000&auto=format&fit=crop';
-            // Gunakan deskripsi kuis, jika tidak ada, tampilkan pesan default
             const desc = quiz.description || 'Tidak ada deskripsi.';
             
             card.innerHTML = `
@@ -64,7 +66,18 @@ async function fetchQuizzes() {
         }
     } catch (error) {
         console.error('Error fetching quizzes:', error);
-        alert('Gagal memuat daftar kuis.');
+        const isTimeout = error.name === 'AbortError';
+        if (container) {
+            container.innerHTML = `
+                <div style="text-align:center; padding: 20px;">
+                    <p style="color: #ef4444; margin-bottom: 10px;">
+                        ${isTimeout ? '⏱️ Server sedang startup, mohon tunggu.' : '❌ Gagal memuat daftar kuis.'}
+                    </p>
+                    <button onclick="fetchQuizzes()" style="background:#2563eb;color:white;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;">
+                        🔄 Coba Lagi
+                    </button>
+                </div>`;
+        }
     }
 }
 
@@ -73,7 +86,7 @@ async function deleteQuiz(id) {
     
     try {
         const response = await fetch(`${API_BASE_URL}/api/admin/quizzes/${id}`, {
-            method: `DELETE'
+            method: 'DELETE'
         });
         
         if (response.ok) {

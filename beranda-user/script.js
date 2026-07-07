@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_BASE_URL}/api/users/${userId}/quiz-progress`);
             if (response.ok) {
                 const results = await response.json();
-                grid.innerHTML = `';
+                grid.innerHTML = '';
                 
                 if (results.length > 0) {
                     results.forEach(res => {
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`${API_BASE_URL}/api/users/${userId}/recent-quizzes`);
             if (response.ok) {
                 const results = await response.json();
-                list.innerHTML = `';
+                list.innerHTML = '';
                 
                 if (results.length > 0) {
                     results.forEach(res => {
