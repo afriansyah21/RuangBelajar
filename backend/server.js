@@ -7,7 +7,11 @@ const db = require('./db');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
@@ -1027,6 +1031,13 @@ app.get('/api/admin/dashboard-stats', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Backend server running at http://localhost:${PORT}`);
-});
+
+// Untuk local development
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Backend server running at http://localhost:${PORT}`);
+    });
+}
+
+// Export untuk Vercel Serverless
+module.exports = app;
