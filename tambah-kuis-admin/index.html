@@ -113,8 +113,8 @@
                     <label>Upload Gambar Thumbnail</label>
                     <div class="upload-area" id="upload-area" onclick="document.getElementById('gambar-kuis').click()">
                         <span class="material-symbols-outlined upload-icon">cloud_upload</span>
-                        <p>Klik atau seret gambar ke sini</p>
-                        <input type="file" id="gambar-kuis" accept="image/*" hidden />
+                        <p id="file-name-display">Klik atau seret gambar ke sini</p>
+                        <input type="file" id="gambar-kuis" accept="image/*" hidden onchange="handleImageSelect(this)" />
                     </div>
                 </div>
 

@@ -56,6 +56,22 @@ async function fetchDashboardStats() {
         document.getElementById('stat-total-courses').textContent = data.totalCourses.toLocaleString('id-ID');
         document.getElementById('stat-avg-quiz').textContent = data.avgQuizScore;
 
+        const badgeUsers = document.getElementById('badge-users-growth');
+        if(badgeUsers) {
+            const val = data.usersGrowth;
+            badgeUsers.innerHTML = `<span class="material-symbols-outlined" style="font-size: 14px;">${val >= 0 ? 'trending_up' : 'trending_down'}</span> ${Math.abs(val)}%`;
+            badgeUsers.style.color = val >= 0 ? '#10b981' : '#ef4444';
+            badgeUsers.style.background = val >= 0 ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)';
+        }
+        
+        const badgeDonations = document.getElementById('badge-donations-growth');
+        if(badgeDonations) {
+            const val = data.donationsGrowth;
+            badgeDonations.innerHTML = `<span class="material-symbols-outlined" style="font-size: 14px;">${val >= 0 ? 'trending_up' : 'trending_down'}</span> ${Math.abs(val)}%`;
+            badgeDonations.style.color = val >= 0 ? '#10b981' : '#ef4444';
+            badgeDonations.style.background = val >= 0 ? 'rgba(16, 185, 129, 0.1)' : 'rgba(239, 68, 68, 0.1)';
+        }
+
         // 2. Render Chart
         renderChart(data.monthlyGrowth, 'bulanan');
 
@@ -129,42 +145,134 @@ function renderChart(growthData, type) {
         dataPoints = growthData.map(d => d.count);
     }
 
-    const maxVal = Math.max(...dataPoints, 1); // Hindari div by zero
+    const maxVal = Math.max(...dataPoints, 1);
+    const pointCount = dataPoints.length;
+    
+    // Spacing percentages for X axis (e.g. if 6 points, spacing is 100/5 = 20%)
+    const spacing = pointCount > 1 ? 100 / (pointCount - 1) : 100;
 
-    dataPoints.forEach((val, i) => {
-        const heightPct = (val / maxVal) * 80; // Sisakan ruang untuk label
+    // Create SVG container
+    const svgContainer = document.createElement('div');
+    svgContainer.style.position = 'relative';
+    svgContainer.style.width = '100%';
+    svgContainer.style.height = '180px';
+    
+    const svgNS = 'http://www.w3.org/2000/svg';
+    const svg = document.createElementNS(svgNS, 'svg');
+    svg.style.position = 'absolute';
+    svg.style.top = '0';
+    svg.style.left = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.overflow = 'visible';
+    svg.setAttribute('viewBox', '0 0 100 100');
+    svg.setAttribute('preserveAspectRatio', 'none');
+
+    // Generate path points
+    let polylinePoints = '';
+    const pointsData = dataPoints.map((val, i) => {
+        const x = i * spacing;
+        const y = 100 - ((val / maxVal) * 80); // 80% to leave room on top
+        polylinePoints += `${x},${y} `;
+        return { x, y, val, label: labels[i] };
+    });
+
+    // Draw line
+    const polyline = document.createElementNS(svgNS, 'polyline');
+    polyline.setAttribute('points', polylinePoints.trim());
+    polyline.setAttribute('fill', 'none');
+    polyline.setAttribute('stroke', '#2563eb');
+    polyline.setAttribute('stroke-width', '2');
+    polyline.setAttribute('vector-effect', 'non-scaling-stroke');
+    svg.appendChild(polyline);
+    
+    // Gradient fill under the line
+    const polygon = document.createElementNS(svgNS, 'polygon');
+    const firstPoint = pointsData[0];
+    const lastPoint = pointsData[pointsData.length - 1];
+    polygon.setAttribute('points', `${firstPoint.x},100 ${polylinePoints.trim()} ${lastPoint.x},100`);
+    polygon.setAttribute('fill', 'url(#lineGradient)');
+    
+    const defs = document.createElementNS(svgNS, 'defs');
+    const linearGradient = document.createElementNS(svgNS, 'linearGradient');
+    linearGradient.setAttribute('id', 'lineGradient');
+    linearGradient.setAttribute('x1', '0%');
+    linearGradient.setAttribute('y1', '0%');
+    linearGradient.setAttribute('x2', '0%');
+    linearGradient.setAttribute('y2', '100%');
+    
+    const stop1 = document.createElementNS(svgNS, 'stop');
+    stop1.setAttribute('offset', '0%');
+    stop1.setAttribute('stop-color', 'rgba(37, 99, 235, 0.4)');
+    
+    const stop2 = document.createElementNS(svgNS, 'stop');
+    stop2.setAttribute('offset', '100%');
+    stop2.setAttribute('stop-color', 'rgba(37, 99, 235, 0)');
+    
+    linearGradient.appendChild(stop1);
+    linearGradient.appendChild(stop2);
+    defs.appendChild(linearGradient);
+    svg.appendChild(defs);
+    svg.appendChild(polygon);
+
+    // Overlay div for circles and labels (to prevent stretching)
+    const overlay = document.createElement('div');
+    overlay.style.position = 'absolute';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+
+    const xLabelsContainer = document.createElement('div');
+    xLabelsContainer.style.display = 'flex';
+    xLabelsContainer.style.justifyContent = 'space-between';
+    xLabelsContainer.style.marginTop = '15px';
+    xLabelsContainer.style.width = '100%';
+    xLabelsContainer.style.padding = '0 5px';
+
+    pointsData.forEach(p => {
+        // Point Circle
+        const circle = document.createElement('div');
+        circle.style.position = 'absolute';
+        circle.style.left = `${p.x}%`;
+        circle.style.top = `${p.y}%`;
+        circle.style.width = '12px';
+        circle.style.height = '12px';
+        circle.style.backgroundColor = '#fff';
+        circle.style.border = '2px solid #2563eb';
+        circle.style.borderRadius = '50%';
+        circle.style.transform = 'translate(-50%, -50%)';
+        circle.style.zIndex = '10';
+        circle.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+        circle.title = `${p.label}: ${p.val} Pendaftar`;
+
+        // Value Label above point
+        const valLabel = document.createElement('div');
+        valLabel.textContent = p.val;
+        valLabel.style.position = 'absolute';
+        valLabel.style.left = `${p.x}%`;
+        valLabel.style.top = `calc(${p.y}% - 22px)`;
+        valLabel.style.transform = 'translateX(-50%)';
+        valLabel.style.fontSize = '12px';
+        valLabel.style.fontWeight = 'bold';
+        valLabel.style.color = '#0f172a';
         
-        const barWrapper = document.createElement('div');
-        barWrapper.style.display = 'flex';
-        barWrapper.style.flexDirection = 'column';
-        barWrapper.style.alignItems = 'center';
-        barWrapper.style.height = '100%';
-        barWrapper.style.justifyContent = 'flex-end';
-        barWrapper.style.gap = '8px';
-        barWrapper.style.flex = '1';
+        overlay.appendChild(circle);
+        overlay.appendChild(valLabel);
 
-        const bar = document.createElement('div');
-        bar.style.width = '30px';
-        bar.style.height = `${heightPct}%`;
-        bar.style.backgroundColor = '#2563eb';
-        bar.style.borderRadius = '4px 4px 0 0';
-        bar.style.transition = 'height 0.3s ease';
-        bar.title = `${labels[i]}: ${val} Pendaftar`;
-
+        // X-Axis Label
         const label = document.createElement('span');
-        label.textContent = labels[i];
+        label.textContent = p.label;
         label.style.fontSize = '12px';
         label.style.color = '#64748b';
-
-        const valueLabel = document.createElement('span');
-        valueLabel.textContent = val;
-        valueLabel.style.fontSize = '12px';
-        valueLabel.style.fontWeight = 'bold';
-        valueLabel.style.color = '#0f172a';
-
-        barWrapper.appendChild(valueLabel);
-        barWrapper.appendChild(bar);
-        barWrapper.appendChild(label);
-        chartContainer.appendChild(barWrapper);
+        label.style.textAlign = 'center';
+        // Center text on its position (adjusting margins isn't perfect for flex-between, so we can use absolute or relative inside flex)
+        xLabelsContainer.appendChild(label);
     });
+
+    svgContainer.appendChild(svg);
+    svgContainer.appendChild(overlay);
+    
+    chartContainer.appendChild(svgContainer);
+    chartContainer.appendChild(xLabelsContainer);
 }

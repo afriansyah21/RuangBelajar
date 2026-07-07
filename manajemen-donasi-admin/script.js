@@ -1,3 +1,7 @@
+let allDonations = [];
+let currentDonationPage = 1;
+const donationsPerPage = 10;
+
 // Toggle Hamburger Menu
 document.addEventListener('DOMContentLoaded', () => {
     console.log('RuangBelajar Admin Manajemen Donasi Page Loaded');
@@ -22,6 +26,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadPaymentMethods();
     loadDonations();
+
+    const btnPrev = document.getElementById('btn-prev-page');
+    const btnNext = document.getElementById('btn-next-page');
+
+    if (btnPrev) {
+        btnPrev.addEventListener('click', () => {
+            if (currentDonationPage > 1) {
+                currentDonationPage--;
+                renderDonations();
+            }
+        });
+    }
+
+    if (btnNext) {
+        btnNext.addEventListener('click', () => {
+            const totalPages = Math.ceil(allDonations.length / donationsPerPage) || 1;
+            if (currentDonationPage < totalPages) {
+                currentDonationPage++;
+                renderDonations();
+            }
+        });
+    }
 });
 
 async function loadPaymentMethods() {
@@ -67,52 +93,83 @@ async function loadPaymentMethods() {
 async function loadDonations() {
     try {
         const res = await axios.get('http://localhost:3000/api/admin/donations');
-        const donations = res.data;
-        const tbody = document.getElementById('donations-tbody');
-        
-        tbody.innerHTML = '';
+        const rawDonations = res.data;
         
         let totalAmount = 0;
-
-        if (donations.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Belum ada riwayat donasi.</td></tr>';
-            document.getElementById('total-donasi-terkumpul').textContent = 'Rp 0';
-            return;
-        }
-
-        donations.forEach(d => {
+        rawDonations.forEach(d => {
             totalAmount += parseFloat(d.amount);
-
-            const dateStr = new Date(d.donation_date).toLocaleDateString('id-ID', {
-                day: 'numeric', month: 'short', year: 'numeric'
-            });
-            const amountStr = 'Rp ' + Number(d.amount).toLocaleString('id-ID');
-
-            tbody.innerHTML += `
-                <tr>
-                    <td style="font-weight: 500;">${d.donator_name}</td>
-                    <td style="color: #64748b;">${d.donation_method}</td>
-                    <td style="color: #64748b;">${dateStr}</td>
-                    <td style="font-weight: 700;">${amountStr}</td>
-                    <td>
-                        <div style="display: flex; gap: 8px;">
-                            <button class="btn-icon btn-edit" title="Edit Donasi" onclick="window.location.href='../edit-donasi-admin/index.html?id=${d.id}'">
-                                <span class="material-symbols-outlined" style="font-size: 20px;">edit</span>
-                            </button>
-                            <button class="btn-icon btn-delete" title="Hapus Donasi" onclick="deleteDonation(${d.id})">
-                                <span class="material-symbols-outlined" style="font-size: 20px;">delete</span>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            `;
         });
-
         document.getElementById('total-donasi-terkumpul').textContent = 'Rp ' + totalAmount.toLocaleString('id-ID');
+
+        // Sort by donation_date descending (newest first)
+        allDonations = rawDonations.sort((a, b) => new Date(b.donation_date) - new Date(a.donation_date));
+        currentDonationPage = 1;
+        
+        renderDonations();
     } catch (error) {
         console.error('Error fetching donations:', error);
-        document.getElementById('donations-tbody').innerHTML = '<tr><td colspan="5" style="text-align: center; color: red;">Gagal memuat riwayat donasi.</td></tr>';
+        const tbody = document.getElementById('donations-tbody');
+        if (tbody) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: red;">Gagal memuat riwayat donasi.</td></tr>';
+        }
     }
+}
+
+function renderDonations() {
+    const tbody = document.getElementById('donations-tbody');
+    const btnPrev = document.getElementById('btn-prev-page');
+    const btnNext = document.getElementById('btn-next-page');
+    const pageIndicator = document.getElementById('page-indicator');
+    
+    if (!tbody) return;
+    tbody.innerHTML = '';
+    
+    if (allDonations.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align: center;">Belum ada riwayat donasi.</td></tr>';
+        if (btnPrev) btnPrev.disabled = true;
+        if (btnNext) btnNext.disabled = true;
+        if (pageIndicator) pageIndicator.innerText = 'Halaman 1 dari 1';
+        return;
+    }
+
+    const totalPages = Math.ceil(allDonations.length / donationsPerPage) || 1;
+    
+    if (currentDonationPage > totalPages) currentDonationPage = totalPages;
+    if (currentDonationPage < 1) currentDonationPage = 1;
+
+    const startIndex = (currentDonationPage - 1) * donationsPerPage;
+    const endIndex = startIndex + donationsPerPage;
+    const donationsToDisplay = allDonations.slice(startIndex, endIndex);
+
+    donationsToDisplay.forEach(d => {
+        const dateStr = new Date(d.donation_date).toLocaleDateString('id-ID', {
+            day: 'numeric', month: 'short', year: 'numeric'
+        });
+        const amountStr = 'Rp ' + Number(d.amount).toLocaleString('id-ID');
+
+        tbody.innerHTML += `
+            <tr>
+                <td style="font-weight: 500;">${d.donator_name}</td>
+                <td style="color: #64748b;">${d.donation_method}</td>
+                <td style="color: #64748b;">${dateStr}</td>
+                <td style="font-weight: 700;">${amountStr}</td>
+                <td>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-icon btn-edit" title="Edit Donasi" onclick="window.location.href='../edit-donasi-admin/index.html?id=${d.id}'">
+                            <span class="material-symbols-outlined" style="font-size: 20px;">edit</span>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Hapus Donasi" onclick="deleteDonation(${d.id})">
+                            <span class="material-symbols-outlined" style="font-size: 20px;">delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        `;
+    });
+
+    if (pageIndicator) pageIndicator.innerText = `Halaman ${currentDonationPage} dari ${totalPages}`;
+    if (btnPrev) btnPrev.disabled = currentDonationPage === 1;
+    if (btnNext) btnNext.disabled = currentDonationPage === totalPages;
 }
 
 async function deleteDonation(id) {

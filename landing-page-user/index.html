@@ -19,11 +19,10 @@
 </head>
 
 <body class="bg-background text-on-background font-body-md selection:bg-primary-fixed-dim selection:text-primary">
-    <!-- Global Loading Indicator -->
 
     <!-- Top Navigation Bar -->
-    <header
-        class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant shadow-sm dark:shadow-none">
+    <header id="main-navbar"
+        class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant shadow-sm dark:shadow-none transition-all duration-300">
         <nav class="flex justify-between items-center h-16 px-6 max-w-7xl mx-auto">
             <div class="text-xl font-bold tracking-tight text-primary font-display-md">RuangBelajar
             </div>
@@ -35,172 +34,252 @@
                     <span class="material-symbols-outlined">dark_mode</span>
                 </button>
                 <button onclick="window.location.href='../login-user/index.html'"
-                    class=" px-md py-xs text-muskal hover:text-hayuk rounded-lg font-label-lg hover:bg-muskal transition-colors active:scale-95 duration-150">Masuk</button>
+                    class="px-md py-xs text-muskal hover:text-hayuk rounded-lg font-label-lg hover:bg-muskal transition-all duration-300 active:scale-95">Masuk</button>
                 <button onclick="window.location.href='../sign-up-user/index.html'"
-                    class="bg-muskal px-md py-xs text-hayuk hover:text-muskal rounded-lg font-label-lg hover:bg-hayuk transition-colors active:scale-95 duration-150">Daftar</button>
+                    class="bg-muskal px-md py-xs text-hayuk hover:text-muskal rounded-lg font-label-lg hover:bg-hayuk transition-all duration-300 active:scale-95 border border-muskal">Daftar</button>
             </div>
         </nav>
     </header>
 
     <main class="pt-16">
         <!-- Hero Section -->
-        <section class="relative overflow-hidden hero-section pt-12 pb-20 lg:pt-8 lg:pb-32 flex items-center">
-            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-lg items-center w-full">
-                <div class="space-y-md">
-                    <span
-                        class="inline-block px-base py-xs bg-surface-container-highest text-primary rounded-full font-label-md">#PilihanProgrammerMasaKini</span>
-                    <h1 class="font-display-lg text-on-background tracking-tight">RuangBelajar</h1>
-                    <p class="font-headline-sm text-on-surface-variant max-w-lg">Belajar pemrograman secara mudah
-                        dimanapun anda
-                        berada. Akses puluhan materi berkualitas gratis dengan mentor profesional.</p>
-                    <div class="flex flex-wrap gap-base pt-base">
+        <section class="hero-section relative min-h-[90vh] flex items-center pt-16 pb-16 overflow-hidden bg-gradient-to-br from-surface to-primary-container/10 dark:from-background dark:to-primary-fixed-dim/10">
+            <!-- Animated Background Blobs -->
+            <div class="hero-blob w-96 h-96 bg-primary/20 top-10 left-10 delay-100"></div>
+            <div class="hero-blob w-80 h-80 bg-tertiary-fixed-dim/20 bottom-10 right-20 delay-500"></div>
+            <div class="hero-blob w-72 h-72 bg-secondary-fixed-dim/20 top-40 right-1/2 delay-1000"></div>
+            
+            <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-xl items-center w-full relative z-10">
+                <div class="space-y-lg reveal-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-surface-container-highest/80 backdrop-blur-sm text-primary rounded-full font-label-md border border-primary/20 hero-badge">
+                        <span class="relative flex h-3 w-3">
+                          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+                        </span>
+                        #PilihanProgrammerMasaKini
+                    </div>
+                    
+                    <h1 class="font-display-lg text-on-background tracking-tight leading-[1.15]">
+                        Raih Masa Depan<br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-fixed-dim">
+                            <span class="typing-cursor" id="typed-text"></span>
+                        </span>
+                    </h1>
+                    
+                    <p class="font-body-lg text-on-surface-variant max-w-lg leading-relaxed">
+                        Belajar pemrograman secara interaktif dan mudah dimanapun Anda berada. Tingkatkan skill dan karir Anda dengan bimbingan mentor profesional di industri.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 pt-4">
                         <button onclick="window.location.href='../sign-up-user/index.html'"
-                            class="bg-primary text-background hover:text-putih hover:bg-primary-container px-xl py-md rounded-xl font-headline-sm shadow-md hover:shadow-lg transition-all active:scale-95">Daftar
-                            Sekarang</button>
+                            class="hero-btn-primary flex items-center gap-2 bg-primary text-white hover:bg-primary-container px-8 py-4 rounded-2xl font-label-lg shadow-[0_8px_20px_rgba(0,63,135,0.3)] transition-all duration-300">
+                            Mulai Belajar Gratis
+                            <span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+                        </button>
                         <button onclick="window.location.href='../login-user/index.html'"
-                            class="bg-surface-container-highest text-muskal px-xl py-md rounded-xl font-headline-sm hover:text-putih hover:bg-primary-container transition-all active:scale-95 border border-primary/10">Login</button>
+                            class="hero-btn-secondary flex items-center gap-2 bg-surface/80 backdrop-blur-md text-on-surface hover:text-primary px-8 py-4 rounded-2xl font-label-lg border border-outline-variant hover:border-primary/50 shadow-sm transition-all duration-300">
+                            <span class="material-symbols-outlined text-[20px]">login</span>
+                            Masuk
+                        </button>
                     </div>
                 </div>
-                <div class="relative hidden md:block">
-                    <div class="absolute -top-12 -right-12 w-72 h-72 bg-primary-fixed-dim/20 rounded-full blur-3xl">
+                
+                <div class="relative hidden lg:block reveal-right perspective-1000 w-full h-[550px]">
+                    <!-- Floating Field -->
+                    <div class="absolute inset-0 z-0">
+                        <!-- JS Badge -->
+                        <div class="absolute top-[15%] right-[15%] animate-float-slow">
+                            <div class="w-16 h-16 bg-[#f0db4f] rounded-2xl flex items-center justify-center shadow-lg transform rotate-12 hover:scale-110 transition-transform cursor-default border border-white/20">
+                                <span class="font-bold text-black text-2xl font-mono">JS</span>
+                            </div>
+                        </div>
+                        
+                        <!-- HTML Badge -->
+                        <div class="absolute bottom-[25%] right-[5%] animate-float-medium" style="animation-delay: 1s;">
+                            <div class="w-14 h-14 bg-gradient-to-br from-[#f16529] to-[#c53f1a] rounded-2xl flex items-center justify-center shadow-lg transform -rotate-12 hover:scale-110 transition-transform cursor-default border border-white/20">
+                                <span class="font-bold text-white text-sm font-mono">HTML</span>
+                            </div>
+                        </div>
+                        
+                        <!-- CSS Badge -->
+                        <div class="absolute top-[40%] left-[5%] animate-float-fast" style="animation-delay: 0.5s;">
+                            <div class="w-14 h-14 bg-gradient-to-br from-[#2965f1] to-[#1943a8] rounded-2xl flex items-center justify-center shadow-lg transform rotate-6 hover:scale-110 transition-transform cursor-default border border-white/20">
+                                <span class="font-bold text-white text-sm font-mono">CSS</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Code Window Small -->
+                        <div class="absolute top-[10%] left-[10%] animate-float-slow" style="animation-delay: 1.5s;">
+                            <div class="bg-surface-container-highest/90 backdrop-blur-md border border-outline-variant rounded-xl shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)] overflow-hidden w-56">
+                                <div class="bg-surface/50 px-3 py-2 flex gap-1.5 border-b border-outline-variant">
+                                    <div class="w-2.5 h-2.5 rounded-full bg-[#ff5f57]"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-[#febc2e]"></div>
+                                    <div class="w-2.5 h-2.5 rounded-full bg-[#28c840]"></div>
+                                    <span class="ml-2 text-[10px] text-on-surface-variant font-mono">main.js</span>
+                                </div>
+                                <div class="p-4 text-xs font-mono text-on-surface leading-relaxed">
+                                    <span class="text-tertiary">function</span> <span class="text-primary-fixed-dim">learn</span>() {<br>
+                                    &nbsp;&nbsp;<span class="text-tertiary">while</span> (<span class="text-error">alive</span>) {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="text-primary-fixed-dim">code</span>();<br>
+                                    &nbsp;&nbsp;}<br>
+                                    &nbsp;&nbsp;<span class="text-tertiary">return</span> <span class="text-[#3ddc84]">success</span>;<br>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quote/Terminal Card -->
+                        <div class="absolute bottom-[10%] left-[0%] animate-float-medium" style="animation-delay: 2s;">
+                            <div class="bg-[#0e1428] border border-[#232b4a] rounded-xl shadow-[0_20px_40px_-15px_rgba(0,0,0,0.4)] p-5 w-64 text-[#8b93b8] font-mono text-sm relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent"></div>
+                                <span class="text-[#f0db4f] text-xl block mb-2 relative z-10">{ }</span>
+                                <span class="relative z-10">Code is not just what I do, it's <span class="text-[#ff6ad5]">who I am</span>.</span>
+                                <div class="mt-3 pt-3 border-t border-[#232b4a] relative z-10">
+                                    <span class="text-[#3ddc84]">></span> building the future<span class="animate-pulse inline-block w-1.5 h-3.5 bg-[#3ddc84] ml-1 align-middle"></span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="absolute -bottom-12 -left-12 w-72 h-72 bg-secondary-fixed-dim/20 rounded-full blur-3xl">
+                    
+                    <!-- Character Image -->
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[55%] max-w-[300px] z-20">
+                        <div class="w-full h-full animate-float-slow" style="animation-delay: 0.5s;">
+                            <img src="orang.png" alt="Developer" class="w-full h-auto drop-shadow-2xl transition-transform duration-500 ease-out hover:scale-110 cursor-pointer pointer-events-auto" onerror="this.src='hero2.jpg'; this.classList.add('rounded-[2rem]', 'border-4', 'border-outline-variant')">
+                        </div>
                     </div>
-                    <img alt="Education Hub"
-                        class="relative z-10 w-full aspect-square object-cover rounded-[2rem] shadow-2xl border-4 border-outline-variant"
-                        data-alt="A diverse group of university students collaborating in a bright, modern library setting filled with natural light. The environment features minimalist architectural elements and soft blue accents that align with the educational theme. Students are focused on high-end laptops and textbooks, showcasing a professional and productive atmosphere. The lighting is crisp and optimistic, emphasizing a trusted mentor persona through clean, organized visual structures."
-                        src="hero2.jpg" />
                 </div>
             </div>
         </section>
+
         <!-- Stats Counter Section -->
         <section class="py-lg bg-surface relative z-20">
             <div class="max-w-7xl mx-auto px-6">
                 <div
-                    class="grid grid-cols-2 md:grid-cols-4 gap-md py-lg px-xl bg-surface-container rounded-[2rem] border border-outline-variant shadow-sm">
-                    <div class="text-center border-r border-outline-variant last:border-0">
-                        <div class="text-primary font-display-md">250K+</div>
-                        <div class="text-on-surface-variant font-label-lg">Siswa Aktif</div>
+                    class="stats-container grid grid-cols-2 md:grid-cols-4 gap-md py-lg px-xl rounded-[2rem] border border-outline-variant shadow-sm reveal-scale">
+                    <div class="stat-item text-center border-r border-outline-variant last:border-0 py-4">
+                        <div class="stat-number font-display-md" id="stat-siswa-aktif" data-target="250">0</div>
+                        <div class="text-on-surface-variant font-label-lg mt-1">Siswa Aktif</div>
                     </div>
-                    <div class="text-center md:border-r border-outline-variant last:border-0">
-                        <div class="text-primary font-display-md"> 1.2K+</div>
-                        <div class="text-on-surface-variant font-label-lg">Materi Kursus</div>
+                    <div class="stat-item text-center md:border-r border-outline-variant last:border-0 py-4">
+                        <div class="stat-number font-display-md" id="stat-materi-kursus" data-target="1200">0</div>
+                        <div class="text-on-surface-variant font-label-lg mt-1">Materi Kursus</div>
                     </div>
-                    <div class="text-center border-r border-outline-variant last:border-0">
-                        <div class="text-primary font-display-md">5</div>
-                        <div class="text-on-surface-variant font-label-lg">Mentor Ahli</div>
+                    <div class="stat-item text-center border-r border-outline-variant last:border-0 py-4">
+                        <div class="stat-number font-display-md" data-target="4">0</div>
+                        <div class="text-on-surface-variant font-label-lg mt-1">Mentor Ahli</div>
                     </div>
-                    <div class="text-center last:border-0">
-                        <div class="text-primary font-display-md">4.9/5</div>
-                        <div class="text-on-surface-variant font-label-lg">Rating Kepuasan</div>
+                    <div class="stat-item text-center last:border-0 py-4">
+                        <div class="stat-number font-display-md">4.9/5</div>
+                        <div class="text-on-surface-variant font-label-lg mt-1">Rating Kepuasan</div>
                     </div>
                 </div>
             </div>
         </section>
+
         <!-- Features Grid: 9 Reasons -->
         <section class="py-xl bg-surface">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-xl">
+                <div class="text-center max-w-3xl mx-auto mb-xl reveal">
                     <h2 class="font-headline-lg text-on-surface mb-base">Alasan Mengapa Harus Belajar Pemrograman di
                         RuangBelajar
                     </h2>
                     <p class="font-body-md text-on-surface-variant">Kami memberikan pengalaman belajar yang dirancang
                         khusus untuk membantu Anda meraih skill pemrograman dengan cara yang paling efektif.</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-md stagger-children">
                     <!-- Reason Cards -->
-                    <div
-                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                    <div class="reason-card reveal p-md bg-surface-container-highest rounded-xl border border-outline-variant group"
+                        style="--stagger-index: 0;">
                         <div
-                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
-                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                            class="icon-box w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base">
+                            <span class="material-symbols-outlined text-putih"
                                 data-icon="auto_awesome">auto_awesome</span>
                         </div>
                         <h3 class="font-headline-sm mb-xs">Kurikulum Terupdate</h3>
                         <p class="font-body-sm text-on-surface-variant">Materi disusun berdasarkan standar industri
                             terkini untuk menjamin relevansi di dunia kerja.</p>
                     </div>
-                    <div
-                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                    <div class="reason-card reveal p-md bg-surface-container-highest rounded-xl border border-outline-variant group"
+                        style="--stagger-index: 1;">
                         <div
-                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
-                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                            class="icon-box w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base">
+                            <span class="material-symbols-outlined text-putih"
                                 data-icon="groups">groups</span>
                         </div>
                         <h3 class="font-headline-sm mb-xs">Komunitas Belajar</h3>
                         <p class="font-body-sm text-on-surface-variant">Bergabung dengan ribuan pelajar lainnya untuk
                             bertukar ilmu dan berkolaborasi dalam proyek.</p>
                     </div>
-                    <div
-                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                    <div class="reason-card reveal p-md bg-surface-container-highest rounded-xl border border-outline-variant group"
+                        style="--stagger-index: 2;">
                         <div
-                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
-                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                            class="icon-box w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base">
+                            <span class="material-symbols-outlined text-putih"
                                 data-icon="verified_user">verified_user</span>
                         </div>
                         <h3 class="font-headline-sm mb-xs">Sertifikat Resmi</h3>
                         <p class="font-body-sm text-on-surface-variant">Dapatkan sertifikat penyelesaian yang diakui
                             secara luas oleh mitra perusahaan kami.</p>
                     </div>
-                    <div
-                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                    <div class="reason-card reveal p-md bg-surface-container-highest rounded-xl border border-outline-variant group"
+                        style="--stagger-index: 3;">
                         <div
-                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
-                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                            class="icon-box w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base">
+                            <span class="material-symbols-outlined text-putih"
                                 data-icon="video_chat">video_chat</span>
                         </div>
                         <h3 class="font-headline-sm mb-xs">Akses Video Selamanya</h3>
                         <p class="font-body-sm text-on-surface-variant">Dapatkan video yang bisa diakses selamanya.</p>
                     </div>
-                    <div
-                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                    <div class="reason-card reveal p-md bg-surface-container-highest rounded-xl border border-outline-variant group"
+                        style="--stagger-index: 4;">
                         <div
-                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
-                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                            class="icon-box w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base">
+                            <span class="material-symbols-outlined text-putih"
                                 data-icon="ads_click">ads_click</span>
                         </div>
                         <h3 class="font-headline-sm mb-xs">Akses Selamanya</h3>
                         <p class="font-body-sm text-on-surface-variant">Sekali mendaftar, Anda memiliki akses materi
                             tanpa batas waktu untuk terus dipelajari kembali.</p>
                     </div>
-                    <div
-                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                    <div class="reason-card reveal p-md bg-surface-container-highest rounded-xl border border-outline-variant group"
+                        style="--stagger-index: 5;">
                         <div
-                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
-                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                            class="icon-box w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base">
+                            <span class="material-symbols-outlined text-putih"
                                 data-icon="quiz">quiz</span>
                         </div>
                         <h3 class="font-headline-sm mb-xs">Kuis Interaktif</h3>
                         <p class="font-body-sm text-on-surface-variant">Uji pemahaman Anda dengan ratusan kuis yang
                             dirancang khusus per bab materi.</p>
                     </div>
-                    <div
-                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                    <div class="reason-card reveal p-md bg-surface-container-highest rounded-xl border border-outline-variant group"
+                        style="--stagger-index: 6;">
                         <div
-                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
-                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                            class="icon-box w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base">
+                            <span class="material-symbols-outlined text-putih"
                                 data-icon="mobile_friendly">mobile_friendly</span>
                         </div>
                         <h3 class="font-headline-sm mb-xs">Mobile Responsive</h3>
                         <p class="font-body-sm text-on-surface-variant">Belajar di mana saja melalui laptop, tablet,
                             atau smartphone dengan pengalaman yang mulus.</p>
                     </div>
-                    <div
-                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                    <div class="reason-card reveal p-md bg-surface-container-highest rounded-xl border border-outline-variant group"
+                        style="--stagger-index: 7;">
                         <div
-                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
-                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                            class="icon-box w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base">
+                            <span class="material-symbols-outlined text-putih"
                                 data-icon="work">work</span>
                         </div>
                         <h3 class="font-headline-sm mb-xs">Persiapan Kerja</h3>
                         <p class="font-body-sm text-on-surface-variant">Kami menyediakan modul khusus untuk pembuatan
                             portofolio dan simulasi wawancara.</p>
                     </div>
-                    <div
-                        class="p-md bg-surface-container-highest rounded-xl border border-outline-variant hover:border-primary hover:shadow-xl transition-all duration-300 group">
+                    <div class="reason-card reveal p-md bg-surface-container-highest rounded-xl border border-outline-variant group"
+                        style="--stagger-index: 8;">
                         <div
-                            class="w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base group-hover:bg-primary transition-colors">
-                            <span class="material-symbols-outlined text-putih group-hover:text-background"
+                            class="icon-box w-12 h-12 bg-primary-container rounded-lg flex items-center justify-center mb-base">
+                            <span class="material-symbols-outlined text-putih"
                                 data-icon="savings">money_off</span>
                         </div>
                         <h3 class="font-headline-sm mb-xs">Gratis</h3>
@@ -209,64 +288,75 @@
                 </div>
             </div>
         </section>
+
         <!-- Mentors Section -->
         <section class="py-xl bg-surface">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="flex justify-between items-end mb-xl">
+                <div class="flex justify-between items-end mb-xl reveal">
                     <div class="max-w-2xl">
                         <h2 class="font-headline-lg text-on-surface">Mentor Kami</h2>
                         <p class="font-body-md text-on-surface-variant mt-base">Belajar langsung dari para praktisi dan
                             ahli yang telah berpengalaman bertahun-tahun di bidangnya.</p>
                     </div>
                 </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-md">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-md stagger-children">
                     <!-- Mentor Cards -->
-                    <div
-                        class="group relative bg-surface rounded-2xl overflow-hidden border border-outline-variant hover:border-primary transition-all duration-300">
-                        <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
-                            data-alt="A professional male mentor in his 30s wearing business casual attire, smiling confidently in a modern office background. The lighting is warm and professional, highlighting a clean-shaven face and structured features. The image uses a shallow depth of field to keep the focus on the mentor while the background of glass partitions and minimalist furniture remains soft. Overall tone is encouraging, trustworthy, and expert-driven."
-                            src="afri.jpeg" />
-                        <div class="p-md">
+                    <div class="mentor-card reveal relative bg-surface rounded-2xl overflow-hidden border border-outline-variant"
+                        style="--stagger-index: 0;">
+                        <div class="overflow-hidden">
+                            <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
+                                src="m2.jpeg" />
+                        </div>
+                        <div class="mentor-overlay"></div>
+                        <div class="p-md relative z-10">
                             <h4 class="font-label-lg text-on-surface">Afriansyah Maulana Rizki</h4>
                             <p class="font-caption text-primary">Mentor Frontend</p>
                         </div>
                     </div>
-                    <div
-                        class="group relative bg-surface rounded-2xl overflow-hidden border border-outline-variant hover:border-primary transition-all duration-300">
-                        <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
-                            data-alt="An expert female mentor with an professional expression, wearing a tailored blazer in a bright, modern studio. The background is a clean white wall with soft blue lighting accents, creating a high-key and optimistic mood. She has an air of authority and approachability, perfect for the role of a trusted guide in educational technology. The visual style is crisp, minimal, and highly polished."
-                            src="afri.jpeg" />
-                        <div class="p-md">
-                            <h4 class="font-label-lg text-on-surface">Sarah Wijaya</h4>
-                            <p class="font-caption text-primary">Mentor Backend</p>
+                    <div class="mentor-card reveal relative bg-surface rounded-2xl overflow-hidden border border-outline-variant"
+                        style="--stagger-index: 1;">
+                        <div class="overflow-hidden">
+                            <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
+                                src="f1.jpeg" />
                         </div>
-                    </div>
-                    <div
-                        class="group relative bg-surface rounded-2xl overflow-hidden border border-outline-variant hover:border-primary transition-all duration-300">
-                        <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
-                            data-alt="A successful male mentor presenting with confidence, standing in front of a digital display showing data visualizations. He is dressed in professional smart-casual attire, illuminated by natural daylight coming from large windows. The overall aesthetic is one of mental clarity and corporate modernism, using a palette of deep blues and greys. The lighting is soft and even, emphasizing his role as an encouraging authority."
-                            src="afri.jpeg" />
-                        <div class="p-md">
-                            <h4 class="font-label-lg text-on-surface">Muhammad Iqbal Ramadhan</h4>
-                            <p class="font-caption text-primary">Mentor Frontend</p>
-                        </div>
-                    </div>
-                    <div
-                        class="group relative bg-surface rounded-2xl overflow-hidden border border-outline-variant hover:border-primary transition-all duration-300">
-                        <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
-                            data-alt="A friendly female mentor with a warm smile, positioned in a creative workspace with plants and soft lighting. She wears modern, professional clothing and conveys a sense of reliability and efficiency. The lighting is warm and golden, creating an inviting and accessible atmosphere. The visual elements are intentional and elegant, reinforcing the Trusted Mentor brand identity through a balanced and serene composition."
-                            src="afri.jpeg" />
-                        <div class="p-md">
-                            <h4 class="font-label-lg text-on-surface">Dewi Lestari</h4>
+                        <div class="mentor-overlay"></div>
+                        <div class="p-md relative z-10">
+                            <h4 class="font-label-lg text-on-surface">Natasya Nur Aqillah</h4>
                             <p class="font-caption text-primary">Mentor UI/UX</p>
                         </div>
                     </div>
-                    <div
-                        class="group relative bg-surface rounded-2xl overflow-hidden border border-outline-variant hover:border-primary transition-all duration-300">
-                        <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
-                            data-alt="A seasoned male mentor in a professional portrait, wearing a charcoal suit against a minimal architectural backdrop. His expression is one of calm confidence and experience. The lighting is diffused and professional, casting subtle shadows that add depth and character. The image aligns with the Corporate Minimalist style, focusing on high signal-to-noise ratio and functional elegance that guides the viewer's trust."
-                            src="afri.jpeg" />
-                        <div class="p-md">
+                    <div class="mentor-card reveal relative bg-surface rounded-2xl overflow-hidden border border-outline-variant"
+                        style="--stagger-index: 2;">
+                        <div class="overflow-hidden">
+                            <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
+                                src="m3.jpeg" />
+                        </div>
+                        <div class="mentor-overlay"></div>
+                        <div class="p-md relative z-10">
+                            <h4 class="font-label-lg text-on-surface">Muhammad Iqbal Ramadhan</h4>
+                            <p class="font-caption text-primary">Mentor Backend</p>
+                        </div>
+                    </div>
+                    <div class="mentor-card reveal relative bg-surface rounded-2xl overflow-hidden border border-outline-variant"
+                        style="--stagger-index: 3;">
+                        <div class="overflow-hidden">
+                            <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
+                                src="f2.jpeg" />
+                        </div>
+                        <div class="mentor-overlay"></div>
+                        <div class="p-md relative z-10">
+                            <h4 class="font-label-lg text-on-surface">Cahya Restu Pertiwi</h4>
+                            <p class="font-caption text-primary">Mentor UI/UX</p>
+                        </div>
+                    </div>
+                    <div class="mentor-card reveal relative bg-surface rounded-2xl overflow-hidden border border-outline-variant"
+                        style="--stagger-index: 4;">
+                        <div class="overflow-hidden">
+                            <img alt="Mentor" class="w-full aspect-[4/5] object-cover"
+                                src="m1.jpeg" />
+                        </div>
+                        <div class="mentor-overlay"></div>
+                        <div class="p-md relative z-10">
                             <h4 class="font-label-lg text-on-surface">Muh Rafiq Hidayah</h4>
                             <p class="font-caption text-primary">Mentor Backend</p>
                         </div>
@@ -274,15 +364,17 @@
                 </div>
             </div>
         </section>
-        <!-- Testimonial Slider Section (Auto-scrolling simulation) -->
+
+        <!-- Testimonial Section -->
         <section class="py-xl bg-surface-container overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6 mb-lg text-center">
+            <div class="max-w-7xl mx-auto px-6 mb-lg text-center reveal">
                 <h2 class="font-headline-lg text-on-surface">Apa Kata Mereka?</h2>
+                <p class="font-body-md text-on-surface-variant mt-base">Dengarkan langsung cerita sukses dari para alumni kami.</p>
             </div>
-            <div class="flex gap-md px-6 animate-scroll overflow-x-auto hide-scrollbar snap-x snap-mandatory">
+            <div class="testimonial-track px-6">
                 <!-- Testimonial Card 1 -->
                 <div
-                    class="min-w-[320px] md:min-w-[400px] bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant snap-center flex flex-col gap-base">
+                    class="testimonial-card bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant flex flex-col gap-base">
                     <div class="flex text-tertiary-fixed-dim">
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -290,7 +382,7 @@
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
                     </div>
-                    <p class="font-body-md text-on-surface italic italic">"Belajar di RuangBelajar sangat membantu saya
+                    <p class="font-body-md text-on-surface italic">"Belajar di RuangBelajar sangat membantu saya
                         yang sibuk bekerja. Materinya padat dan langsung ke intinya. Mentornya juga sangat responsif
                         saat ditanya."</p>
                     <div class="flex items-center gap-sm mt-auto">
@@ -305,7 +397,7 @@
                 </div>
                 <!-- Testimonial Card 2 -->
                 <div
-                    class="min-w-[320px] md:min-w-[400px] bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant snap-center flex flex-col gap-base">
+                    class="testimonial-card bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant flex flex-col gap-base">
                     <div class="flex text-tertiary-fixed-dim">
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -318,7 +410,7 @@
                         bulan."</p>
                     <div class="flex items-center gap-sm mt-auto">
                         <div
-                            class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-on-primary-container">
+                            class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-on-primary-container border border-outline-variant">
                             AN</div>
                         <div>
                             <h5 class="font-label-lg text-on-surface">Amanda Nurul</h5>
@@ -328,7 +420,73 @@
                 </div>
                 <!-- Testimonial Card 3 -->
                 <div
-                    class="min-w-[320px] md:min-w-[400px] bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant snap-center flex flex-col gap-base">
+                    class="testimonial-card bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant flex flex-col gap-base">
+                    <div class="flex text-tertiary-fixed-dim">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body-md text-on-surface italic">"Penyampaian materinya sangat mudah dimengerti bahkan
+                        untuk pemula seperti saya. Kuis interaktifnya membantu saya mengukur pemahaman saya."</p>
+                    <div class="flex items-center gap-sm mt-auto">
+                        <div
+                            class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center font-bold text-on-secondary-fixed">
+                            DS</div>
+                        <div>
+                            <h5 class="font-label-lg text-on-surface">Doni Setiawan</h5>
+                            <p class="font-caption text-on-surface-variant">Siswa Data Science</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Duplicate cards for infinite scroll effect -->
+                <div
+                    class="testimonial-card bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant flex flex-col gap-base">
+                    <div class="flex text-tertiary-fixed-dim">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body-md text-on-surface italic">"Belajar di RuangBelajar sangat membantu saya
+                        yang sibuk bekerja. Materinya padat dan langsung ke intinya. Mentornya juga sangat responsif
+                        saat ditanya."</p>
+                    <div class="flex items-center gap-sm mt-auto">
+                        <div
+                            class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center font-bold text-primary">
+                            RR</div>
+                        <div>
+                            <h5 class="font-label-lg text-on-surface">Rizky Ramadhan</h5>
+                            <p class="font-caption text-on-surface-variant">Siswa Web Development</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="testimonial-card bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant flex flex-col gap-base">
+                    <div class="flex text-tertiary-fixed-dim">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body-md text-on-surface italic">"Kurikulumnya sangat up-to-date. Berkat RuangBelajar,
+                        saya berhasil mendapatkan pekerjaan pertama saya sebagai Junior UI/UX Designer dalam waktu 3
+                        bulan."</p>
+                    <div class="flex items-center gap-sm mt-auto">
+                        <div
+                            class="w-12 h-12 rounded-full bg-surface-container-highest flex items-center justify-center font-bold text-on-primary-container border border-outline-variant">
+                            AN</div>
+                        <div>
+                            <h5 class="font-label-lg text-on-surface">Amanda Nurul</h5>
+                            <p class="font-caption text-on-surface-variant">Alumni UI/UX Design</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="testimonial-card bg-surface-container-highest p-md rounded-[1.5rem] shadow-sm border border-outline-variant flex flex-col gap-base">
                     <div class="flex text-tertiary-fixed-dim">
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
                         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
@@ -350,7 +508,21 @@
                 </div>
             </div>
         </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section py-xl text-center reveal">
+            <div class="max-w-3xl mx-auto px-6 relative z-10">
+                <h2 class="font-headline-lg text-white mb-base">Siap Memulai Perjalanan Belajar Anda?</h2>
+                <p class="font-body-lg text-white/80 mb-lg">Bergabung dengan ribuan pelajar lainnya dan raih skill pemrograman impian Anda. Gratis, selamanya.</p>
+                <button onclick="window.location.href='../sign-up-user/index.html'"
+                    class="cta-btn bg-white text-primary px-xl py-md rounded-xl font-headline-sm shadow-lg hover:shadow-xl">
+                    Daftar Sekarang — Gratis!
+                </button>
+            </div>
+        </section>
+
     </main>
+
     <!-- Footer Section -->
     <footer class="bg-surface border-t border-outline-variant">
         <div class="max-w-7xl mx-auto py-12 px-6">
@@ -377,11 +549,9 @@
                     <h6 class="font-label-lg text-on-surface">Perusahaan</h6>
                     <ul class="space-y-xs">
                         <li><a class="font-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary/30 transition-all duration-300"
-                                href="#">Tentang Kami</a></li>
+                                href="../tentang-user/index.html">Tentang Kami</a></li>
                         <li><a class="font-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary/30 transition-all duration-300"
-                                href="#">Kontak Kami</a></li>
-                        <li><a class="font-body-sm text-on-surface-variant hover:text-primary hover:underline decoration-primary/30 transition-all duration-300"
-                                href="#">Bantuan</a></li>
+                                href="https://wa.me/6289528236913" target="_blank">Kontak Kami</a></li>
                     </ul>
                 </div>
                 <div class="space-y-base">
@@ -394,17 +564,16 @@
                     </ul>
                 </div>
             </div>
+            <div class="section-divider mb-lg"></div>
             <div
-                class="pt-lg border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-base">
-                <p class="font-lexend text-xs text-on-surface-variant">© 2026 RuangBelajar Educational Platform. All
-                    rights
-                    reserved.</p>
+                class="flex flex-col md:flex-row justify-between items-center gap-base">
+                <p class="font-lexend text-xs text-on-surface-variant">© 2026 RuangBelajar platform pembelajaran</p>
                 <div class="flex gap-md">
-                    <a class="text-outline hover:text-primary" href="#"><span class="material-symbols-outlined"
+                    <a class="text-outline hover:text-primary transition-colors duration-300" href="https://wa.me/6289528236913" target="_blank"><span class="material-symbols-outlined"
                             data-icon="language">language</span></a>
-                    <a class="text-outline hover:text-primary" href="#"><span class="material-symbols-outlined"
+                    <a class="text-outline hover:text-primary transition-colors duration-300" href="#"><span class="material-symbols-outlined"
                             data-icon="share">share</span></a>
-                    <a class="text-outline hover:text-primary" href="#"><span class="material-symbols-outlined"
+                    <a class="text-outline hover:text-primary transition-colors duration-300" href="#"><span class="material-symbols-outlined"
                             data-icon="mail">mail</span></a>
                 </div>
             </div>
@@ -413,7 +582,6 @@
 
     <!-- Floating Actions -->
     <div class="floating-actions">
-
         <!-- WhatsApp Button -->
         <a href="https://wa.me/6289528236913" target="_blank" class="floating-btn whatsapp" title="Chat on WhatsApp">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">

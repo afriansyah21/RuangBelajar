@@ -196,6 +196,22 @@ app.delete('/api/admin/materials/:id', async (req, res) => {
     }
 });
 
+// --- PUBLIC API ---
+app.get('/api/public/landing-stats', async (req, res) => {
+    try {
+        const [[{ total_users }]] = await db.query('SELECT COUNT(*) AS total_users FROM users');
+        const [[{ total_materials }]] = await db.query('SELECT COUNT(*) AS total_materials FROM materials');
+        
+        res.json({
+            totalUsers: total_users || 0,
+            totalMaterials: total_materials || 0
+        });
+    } catch (error) {
+        console.error('Error fetching landing stats:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 // --- USERS API ---
 // Register new user
 app.post('/api/users/register', async (req, res) => {
@@ -566,6 +582,7 @@ app.get('/api/admin/question-groups/:groupId', async (req, res) => {
 
 // 6. Create Question Group
 app.post('/api/admin/quizzes/:quizId/question-groups', async (req, res) => {
+    let connection;
     try {
         const quizId = req.params.quizId;
         const { title, questions } = req.body;
@@ -573,20 +590,27 @@ app.post('/api/admin/quizzes/:quizId/question-groups', async (req, res) => {
         if (!title) return res.status(400).json({ error: 'Group title is required' });
         if (!Array.isArray(questions)) return res.status(400).json({ error: 'Questions must be an array' });
 
-        const [groupRes] = await db.query('INSERT INTO quiz_question_groups (quiz_id, title) VALUES (?, ?)', [quizId, title]);
+        connection = await db.getConnection();
+        await connection.beginTransaction();
+
+        const [groupRes] = await connection.query('INSERT INTO quiz_question_groups (quiz_id, title) VALUES (?, ?)', [quizId, title]);
         const groupId = groupRes.insertId;
 
         for (const q of questions) {
-            await db.query(
+            await connection.query(
                 'INSERT INTO quiz_questions (quiz_id, group_id, question_text, options, correct_answer_index, explanation) VALUES (?, ?, ?, ?, ?, ?)',
                 [quizId, groupId, q.question_text, JSON.stringify(q.options), q.correct_answer_index, q.explanation || null]
             );
         }
 
+        await connection.commit();
         res.status(201).json({ message: 'Group created successfully', groupId });
     } catch (error) {
+        if (connection) await connection.rollback();
         console.error('Error creating question group:', error);
         res.status(500).json({ error: 'Internal Server Error' });
+    } finally {
+        if (connection) connection.release();
     }
 });
 
@@ -927,9 +951,61 @@ app.get('/api/admin/dashboard-stats', async (req, res) => {
         const [[{ total_courses }]] = await db.query('SELECT COUNT(*) AS total_courses FROM courses');
         const [[{ avg_score }]] = await db.query('SELECT AVG(score) AS avg_score FROM user_quiz_results');
         
-        // Growth (Mocked properly based on created_at but grouped)
-        const [monthlyGrowth] = await db.query("SELECT DATE_FORMAT(created_at, '%Y-%m') as label, COUNT(*) as count FROM users GROUP BY label ORDER BY label LIMIT 12");
-        const [yearlyGrowth] = await db.query("SELECT DATE_FORMAT(created_at, '%Y') as label, COUNT(*) as count FROM users GROUP BY label ORDER BY label LIMIT 5");
+        const currentYear = new Date().getFullYear();
+        const currentMonth = new Date().getMonth() + 1;
+        const prevMonth = currentMonth === 1 ? 12 : currentMonth - 1;
+        const prevMonthYear = currentMonth === 1 ? currentYear - 1 : currentYear;
+
+        // User stats current vs prev month
+        const [[{ cnt: users_current_month }]] = await db.query('SELECT COUNT(*) as cnt FROM users WHERE MONTH(created_at) = ? AND YEAR(created_at) = ?', [currentMonth, currentYear]);
+        const [[{ cnt: users_prev_month }]] = await db.query('SELECT COUNT(*) as cnt FROM users WHERE MONTH(created_at) = ? AND YEAR(created_at) = ?', [prevMonth, prevMonthYear]);
+        
+        let usersGrowth = 0;
+        if (users_prev_month > 0) {
+            usersGrowth = ((users_current_month - users_prev_month) / users_prev_month) * 100;
+        } else if (users_current_month > 0) {
+            usersGrowth = 100;
+        }
+
+        // Donation stats current vs prev month
+        const [[{ sum: donations_current_month }]] = await db.query('SELECT SUM(amount) as sum FROM donations WHERE MONTH(donation_date) = ? AND YEAR(donation_date) = ?', [currentMonth, currentYear]);
+        const [[{ sum: donations_prev_month }]] = await db.query('SELECT SUM(amount) as sum FROM donations WHERE MONTH(donation_date) = ? AND YEAR(donation_date) = ?', [prevMonth, prevMonthYear]);
+
+        const curDonations = donations_current_month || 0;
+        const prevDonations = donations_prev_month || 0;
+
+        let donationsGrowth = 0;
+        if (prevDonations > 0) {
+            donationsGrowth = ((curDonations - prevDonations) / prevDonations) * 100;
+        } else if (curDonations > 0) {
+            donationsGrowth = 100;
+        }
+        
+        // Monthly Growth: Jan to Dec for the current year
+        const [monthlyRaw] = await db.query(`SELECT DATE_FORMAT(created_at, '%m') as month, COUNT(*) as count FROM users WHERE YEAR(created_at) = ? GROUP BY month`, [currentYear]);
+        const monthlyGrowth = [];
+        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Ags', 'Sep', 'Okt', 'Nov', 'Des'];
+        for(let i=0; i<12; i++) {
+            const found = monthlyRaw.find(m => parseInt(m.month, 10) === i+1);
+            monthlyGrowth.push({
+                label: monthNames[i],
+                count: found ? found.count : 0
+            });
+        }
+
+        // Yearly Growth: Earliest to Latest
+        const [[yearsData]] = await db.query(`SELECT MIN(YEAR(created_at)) as min_year, MAX(YEAR(created_at)) as max_year FROM users`);
+        const startYear = yearsData && yearsData.min_year ? yearsData.min_year : currentYear;
+        const endYear = yearsData && yearsData.max_year ? yearsData.max_year : currentYear;
+        const [yearlyRaw] = await db.query(`SELECT YEAR(created_at) as year, COUNT(*) as count FROM users GROUP BY year`);
+        const yearlyGrowth = [];
+        for(let y = startYear; y <= endYear; y++) {
+            const found = yearlyRaw.find(yr => parseInt(yr.year, 10) === y);
+            yearlyGrowth.push({
+                label: y.toString(),
+                count: found ? found.count : 0
+            });
+        }
 
         const [recentDonations] = await db.query('SELECT donator_name, donation_method, amount, created_at FROM donations ORDER BY created_at DESC LIMIT 5');
 
@@ -938,6 +1014,8 @@ app.get('/api/admin/dashboard-stats', async (req, res) => {
             totalDonations: total_donations || 0,
             totalCourses: total_courses || 0,
             avgQuizScore: Math.round((avg_score || 0) * 10) / 10,
+            usersGrowth: Math.round(usersGrowth * 10) / 10,
+            donationsGrowth: Math.round(donationsGrowth * 10) / 10,
             monthlyGrowth,
             yearlyGrowth,
             recentDonations

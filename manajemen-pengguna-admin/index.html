@@ -121,6 +121,19 @@
                     </tbody>
                 </table>
             </div>
+
+            <!-- Pagination Controls -->
+            <div id="user-pagination" style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+                <button id="btn-prev-page" class="btn-pagination" disabled>
+                    <span class="material-symbols-outlined">chevron_left</span> Sebelumnya
+                </button>
+                <div style="background: #f8fafc; padding: 6px 16px; border-radius: 20px; border: 1px solid #e2e8f0;">
+                    <span id="page-indicator" style="font-size: 13px; color: #475569; font-weight: 600;">Halaman 1</span>
+                </div>
+                <button id="btn-next-page" class="btn-pagination">
+                    Selanjutnya <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </div>
         </div>
 
         <!-- Kritik & Saran -->
@@ -131,6 +144,19 @@
             
             <div class="feedback-list" id="feedback-list">
                 <div class="text-center text-slate-500 py-4">Memuat kritik & saran...</div>
+            </div>
+
+            <!-- Pagination Controls Feedback -->
+            <div id="feedback-pagination" style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+                <button id="btn-prev-feedback" class="btn-pagination" disabled>
+                    <span class="material-symbols-outlined">chevron_left</span> Sebelumnya
+                </button>
+                <div style="background: #f8fafc; padding: 6px 16px; border-radius: 20px; border: 1px solid #e2e8f0;">
+                    <span id="feedback-page-indicator" style="font-size: 13px; color: #475569; font-weight: 600;">Halaman 1</span>
+                </div>
+                <button id="btn-next-feedback" class="btn-pagination">
+                    Selanjutnya <span class="material-symbols-outlined">chevron_right</span>
+                </button>
             </div>
         </div>
 

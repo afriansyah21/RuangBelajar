@@ -580,3 +580,38 @@ td {
 body {
   overflow-y: scroll !important;
 }
+
+/* PAGINATION BUTTONS */
+.btn-pagination {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-pagination:hover:not(:disabled) {
+  border-color: #3b82f6;
+  color: #3b82f6;
+  background: #eff6ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
+}
+
+.btn-pagination:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: #f8fafc;
+  color: #94a3b8;
+}
+
+.btn-pagination .material-symbols-outlined {
+  font-size: 18px;
+}

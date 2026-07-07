@@ -132,18 +132,126 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Simulasi Loading Indicator ---
-    const loadingIndicator = document.getElementById('loading-indicator');
-    if (loadingIndicator) {
-        // Tampilkan loading saat halaman dibuka
-        loadingIndicator.classList.remove('hidden');
-        loadingIndicator.classList.add('flex');
-        
-        // Sembunyikan setelah 3 detik
-        setTimeout(() => {
-            loadingIndicator.classList.add('hidden');
-            loadingIndicator.classList.remove('flex');
-        }, 3000);
+    // ========================================
+    // SCROLL REVEAL - IntersectionObserver
+    // ========================================
+    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ========================================
+    // TYPING EFFECT
+    // ========================================
+    const typedEl = document.getElementById('typed-text');
+    if (typedEl) {
+        const words = ['di RuangBelajar', 'Bersama Kami', 'Mulai Sekarang'];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+
+            if (isDeleting) {
+                typedEl.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedEl.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let delay = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                delay = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                delay = 500;
+            }
+
+            setTimeout(typeEffect, delay);
+        }
+
+        typeEffect();
+    }
+
+    // ========================================
+    // COUNTER ANIMATION & DYNAMIC STATS
+    // ========================================
+    async function initStats() {
+        try {
+            const res = await fetch('http://localhost:3000/api/public/landing-stats');
+            if (res.ok) {
+                const stats = await res.json();
+                const siswaEl = document.getElementById('stat-siswa-aktif');
+                const materiEl = document.getElementById('stat-materi-kursus');
+                if (siswaEl) siswaEl.setAttribute('data-target', stats.totalUsers || 0);
+                if (materiEl) materiEl.setAttribute('data-target', stats.totalMaterials || 0);
+            }
+        } catch (error) {
+            console.error('Error fetching landing stats:', error);
+        }
+
+        const statNumbers = document.querySelectorAll('.stat-number[data-target]');
+        let countersStarted = false;
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !countersStarted) {
+                    countersStarted = true;
+                    statNumbers.forEach(el => {
+                        const target = parseInt(el.getAttribute('data-target')) || 0;
+                        const suffix = target > 100 ? '+' : '';
+                        const displayTarget = target;
+                        let current = 0;
+                        const increment = Math.max(1, Math.floor(displayTarget / 60));
+                        const duration = 2000;
+                        const stepTime = duration / (displayTarget / increment);
+
+                        const counter = setInterval(() => {
+                            current += increment;
+                            if (current >= displayTarget) {
+                                current = displayTarget;
+                                clearInterval(counter);
+                            }
+                            el.textContent = current.toLocaleString('id-ID') + suffix;
+                        }, stepTime);
+                    });
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const statsSection = document.querySelector('.stats-container');
+        if (statsSection) counterObserver.observe(statsSection);
+    }
+    
+    initStats();
+
+    // ========================================
+    // NAVBAR SCROLL EFFECT
+    // ========================================
+    const navbar = document.getElementById('main-navbar');
+    if (navbar) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
+        });
     }
 });
-

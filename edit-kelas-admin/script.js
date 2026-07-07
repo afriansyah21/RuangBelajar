@@ -77,3 +77,25 @@ async function updateCourse() {
         alert('Gagal menyimpan perubahan.');
     }
 }
+
+function handleImageSelect(input) {
+    const display = document.getElementById('file-name-display');
+    const uploadArea = document.getElementById('upload-area');
+    
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        display.innerText = file.name;
+        
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            uploadArea.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${e.target.result})`;
+            uploadArea.style.backgroundSize = 'cover';
+            uploadArea.style.backgroundPosition = 'center';
+            uploadArea.style.backgroundRepeat = 'no-repeat';
+        }
+        reader.readAsDataURL(file);
+    } else {
+        display.innerText = 'Klik atau seret gambar ke sini untuk mengganti';
+        uploadArea.style.backgroundImage = 'none';
+    }
+}

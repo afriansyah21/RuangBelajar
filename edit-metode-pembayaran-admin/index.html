@@ -55,11 +55,10 @@
                 <h3 style="margin-bottom: 16px;">QRIS Utama</h3>
                 <div class="form-group">
                     <label>Upload Gambar Barcode QRIS</label>
-                    <div class="upload-area" onclick="document.getElementById('gambar-qris').click()">
+                    <div class="upload-area" id="upload-area-qris" onclick="document.getElementById('gambar-qris').click()">
                         <span class="material-symbols-outlined upload-icon">qr_code_scanner</span>
-                        <p>Klik atau seret gambar barcode QRIS ke sini</p>
+                        <p id="file-name-display-qris">Klik atau seret gambar barcode QRIS ke sini</p>
                         <input type="file" id="gambar-qris" accept="image/*" hidden />
-                        <img id="preview-qris" style="max-width: 150px; display: none; margin-top: 16px; border-radius: 8px;" />
                     </div>
                 </div>
             </div>

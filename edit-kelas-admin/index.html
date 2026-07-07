@@ -110,7 +110,7 @@
                     <div class="upload-area" id="upload-area" onclick="document.getElementById('gambar-kelas').click()">
                         <span class="material-symbols-outlined upload-icon">cloud_upload</span>
                         <p id="file-name-display">Klik atau seret gambar ke sini untuk mengganti</p>
-                        <input type="file" id="gambar-kelas" accept="image/*" hidden onchange="document.getElementById('file-name-display').innerText = this.files[0] ? this.files[0].name : 'Klik atau seret gambar ke sini untuk mengganti'" />
+                        <input type="file" id="gambar-kelas" accept="image/*" hidden onchange="handleImageSelect(this)" />
                     </div>
                 </div>
 

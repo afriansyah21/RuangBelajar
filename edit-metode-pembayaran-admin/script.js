@@ -19,7 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAddBank = document.getElementById('btn-add-bank');
     const form = document.getElementById('payment-form');
     const qrisInput = document.getElementById('gambar-qris');
-    const qrisPreview = document.getElementById('preview-qris');
+    const uploadAreaQris = document.getElementById('upload-area-qris');
+    const fileNameDisplayQris = document.getElementById('file-name-display-qris');
     let qrisBase64 = null;
     let bankCount = 0;
 
@@ -39,11 +40,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (file) {
             try {
                 qrisBase64 = await toBase64(file);
-                qrisPreview.src = qrisBase64;
-                qrisPreview.style.display = 'block';
+                fileNameDisplayQris.innerText = file.name;
+                uploadAreaQris.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${qrisBase64})`;
+                uploadAreaQris.style.backgroundSize = 'cover';
+                uploadAreaQris.style.backgroundPosition = 'center';
+                uploadAreaQris.style.backgroundRepeat = 'no-repeat';
             } catch (err) {
                 console.error("Error reading QRIS file", err);
             }
+        } else {
+            fileNameDisplayQris.innerText = 'Klik atau seret gambar barcode QRIS ke sini';
+            uploadAreaQris.style.backgroundImage = 'none';
         }
     });
 
@@ -95,8 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     hasQris = true;
                     if (m.image_data) {
                         qrisBase64 = m.image_data;
-                        qrisPreview.src = m.image_data;
-                        qrisPreview.style.display = 'block';
+                        fileNameDisplayQris.innerText = 'Gambar QRIS Tersimpan (Klik untuk mengganti)';
+                        uploadAreaQris.style.backgroundImage = `linear-gradient(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.85)), url(${m.image_data})`;
+                        uploadAreaQris.style.backgroundSize = 'cover';
+                        uploadAreaQris.style.backgroundPosition = 'center';
+                        uploadAreaQris.style.backgroundRepeat = 'no-repeat';
                     }
                 } else if (m.type === 'bank') {
                     createBankCard(m);
