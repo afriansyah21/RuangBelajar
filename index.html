@@ -1,14 +1,55 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html>
+<html lang="id">
+<head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>temp-app</title>
-    <script src="../config.js"></script>
+    <title>RuangBelajar - Platform Pembelajaran Online</title>
+    <meta name="description" content="RuangBelajar adalah platform pembelajaran online terbaik untuk meningkatkan keahlian digital Anda." />
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+        }
+        .loader {
+            text-align: center;
+        }
+        .loader h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .loader p {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+    <script>
+        // Redirect otomatis ke landing page
+        window.location.replace('./landing-page-user/index.html');
+    </script>
 </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<body>
+    <div class="loader">
+        <h1>🎓 RuangBelajar</h1>
+        <div class="spinner"></div>
+        <p>Memuat halaman...</p>
+    </div>
+</body>
 </html>
