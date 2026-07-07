@@ -29,6 +29,17 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// Endpoint warmup — ping dari frontend agar backend tidak cold start
+app.get('/api/warmup', async (req, res) => {
+    try {
+        await db.query('SELECT 1');
+        res.json({ status: 'warm', time: new Date().toISOString() });
+    } catch {
+        res.json({ status: 'warming', time: new Date().toISOString() });
+    }
+});
+
+
 // Endpoint upload gambar
 app.post('/api/upload', upload.single('image'), (req, res) => {
     if (!req.file) {

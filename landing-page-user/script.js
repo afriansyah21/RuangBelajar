@@ -254,4 +254,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Ping backend saat halaman dibuka agar tidak cold start saat user navigasi
+    if (typeof API_BASE_URL !== 'undefined') {
+        fetch(`${API_BASE_URL}/api/warmup`).catch(() => {});
+    }
 });

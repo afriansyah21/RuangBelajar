@@ -150,4 +150,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Warmup backend di background saat halaman login dibuka
+    if (typeof API_BASE_URL !== 'undefined') {
+        fetch(`${API_BASE_URL}/api/warmup`).catch(() => {});
+    }
 });
