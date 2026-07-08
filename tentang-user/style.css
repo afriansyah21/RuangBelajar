@@ -236,15 +236,12 @@ html, body {
 
 /* HERO */
 .hero-section {
-
   min-height: 90vh;
-
   display: grid;
   grid-template-columns: repeat(2,1fr);
-
   gap: 60px;
-
   align-items: center;
+  padding-top: 40px;
 }
 
 .hero-badge {

@@ -908,3 +908,14 @@ body > *:not(.navbar):not(.bg-blur) {
   }
 }
 
+
+
+@media(max-width: 900px) {
+  .donation-grid {
+    grid-template-columns: 1fr;
+  }
+  .qris-image-container img {
+    max-width: 100%;
+    height: auto;
+  }
+}
