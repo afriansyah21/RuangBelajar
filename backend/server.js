@@ -29,6 +29,11 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
+// Endpoint root agar tidak muncul Cannot GET /
+app.get('/', (req, res) => {
+    res.send('✅ RuangBelajar API Server is running successfully!');
+});
+
 // Endpoint warmup — ping dari frontend agar backend tidak cold start
 app.get('/api/warmup', async (req, res) => {
     try {
