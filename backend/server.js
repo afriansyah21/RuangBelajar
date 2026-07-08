@@ -279,7 +279,7 @@ app.post('/api/users/login', async (req, res) => {
     try {
         const { username, password } = req.body;
         // Cek email dulu
-        const [users] = await db.query('SELECT id, full_name, email, password, phone_number, birth_date, profile_picture FROM users WHERE email = ?', [username]);
+        const [users] = await db.query('SELECT id, full_name, email, password, phone_number, birth_date FROM users WHERE email = ?', [username]);
         
         if (users.length === 0) {
             return res.status(401).json({ error: 'Email salah' });
@@ -875,10 +875,7 @@ app.put('/api/users/:id', async (req, res) => {
         let updateQuery = 'UPDATE users SET full_name = ?, birth_date = ?, phone_number = ?';
         let queryParams = [full_name, birth_date, phone_number];
         
-        if (profile_picture !== undefined) {
-            updateQuery += ', profile_picture = ?';
-            queryParams.push(profile_picture);
-        }
+        // profile_picture tidak ada di schema — diabaikan
         
         updateQuery += ' WHERE id = ?';
         queryParams.push(userId);
@@ -886,7 +883,7 @@ app.put('/api/users/:id', async (req, res) => {
         await db.query(updateQuery, queryParams);
         
         // Fetch updated user to return
-        const [users] = await db.query('SELECT id, full_name, email, birth_date, phone_number, profile_picture, created_at FROM users WHERE id = ?', [userId]);
+        const [users] = await db.query('SELECT id, full_name, email, birth_date, phone_number, created_at FROM users WHERE id = ?', [userId]);
         if (users.length > 0) {
             res.json(users[0]);
         } else {
