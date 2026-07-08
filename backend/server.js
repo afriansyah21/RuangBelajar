@@ -39,8 +39,8 @@ app.get('/api/warmup', async (req, res) => {
     try {
         await db.query('SELECT 1');
         res.json({ status: 'warm', time: new Date().toISOString() });
-    } catch {
-        res.json({ status: 'warming', time: new Date().toISOString() });
+    } catch (e) {
+        res.json({ status: 'warming', error: e.message, code: e.code, host: process.env.DB_HOST, port: process.env.DB_PORT, db: process.env.DB_NAME });
     }
 });
 
