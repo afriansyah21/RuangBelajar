@@ -80,3 +80,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+// --- INJECTED HAMBURGER MENU SCRIPT ---
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+    if (hamburgerBtn && navMenu) {
+        if(!hamburgerBtn.dataset.hasListener) {
+            hamburgerBtn.addEventListener('click', (e) => { e.stopPropagation(); navMenu.classList.toggle('active'); });
+            hamburgerBtn.dataset.hasListener = 'true';
+        }
+        document.addEventListener('click', (e) => {
+            if (!hamburgerBtn.contains(e.target) && !navMenu.contains(e.target)) { navMenu.classList.remove('active'); }
+        });
+    }
+});
