@@ -66,14 +66,29 @@ async function loadCourseAndMaterials() {
                     </div>
                 </div>
                 <div class="materi-actions">
-                    <button class="btn-icon btn-edit" title="Edit Materi" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='../edit-materi-admin/index.html?id=${materi.id}';">
+                    <button class="btn-icon btn-edit" title="Edit Materi" data-edit-id="${materi.id}">
                         <span class="material-symbols-outlined" style="pointer-events: none;">edit</span>
                     </button>
-                    <button class="btn-icon btn-delete" title="Hapus Materi" onclick="event.preventDefault(); event.stopPropagation(); if(confirm('Apakah Anda yakin ingin menghapus materi ini?')){ axios.delete(`${API_BASE_URL}/api/admin/materials/${materi.id}`).then(() => window.location.reload()).catch(e => alert('Gagal menghapus materi')); }">
+                    <button class="btn-icon btn-delete" title="Hapus Materi" data-delete-id="${materi.id}">
                         <span class="material-symbols-outlined" style="pointer-events: none;">delete</span>
                     </button>
                 </div>
             `;
+
+            // Pasang event listener setelah innerHTML — hindari nested backtick
+            div.querySelector('.btn-edit').addEventListener('click', (e) => {
+                e.preventDefault(); e.stopPropagation();
+                window.location.href = '../edit-materi-admin/index.html?id=' + materi.id;
+            });
+            div.querySelector('.btn-delete').addEventListener('click', (e) => {
+                e.preventDefault(); e.stopPropagation();
+                if (confirm('Apakah Anda yakin ingin menghapus materi ini?')) {
+                    axios.delete(API_BASE_URL + '/api/admin/materials/' + materi.id)
+                        .then(() => window.location.reload())
+                        .catch(() => alert('Gagal menghapus materi'));
+                }
+            });
+
             container.appendChild(div);
         });
 
