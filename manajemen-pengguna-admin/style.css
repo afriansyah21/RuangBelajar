@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   font-family: 'Inter', sans-serif;
   background:
     radial-gradient(circle at top left,
@@ -461,7 +461,7 @@ tr:last-child td {
 
 
 /* Force scrollbar */
-body {
+html, body {
   overflow-y: scroll !important;
 }
 
@@ -499,3 +499,4 @@ body {
 .btn-pagination .material-symbols-outlined {
   font-size: 18px;
 }
+

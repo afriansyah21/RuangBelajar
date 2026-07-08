@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
 
   font-family: 'Inter', sans-serif;
 
@@ -739,6 +739,7 @@ body {
 
 
 /* Force scrollbar */
-body {
+html, body {
   overflow-y: scroll !important;
 }
+

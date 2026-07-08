@@ -52,6 +52,7 @@ a, a:hover, a:active, a:focus {
 
 
 /* Force scrollbar */
-body {
+html, body {
   overflow-y: scroll !important;
 }
+

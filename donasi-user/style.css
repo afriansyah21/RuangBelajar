@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
 
   font-family: 'Inter', sans-serif;
 
@@ -907,3 +907,4 @@ body > *:not(.navbar):not(.bg-blur) {
     transform: scale(1) translateY(0);
   }
 }
+

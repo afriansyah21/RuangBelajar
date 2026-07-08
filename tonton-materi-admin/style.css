@@ -76,6 +76,7 @@
 
 
 /* Force scrollbar */
-body {
+html, body {
   overflow-y: scroll !important;
 }
+
