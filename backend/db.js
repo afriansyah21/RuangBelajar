@@ -9,13 +9,14 @@ if (!global._dbPool) {
         user: process.env.DB_USER || 'root',
         password: process.env.DB_PASSWORD || '',
         database: process.env.DB_NAME || 'ruangbelajar_db',
-        port: process.env.DB_PORT || 3306,
+        port: parseInt(process.env.DB_PORT) || 3306,
         ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined,
         waitForConnections: true,
-        connectionLimit: 5,
+        connectionLimit: 3,
         queueLimit: 0,
-        enableKeepAlive: true,
-        keepAliveInitialDelay: 0
+        connectTimeout: 30000,
+        acquireTimeout: 30000,
+        timeout: 30000
     });
     console.log('Database pool created (new instance)');
 } else {
