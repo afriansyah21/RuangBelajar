@@ -278,7 +278,9 @@ app.get('/api/admin/users', async (req, res) => {
 app.post('/api/users/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        // Cek email dulu
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Username dan password diperlukan' });
+        }
         const [users] = await db.query('SELECT id, full_name, email, password, phone_number, birth_date FROM users WHERE email = ?', [username]);
         
         if (users.length === 0) {
@@ -295,7 +297,8 @@ app.post('/api/users/login', async (req, res) => {
         res.json({ message: 'Login successful', user });
     } catch (error) {
         console.error('Error during login:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        // Sementara tampilkan detail error untuk debugging
+        res.status(500).json({ error: 'Internal Server Error', detail: error.message, code: error.code });
     }
 });
 
