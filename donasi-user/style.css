@@ -918,4 +918,10 @@ body > *:not(.navbar):not(.bg-blur) {
     max-width: 100%;
     height: auto;
   }
+  .qris-card {
+    padding: 20px;
+  }
+  .donation-header h1 {
+    font-size: 32px;
+  }
 }
