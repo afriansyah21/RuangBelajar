@@ -53,6 +53,19 @@ async function fetchGroupDetails(groupId) {
             return;
         }
 
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.toString().replace(/[&<>'"]/g, 
+                tag => ({
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    "'": '&#39;',
+                    '"': '&quot;'
+                }[tag] || tag)
+            );
+        }
+
         let qNumber = 1;
         group.questions.forEach(q => {
             const qDiv = document.createElement('div');
@@ -70,14 +83,14 @@ async function fetchGroupDetails(groupId) {
                     optionsHtml += `
                         <label style="display: flex; align-items: center; gap: 12px; cursor: pointer; padding: 12px; border: 1px solid #e2e8f0; border-radius: 8px;">
                             <input type="radio" name="q_${q.id}" value="${idx}" style="width: 18px; height: 18px;">
-                            <span style="color: #334155;">${opt}</span>
+                            <span style="color: #334155;">${escapeHTML(opt)}</span>
                         </label>
                     `;
                 });
             }
 
             qDiv.innerHTML = `
-                <h3 style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #0f172a; margin-bottom: 16px;">${qNumber}. ${q.question_text}</h3>
+                <h3 style="font-family: 'Lexend', sans-serif; font-size: 18px; color: #0f172a; margin-bottom: 16px;">${qNumber}. ${escapeHTML(q.question_text)}</h3>
                 <div style="display: flex; flex-direction: column; gap: 12px;">
                     ${optionsHtml}
                 </div>
