@@ -50,6 +50,16 @@ app.post('/api/upload', upload.single('image'), (req, res) => {
     res.json({ url: imageUrl });
 });
 
+// Helper: ganti URL gambar yang masih localhost dengan placeholder
+const DEFAULT_COURSE_IMG = 'https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=800&auto=format&fit=crop';
+const DEFAULT_QUIZ_IMG = 'https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?q=80&w=800&auto=format&fit=crop';
+
+function fixImageUrl(url, defaultImg) {
+    if (!url) return defaultImg;
+    if (url.includes('localhost') || url.includes('127.0.0.1')) return defaultImg;
+    return url;
+}
+
 // Get all courses with materials count
 app.get('/api/courses', async (req, res) => {
     try {
@@ -59,7 +69,8 @@ app.get('/api/courses', async (req, res) => {
             LEFT JOIN materials m ON c.id = m.course_id
             GROUP BY c.id
         `);
-        res.json(rows);
+        const fixed = rows.map(r => ({ ...r, thumbnail_url: fixImageUrl(r.thumbnail_url, DEFAULT_COURSE_IMG) }));
+        res.json(fixed);
     } catch (error) {
         console.error('Error fetching courses:', error);
         res.status(500).json({ error: 'Internal Server Error' });
@@ -78,6 +89,7 @@ app.get('/api/courses/:id', async (req, res) => {
         
         res.json({
             ...rows[0],
+            thumbnail_url: fixImageUrl(rows[0].thumbnail_url, DEFAULT_COURSE_IMG),
             materials
         });
     } catch (error) {
@@ -523,7 +535,8 @@ app.get('/api/admin/quizzes', async (req, res) => {
             ORDER BY q.created_at DESC
         `;
         const [quizzes] = await db.query(query);
-        res.json(quizzes);
+        const fixed = quizzes.map(q => ({ ...q, thumbnail_url: fixImageUrl(q.thumbnail_url, DEFAULT_QUIZ_IMG) }));
+        res.json(fixed);
     } catch (error) {
         console.error('Error fetching admin quizzes:', error);
         res.status(500).json({ error: 'Internal Server Error' });
