@@ -1,9 +1,10 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const multer = require('multer');
 const db = require('./db');
+const { v2: cloudinary } = require('cloudinary');
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 const app = express();
 
@@ -15,16 +16,20 @@ app.use(cors({
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
-// Sajikan folder uploads sebagai static folder
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Konfigurasi Cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
-// Konfigurasi Multer
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + '-' + file.originalname);
+// Cloudinary storage — upload langsung ke cloud, tidak perlu disk lokal
+const storage = new CloudinaryStorage({
+    cloudinary,
+    params: {
+        folder: 'ruangbelajar',
+        allowed_formats: ['jpg', 'jpeg', 'png', 'gif', 'webp'],
+        transformation: [{ width: 800, crop: 'limit', quality: 'auto' }]
     }
 });
 const upload = multer({ storage });
@@ -45,13 +50,13 @@ app.get('/api/warmup', async (req, res) => {
 });
 
 
-// Endpoint upload gambar
+// Endpoint upload gambar — menggunakan Cloudinary (bukan disk lokal)
 app.post('/api/upload', upload.single('image'), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'No file uploaded' });
     }
-    // Kembalikan URL gambar
-    const imageUrl = `http://localhost:${port}/uploads/${req.file.filename}`;
+    // Cloudinary otomatis menyimpan file dan mengembalikan URL publik
+    const imageUrl = req.file.path;
     res.json({ url: imageUrl });
 });
 
@@ -286,7 +291,7 @@ app.post('/api/users/login', async (req, res) => {
         if (!username || !password) {
             return res.status(400).json({ error: 'Username dan password diperlukan' });
         }
-        const [users] = await db.query('SELECT id, full_name, email, password, phone_number, birth_date FROM users WHERE email = ?', [username]);
+        const [users] = await db.query('SELECT id, full_name, email, password, phone_number, birth_date, profile_picture FROM users WHERE email = ?', [username]);
         
         if (users.length === 0) {
             return res.status(401).json({ error: 'Email salah' });
@@ -883,7 +888,10 @@ app.put('/api/users/:id', async (req, res) => {
         let updateQuery = 'UPDATE users SET full_name = ?, birth_date = ?, phone_number = ?';
         let queryParams = [full_name, birth_date, phone_number];
         
-        // profile_picture tidak ada di schema — diabaikan
+        if (profile_picture !== undefined && profile_picture !== null) {
+            updateQuery += ', profile_picture = ?';
+            queryParams.push(profile_picture);
+        }
         
         updateQuery += ' WHERE id = ?';
         queryParams.push(userId);
@@ -891,7 +899,7 @@ app.put('/api/users/:id', async (req, res) => {
         await db.query(updateQuery, queryParams);
         
         // Fetch updated user to return
-        const [users] = await db.query('SELECT id, full_name, email, birth_date, phone_number, created_at FROM users WHERE id = ?', [userId]);
+        const [users] = await db.query('SELECT id, full_name, email, birth_date, phone_number, profile_picture, created_at FROM users WHERE id = ?', [userId]);
         if (users.length > 0) {
             res.json(users[0]);
         } else {
