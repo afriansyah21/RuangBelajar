@@ -856,22 +856,30 @@ app.get('/api/users/:id/quiz-progress', async (req, res) => {
 app.get('/api/users/:id/profile-stats', async (req, res) => {
     try {
         const userId = req.params.id;
-        const [totalQuizzes] = await db.query(`SELECT COUNT(*) as count FROM quizzes`);
+        const [totalQuizzesResult] = await db.query(`SELECT COUNT(*) as count FROM quizzes`);
+        const totalQuizzes = totalQuizzesResult[0].count || 0;
+        
         const [completedQuizzes] = await db.query(`SELECT COUNT(DISTINCT quiz_id) as count FROM user_quiz_results WHERE user_id = ?`, [userId]);
-        const [avgScoreResult] = await db.query(`
-            SELECT AVG(max_score) as avg_score 
-            FROM (
-                SELECT MAX(score) as max_score 
-                FROM user_quiz_results 
-                WHERE user_id = ? 
-                GROUP BY quiz_id
-            ) as t
-        `, [userId]);
+        
+        let averageScore = 0;
+        if (totalQuizzes > 0) {
+            const [sumScoreResult] = await db.query(`
+                SELECT SUM(max_score) as total_score 
+                FROM (
+                    SELECT MAX(score) as max_score 
+                    FROM user_quiz_results 
+                    WHERE user_id = ? 
+                    GROUP BY quiz_id
+                ) as t
+            `, [userId]);
+            const totalScore = sumScoreResult[0].total_score || 0;
+            averageScore = totalScore / totalQuizzes;
+        }
         
         res.json({
-            total_quizzes: totalQuizzes[0].count,
+            total_quizzes: totalQuizzes,
             completed_quizzes: completedQuizzes[0].count,
-            average_score: avgScoreResult[0].avg_score || 0
+            average_score: averageScore
         });
     } catch (error) {
         console.error('Error fetching profile stats:', error);
