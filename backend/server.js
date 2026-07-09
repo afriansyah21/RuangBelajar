@@ -856,10 +856,10 @@ app.get('/api/users/:id/quiz-progress', async (req, res) => {
 app.get('/api/users/:id/profile-stats', async (req, res) => {
     try {
         const userId = req.params.id;
-        const [totalQuizzesResult] = await db.query(`SELECT COUNT(*) as count FROM quizzes`);
+        const [totalQuizzesResult] = await db.query(`SELECT COUNT(*) as count FROM quiz_question_groups`);
         const totalQuizzes = totalQuizzesResult[0].count || 0;
         
-        const [completedQuizzes] = await db.query(`SELECT COUNT(DISTINCT quiz_id) as count FROM user_quiz_results WHERE user_id = ?`, [userId]);
+        const [completedQuizzes] = await db.query(`SELECT COUNT(DISTINCT group_id) as count FROM user_quiz_results WHERE user_id = ?`, [userId]);
         
         let averageScore = 0;
         if (totalQuizzes > 0) {
@@ -869,7 +869,7 @@ app.get('/api/users/:id/profile-stats', async (req, res) => {
                     SELECT MAX(score) as max_score 
                     FROM user_quiz_results 
                     WHERE user_id = ? 
-                    GROUP BY quiz_id
+                    GROUP BY group_id
                 ) as t
             `, [userId]);
             const totalScore = sumScoreResult[0].total_score || 0;
