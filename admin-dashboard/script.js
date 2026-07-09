@@ -56,6 +56,19 @@ async function fetchDashboardStats() {
         document.getElementById('stat-total-courses').textContent = data.totalCourses.toLocaleString('id-ID');
         document.getElementById('stat-avg-quiz').textContent = data.avgQuizScore;
 
+        const rawScore = parseFloat(data.avgQuizScore) || 0;
+        const avgQuizProgress = document.getElementById('stat-avg-quiz-progress');
+        if (avgQuizProgress) {
+            avgQuizProgress.style.width = `${rawScore}%`;
+            if (rawScore < 50) {
+                avgQuizProgress.style.background = '#ef4444';
+            } else if (rawScore < 80) {
+                avgQuizProgress.style.background = '#f59e0b';
+            } else {
+                avgQuizProgress.style.background = '#10b981';
+            }
+        }
+
         const badgeUsers = document.getElementById('badge-users-growth');
         if(badgeUsers) {
             const val = data.usersGrowth;
