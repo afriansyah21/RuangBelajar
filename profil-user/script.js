@@ -8,6 +8,40 @@ if (hamburgerBtn && navMenu) {
   });
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const editFotoInput = document.getElementById('edit-foto');
+  const previewEl = document.getElementById('edit-foto-preview');
+  if (editFotoInput && previewEl) {
+    editFotoInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          previewEl.src = e.target.result;
+          previewEl.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // Fallback to original user picture if input is cleared
+        const userJson = localStorage.getItem('currentUser');
+        if (userJson) {
+          const user = JSON.parse(userJson);
+          if (user.profile_picture) {
+            previewEl.src = user.profile_picture;
+            previewEl.style.display = 'block';
+          } else {
+            previewEl.style.display = 'none';
+            previewEl.src = '';
+          }
+        } else {
+          previewEl.style.display = 'none';
+          previewEl.src = '';
+        }
+      }
+    });
+  }
+});
+
 // Modal Logic
 function openEditModal() {
   const modal = document.getElementById('editProfileModal');
@@ -16,6 +50,17 @@ function openEditModal() {
     if (userJson) {
       const user = JSON.parse(userJson);
       document.getElementById('edit-nama').value = user.full_name || '';
+      
+      const previewEl = document.getElementById('edit-foto-preview');
+      if (previewEl) {
+        if (user.profile_picture) {
+          previewEl.src = user.profile_picture;
+          previewEl.style.display = 'block';
+        } else {
+          previewEl.src = '';
+          previewEl.style.display = 'none';
+        }
+      }
       
       if (user.birth_date) {
         const d = new Date(user.birth_date);

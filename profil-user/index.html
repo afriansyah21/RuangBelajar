@@ -212,9 +212,10 @@
       </button>
       <h2 class="modal-title">Edit Profil</h2>
       
-      <div class="form-group">
-        <label>Foto Profil</label>
-        <input type="file" id="edit-foto" accept="image/*">
+      <div class="form-group" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <label style="align-self: flex-start;">Foto Profil</label>
+        <img id="edit-foto-preview" src="" alt="Preview" style="width: 100px; height: 100px; object-fit: cover; border-radius: 50%; display: none; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+        <input type="file" id="edit-foto" accept="image/*" style="width: 100%;">
       </div>
       
       <div class="form-group">
