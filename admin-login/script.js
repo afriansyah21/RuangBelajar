@@ -1,3 +1,26 @@
+
+// Toggle Hamburger Menu
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (hamburgerBtn && navMenu) {
+        hamburgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            
+            // Toggle icon
+            const icon = hamburgerBtn.querySelector('span');
+            if(icon) {
+                if (navMenu.classList.contains('active')) {
+                    icon.textContent = 'close';
+                } else {
+                    icon.textContent = 'menu';
+                }
+            }
+        });
+    }
+});
+
 tailwind.config = {
     darkMode: "class",
     theme: {
@@ -147,19 +170,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Warmup backend saat halaman admin-login dibuka
     if (typeof API_BASE_URL !== 'undefined') {
         fetch(`${API_BASE_URL}/api/warmup`).catch(() => {});
-    }
-});
-// --- INJECTED HAMBURGER MENU SCRIPT ---
-document.addEventListener('DOMContentLoaded', () => {
-    const hamburgerBtn = document.getElementById('hamburger-btn');
-    const navMenu = document.getElementById('nav-menu');
-    if (hamburgerBtn && navMenu) {
-        if(!hamburgerBtn.dataset.hasListener) {
-            hamburgerBtn.addEventListener('click', (e) => { e.stopPropagation(); navMenu.classList.toggle('active'); });
-            hamburgerBtn.dataset.hasListener = 'true';
-        }
-        document.addEventListener('click', (e) => {
-            if (!hamburgerBtn.contains(e.target) && !navMenu.contains(e.target)) { navMenu.classList.remove('active'); }
-        });
     }
 });
