@@ -588,6 +588,28 @@ app.put('/api/admin/quizzes/:id', async (req, res) => {
     }
 });
 
+// Admin Login
+app.post('/api/admin/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+
+        // Hardcoded admin credentials for now, can be moved to DB or ENV later
+        const validUsername = process.env.ADMIN_USERNAME || 'admin';
+        const validPassword = process.env.ADMIN_PASSWORD || 'admin123';
+
+        if (username === validUsername && password === validPassword) {
+            // Berhasil login
+            res.json({ message: 'Login successful', role: 'admin' });
+        } else {
+            // Gagal login
+            res.status(401).json({ error: 'Username atau password salah' });
+        }
+    } catch (error) {
+        console.error('Error during admin login:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
 // 4. Delete Quiz
 app.delete('/api/admin/quizzes/:id', async (req, res) => {
     try {

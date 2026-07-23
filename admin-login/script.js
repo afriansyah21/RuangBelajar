@@ -155,13 +155,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            // Validasi kredensial (admin tunggal)
-            if (username === 'admin' && password === 'admin123') {
-                // Berhasil login
-                window.location.href = '../admin-dashboard/index.html';
+            // Validasi kredensial via API
+            if (typeof API_BASE_URL !== 'undefined') {
+                const btnSubmit = loginForm.querySelector('button[type="submit"]');
+                const originalText = btnSubmit ? btnSubmit.innerHTML : 'Masuk Dashboard';
+                
+                if (btnSubmit) {
+                    btnSubmit.innerHTML = 'Memuat...';
+                    btnSubmit.disabled = true;
+                }
+                
+                fetch(`${API_BASE_URL}/api/admin/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                })
+                .then(res => res.json().then(data => ({ status: res.status, body: data })))
+                .then(res => {
+                    if (btnSubmit) {
+                        btnSubmit.innerHTML = originalText;
+                        btnSubmit.disabled = false;
+                    }
+                    if (res.status === 200) {
+                        window.location.href = '../admin-dashboard/index.html';
+                    } else {
+                        errorContainer.textContent = res.body.error || 'Username atau password salah';
+                        errorContainer.classList.remove('hidden');
+                    }
+                })
+                .catch(err => {
+                    if (btnSubmit) {
+                        btnSubmit.innerHTML = originalText;
+                        btnSubmit.disabled = false;
+                    }
+                    console.error('Error during login:', err);
+                    errorContainer.textContent = 'Terjadi kesalahan pada server. Coba lagi.';
+                    errorContainer.classList.remove('hidden');
+                });
             } else {
-                // Gagal login
-                errorContainer.textContent = 'Username atau password salah';
+                errorContainer.textContent = 'API_BASE_URL tidak ditemukan';
                 errorContainer.classList.remove('hidden');
             }
         });
