@@ -693,8 +693,9 @@ html, body {
 }
 
 .qris-image-container img {
-  width: 256px;
-  height: 256px;
+  width: 100%;
+  max-width: 256px;
+  height: auto;
   object-fit: contain;
 }
 
@@ -852,10 +853,74 @@ html, body {
   .donation-grid {
     grid-template-columns: 1fr;
   }
+  .account-number {
+    font-size: 24px;
+  }
+  .bank-card h2 {
+    font-size: 22px;
+  }
 }
 
+@media(max-width: 900px) {
+  .donation-grid {
+    grid-template-columns: 1fr;
+  }
+  .qris-card {
+    padding: 24px;
+  }
+  .qris-image-container {
+    display: flex;
+    justify-content: center;
+  }
+  .qris-image-container img {
+    max-width: 220px;
+  }
+  .donation-header h1 {
+    font-size: 28px;
+  }
+  .donation-header p {
+    font-size: 16px;
+  }
+  .bank-card {
+    padding: 28px;
+  }
+  .bank-card h2 {
+    font-size: 20px;
+  }
+  .account-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .account-number {
+    font-size: 22px;
+    letter-spacing: 1px;
+  }
+  .btn-copy {
+    align-self: flex-end;
+  }
+}
 
-/* LOGOUT MENU HAMBURGER (MOBILE ONLY) */
+@media(max-width: 480px) {
+  .qris-image-container img {
+    max-width: 180px;
+  }
+  .donation-header h1 {
+    font-size: 24px;
+  }
+  .bank-card {
+    padding: 20px;
+  }
+  .bank-card h2 {
+    font-size: 18px;
+  }
+  .account-number {
+    font-size: 18px;
+  }
+  .impact-card {
+    padding: 20px;
+  }
+}
 .nav-link-logout {
   display: none;
 }
