@@ -545,7 +545,7 @@ app.get('/api/admin/quizzes', async (req, res) => {
             SELECT q.id, q.title as quiz_title, c.title as course_title, q.description, q.thumbnail_url
             FROM quizzes q
             JOIN courses c ON q.course_id = c.id
-            ORDER BY q.created_at DESC
+            ORDER BY q.created_at ASC
         `;
         const [quizzes] = await db.query(query);
         const fixed = quizzes.map(q => ({ ...q, thumbnail_url: fixImageUrl(q.thumbnail_url, DEFAULT_QUIZ_IMG) }));
