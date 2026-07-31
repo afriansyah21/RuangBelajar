@@ -160,4 +160,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Initialize Flatpickr for birth date
+    if (document.getElementById('birth_date')) {
+        flatpickr("#birth_date", {
+            dateFormat: "Y-m-d",
+            allowInput: true,
+            locale: "id"
+        });
+    }
 });
